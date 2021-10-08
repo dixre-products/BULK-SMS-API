@@ -16,7 +16,7 @@ export default async function UpdateUserProfile(
     updates: UserProps;
   };
 
-  const $UID = new Types.ObjectId(userId);
+  const $UID = Types.ObjectId(userId);
   const $user = await models.Users.findByIdAndUpdate($UID, updates);
 
   if (!$user) return UserDoesNotExist(res);

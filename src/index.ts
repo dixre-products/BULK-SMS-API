@@ -18,6 +18,12 @@ const {
   TOKEN_MANAGEMENT_BASE,
   RESSET_PASSWORD_BASE,
   PROFILE,
+
+  EMPLOYEE,
+  ROLE,
+  DEPARTMENT,
+  CONTACT,
+  MESSAGE,
 } = constants.RouteBase;
 // Application-Level Middleware
 const app = express();
@@ -54,6 +60,11 @@ app.use(VERIFICATION_BASE, routes.Verification);
 app.use(TOKEN_MANAGEMENT_BASE, routes.Token);
 app.use(RESSET_PASSWORD_BASE, routes.PasswordReset);
 app.use(PROFILE, routes.Profile);
+app.use(EMPLOYEE, routes.Employee);
+app.use(ROLE, routes.Role);
+app.use(DEPARTMENT, routes.Department);
+app.use(MESSAGE, routes.Message);
+app.use(CONTACT, routes.Contact);
 
 // Handles error
 app.use(ErrorHandler);

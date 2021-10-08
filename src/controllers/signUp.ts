@@ -9,13 +9,8 @@ export async function SignUp(req: Request, res: Response) {
 
   const userVerifiedPhoneNumber = res.locals.phoneNumber;
   const phoneNumberInternational = userVerifiedPhoneNumber as string;
-  const {
-    password,
-    firstName,
-    lastName,
-    sex,
-    phoneNumber,
-  } = req.body as SignUpProps;
+  const { password, firstName, lastName, sex, phoneNumber } =
+    req.body as SignUpProps;
 
   // create user,generate password and token
   const user = new models.Users();

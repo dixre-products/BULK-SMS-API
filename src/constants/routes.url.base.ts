@@ -6,6 +6,12 @@ const TOKEN_MANAGEMENT_BASE = '/token'; // manage tokens
 const RESSET_PASSWORD_BASE = '/reset-password';
 const PROFILE = '/profile';
 
+const EMPLOYEE = '/employee';
+const ROLE = '/role';
+const DEPARTMENT = '/department';
+const CONTACT = '/contact';
+const MESSAGE = '/message';
+
 export default {
   LOGIN_BASE,
   SIGNUP_BASE,
@@ -13,4 +19,10 @@ export default {
   TOKEN_MANAGEMENT_BASE,
   RESSET_PASSWORD_BASE,
   PROFILE,
+
+  EMPLOYEE,
+  ROLE,
+  DEPARTMENT,
+  CONTACT,
+  MESSAGE,
 };

@@ -1,4 +1,4 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 /**
  * `thumbnail`  image thumbnail
@@ -93,4 +93,73 @@ export interface UserProps extends Document {
   isAccountLocked: () => boolean;
   lockAccount: () => void;
   /* eslint-enable */
+}
+
+export interface DepartmentProps extends Document {
+  _id: Types.ObjectId; //eslint-disable-line
+  credit: number;
+  name: string;
+  groupId: Types.ObjectId;
+}
+
+export interface EmployeeProps extends Document {
+  _id: Types.ObjectId; //eslint-disable-line
+  name: string;
+  email: string;
+  password: string;
+  address: string;
+  groupId: Types.ObjectId;
+  roleId: Types.ObjectId;
+  hash: string;
+  salt: string;
+
+  /* eslint-disable */
+  setPassword: (pwd: string) => void;
+  /* eslint-enable */
+}
+
+export interface EmployeeSignupProps extends Document {
+  name: string;
+  email: string;
+  password: string;
+  address: string;
+  groupId: string;
+  roleId: string;
+}
+
+export interface RoleProps extends Document {
+  sendMessage: boolean;
+  readMessage: boolean;
+  name: string;
+  addContact: boolean;
+}
+export interface ContactProps extends Document {
+  name: string;
+  number: number;
+  groupId: string;
+  date: Date;
+}
+
+export interface AdminProps extends Document {
+  _id: Types.ObjectId; //eslint-disable-line
+  name: string;
+  email: string;
+  password: string;
+  hash: string;
+  salt: string;
+
+  /* eslint-disable */
+  setPassword: (pwd: string) => void;
+  /* eslint-enable */
+}
+
+export interface MessageProps extends Document {
+  _id: Types.ObjectId; //eslint-disable-line
+  message: string;
+  sender: string;
+  groupId: Types.ObjectId;
+  date: Date;
+  contacts: Array<ContactProps>;
+  time: Date;
+  status: any;
 }

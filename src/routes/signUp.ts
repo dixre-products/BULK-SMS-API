@@ -6,13 +6,13 @@ import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
 const { SIGNUP } = constants.RoutesSubs;
-const signUp = Router();
+const employee = Router();
 
-signUp.post(
+employee.post(
   SIGNUP,
   HandleAsyncFactory(ValidateSignUpInput),
   HandleAsyncFactory(HandleDuplicateSignUpMiddleWare),
   HandleAsyncFactory(SignUp),
 );
 
-export default signUp;
+export default employee;

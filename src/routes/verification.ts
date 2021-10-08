@@ -8,11 +8,8 @@ import constants from '../constants/index';
 import ValidateNumberVerification from '../Validators/verify.phone.validator';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
-const {
-  VERIFICATION_CALL,
-  VERIFICATION_CODE,
-  VERIFICATION_SMS,
-} = constants.RoutesSubs;
+const { VERIFICATION_CALL, VERIFICATION_CODE, VERIFICATION_SMS } =
+  constants.RoutesSubs;
 const Verification = Router();
 
 Verification.post(

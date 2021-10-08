@@ -14,11 +14,12 @@ const Verification: Schema = new Schema(
   { autoIndex: false },
 );
 
-Verification.methods.incrementPinTrial = async function lockAccount() {
-  const documents = this as VerificationTypes;
-  documents.pinTrials += 1;
-  await documents.save();
-};
+Verification.methods.incrementPinTrial =
+  async function lockAccount() {
+    const documents = this as VerificationTypes;
+    documents.pinTrials += 1;
+    await documents.save();
+  };
 
 Verification.methods.isPinValid = function isPinValid(pin: string) {
   const doc = this as VerificationTypes;
