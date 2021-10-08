@@ -1,16 +1,15 @@
-## Authentication Service
+## BULK-SMS-API 
 
-The hanwok authentication and authorisation service basically manages the authentication of users , token management, and certify the integrity of every request made to any service of Dixre, it serves as the security of hanwok platforms and means to access resources from hanwok micro services.
+Bulk sms allocation backend using checker and maker Access layer Control System. Application is synonymous to ebulk sms but with the exception that checker and maker integration.
 
-## [See API Documentation](https://dixre-auth-service.herokuapp.com)
 
 # Environment SetUp
 
 - clone repository
 - Install local mongodb
 - Add mongo to System environment variables path and open a new terminal
-- Create Path C:/data/auth-service for windows machine
-- Create Path /var/lib/mongodb/auth-service for linux machine
+- Create Path C:/data/bulk-sms-api for windows machine
+- Create Path /var/lib/mongodb/bulk-sms-api for linux machine
 
 **Installing Dependencies**
 
@@ -42,15 +41,3 @@ yarn prettier-watch ## starts prettier in watch mode
 yarn doc:watch ## Runs api doc in watch mode
 
 ```
-
-### UPDATES
-
-- Implement 2 Factor authentications model
-
-### TODOS
-
-- Deployment
-- Connect Server Ip address on database whitelist
-- Fix issue on password resset page which will cause change in helper function encodeJwtToken
-- Use containerize model
-- Set up interface for managing logs and errors
