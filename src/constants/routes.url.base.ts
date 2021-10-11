@@ -11,6 +11,7 @@ const ROLE = '/role';
 const DEPARTMENT = '/department';
 const CONTACT = '/contact';
 const MESSAGE = '/message';
+const Admin = '/admin';
 
 export default {
   LOGIN_BASE,
@@ -25,4 +26,5 @@ export default {
   DEPARTMENT,
   CONTACT,
   MESSAGE,
+  Admin,
 };

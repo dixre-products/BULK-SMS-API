@@ -23,14 +23,31 @@ const PROFILE = '/';
 
 const RESSET_PASSWORD = '/';
 
-// EMPLOYEE
-const ADMIN_BASE_SUB = '/admin';
-const ROLE_BASE_SUB = '/role';
-const DEPARTMENT_BASE_SUB = '/department';
-const EMPLOYEE_BASE_SUB = '/employee';
-const MESSAGE_BASE_SUB = '/message';
+// Department Endpoint
+const CREATE_DEPARTMENT = '/create-department';
+const GET_DEPARTMENT = '/get-department';
+const UPDATE_DEPARTMENT = '/update-department';
+const ADD_CREDIT = '/add-credit';
+
+// Contact Endpoint
+const GET_CONTACT = '/get-contact';
+
+// Message Endpoint
+const GET_MESSAGE = '/get-message';
+
+// Employee Endpoint
+const CREATE_EMPLOYEE = '/create-employee';
+const GET_EMPLOYEE = '/get-employee';
+const UPDATE_EMPLOYEE = '/update-employee';
+const UPDATE_EMPLOYEE_ROLE = '/update-employee-role';
+const UPDATE_EMPLOYEE_DEPARTMENT = '/update-employee-department';
+
+// Role Endpoint
+const CREATE_ROLE = '/create-role';
+const GET_ROLE = '/get-role';
+const DELETE_ROLE = '/delete-role';
+
 const GET_ID_PARAM = '/:id';
-const CREDIT_BASE_SUB = '/credit';
 const BASE_SUB = '/';
 // const
 
@@ -46,12 +63,21 @@ export default {
   VERIFICATION_SMS,
   RESSET_PASSWORD,
 
-  ADMIN_BASE_SUB,
-  ROLE_BASE_SUB,
-  DEPARTMENT_BASE_SUB,
-  EMPLOYEE_BASE_SUB,
-  MESSAGE_BASE_SUB,
   GET_ID_PARAM,
-  CREDIT_BASE_SUB,
   BASE_SUB,
+
+  CREATE_DEPARTMENT,
+  GET_DEPARTMENT,
+  UPDATE_DEPARTMENT,
+  ADD_CREDIT,
+  GET_CONTACT,
+  GET_MESSAGE,
+  CREATE_EMPLOYEE,
+  GET_EMPLOYEE,
+  UPDATE_EMPLOYEE,
+  UPDATE_EMPLOYEE_ROLE,
+  UPDATE_EMPLOYEE_DEPARTMENT,
+  CREATE_ROLE,
+  GET_ROLE,
+  DELETE_ROLE,
 };

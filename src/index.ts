@@ -20,10 +20,11 @@ const {
   PROFILE,
 
   EMPLOYEE,
-  ROLE,
+  // ROLE,
   DEPARTMENT,
   CONTACT,
   MESSAGE,
+  Admin,
 } = constants.RouteBase;
 // Application-Level Middleware
 const app = express();
@@ -61,10 +62,11 @@ app.use(TOKEN_MANAGEMENT_BASE, routes.Token);
 app.use(RESSET_PASSWORD_BASE, routes.PasswordReset);
 app.use(PROFILE, routes.Profile);
 app.use(EMPLOYEE, routes.Employee);
-app.use(ROLE, routes.Role);
+// app.use(ROLE, routes.Role);
 app.use(DEPARTMENT, routes.Department);
 app.use(MESSAGE, routes.Message);
 app.use(CONTACT, routes.Contact);
+app.use(Admin, routes.Admin);
 
 // Handles error
 app.use(ErrorHandler);
