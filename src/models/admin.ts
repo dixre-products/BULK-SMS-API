@@ -5,8 +5,6 @@ import { AdminProps } from '../Types/interfaces';
 
 const Admin: Schema = new Schema(
   {
-    _id: { type: Schema.Types.ObjectId },
-
     email: {
       type: Schema.Types.String,
     },

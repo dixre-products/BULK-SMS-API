@@ -11,9 +11,14 @@ export async function UpdateDepartment(req: Request, res: Response) {
     id: string;
     updates: { name: string; credit: number };
   };
+
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Department.findOneAndUpdate(ID, updates);
+  const doc = await models.Department.findOneAndUpdate(
+    { _id: ID },
+    updates,
+    { new: true },
+  );
 
   if (!doc) return ResourceNotFound(res, 'Department not found');
 
@@ -30,9 +35,13 @@ export async function UpdateDepartmentCredit(
   };
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Department.findOneAndUpdate(ID, {
-    $inc: { credit },
-  });
+  const doc = await models.Department.findOneAndUpdate(
+    { _id: ID },
+    {
+      $inc: { credit },
+    },
+    { new: true },
+  );
 
   if (!doc) return ResourceNotFound(res, 'Department not found');
 

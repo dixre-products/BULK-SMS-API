@@ -6,7 +6,7 @@ import {
 import models from '../../models';
 
 export async function GetAllEmployee(req: Request, res: Response) {
-  const doc = await models.Employee.find();
+  const doc = await models.Employee.find().populate('groupId roleId');
 
   if (!doc) return ResourceNotFound(res, 'Employee not found');
 
@@ -16,7 +16,9 @@ export async function GetAllEmployee(req: Request, res: Response) {
 export async function GetSingleEmployee(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Employee.find({ _id: id });
+  const doc = await models.Employee.find({ _id: id }).populate(
+    'roleId groupId',
+  );
 
   if (!doc)
     return ResourceNotFound(

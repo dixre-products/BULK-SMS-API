@@ -27,7 +27,7 @@ export default {
   GEOCODING_APIKEY, // you can get this by from google cloud
   PAYSTACK_SECRET: '', // signup to paystack !!
   PORT: 8081,
-  DB_CONNECTION_STRING: 'mongodb://localhost/hanwok-auth-service',
+  DB_CONNECTION_STRING: 'mongodb://localhost/bulk-sms-api',
   JWT_ISSUER: 'https://example.com/example',
   JWT_AUDIENCE: '76rghjklkjh',
   JWT_ALGO: 'RS256',

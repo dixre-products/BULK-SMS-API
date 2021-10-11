@@ -14,7 +14,11 @@ export async function UpdateEmployee(req: Request, res: Response) {
   };
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Employee.findOneAndUpdate(ID, updates);
+  const doc = await models.Employee.findOneAndUpdate(
+    { _id: ID },
+    updates,
+    { new: true },
+  ).populate('groupId roleId');
 
   if (!doc) return ResourceNotFound(res, 'Employee not Found ');
 
@@ -25,11 +29,11 @@ export async function AssignEmployeeToDepartment(
   req: Request,
   res: Response,
 ) {
-  const { EmployeeId, departmentId } = req.body as {
-    EmployeeId: string;
+  const { employeeId, departmentId } = req.body as {
+    employeeId: string;
     departmentId: string;
   };
-  const $EID = Types.ObjectId(EmployeeId);
+  const $EID = Types.ObjectId(employeeId);
   const $DID = Types.ObjectId(departmentId);
 
   const employeeExist = await models.Employee.findOne($EID);
@@ -40,9 +44,13 @@ export async function AssignEmployeeToDepartment(
   if (!departmentExist)
     return ResourceNotFound(res, 'Department not Found ');
 
-  const doc = await models.Employee.findOneAndUpdate($EID, {
-    $push: { departmentId: $DID },
-  });
+  const doc = await models.Employee.findOneAndUpdate(
+    { _id: $EID },
+    {
+      $set: { groupId: $DID },
+    },
+    { new: true },
+  ).populate('groupId roleId');
 
   return ProcessingSuccess(res, doc);
 }
@@ -51,11 +59,11 @@ export async function AssignEmployeeToRole(
   req: Request,
   res: Response,
 ) {
-  const { EmployeeId, roleId } = req.body as {
-    EmployeeId: string;
+  const { employeeId, roleId } = req.body as {
+    employeeId: string;
     roleId: string;
   };
-  const $EID = Types.ObjectId(EmployeeId);
+  const $EID = Types.ObjectId(employeeId);
   const $RID = Types.ObjectId(roleId);
 
   const employeeExist = await models.Employee.findOne($EID);
@@ -65,9 +73,13 @@ export async function AssignEmployeeToRole(
     return ResourceNotFound(res, 'Employee not Found ');
   if (!roleExist) return ResourceNotFound(res, 'Role not Found ');
 
-  const doc = await models.Employee.findOneAndUpdate($EID, {
-    ' $push': { roleId: $RID },
-  });
+  const doc = await models.Employee.findOneAndUpdate(
+    { _id: $EID },
+    {
+      $set: { roleId: $RID },
+    },
+    { new: true },
+  ).populate('groupId roleId');
 
   return ProcessingSuccess(res, doc);
 }

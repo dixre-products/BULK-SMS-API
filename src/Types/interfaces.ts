@@ -99,7 +99,6 @@ export interface DepartmentProps extends Document {
   _id: Types.ObjectId; //eslint-disable-line
   credit: number;
   name: string;
-  groupId: Types.ObjectId;
 }
 
 export interface EmployeeProps extends Document {
@@ -108,8 +107,8 @@ export interface EmployeeProps extends Document {
   email: string;
   password: string;
   address: string;
-  groupId: Types.ObjectId;
-  roleId: Types.ObjectId;
+  groupId?: Types.ObjectId;
+  roleId?: Types.ObjectId;
   hash: string;
   salt: string;
 
@@ -123,8 +122,8 @@ export interface EmployeeSignupProps extends Document {
   email: string;
   password: string;
   address: string;
-  groupId: string;
-  roleId: string;
+  groupId?: string;
+  roleId?: string;
 }
 
 export interface RoleProps extends Document {

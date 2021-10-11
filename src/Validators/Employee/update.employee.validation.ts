@@ -6,7 +6,7 @@ const requestBodySchema = joi.object({
   id: joi.string().required().label('Employee ID'),
 
   updates: joi.object({
-    email: joi.number(),
+    email: joi.string(),
     name: joi.string(),
     password: joi.string(),
     address: joi.string(),
@@ -16,12 +16,12 @@ const requestBodySchema = joi.object({
 });
 
 const requestBodySchemaAssignEmployeeToDept = joi.object({
-  EmployeeId: joi.string().required().label('Employee ID'),
+  employeeId: joi.string().required().label('Employee ID'),
   departmentId: joi.string().required().label('department ID'),
 });
 
 const requestBodySchemaAssignEmployeeToRole = joi.object({
-  EmployeeId: joi.string().required().label('Employee ID'),
+  employeeId: joi.string().required().label('Employee ID'),
   roleId: joi.string().required().label('roid ID'),
 });
 

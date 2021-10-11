@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  email: joi.number().required().label('Email'),
+  email: joi.string().required().label('Email'),
   name: joi.string().required().label('Name'),
   password: joi.string().required().label('Password'),
   address: joi.string().required().label('Address'),

@@ -38,14 +38,14 @@ employee.get(
   HandleAsyncFactory(EmployeeController.GetSingleEmployee),
 );
 
-employee.post(
+employee.put(
   ADMIN_BASE_SUB + GET_ID_PARAM + ROLE_BASE_SUB, // employee/admin/:id/role
   HandleAsyncFactory(Validation.ValidateAssignEmployeeToRole),
   HandleAsyncFactory(EmployeeController.AssignEmployeeToRole),
 );
 
-employee.post(
-  ADMIN_BASE_SUB + GET_ID_PARAM + DEPARTMENT_BASE_SUB, // employee/admin/:id/role
+employee.put(
+  ADMIN_BASE_SUB + DEPARTMENT_BASE_SUB, // employee/admin/:id/role
   HandleAsyncFactory(Validation.ValidateAssignEmployeeToDepartment),
   HandleAsyncFactory(EmployeeController.AssignEmployeeToDepartment),
 );

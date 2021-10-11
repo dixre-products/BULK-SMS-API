@@ -5,7 +5,6 @@ import { InvalidInputs } from '../../RequestStatus/status';
 const requestBodySchema = joi.object({
   credit: joi.number().required().label('credit'),
   name: joi.string().required().label('Name'),
-  groupId: joi.string().label('Group ID'),
 });
 
 export default function ValidateCreateDepartment(

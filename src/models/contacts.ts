@@ -2,8 +2,6 @@ import * as mongoose from 'mongoose';
 
 const Contact: mongoose.Schema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Schema.Types.ObjectId },
-
     name: {
       type: mongoose.Schema.Types.String,
     },
@@ -14,7 +12,7 @@ const Contact: mongoose.Schema = new mongoose.Schema(
 
     groupId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Group',
+      ref: 'department',
     },
 
     date: {

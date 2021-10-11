@@ -22,8 +22,8 @@ export default async function CreateEmployee(
   employee.email = email;
   employee.address = address;
 
-  employee.groupId = $GROUPID;
-  employee.roleId = $ROLEID;
+  employee.groupId = groupId && $GROUPID;
+  employee.roleId = roleId && $ROLEID;
 
   await employee.save({ validateBeforeSave: false });
 

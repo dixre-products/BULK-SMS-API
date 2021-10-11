@@ -3,8 +3,6 @@ import { RoleProps } from '../Types/interfaces';
 
 const Role: mongoose.Schema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Schema.Types.ObjectId },
-
     name: {
       type: mongoose.Schema.Types.String,
       enum: ['maker', 'checker'],

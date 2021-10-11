@@ -5,8 +5,6 @@ import { EmployeeProps } from '../Types/interfaces';
 
 const Employee: mongoose.Schema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Schema.Types.ObjectId },
-
     email: {
       type: mongoose.Schema.Types.String,
     },
@@ -31,14 +29,14 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
-    departmentId: {
+    groupId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Department',
+      ref: 'department',
     },
 
     roleId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Role',
+      ref: 'role',
     },
   },
 
