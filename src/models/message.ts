@@ -15,7 +15,10 @@ const Message: mongoose.Schema = new mongoose.Schema(
     sender: { type: mongoose.Schema.Types.String },
     time: { type: mongoose.Schema.Types.Date },
 
-    status: { enum: ['notApproved', 'approved', 'pending', 'sent'] },
+    status: {
+      enum: ['notApproved', 'approved', 'pending', 'sent'],
+      default: 'notApproved',
+    },
 
     groupId: {
       type: mongoose.Schema.Types.ObjectId,

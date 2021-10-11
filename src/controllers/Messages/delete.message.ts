@@ -8,7 +8,17 @@ export default async function DeleteMessage(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Message.deleteOne({ _id: id });
+  const deletedDoc = await models.Message.findOneAndDelete({
+    _id: id,
+  });
 
-  return ProcessingSuccess(res, doc);
+  models.Department.findOneAndUpdate(
+    { _id: deletedDoc?.groupId },
+    {
+      $inc: { credit: deletedDoc?.contacts.length },
+    },
+    { new: true },
+  );
+
+  return ProcessingSuccess(res, deletedDoc);
 }

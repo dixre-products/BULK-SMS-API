@@ -122,8 +122,8 @@ export interface EmployeeSignupProps extends Document {
   email: string;
   password: string;
   address: string;
-  groupId?: string;
-  roleId?: string;
+  groupId: string;
+  roleId: string;
 }
 
 export interface RoleProps extends Document {
@@ -158,7 +158,7 @@ export interface MessageProps extends Document {
   sender: string;
   groupId: Types.ObjectId;
   date: Date;
-  contacts: Array<ContactProps>;
+  contacts: Array<string>;
   time: Date;
   status: any;
 }

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
-import { ContactProps, MessageProps } from '../../Types/interfaces';
+import { MessageProps } from '../../Types/interfaces';
 
 export default async function Createmessage(
   req: Request,
@@ -13,7 +13,7 @@ export default async function Createmessage(
       message: string;
       sender: string;
       groupId: string;
-      contacts: Array<ContactProps>;
+      contacts: Array<string>;
       time: Date;
       status: any;
     };
@@ -31,6 +31,14 @@ export default async function Createmessage(
   newMessage.groupId = $GROUPID;
 
   await newMessage.save({ validateBeforeSave: false });
+
+  models.Department.findOneAndUpdate(
+    { _id: $GROUPID },
+    {
+      $inc: { credit: -newMessage.contacts.length },
+    },
+    { new: true },
+  );
 
   return ProcessingSuccess(res, newMessage);
 }
