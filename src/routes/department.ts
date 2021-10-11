@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import DepartmentController from '../controllers/Department';
-// import ValidateSignUpInput from '../Validators/signup.user.validator';
+import Validation from '../Validators/Department';
+
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
@@ -14,31 +15,31 @@ const department = Router();
 
 department.post(
   ADMIN_BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateCreateDepartment),
   HandleAsyncFactory(DepartmentController.CreateDepartment),
 );
 
 department.get(
   ADMIN_BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  // HandleAsyncFactory(Validation.),
   HandleAsyncFactory(DepartmentController.GetAllDepartment),
 );
 
 department.get(
   GET_ID_PARAM,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateGetSingleDepartment),
   HandleAsyncFactory(DepartmentController.GetSingleDepartment),
 );
 
 department.put(
   ADMIN_BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateUpdateDepartment),
   HandleAsyncFactory(DepartmentController.UpdateDepartment),
 );
 
 department.put(
   ADMIN_BASE_SUB + CREDIT_BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateUpdateDepartmentCredit),
   HandleAsyncFactory(DepartmentController.UpdateDepartmentCredit),
 );
 

@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import MessageController from '../controllers/Messages';
-// import ValidateSignUpInput from '../Validators/signup.user.validator';
+import Validation from '../Validators/Messages';
+
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
@@ -10,25 +11,25 @@ const message = Router();
 
 message.post(
   BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateCreateMessage),
   HandleAsyncFactory(MessageController.CreateMessage),
 );
 
 message.put(
   BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateUpdateMessage),
   HandleAsyncFactory(MessageController.UpdateMessage),
 );
 
 message.delete(
   BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateDeleteMessage),
   HandleAsyncFactory(MessageController.DeleteMessage),
 );
 
 message.get(
   GET_ID_PARAM,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateGetSingleMessageByGroup),
   HandleAsyncFactory(MessageController.GetSingleMessageByGroup),
 );
 

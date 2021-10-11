@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import ContactController from '../controllers/Contact';
-// import ValidateSignUpInput from '../Validators/signup.user.validator';
+import Validation from '../Validators/Contact';
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
@@ -14,32 +14,32 @@ const contact = Router();
 
 contact.post(
   BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(Validation.ValidateCreateContact),
   HandleAsyncFactory(ContactController.CreateContact),
 );
 
 contact.put(
   BASE_SUB,
   //   HandleAsyncFactory(ValidateSignUpInput),
-  HandleAsyncFactory(ContactController.UpdateContact),
+  HandleAsyncFactory(Validation.ValidateUpdateContact),
 );
 
 contact.delete(
   BASE_SUB,
   //   HandleAsyncFactory(ValidateSignUpInput),
-  HandleAsyncFactory(ContactController.DeleteContact),
+  HandleAsyncFactory(Validation.ValidateDeleteContact),
 );
 
 contact.get(
   GET_ID_PARAM,
   //   HandleAsyncFactory(ValidateSignUpInput),
-  HandleAsyncFactory(ContactController.GetSingleContactByGroup),
+  HandleAsyncFactory(Validation.ValidateGetSingleContactByGroup),
 );
 
 contact.get(
   ADMIN_BASE_SUB,
   //   HandleAsyncFactory(ValidateSignUpInput),
-  HandleAsyncFactory(ContactController.GetAllContact),
+  // HandleAsyncFactory(ContactController.GetAllContact),
 );
 
 export default contact;
