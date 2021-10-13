@@ -135,7 +135,7 @@ export interface RoleProps extends Document {
 export interface ContactProps extends Document {
   name: string;
   number: number;
-  groupId: string;
+  groupId: Types.ObjectId;
   date: Date;
 }
 

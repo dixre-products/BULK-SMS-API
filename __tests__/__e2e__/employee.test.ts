@@ -62,17 +62,13 @@ beforeAll(async () => {
     await role.save();
 
     newRoleId = role._id;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 });
 afterAll(async () => {
   try {
     await DatabaseConnection.dropCollection('departments');
     await DatabaseConnection.dropCollection('roles');
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 });
 
 describe('Employee Test', () => {
@@ -188,7 +184,6 @@ describe('Employee Test', () => {
       .expect(400)
       .then((response) => {
         const { message } = response.body;
-        console.log(message);
 
         expect(message).toBeDefined();
 

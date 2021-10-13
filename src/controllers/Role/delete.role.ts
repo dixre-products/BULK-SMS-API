@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import { ProcessingSuccess } from '../../RequestStatus/status';
+import {
+  ProcessingSuccess,
+  ResourceNotFound,
+} from '../../RequestStatus/status';
 import models from '../../models';
 
 export default async function DeleteRole(
@@ -8,7 +11,11 @@ export default async function DeleteRole(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Role.deleteOne({ _id: id });
-
+  const doc = await models.Role.findOneAndDelete({ _id: id });
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      'Contact not found with corresponding id',
+    );
   return ProcessingSuccess(res, doc);
 }

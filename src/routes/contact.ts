@@ -13,22 +13,22 @@ contact.post(
   HandleAsyncFactory(ContactController.CreateContact),
 );
 
+contact.get(
+  GET_ID_PARAM,
+  HandleAsyncFactory(Validation.ValidateGetSingleContactByGroup),
+  HandleAsyncFactory(ContactController.GetSingleContactByGroup),
+);
+
 contact.put(
   BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
   HandleAsyncFactory(Validation.ValidateUpdateContact),
+  HandleAsyncFactory(ContactController.UpdateContact),
 );
 
 contact.delete(
-  BASE_SUB,
-  //   HandleAsyncFactory(ValidateSignUpInput),
-  HandleAsyncFactory(Validation.ValidateDeleteContact),
-);
-
-contact.get(
   GET_ID_PARAM,
-  //   HandleAsyncFactory(ValidateSignUpInput),
-  HandleAsyncFactory(Validation.ValidateGetSingleContactByGroup),
+  HandleAsyncFactory(Validation.ValidateDeleteContact),
+  HandleAsyncFactory(ContactController.DeleteContact),
 );
 
 export default contact;

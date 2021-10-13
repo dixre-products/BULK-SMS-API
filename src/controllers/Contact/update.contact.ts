@@ -17,7 +17,11 @@ export default async function UpdateContact(
   };
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Contact.findOneAndUpdate(ID, updates);
+  const doc = await models.Contact.findOneAndUpdate(
+    { _id: ID },
+    updates,
+    { new: true },
+  );
 
   if (!doc) return ResourceNotFound(res, 'Contact not Found ');
 

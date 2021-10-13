@@ -1,65 +1,79 @@
 import superTest from 'supertest';
 import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
+import { DepartmentProps } from '../../src/Types/interfaces';
+import models from '../../src/models';
 // import department from './../../src/routes/department';
 /*
-   Test 1 => Admin should successfully create a department
-   Test 2 => Admin should not be abe to create a department if name or credit is not given
-   Test 3 => Admin should be able to get all Departments
-   Test 4 => should be able to get a single department
+   Test 1 => it should successfully create a contact
+   Test 2 => it should fail to create a contact if name or orther required field is not given
+   Test 3 => Admin should be able to get all contact
+   Test 4 => should be able to get a single contact
    Test 5 => should fail if params is incorrect
-   Test 6 => Admin should be able to update a department
-   Test 7 => Admin should not be able to update if department ID is not provided
-   Test 8 => Admin should not be able to update if department ID isincorrect
-   Test 9 => Admin should  be able to add credit
-   Test 10 => should fail if credit is not a number
-
+   Test 6 => it should be able to update a contact
+   Test 7 => it should not be able to update if contact ID is not provided / empty
+   Test 8 => it should not be able to update if contact ID is incorrect
+   Test 9 => should be able to delete a contact with correct ID
 */
 // login Test Account Creadentials
-let newDepartment = {
+let newContact = {
   name: 'test',
-  credit: 20,
+  number: 20909,
 };
 
 let updates = {
-  name: 'dept1updated',
-  credit: 23,
+  name: 'contact1updated',
+  number: 23,
+  // groupId: newDepartmentId,
 };
 
 const SuperTest = superTest(app);
 
+let incorrectId = '6166360199c49afae4f22712';
+var newDepartmentId: any;
 beforeAll(async () => {
+  try {
+    await DatabaseConnection.dropCollection('contacts');
+    const department = new models.Department({
+      name: 'deptX',
+      credit: 13,
+    }) as DepartmentProps;
+    await department.save();
+    newDepartmentId = department._id;
+  } catch (e) {}
+});
+afterAll(async () => {
   try {
     await DatabaseConnection.dropCollection('departments');
   } catch (e) {
-    //
+    // console.log(e);
   }
 });
-
-describe('Department Test', () => {
+describe('Contact Test', () => {
   let newPostId = '';
-  test('Admin should successfully create a department', async (done) => {
-    SuperTest.post('/admin/create-department')
-      .send(newDepartment)
+  test('it should successfully create a contact', async (done) => {
+    SuperTest.post('/contact')
+      .send({ ...newContact, groupId: newDepartmentId })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
         newPostId = payload._id;
-
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
       })
       .catch((e) => {
+        // console.log(e);
+
         done(e);
       });
   });
 
-  test('Admin should not be abe to create a department if name or credit is not given', async (done) => {
-    SuperTest.post('/admin/create-department')
-      .send({ ...newDepartment, name: '' })
+  test('it should fail to create a contact if name or other required field is not given', async (done) => {
+    SuperTest.post('/contact')
+      .send({ ...newContact, name: '', number: '' })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
@@ -73,8 +87,8 @@ describe('Department Test', () => {
       });
   });
 
-  test('Admin should be able to get all Departments', async (done) => {
-    SuperTest.get('/admin/get-department')
+  test('Admin should be able to get all Contacts', async (done) => {
+    SuperTest.get('/admin/get-contact')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -90,8 +104,8 @@ describe('Department Test', () => {
       });
   });
 
-  test('should be able to get a single department', async (done) => {
-    SuperTest.get('/department/' + newPostId)
+  test('should be able to get a single contact', async (done) => {
+    SuperTest.get('/contact/' + newDepartmentId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -99,7 +113,6 @@ describe('Department Test', () => {
         const { message, payload } = response.body;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
-
         done();
       })
       .catch((e) => {
@@ -108,7 +121,7 @@ describe('Department Test', () => {
   });
 
   test('should fail if params is incorrect', async (done) => {
-    SuperTest.get('/department/6166360199c49afae4f22712')
+    SuperTest.get('/contact/' + incorrectId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404)
@@ -123,14 +136,15 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should be able to update a department', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test(' it should be able to update a contact', async (done) => {
+    SuperTest.put('/contact')
       .send({ id: newPostId, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
+        console.log(message);
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -142,14 +156,15 @@ describe('Department Test', () => {
       });
   });
 
-  test('Admin should not be able to update if department ID is not provided', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test('it should not be able to update if contact ID is not provided / empty', async (done) => {
+    SuperTest.put('/contact')
       .send({ id: '', updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
       .then((response) => {
         const { message } = response.body;
+        console.log(message);
 
         expect(message).toBeDefined();
 
@@ -161,7 +176,7 @@ describe('Department Test', () => {
   });
 
   test(' Admin should not be able to update if department ID is incorrect', async (done) => {
-    SuperTest.put('/admin/update-department/')
+    SuperTest.put('/contact')
       .send({ id: '6166360199c49afae4f22714', updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -178,9 +193,8 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should  be able to add credit', async (done) => {
-    SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 2 })
+  test('should be able to delete a contact with correct ID', async (done) => {
+    SuperTest.delete('/contact/' + newPostId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -189,24 +203,6 @@ describe('Department Test', () => {
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
-
-        done();
-      })
-      .catch((e) => {
-        done(e);
-      });
-  });
-
-  test('should fail if credit is not a number', async (done) => {
-    SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 'a' })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .then((response) => {
-        const { message } = response.body;
-
-        expect(message).toBeDefined();
 
         done();
       })

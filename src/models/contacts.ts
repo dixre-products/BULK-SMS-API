@@ -6,7 +6,7 @@ const Contact: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
-    phoneNumber: {
+    phone: {
       type: mongoose.Schema.Types.String,
     },
 
