@@ -5,7 +5,7 @@ import { InvalidInputs } from '../../RequestStatus/status';
 const requestBodySchema = joi.object({
   sendMessage: joi.boolean().required().label('send message'),
   readMessage: joi.boolean().required().label('read Message'),
-  addContact: joi.boolean().label('add Contact'),
+  addContact: joi.boolean().required().label('add Contact'),
   name: joi.string().required().label('name'),
 });
 

@@ -20,7 +20,7 @@ export async function GetSingleMessageByGroup(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Message.find({ groupId: id });
+  const doc = await models.Message.findOne({ groupId: id });
 
   if (!doc)
     return ResourceNotFound(

@@ -19,7 +19,7 @@ export async function GetSingleDepartment(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Department.find({ _id: id });
+  const doc = await models.Department.findOne({ _id: id });
 
   if (!doc)
     return ResourceNotFound(

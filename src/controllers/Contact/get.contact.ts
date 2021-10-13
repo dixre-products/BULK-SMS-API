@@ -19,7 +19,7 @@ export async function GetSingleContactByGroup(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Contact.find({ groupId: id });
+  const doc = await models.Contact.findOne({ groupId: id });
 
   if (!doc)
     return ResourceNotFound(

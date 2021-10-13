@@ -16,7 +16,7 @@ export async function GetAllEmployee(req: Request, res: Response) {
 export async function GetSingleEmployee(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Employee.find({ _id: id }).populate(
+  const doc = await models.Employee.findOne({ _id: id }).populate(
     'roleId groupId',
   );
 

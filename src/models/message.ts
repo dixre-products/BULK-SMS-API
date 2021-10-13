@@ -17,7 +17,6 @@ const Message: mongoose.Schema = new mongoose.Schema(
 
     status: {
       enum: ['notApproved', 'approved', 'pending', 'sent'],
-      default: 'notApproved',
     },
 
     groupId: {

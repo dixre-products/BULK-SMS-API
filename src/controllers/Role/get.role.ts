@@ -16,7 +16,7 @@ export async function GetAllRole(req: Request, res: Response) {
 export async function GetSingleRole(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Role.find({ _id: id });
+  const doc = await models.Role.findOne({ _id: id });
 
   if (!doc)
     return ResourceNotFound(

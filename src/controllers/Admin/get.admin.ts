@@ -16,7 +16,7 @@ export async function GetAllAdmin(req: Request, res: Response) {
 export async function GetSingleAdmin(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Admin.find({ _id: id });
+  const doc = await models.Admin.findOne({ _id: id });
 
   if (!doc)
     return ResourceNotFound(
