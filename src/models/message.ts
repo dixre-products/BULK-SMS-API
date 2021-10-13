@@ -3,12 +3,7 @@ import { MessageProps } from '../Types/interfaces';
 
 const Message: mongoose.Schema = new mongoose.Schema(
   {
-    contacts: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'contact',
-      },
-    ],
+    contacts: { type: mongoose.Schema.Types.Array },
 
     message: { type: mongoose.Schema.Types.String },
 
@@ -16,6 +11,7 @@ const Message: mongoose.Schema = new mongoose.Schema(
     time: { type: mongoose.Schema.Types.Date },
 
     status: {
+      type: mongoose.Schema.Types.String,
       enum: ['notApproved', 'approved', 'pending', 'sent'],
     },
 

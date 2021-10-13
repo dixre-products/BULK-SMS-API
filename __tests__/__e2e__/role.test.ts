@@ -2,63 +2,72 @@ import superTest from 'supertest';
 import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
 /*
-   Test 1 => Admin should successfully create a department
-   Test 2 => Admin should not be abe to create a department if name or credit is not given
-   Test 3 => Admin should be able to get all Departments
-   Test 4 => should be able to get a single department
+   Test 1 => Admin should successfully create a role
+   Test 2 => Admin should fail to create a role if name or other required field is not given
+   Test 3 => Admin should be able to get all role
+   Test 4 => Admin should be able to get a single role
    Test 5 => should fail if params is incorrect
-   Test 6 => Admin should be able to update a department
-   Test 7 => Admin should not be able to update if department ID is not provided
-   Test 8 => Admin should not be able to update if department ID isincorrect
-   Test 9 => Admin should  be able to add credit
-   Test 10 => should fail if credit is not a number
+   Test 6 => it should be able to update a role
 
+   Test 7 => should fail to update if role ID is not provided / empty
+   Test 8 => should fail to update  if contact ID is incorrect
+   Test 9 => should be able to delete a role with correct ID
 */
 // login Test Account Creadentials
-let newDepartment = {
-  name: 'test',
-  credit: 20,
+let newRole = {
+  sendMessage: true,
+  readMessage: true,
+  name: 'taker',
+  addContact: true,
 };
 
 let updates = {
-  name: 'dept1updated',
-  credit: 23,
+  sendMessage: false,
+  readMessage: false,
+  name: 'taker',
+  addContact: false,
 };
 
 const SuperTest = superTest(app);
 
+let incorrectId = '6166360199c49afae4f22712';
 beforeAll(async () => {
   try {
-    await DatabaseConnection.dropCollection('departments');
-  } catch (e) {
-    //
-  }
+    await DatabaseConnection.dropCollection('roles');
+  } catch (e) {}
 });
 
-describe('Department Test', () => {
+describe('Role Test', () => {
   let newPostId = '';
-  test('Admin should successfully create a department', async (done) => {
-    SuperTest.post('/admin/create-department')
-      .send(newDepartment)
+
+  test('Admin should successfully create a role', async (done) => {
+    SuperTest.post('/admin/create-role')
+      .send(newRole)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
         newPostId = payload._id;
-
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
       })
       .catch((e) => {
+        // console.log(e);
+
         done(e);
       });
   });
 
-  test('Admin should not be abe to create a department if name or credit is not given', async (done) => {
-    SuperTest.post('/admin/create-department')
-      .send({ ...newDepartment, name: '' })
+  test(' Admin should fail to create a role if name or other required field is not given', async (done) => {
+    SuperTest.post('/admin/create-role')
+      .send({
+        ...newRole,
+        name: '',
+        sendMessage: '',
+        readMessage: '',
+      })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
@@ -72,8 +81,8 @@ describe('Department Test', () => {
       });
   });
 
-  test('Admin should be able to get all Departments', async (done) => {
-    SuperTest.get('/admin/get-department')
+  test('Admin should be able to get all role', async (done) => {
+    SuperTest.get('/admin/get-role')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -89,8 +98,8 @@ describe('Department Test', () => {
       });
   });
 
-  test('should be able to get a single department', async (done) => {
-    SuperTest.get('/department/' + newPostId)
+  test(' Admin should be able to get a single role', async (done) => {
+    SuperTest.get('/admin/get-role/' + newPostId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -98,7 +107,6 @@ describe('Department Test', () => {
         const { message, payload } = response.body;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
-
         done();
       })
       .catch((e) => {
@@ -107,7 +115,7 @@ describe('Department Test', () => {
   });
 
   test('should fail if params is incorrect', async (done) => {
-    SuperTest.get('/department/6166360199c49afae4f22712')
+    SuperTest.get('/admin/get-role/' + incorrectId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404)
@@ -122,14 +130,15 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should be able to update a department', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test('it should be able to update a role', async (done) => {
+    SuperTest.put('/admin/update-role')
       .send({ id: newPostId, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
+        console.log(message);
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -141,14 +150,15 @@ describe('Department Test', () => {
       });
   });
 
-  test('Admin should not be able to update if department ID is not provided', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test('should fail to update if role ID is not provided / empty', async (done) => {
+    SuperTest.put('/admin/update-role')
       .send({ id: '', updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
       .then((response) => {
         const { message } = response.body;
+        console.log(message);
 
         expect(message).toBeDefined();
 
@@ -159,9 +169,9 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should not be able to update if department ID is incorrect', async (done) => {
-    SuperTest.put('/admin/update-department/')
-      .send({ id: '6166360199c49afae4f22714', updates })
+  test('should fail to update  if role ID is incorrect', async (done) => {
+    SuperTest.put('/admin/update-role')
+      .send({ id: incorrectId, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404)
@@ -177,36 +187,15 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should  be able to add credit', async (done) => {
-    SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 2 })
+  test('should be able to delete a role with correct ID', async (done) => {
+    SuperTest.delete('/admin/delete-role/' + newPostId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
-
-        done();
-      })
-      .catch((e) => {
-        done(e);
-      });
-  });
-
-  test('should fail if credit is not a number', async (done) => {
-    SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 'a' })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .then((response) => {
-        const { message } = response.body;
-
-        expect(message).toBeDefined();
-
         done();
       })
       .catch((e) => {

@@ -21,7 +21,7 @@ message.put(
 );
 
 message.delete(
-  BASE_SUB,
+  GET_ID_PARAM,
   HandleAsyncFactory(Validation.ValidateDeleteMessage),
   HandleAsyncFactory(MessageController.DeleteMessage),
 );

@@ -4,15 +4,19 @@ import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
 import RoleController from '../controllers/Role';
 import MessageController from '../controllers/Messages';
+import AdminController from '../controllers/Admin';
 //
 import DepartmentValidation from '../Validators/Department';
 import EmployeeValidation from '../Validators/Employee';
 import RoleValidation from '../Validators/Role';
+import AdminValidation from '../Validators/Admin';
 
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
 const {
+  UPDATE_ROLE,
+  BASE_SUB,
   GET_ID_PARAM,
   CREATE_DEPARTMENT,
   GET_DEPARTMENT,
@@ -103,16 +107,22 @@ admin.put(
 
 // Admin: Role Routes
 
+admin.delete(
+  DELETE_ROLE + GET_ID_PARAM,
+  HandleAsyncFactory(RoleValidation.ValidateDeleteRole),
+  HandleAsyncFactory(RoleController.DeleteRole),
+);
+
 admin.post(
   CREATE_ROLE,
   HandleAsyncFactory(RoleValidation.ValidateCreateRole),
   HandleAsyncFactory(RoleController.CreateRole),
 );
 
-admin.delete(
-  DELETE_ROLE,
-  HandleAsyncFactory(RoleValidation.ValidateDeleteRole),
-  HandleAsyncFactory(RoleController.DeleteRole),
+admin.put(
+  UPDATE_ROLE,
+  HandleAsyncFactory(RoleValidation.ValidateUpdateRole),
+  HandleAsyncFactory(RoleController.UpdateRole),
 );
 
 admin.get(
@@ -127,4 +137,26 @@ admin.get(
   HandleAsyncFactory(RoleController.GetSingleRole),
 );
 
+// Admin Route
+admin.post(
+  BASE_SUB,
+  HandleAsyncFactory(AdminValidation.ValidateCreateAdmin),
+  HandleAsyncFactory(AdminController.CreateAdmin),
+);
+
+admin.get(BASE_SUB, HandleAsyncFactory(AdminController.GetAllAdmin));
+
+admin.get(
+  GET_ID_PARAM,
+  HandleAsyncFactory(AdminValidation.ValidateGetSingleAdmin),
+  HandleAsyncFactory(AdminController.GetSingleAdmin),
+);
+
+admin.put(
+  BASE_SUB,
+  HandleAsyncFactory(AdminValidation.ValidateUpdateAdmin),
+  HandleAsyncFactory(AdminController.UpdateAdmin),
+);
+
+//
 export default admin;

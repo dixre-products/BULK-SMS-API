@@ -3,7 +3,6 @@ import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
 import { DepartmentProps } from '../../src/Types/interfaces';
 import models from '../../src/models';
-// import department from './../../src/routes/department';
 /*
    Test 1 => it should successfully create a contact
    Test 2 => it should fail to create a contact if name or orther required field is not given
@@ -15,7 +14,6 @@ import models from '../../src/models';
    Test 8 => it should not be able to update if contact ID is incorrect
    Test 9 => should be able to delete a contact with correct ID
 */
-// login Test Account Creadentials
 let newContact = {
   name: 'test',
   number: 20909,

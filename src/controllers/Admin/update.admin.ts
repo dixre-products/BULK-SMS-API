@@ -16,7 +16,10 @@ export default async function UpdateAdmin(
   };
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Admin.findOneAndUpdate(ID, updates);
+  const doc = await models.Admin.findOneAndUpdate(
+    { _id: ID },
+    updates,
+  );
 
   if (!doc) return ResourceNotFound(res, 'Admin not Found ');
 

@@ -46,10 +46,11 @@ const UPDATE_EMPLOYEE_DEPARTMENT = '/update-employee-department';
 const CREATE_ROLE = '/create-role';
 const GET_ROLE = '/get-role';
 const DELETE_ROLE = '/delete-role';
+const UPDATE_ROLE = '/update-role';
 
 const GET_ID_PARAM = '/:id';
 const BASE_SUB = '/';
-// const
+// Admin
 
 export default {
   PROFILE,
@@ -65,7 +66,7 @@ export default {
 
   GET_ID_PARAM,
   BASE_SUB,
-
+  UPDATE_ROLE,
   CREATE_DEPARTMENT,
   GET_DEPARTMENT,
   UPDATE_DEPARTMENT,

@@ -17,7 +17,10 @@ export default async function UpdateRole(
   };
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Role.findOneAndUpdate(ID, updates);
+  const doc = await models.Role.findOneAndUpdate(
+    { _id: ID },
+    updates,
+  );
 
   if (!doc) return ResourceNotFound(res, 'Role not Found ');
 

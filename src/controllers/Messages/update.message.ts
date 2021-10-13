@@ -17,7 +17,10 @@ export default async function UpdateMessage(
   };
   const ID = Types.ObjectId(id);
 
-  const doc = await models.Message.findOneAndUpdate(ID, updates);
+  const doc = await models.Message.findOneAndUpdate(
+    { _id: ID },
+    updates,
+  );
 
   if (!doc) return ResourceNotFound(res, 'Message not Found ');
 

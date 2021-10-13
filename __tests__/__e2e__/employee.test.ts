@@ -3,8 +3,7 @@ import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
 import models from '../../src/models';
 import { DepartmentProps } from '../../src/Types/interfaces';
-// import department from './../../src/routes/department';
-/*import ValidateGetSingleDepartment from './../../src/Validators/Department/get.department.validation';
+/*
 
    Test 1 => Admin should successfully create an employee
    Test 2 => Admin should not be abe to create an employee if required field is not given

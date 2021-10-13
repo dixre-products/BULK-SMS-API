@@ -8,13 +8,7 @@ const requestBodySchema = joi.object({
   time: joi.date().label('Time'),
   status: joi.string().required().label('Status'),
   groupId: joi.string().label('Group ID'),
-
-  contacts: joi.object({
-    number: joi.number(),
-    name: joi.string(),
-    groupId: joi.string(),
-    date: joi.date(),
-  }),
+  contacts: joi.array().required().label('Contacts'),
 });
 
 export default function ValidateCreateMessage(

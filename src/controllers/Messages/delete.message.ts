@@ -12,7 +12,7 @@ export default async function DeleteMessage(
     _id: id,
   });
 
-  models.Department.findOneAndUpdate(
+  await models.Department.findOneAndUpdate(
     { _id: deletedDoc?.groupId },
     {
       $inc: { credit: deletedDoc?.contacts.length },

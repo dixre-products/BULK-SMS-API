@@ -1,79 +1,103 @@
 import superTest from 'supertest';
 import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
+import { DepartmentProps } from '../../src/Types/interfaces';
+import models from '../../src/models';
 /*
-   Test 1 => Admin should successfully create a department
-   Test 2 => Admin should not be abe to create a department if name or credit is not given
-   Test 3 => Admin should be able to get all Departments
-   Test 4 => should be able to get a single department
+   Test 1 => it should successfully create a messsage
+   Test 2 => it should fail to create message if required field is not given
+   Test 3 => Admin should be able to get all messages
+   Test 4 => should be able to get a single message  Department ID
    Test 5 => should fail if params is incorrect
-   Test 6 => Admin should be able to update a department
-   Test 7 => Admin should not be able to update if department ID is not provided
-   Test 8 => Admin should not be able to update if department ID isincorrect
-   Test 9 => Admin should  be able to add credit
-   Test 10 => should fail if credit is not a number
-
+   
+   Test 6 => it should be able to update a message
+   Test 7 => it should not be able to update if message ID is not provided / empty
+   Test 8 => it should not be able to update if message ID is incorrect
+   Test 9 => should be able to delete a contact with correct ID
 */
-// login Test Account Creadentials
-let newDepartment = {
-  name: 'test',
-  credit: 20,
-};
 
 let updates = {
-  name: 'dept1updated',
-  credit: 23,
+  contacts: [1111, 11111, 11111, 1111],
+  message: 'bbbb',
+  sender: 'bbbb',
+  time: Date.now(),
+  status: 'pending',
 };
 
 const SuperTest = superTest(app);
 
+let incorrectId = '6166360199c49afae4f22712';
+var newDepartmentId: any;
 beforeAll(async () => {
+  try {
+    await DatabaseConnection.dropCollection('messages');
+    const department = new models.Department({
+      name: 'deptX',
+      credit: 13,
+    }) as DepartmentProps;
+    await department.save();
+    newDepartmentId = department._id;
+  } catch (e) {}
+});
+
+let newMessage = {
+  contacts: [2314343, 1333134, 41141, 141],
+  message: 'asasasas',
+  sender: 'sassss',
+  time: Date.now(),
+  status: 'approved',
+  groupId: newDepartmentId,
+};
+
+afterAll(async () => {
   try {
     await DatabaseConnection.dropCollection('departments');
   } catch (e) {
-    //
+    // console.log(e);
   }
 });
-
-describe('Department Test', () => {
+describe('Message Test', () => {
   let newPostId = '';
-  test('Admin should successfully create a department', async (done) => {
-    SuperTest.post('/admin/create-department')
-      .send(newDepartment)
+  test('it should successfully create a message', async (done) => {
+    SuperTest.post('/message')
+      .send(newMessage)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
         newPostId = payload._id;
-
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
       })
       .catch((e) => {
+        // console.log(e);
+
         done(e);
       });
   });
 
-  test('Admin should not be abe to create a department if name or credit is not given', async (done) => {
-    SuperTest.post('/admin/create-department')
-      .send({ ...newDepartment, name: '' })
+  test('it should fail to create message if required field is not given', async (done) => {
+    SuperTest.post('/message')
+      .send({ ...newMessage, message: '', sender: '' })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
       .then((response) => {
-        const { message } = response.body;
+        const { message, payload } = response.body;
         expect(message).toBeDefined();
         done();
       })
       .catch((e) => {
+        // console.log(e);
+
         done(e);
       });
   });
 
-  test('Admin should be able to get all Departments', async (done) => {
-    SuperTest.get('/admin/get-department')
+  test(' Admin should be able to get all messages', async (done) => {
+    SuperTest.get('/admin/get-message')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -89,25 +113,28 @@ describe('Department Test', () => {
       });
   });
 
-  test('should be able to get a single department', async (done) => {
-    SuperTest.get('/department/' + newPostId)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .then((response) => {
-        const { message, payload } = response.body;
-        expect(message).toBeDefined();
-        expect(typeof payload).toBe('object');
+  // test('should be able to get a single message by Department ID', async (done) => {
+  //   SuperTest.get('/message/' + newMessage)
+  //     .set('Accept', 'application/json')
+  //     .expect('Content-Type', /json/)
+  //     .expect(200)
+  //     .then((response) => {
+  //       console.log('departmentID', newDepartmentId);
 
-        done();
-      })
-      .catch((e) => {
-        done(e);
-      });
-  });
+  //       const { message, payload } = response.body;
+  //       expect(message).toBeDefined();
+  //       expect(typeof payload).toBe('object');
+  //       done();
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+
+  //       done(e);
+  //     });
+  // });
 
   test('should fail if params is incorrect', async (done) => {
-    SuperTest.get('/department/6166360199c49afae4f22712')
+    SuperTest.get('/message/' + incorrectId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(404)
@@ -122,15 +149,14 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should be able to update a department', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test(' it should be able to update a message', async (done) => {
+    SuperTest.put('/message')
       .send({ id: newPostId, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
 
@@ -141,8 +167,8 @@ describe('Department Test', () => {
       });
   });
 
-  test('Admin should not be able to update if department ID is not provided', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test('it should not be able to update if message ID is not provided / empty', async (done) => {
+    SuperTest.put('/message')
       .send({ id: '', updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -159,8 +185,8 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should not be able to update if department ID is incorrect', async (done) => {
-    SuperTest.put('/admin/update-department/')
+  test(' should fail to update if message ID is incorrect', async (done) => {
+    SuperTest.put('/message')
       .send({ id: '6166360199c49afae4f22714', updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -177,9 +203,8 @@ describe('Department Test', () => {
       });
   });
 
-  test(' Admin should  be able to add credit', async (done) => {
-    SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 2 })
+  test('should be able to delete a contact with correct ID', async (done) => {
+    SuperTest.delete('/message/' + newPostId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -188,24 +213,6 @@ describe('Department Test', () => {
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
-
-        done();
-      })
-      .catch((e) => {
-        done(e);
-      });
-  });
-
-  test('should fail if credit is not a number', async (done) => {
-    SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 'a' })
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(400)
-      .then((response) => {
-        const { message } = response.body;
-
-        expect(message).toBeDefined();
 
         done();
       })
