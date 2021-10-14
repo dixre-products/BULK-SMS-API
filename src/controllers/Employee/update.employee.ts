@@ -79,7 +79,13 @@ export async function AssignEmployeeToRole(
       $set: { roleId: $RID },
     },
     { new: true },
-  ).populate('groupId roleId');
+  )
+    .populate('groupId roleId')
+    .select({
+      hash: 0,
+      salt: 0,
+      password: 0,
+    });
 
   return ProcessingSuccess(res, doc);
 }

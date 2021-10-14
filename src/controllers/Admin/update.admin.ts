@@ -19,7 +19,11 @@ export default async function UpdateAdmin(
   const doc = await models.Admin.findOneAndUpdate(
     { _id: ID },
     updates,
-  );
+  ).select({
+    hash: 0,
+    salt: 0,
+    password: 0,
+  });
 
   if (!doc) return ResourceNotFound(res, 'Admin not Found ');
 

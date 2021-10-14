@@ -1,7 +1,7 @@
 {
-  "name": "auth-service",
+  "name": "Bulk-sms-api",
   "version": "1.0.0",
-  "description": "Hanwok Service and authorisation service basically manages the authentication of users , token management,  and certify the integrity of every request made to any service of hanwok service, it serves as the security of hanwok platform and means to access resources from the hanwok services, Service also manages users information.",
+  "description": "Bulk sms allocation backend using checker and maker Access layer Control System. Application is synonymous to ebulk sms but with the exception that checker and maker integration",
   "main": "build/index.js",
   "scripts": {
     "build": "yarn compile:tsc && yarn doc",

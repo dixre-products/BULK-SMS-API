@@ -20,6 +20,14 @@ export default async function CreateAdmin(
   admin.email = email;
 
   await admin.save({ validateBeforeSave: false });
+  const id = admin._id; //eslint-disable-line
+  const createdAdmin = await models.Admin.findOne({
+    _id: id,
+  }).select({
+    hash: 0,
+    salt: 0,
+    password: 0,
+  });
 
-  return ProcessingSuccess(res, admin);
+  return ProcessingSuccess(res, createdAdmin);
 }

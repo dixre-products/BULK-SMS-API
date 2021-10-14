@@ -26,6 +26,15 @@ export default async function CreateEmployee(
   employee.roleId = $ROLEID;
 
   await employee.save({ validateBeforeSave: false });
+  const id = employee._id; //eslint-disable-line
 
-  return ProcessingSuccess(res, employee);
+  const createdEmployee = await models.Employee.findOne({
+    _id: id,
+  }).select({
+    hash: 0,
+    salt: 0,
+    password: 0,
+  });
+
+  return ProcessingSuccess(res, createdEmployee);
 }

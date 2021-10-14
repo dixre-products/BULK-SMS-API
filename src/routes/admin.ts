@@ -105,7 +105,7 @@ admin.put(
   HandleAsyncFactory(EmployeeController.AssignEmployeeToDepartment),
 );
 
-// Admin: Role Routes
+// Admin: Role Routes //
 
 admin.delete(
   DELETE_ROLE + GET_ID_PARAM,

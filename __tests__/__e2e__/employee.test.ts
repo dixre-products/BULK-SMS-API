@@ -73,7 +73,11 @@ afterAll(async () => {
 describe('Employee Test', () => {
   test('Admin should successfully create an employee', async (done) => {
     SuperTest.post('/admin/create-employee')
-      .send(newEmployee)
+      .send({
+        ...newEmployee,
+        groupId: newDepartmentId,
+        roleId: newRoleId,
+      })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

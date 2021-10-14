@@ -1,0 +1,75 @@
+/**
+ * @api {POST} /message  Create a message
+ * @apiName Post message
+ * @apiGroup Message
+ * @apiVersion  1.0.0
+ * @apiSampleRequest off
+ *
+ * @apiParam {Number[]} contacts List of contacts 
+ * @apiParam {String} message message to be sent.
+ * @apiParam {String} date date.
+ * @apiParam {String} time time created.
+ * @apiParam {String} sender  message sender
+ * @apiParam {String} status current status of the message.
+ * @apiParam {String} groupId department id
+ *
+ * @apiSuccess {String} message  describes the success of the action performed.
+ * @apiSuccess {Object} payload  message credentials object
+ * @apiSuccess {String} payload._id message ID.
+ * @apiSuccess {Number[]} payload.contacts list of contacts.
+ * @apiSuccess {String} payload.message createed message to be sent.
+ * @apiSuccess {String} payload.time time created.
+ * @apiSuccess {String} payload.date date created.
+ * @apiSuccess {String} payload.sender message sender
+ * @apiSuccess {String} payload.status current status of the message.
+ * @apiSuccess {String} payload.groupId department ID.
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 Successful
+ *     {
+ *       "message": "SUCCESSFULL",
+ *       "payload"{
+ *          "_id": "6167ec5c549f4c75397eec44",
+            "contacts": [
+                0802332323,090323232323,09823233
+            ],
+            "_id": "616739af7d36677091c60785",
+            "time": "2:22",
+            "date": "20-2-2912",
+            "message": "asasasas",
+            "sender": "sassss",
+            "status": "approved",
+            "groupId": "61664190dd57d724b1b49c23",,
+ *       }
+ *     }
+ *
+ * @apiError sender is required.
+ * @apiErrorExample InvalidCredential:
+ *     HTTP/1.1 400 Forbidden
+ *     {
+ *       "message": "sender is required",
+         "error": "INVALID.INPUT"
+ *     }
+ *
+ * @apiError message is required.
+ * @apiErrorExample InvalidCredential
+ *     HTTP/1.1 400 Conflict
+ *     {
+ *       "message": "message is required",
+         "error": "INVALID.INPUT"
+ *     }
+
+ @apiError groupId is required.
+ * @apiErrorExample InvalidCredential
+ *     HTTP/1.1 400 Conflict
+ *     {
+ *       "message": "groupId is required",
+         "error": "INVALID.INPUT"
+ *     }
+ * 
+ * 
+ *
+ *
+ *
+ */

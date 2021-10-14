@@ -51,7 +51,7 @@ let newMessage = {
 
 afterAll(async () => {
   try {
-    await DatabaseConnection.dropCollection('departments');
+    // await DatabaseConnection.dropCollection('departments');
   } catch (e) {
     // console.log(e);
   }
@@ -114,7 +114,7 @@ describe('Message Test', () => {
   });
 
   // test('should be able to get a single message by Department ID', async (done) => {
-  //   SuperTest.get('/message/' + newMessage)
+  //   SuperTest.get('/message/' + newDepartmentId)
   //     .set('Accept', 'application/json')
   //     .expect('Content-Type', /json/)
   //     .expect(200)
