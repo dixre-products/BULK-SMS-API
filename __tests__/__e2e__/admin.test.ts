@@ -34,7 +34,7 @@ beforeAll(async () => {
 });
 
 describe('Admin Test', () => {
-  let newPostId = '';
+  let adminID = '';
   let incorrectId = '6166360199c49afae4f22712';
 
   test('Admin should successfully create an account', async (done) => {
@@ -45,7 +45,7 @@ describe('Admin Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        newPostId = payload._id;
+        adminID = payload._id;
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -73,7 +73,7 @@ describe('Admin Test', () => {
   });
 
   test('should be able to get a single account by ID', async (done) => {
-    SuperTest.get('/admin/' + newPostId)
+    SuperTest.get('/admin/' + adminID)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -107,7 +107,7 @@ describe('Admin Test', () => {
 
   test(' Admin should be able to update an account', async (done) => {
     SuperTest.put('/admin/')
-      .send({ id: newPostId, updates })
+      .send({ id: adminID, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

@@ -1,7 +1,6 @@
-## BULK-SMS-API 
+## BULK-SMS-API
 
 Bulk sms allocation backend using checker and maker Access layer Control System. Application is synonymous to ebulk sms but with the exception that checker and maker integration.
-
 
 # Environment SetUp
 
@@ -41,3 +40,19 @@ yarn prettier-watch ## starts prettier in watch mode
 yarn doc:watch ## Runs api doc in watch mode
 
 ```
+
+### FIXES
+
+- Typescript is not used on project, please make sure data models, entities and all data have their corresponding type definitions
+- No static typing on main code.
+- In creating a role the name must not be checker or maker, it can be anything
+- Elint fails to validate code
+
+### UPCOMING UPDATES
+
+- Creating and assigning of senderId to a department (enable sending of message with senderid)
+- Track every activity on plaform
+- resseting of account information
+- inApp notification when messages is getting low for each department, Admin should be notified when department request for more sms,
+  admin should be notified when sms update is required
+- Adding of higher authority
