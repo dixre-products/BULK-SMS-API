@@ -48,7 +48,7 @@ afterAll(async () => {
   }
 });
 describe('Contact Test', () => {
-  let newPostId = '';
+  let contactId = '';
   test('it should successfully create a contact', async (done) => {
     SuperTest.post('/contact')
       .send({ ...newContact, groupId: newDepartmentId })
@@ -57,7 +57,7 @@ describe('Contact Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        newPostId = payload._id;
+        contactId = payload._id;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
@@ -136,7 +136,7 @@ describe('Contact Test', () => {
 
   test(' it should be able to update a contact', async (done) => {
     SuperTest.put('/contact')
-      .send({ id: newPostId, updates })
+      .send({ id: contactId, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -192,7 +192,7 @@ describe('Contact Test', () => {
   });
 
   test('should be able to delete a contact with correct ID', async (done) => {
-    SuperTest.delete('/contact/' + newPostId)
+    SuperTest.delete('/contact/' + contactId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

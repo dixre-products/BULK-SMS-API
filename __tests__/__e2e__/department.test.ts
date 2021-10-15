@@ -36,7 +36,7 @@ beforeAll(async () => {
 });
 
 describe('Department Test', () => {
-  let newPostId = '';
+  let deptID = '';
   test('Admin should successfully create a department', async (done) => {
     SuperTest.post('/admin/create-department')
       .send(newDepartment)
@@ -45,7 +45,7 @@ describe('Department Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        newPostId = payload._id;
+        deptID = payload._id;
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -90,7 +90,7 @@ describe('Department Test', () => {
   });
 
   test('should be able to get a single department', async (done) => {
-    SuperTest.get('/department/' + newPostId)
+    SuperTest.get('/department/' + deptID)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -124,7 +124,7 @@ describe('Department Test', () => {
 
   test(' Admin should be able to update a department', async (done) => {
     SuperTest.put('/admin/update-department/')
-      .send({ id: newPostId, updates })
+      .send({ id: deptID, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -179,7 +179,7 @@ describe('Department Test', () => {
 
   test(' Admin should  be able to add credit', async (done) => {
     SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 2 })
+      .send({ id: deptID, credit: 2 })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -198,7 +198,7 @@ describe('Department Test', () => {
 
   test('should fail if credit is not a number', async (done) => {
     SuperTest.put('/admin/add-credit')
-      .send({ id: newPostId, credit: 'a' })
+      .send({ id: deptID, credit: 'a' })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)

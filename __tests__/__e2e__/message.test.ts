@@ -57,7 +57,7 @@ afterAll(async () => {
   }
 });
 describe('Message Test', () => {
-  let newPostId = '';
+  let newMessageID = '';
   test('it should successfully create a message', async (done) => {
     SuperTest.post('/message')
       .send(newMessage)
@@ -66,7 +66,7 @@ describe('Message Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        newPostId = payload._id;
+        newMessageID = payload._id;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
@@ -151,7 +151,7 @@ describe('Message Test', () => {
 
   test(' it should be able to update a message', async (done) => {
     SuperTest.put('/message')
-      .send({ id: newPostId, updates })
+      .send({ id: newMessageID, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -204,7 +204,7 @@ describe('Message Test', () => {
   });
 
   test('should be able to delete a contact with correct ID', async (done) => {
-    SuperTest.delete('/message/' + newPostId)
+    SuperTest.delete('/message/' + newMessageID)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

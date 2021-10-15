@@ -38,7 +38,7 @@ beforeAll(async () => {
 });
 
 describe('Role Test', () => {
-  let newPostId = '';
+  let newRoleID = '';
 
   test('Admin should successfully create a role', async (done) => {
     SuperTest.post('/admin/create-role')
@@ -48,7 +48,7 @@ describe('Role Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        newPostId = payload._id;
+        newRoleID = payload._id;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
@@ -99,7 +99,7 @@ describe('Role Test', () => {
   });
 
   test(' Admin should be able to get a single role', async (done) => {
-    SuperTest.get('/admin/get-role/' + newPostId)
+    SuperTest.get('/admin/get-role/' + newRoleID)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -132,7 +132,7 @@ describe('Role Test', () => {
 
   test('it should be able to update a role', async (done) => {
     SuperTest.put('/admin/update-role')
-      .send({ id: newPostId, updates })
+      .send({ id: newRoleID, updates })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -188,7 +188,7 @@ describe('Role Test', () => {
   });
 
   test('should be able to delete a role with correct ID', async (done) => {
-    SuperTest.delete('/admin/delete-role/' + newPostId)
+    SuperTest.delete('/admin/delete-role/' + newRoleID)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
