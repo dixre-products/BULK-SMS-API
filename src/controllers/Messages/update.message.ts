@@ -6,6 +6,7 @@ import {
 } from '../../RequestStatus/status';
 import models from '../../models';
 import { MessageProps } from '../../Types/interfaces';
+import constants from '../../constants';
 
 export default async function UpdateMessage(
   req: Request,
@@ -22,7 +23,11 @@ export default async function UpdateMessage(
     updates,
   );
 
-  if (!doc) return ResourceNotFound(res, 'Message not Found ');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.MessageNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }

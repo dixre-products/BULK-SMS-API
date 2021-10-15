@@ -160,5 +160,5 @@ export interface MessageProps extends Document {
   date: Date;
   contacts: Array<number>;
   time: Date;
-  status: any;
+  status: string;
 }

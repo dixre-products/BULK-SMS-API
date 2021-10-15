@@ -1,5 +1,6 @@
 import * as mongoose from 'mongoose';
 import { MessageProps } from '../Types/interfaces';
+import MessageStatus from '../constants/enums';
 
 const Message: mongoose.Schema = new mongoose.Schema(
   {
@@ -12,7 +13,12 @@ const Message: mongoose.Schema = new mongoose.Schema(
 
     status: {
       type: mongoose.Schema.Types.String,
-      enum: ['notApproved', 'approved', 'pending', 'sent'],
+      enum: [
+        MessageStatus.NOT_APPROVED,
+        MessageStatus.APPROVED,
+        MessageStatus.PENDING,
+        MessageStatus.SENT,
+      ],
     },
 
     groupId: {

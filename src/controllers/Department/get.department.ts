@@ -4,11 +4,16 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export async function GetAllDepartment(req: Request, res: Response) {
   const doc = await models.Department.find();
 
-  if (!doc) return ResourceNotFound(res, 'User not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.DepartmentNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -24,7 +29,7 @@ export async function GetSingleDepartment(
   if (!doc)
     return ResourceNotFound(
       res,
-      'Department not found with corresponding id',
+      constants.RequestResponse.DepartmentNotFoundWithId,
     );
 
   return ProcessingSuccess(res, doc);

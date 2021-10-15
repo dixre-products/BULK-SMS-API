@@ -1,15 +1,20 @@
 import { Request, Response } from 'express';
-// import { ObjectId, Types } from 'mongoose';
+
 import {
   ProcessingSuccess,
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export async function GetAllMessages(req: Request, res: Response) {
   const doc = await models.Message.find();
 
-  if (!doc) return ResourceNotFound(res, 'Messages not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.MessageNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -25,7 +30,7 @@ export async function GetSingleMessageByGroup(
   if (!doc)
     return ResourceNotFound(
       res,
-      'Message not found with corresponding group id',
+      constants.RequestResponse.MessageNotFoundWithId,
     );
 
   return ProcessingSuccess(res, doc);

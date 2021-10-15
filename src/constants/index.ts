@@ -5,6 +5,7 @@ import ThirdIntegrationUrls from './services.integrated.urls';
 import RequestResponse from './response.messages';
 import Timers from './auth.timers';
 import Validations from './validation.messages';
+// import ResponseMessage from './response.messages';
 
 export default {
   TokenExpiry,
@@ -14,4 +15,5 @@ export default {
   RequestResponse,
   Timers,
   Validations,
+  // ResponseMessage,
 };

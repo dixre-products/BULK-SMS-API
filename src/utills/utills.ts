@@ -6,7 +6,6 @@ import {
 
 import * as fs from 'fs';
 import config from 'config';
-import models from '../models/index';
 import constants from '../constants/index';
 import { UserProps } from '../Types/interfaces';
 
@@ -98,21 +97,6 @@ export async function getPhoneNumberInfo(
     return phoneNumber;
   } catch (err: any) {
     throw new Error(err.message);
-  }
-}
-
-export async function phoneNumberExist(phoneNumber: string) {
-  try {
-    const doc = await models.Users.findOne({
-      phoneNumber,
-    });
-
-    if (doc) {
-      return true;
-    }
-    return false;
-  } catch (e: any) {
-    throw new Error(e.message);
   }
 }
 

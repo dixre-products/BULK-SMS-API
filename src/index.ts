@@ -11,20 +11,8 @@ import Logger, { HttpLogger } from './Logger/index';
 require('dotenv/config');
 require('./utills/connection');
 
-const {
-  LOGIN_BASE,
-  SIGNUP_BASE,
-  VERIFICATION_BASE,
-  TOKEN_MANAGEMENT_BASE,
-  RESSET_PASSWORD_BASE,
-  PROFILE,
-
-  EMPLOYEE,
-  DEPARTMENT,
-  CONTACT,
-  MESSAGE,
-  Admin,
-} = constants.RouteBase;
+const { EMPLOYEE, DEPARTMENT, CONTACT, MESSAGE, Admin } =
+  constants.RouteBase;
 // Application-Level Middleware
 const app = express();
 
@@ -54,12 +42,6 @@ app.use(
 app.use('/', express.static('api-doc'));
 
 // Routes
-app.use(LOGIN_BASE, routes.login);
-app.use(SIGNUP_BASE, routes.SignUp);
-app.use(VERIFICATION_BASE, routes.Verification);
-app.use(TOKEN_MANAGEMENT_BASE, routes.Token);
-app.use(RESSET_PASSWORD_BASE, routes.PasswordReset);
-app.use(PROFILE, routes.Profile);
 app.use(EMPLOYEE, routes.Employee);
 app.use(DEPARTMENT, routes.Department);
 app.use(MESSAGE, routes.Message);

@@ -6,6 +6,7 @@ import {
 } from '../../RequestStatus/status';
 import models from '../../models';
 import { RoleProps } from '../../Types/interfaces';
+import constants from '../../constants';
 
 export default async function UpdateRole(
   req: Request,
@@ -22,7 +23,11 @@ export default async function UpdateRole(
     updates,
   );
 
-  if (!doc) return ResourceNotFound(res, 'Role not Found ');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.RoleNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }

@@ -4,11 +4,16 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export async function GetAllEmployee(req: Request, res: Response) {
   const doc = await models.Employee.find().populate('groupId roleId');
 
-  if (!doc) return ResourceNotFound(res, 'Employee not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.EmployeeNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -27,7 +32,7 @@ export async function GetSingleEmployee(req: Request, res: Response) {
   if (!doc)
     return ResourceNotFound(
       res,
-      'Employee not found with corresponding id',
+      constants.RequestResponse.EmployeeNotFoundWithId,
     );
 
   return ProcessingSuccess(res, doc);

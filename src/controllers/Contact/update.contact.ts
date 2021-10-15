@@ -6,6 +6,7 @@ import {
 } from '../../RequestStatus/status';
 import models from '../../models';
 import { ContactProps } from '../../Types/interfaces';
+import constants from '../../constants';
 
 export default async function UpdateContact(
   req: Request,
@@ -23,7 +24,11 @@ export default async function UpdateContact(
     { new: true },
   );
 
-  if (!doc) return ResourceNotFound(res, 'Contact not Found ');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.ContactNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }

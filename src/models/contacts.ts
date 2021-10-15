@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { ContactProps } from '../Types/interfaces';
 
 const Contact: mongoose.Schema = new mongoose.Schema(
   {
@@ -23,4 +24,4 @@ const Contact: mongoose.Schema = new mongoose.Schema(
   { autoIndex: false },
 );
 
-export default mongoose.model('contact', Contact);
+export default mongoose.model<ContactProps>('contact', Contact);

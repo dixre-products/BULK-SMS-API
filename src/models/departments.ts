@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { DepartmentProps } from '../Types/interfaces';
 
 const Department: Schema = new Schema(
   {
@@ -12,4 +13,4 @@ const Department: Schema = new Schema(
   { autoIndex: false },
 );
 
-export default model('department', Department);
+export default model<DepartmentProps>('department', Department);

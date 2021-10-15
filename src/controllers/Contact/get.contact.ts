@@ -4,11 +4,16 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export async function GetAllContact(req: Request, res: Response) {
   const doc = await models.Contact.find();
 
-  if (!doc) return ResourceNotFound(res, 'Contacts not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.ContactNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -24,7 +29,7 @@ export async function GetSingleContactByGroup(
   if (!doc)
     return ResourceNotFound(
       res,
-      'Contact not found with corresponding id',
+      constants.RequestResponse.ContactNotFoundWithId,
     );
 
   return ProcessingSuccess(res, doc);

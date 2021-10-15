@@ -5,6 +5,7 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export async function UpdateDepartment(req: Request, res: Response) {
   const { id, updates } = req.body as {
@@ -20,7 +21,11 @@ export async function UpdateDepartment(req: Request, res: Response) {
     { new: true },
   );
 
-  if (!doc) return ResourceNotFound(res, 'Department not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.DepartmentNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -43,7 +48,11 @@ export async function UpdateDepartmentCredit(
     { new: true },
   );
 
-  if (!doc) return ResourceNotFound(res, 'Department not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.DepartmentNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }

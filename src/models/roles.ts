@@ -5,7 +5,6 @@ const Role: mongoose.Schema = new mongoose.Schema(
   {
     name: {
       type: mongoose.Schema.Types.String,
-      enum: ['maker', 'checker'],
     },
 
     sendMessage: {

@@ -4,6 +4,7 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export default async function DeleteRole(
   req: Request,
@@ -15,7 +16,7 @@ export default async function DeleteRole(
   if (!doc)
     return ResourceNotFound(
       res,
-      'Contact not found with corresponding id',
+      constants.RequestResponse.RoleNotFound,
     );
   return ProcessingSuccess(res, doc);
 }

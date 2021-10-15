@@ -4,6 +4,7 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export default async function DeleteContact(
   req: Request,
@@ -15,7 +16,7 @@ export default async function DeleteContact(
   if (!doc)
     return ResourceNotFound(
       res,
-      'Contact not found with corresponding id',
+      constants.RequestResponse.ContactNotFoundWithId,
     );
 
   return ProcessingSuccess(res, doc);

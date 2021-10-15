@@ -6,6 +6,7 @@ import {
 } from '../../RequestStatus/status';
 import models from '../../models';
 import { EmployeeSignupProps } from '../../Types/interfaces';
+import constants from '../../constants';
 
 export async function UpdateEmployee(req: Request, res: Response) {
   const { id, updates } = req.body as {
@@ -20,7 +21,11 @@ export async function UpdateEmployee(req: Request, res: Response) {
     { new: true },
   ).populate('groupId roleId');
 
-  if (!doc) return ResourceNotFound(res, 'Employee not Found ');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.EmployeeNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -40,9 +45,15 @@ export async function AssignEmployeeToDepartment(
   const departmentExist = await models.Department.findOne($DID);
 
   if (!employeeExist)
-    return ResourceNotFound(res, 'Employee not Found ');
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.EmployeeNotFound,
+    );
   if (!departmentExist)
-    return ResourceNotFound(res, 'Department not Found ');
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.DepartmentNotFound,
+    );
 
   const doc = await models.Employee.findOneAndUpdate(
     { _id: $EID },
@@ -70,8 +81,15 @@ export async function AssignEmployeeToRole(
   const roleExist = await models.Role.findOne($RID);
 
   if (!employeeExist)
-    return ResourceNotFound(res, 'Employee not Found ');
-  if (!roleExist) return ResourceNotFound(res, 'Role not Found ');
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.EmployeeNotFound,
+    );
+  if (!roleExist)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.RoleNotFound,
+    );
 
   const doc = await models.Employee.findOneAndUpdate(
     { _id: $EID },

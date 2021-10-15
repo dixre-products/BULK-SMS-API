@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
-import { DepartmentProps } from '../../Types/interfaces';
 
 export default async function CreateDepartment(
   req: Request,
@@ -12,7 +11,7 @@ export default async function CreateDepartment(
     credit: number;
   };
 
-  const department = new models.Department() as DepartmentProps;
+  const department = new models.Department();
 
   department.name = name;
   department.credit = credit;

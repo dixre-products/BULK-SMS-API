@@ -5,6 +5,8 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import { AdminProps } from '../../Types/interfaces';
+import constants from '../../constants';
 
 export default async function UpdateAdmin(
   req: Request,
@@ -12,7 +14,7 @@ export default async function UpdateAdmin(
 ) {
   const { id, updates } = req.body as {
     id: string;
-    updates: any;
+    updates: AdminProps;
   };
   const ID = Types.ObjectId(id);
 
@@ -25,7 +27,11 @@ export default async function UpdateAdmin(
     password: 0,
   });
 
-  if (!doc) return ResourceNotFound(res, 'Admin not Found ');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.AdminNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }

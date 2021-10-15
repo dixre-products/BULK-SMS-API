@@ -4,6 +4,7 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
+import constants from '../../constants';
 
 export async function GetAllAdmin(req: Request, res: Response) {
   const doc = await models.Admin.find().select({
@@ -11,7 +12,11 @@ export async function GetAllAdmin(req: Request, res: Response) {
     salt: 0,
   });
 
-  if (!doc) return ResourceNotFound(res, 'Admin not found');
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.AdminNotFound,
+    );
 
   return ProcessingSuccess(res, doc);
 }
@@ -28,7 +33,7 @@ export async function GetSingleAdmin(req: Request, res: Response) {
   if (!doc)
     return ResourceNotFound(
       res,
-      'Admin not found with corresponding id',
+      constants.RequestResponse.AdminNotFoundWithId,
     );
 
   return ProcessingSuccess(res, doc);
