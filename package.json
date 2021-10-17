@@ -7,8 +7,8 @@
     "build": "yarn compile:tsc && yarn doc",
     "start:dev": "cross-env NODE_ENV=dev && nodemon build/src/server.js --env dev",
     "compile:tsc:watch": "yarn run tsc -w",
-    "db:start:dev:win": "start mongod --port 27017 --dbpath C:/data/sms-service",
-    "db:start:dev:linux": "mongod --port 27017 --dbpath /var/lib/mongodb/sms-service",
+    "db:start:dev:win": "start mongod --port 27017 --dbpath C:/data/hanwok-auth-service",
+    "db:start:dev:linux": "mongod --port 27017 --dbpath /var/lib/mongodb/hanwok-auth-service",
     "compile:tsc": "yarn run tsc ",
     "start:dev:linux": "yarn compile:tsc && yarn lint:fix &&  yarn start:dev &&  yarn run concurrently  \"yarn compile:tsc:watch\" \"yarn prettier-watch\" \"yarn doc:watch\" ",
     "start:dev:win": "yarn compile:tsc && yarn lint:fix && yarn db:start:dev:win && start yarn start:dev &&  yarn run concurrently  \"yarn compile:tsc:watch\" \"yarn prettier-watch\" \"yarn doc:watch\" ",
@@ -69,7 +69,6 @@
     "prettier": "^2.2.1",
     "supertest": "^6.1.4",
     "ts-jest": "^26.4.4",
-    "ts-node": "^10.2.1",
     "typescript": "^4.1.3"
   },
   "dependencies": {
@@ -104,6 +103,7 @@
     "twilio": "^3.61.0",
     "useragent": "^2.3.0",
     "winston": "^3.3.3",
+    "ts-node": "^10.2.1",
     "winston-firebase-transport": "^1.1.0",
     "yamlparser": "^0.0.2"
   },
