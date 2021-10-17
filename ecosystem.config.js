@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'Auth Service API',
-    script: './build/server.js',
+    script: './build/src/server.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: 'one two',
