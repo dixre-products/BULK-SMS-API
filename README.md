@@ -41,12 +41,9 @@ yarn doc:watch ## Runs api doc in watch mode
 
 ```
 
-### FIXES
+### TODO
 
-- Typescript is not used on project, please make sure data models, entities and all data have their corresponding type definitions
-- No static typing on main code.
-- In creating a role the name must not be checker or maker, it can be anything
-- Elint fails to validate code
+- Implement usage of queryParams for all get Request, please refer to employees get controller for detail example on how to implement others.
 
 ### UPCOMING UPDATES
 
@@ -56,3 +53,4 @@ yarn doc:watch ## Runs api doc in watch mode
 - inApp notification when messages is getting low for each department, Admin should be notified when department request for more sms,
   admin should be notified when sms update is required
 - Adding of higher authority
+- Validating routes permission

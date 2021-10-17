@@ -4,7 +4,11 @@ import {
   AssignEmployeeToDepartment,
   AssignEmployeeToRole,
 } from './update.employee';
-import { GetAllEmployee, GetSingleEmployee } from './get.employee';
+import {
+  GetAllEmployee,
+  GetSingleEmployee,
+  GetAllEmployeeByAgency,
+} from './get.employee';
 
 export default {
   CreateEmployee,
@@ -13,4 +17,5 @@ export default {
   GetSingleEmployee,
   AssignEmployeeToDepartment,
   AssignEmployeeToRole,
+  GetAllEmployeeByAgency,
 };

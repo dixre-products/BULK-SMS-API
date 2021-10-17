@@ -1,15 +1,12 @@
 import CreateMessage from './add.message';
 import DeleteMessage from './delete.message';
 import UpdateMessage from './update.message';
-import {
-  GetAllMessages,
-  GetSingleMessageByGroup,
-} from './get.message';
+import { GetAllMessages, GetMessageByGroup } from './get.message';
 
 export default {
   CreateMessage,
   UpdateMessage,
   GetAllMessages,
-  GetSingleMessageByGroup,
+  GetMessageByGroup,
   DeleteMessage,
 };

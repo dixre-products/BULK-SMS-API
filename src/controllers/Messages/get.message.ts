@@ -19,13 +19,10 @@ export async function GetAllMessages(req: Request, res: Response) {
   return ProcessingSuccess(res, doc);
 }
 
-export async function GetSingleMessageByGroup(
-  req: Request,
-  res: Response,
-) {
+export async function GetMessageByGroup(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Message.findOne({ groupId: id });
+  const doc = await models.Message.find({ groupId: id });
 
   if (!doc)
     return ResourceNotFound(

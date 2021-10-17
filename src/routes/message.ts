@@ -29,7 +29,7 @@ message.delete(
 message.get(
   GET_ID_PARAM,
   HandleAsyncFactory(Validation.ValidateGetSingleMessageByGroup),
-  HandleAsyncFactory(MessageController.GetSingleMessageByGroup),
+  HandleAsyncFactory(MessageController.GetMessageByGroup),
 );
 
 export default message;

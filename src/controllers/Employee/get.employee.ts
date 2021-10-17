@@ -18,6 +18,24 @@ export async function GetAllEmployee(req: Request, res: Response) {
   return ProcessingSuccess(res, doc);
 }
 
+export async function GetAllEmployeeByAgency(
+  req: Request,
+  res: Response,
+) {
+  const { groupId } = req.params; // department, group or agancy ID
+  const doc = await models.Employee.find({ groupId }).populate(
+    'groupId roleId',
+  );
+
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.EmployeeNotFound,
+    );
+
+  return ProcessingSuccess(res, doc);
+}
+
 export async function GetSingleEmployee(req: Request, res: Response) {
   const { id } = req.params;
 

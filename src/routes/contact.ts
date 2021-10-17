@@ -16,7 +16,7 @@ contact.post(
 contact.get(
   GET_ID_PARAM,
   HandleAsyncFactory(Validation.ValidateGetSingleContactByGroup),
-  HandleAsyncFactory(ContactController.GetSingleContactByGroup),
+  HandleAsyncFactory(ContactController.GetContactByGroup),
 );
 
 contact.put(

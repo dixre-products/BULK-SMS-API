@@ -25,7 +25,7 @@ const {
   GET_CONTACT,
   GET_MESSAGE,
   CREATE_EMPLOYEE,
-  GET_EMPLOYEE,
+  GET_EMPLOYEES,
   UPDATE_EMPLOYEE,
   UPDATE_EMPLOYEE_ROLE,
   UPDATE_EMPLOYEE_DEPARTMENT,
@@ -87,7 +87,7 @@ admin.put(
 );
 
 admin.get(
-  GET_EMPLOYEE,
+  GET_EMPLOYEES,
   HandleAsyncFactory(EmployeeController.GetAllEmployee),
 );
 

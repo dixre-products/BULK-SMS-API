@@ -25,6 +25,7 @@ const {
   MESSENGER_ID,
   APP_ID,
   MEASUREMENT_ID,
+  CLUSTER,
 } = process.env;
 
 export default {
@@ -35,7 +36,7 @@ export default {
   GEOCODING_APIKEY,
   PAYSTACK_SECRET,
   PORT,
-  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@services.onb2v.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${CLUSTER}.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
   JWT_ISSUER: JWT_AUDIENCE,
   JWT_AUDIENCE: JWT_ISSUER,
   JWT_ALGO: 'RS256',

@@ -7,7 +7,7 @@ import models from '../../src/models';
    Test 1 => it should successfully create a contact
    Test 2 => it should fail to create a contact if name or orther required field is not given
    Test 3 => Admin should be able to get all contact
-   Test 4 => should be able to get a single contact
+   Test 4 => should be able to get contacts by group
    Test 5 => should fail if params is incorrect
    Test 6 => it should be able to update a contact
    Test 7 => it should not be able to update if contact ID is not provided / empty
@@ -102,7 +102,7 @@ describe('Contact Test', () => {
       });
   });
 
-  test('should be able to get a single contact', async (done) => {
+  test('should be able to get contacts belonging to a group or agencies', async (done) => {
     SuperTest.get('/contact/' + newDepartmentId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -118,21 +118,21 @@ describe('Contact Test', () => {
       });
   });
 
-  test('should fail if params is incorrect', async (done) => {
-    SuperTest.get('/contact/' + incorrectId)
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(404)
-      .then((response) => {
-        const { message } = response.body;
+  // test('should fail if params is incorrect', async (done) => {
+  //   SuperTest.get('/contact/' + incorrectId)
+  //     .set('Accept', 'application/json')
+  //     .expect('Content-Type', /json/)
+  //     .expect(404)
+  //     .then((response) => {
+  //       const { message } = response.body;
 
-        expect(message).toBeDefined();
-        done();
-      })
-      .catch((e) => {
-        done(e);
-      });
-  });
+  //       expect(message).toBeDefined();
+  //       done();
+  //     })
+  //     .catch((e) => {
+  //       done(e);
+  //     });
+  // });
 
   test(' it should be able to update a contact', async (done) => {
     SuperTest.put('/contact')

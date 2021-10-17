@@ -38,8 +38,10 @@ const GET_MESSAGE = '/get-message';
 // Employee Endpoint
 const CREATE_EMPLOYEE = '/create-employee';
 const GET_EMPLOYEE = '/get-employee';
+const GET_EMPLOYEES = '/get-employees';
 const UPDATE_EMPLOYEE = '/update-employee';
 const UPDATE_EMPLOYEE_ROLE = '/update-employee-role';
+const GET_EMPLOYESS_BY_GROUP = '/all/:groupId';
 const UPDATE_EMPLOYEE_DEPARTMENT = '/update-employee-department';
 
 // Role Endpoint
@@ -53,6 +55,8 @@ const BASE_SUB = '/';
 // Admin
 
 export default {
+  GET_EMPLOYESS_BY_GROUP,
+  GET_EMPLOYEES,
   PROFILE,
   GET_PROFILE,
   LOGIN,

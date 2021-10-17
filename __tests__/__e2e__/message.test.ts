@@ -7,7 +7,7 @@ import models from '../../src/models';
    Test 1 => it should successfully create a messsage
    Test 2 => it should fail to create message if required field is not given
    Test 3 => Admin should be able to get all messages
-   Test 4 => should be able to get a single message  Department ID
+   Test 4 => should be able to get all  messages by  Department ID
    Test 5 => should fail if params is incorrect
    
    Test 6 => it should be able to update a message
@@ -113,41 +113,39 @@ describe('Message Test', () => {
       });
   });
 
-  // test('should be able to get a single message by Department ID', async (done) => {
-  //   SuperTest.get('/message/' + newDepartmentId)
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(200)
-  //     .then((response) => {
-  //       console.log('departmentID', newDepartmentId);
-
-  //       const { message, payload } = response.body;
-  //       expect(message).toBeDefined();
-  //       expect(typeof payload).toBe('object');
-  //       done();
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-
-  //       done(e);
-  //     });
-  // });
-
-  test('should fail if params is incorrect', async (done) => {
-    SuperTest.get('/message/' + incorrectId)
+  test('should be able to get all  messages by Department ID', async (done) => {
+    SuperTest.get('/message/' + newDepartmentId)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
-      .expect(404)
+      .expect(200)
       .then((response) => {
-        const { message } = response.body;
-
+        const { message, payload } = response.body;
         expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
         done();
       })
       .catch((e) => {
+        console.log(e);
+
         done(e);
       });
   });
+
+  // test('should fail if params is incorrect', async (done) => {
+  //   SuperTest.get('/message/' + incorrectId)
+  //     .set('Accept', 'application/json')
+  //     .expect('Content-Type', /json/)
+  //     .expect(404)
+  //     .then((response) => {
+  //       const { message } = response.body;
+
+  //       expect(message).toBeDefined();
+  //       done();
+  //     })
+  //     .catch((e) => {
+  //       done(e);
+  //     });
+  // });
 
   test(' it should be able to update a message', async (done) => {
     SuperTest.put('/message')

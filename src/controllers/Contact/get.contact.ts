@@ -18,19 +18,10 @@ export async function GetAllContact(req: Request, res: Response) {
   return ProcessingSuccess(res, doc);
 }
 
-export async function GetSingleContactByGroup(
-  req: Request,
-  res: Response,
-) {
+export async function GetContactByGroup(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Contact.findOne({ groupId: id });
-
-  if (!doc)
-    return ResourceNotFound(
-      res,
-      constants.RequestResponse.ContactNotFoundWithId,
-    );
+  const doc = await models.Contact.find({ groupId: id });
 
   return ProcessingSuccess(res, doc);
 }

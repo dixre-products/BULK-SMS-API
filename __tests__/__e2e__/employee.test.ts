@@ -8,6 +8,7 @@ import { DepartmentProps } from '../../src/Types/interfaces';
    Test 1 => Admin should successfully create an employee
    Test 2 => Admin should not be abe to create an employee if required field is not given
    Test 3 => Admin should be able to get all  employee
+   Test 3.1 => Should be able to get all employees by agencies or department
    Test 4 => should be able to get a single employee
    Test 5 => should fail if params is incorrect
    Test 6 => Admin should be able to update an employee
@@ -110,8 +111,25 @@ describe('Employee Test', () => {
       });
   });
 
-  test('Admin should be able to get all  employee', async (done) => {
-    SuperTest.get('/admin/get-employee')
+  test('Should be able to get all  employees by group or Agencies', async (done) => {
+    SuperTest.get('/employee/all/' + newDepartmentId)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('Admin should be able to get all  employees', async (done) => {
+    SuperTest.get('/admin/get-employees')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

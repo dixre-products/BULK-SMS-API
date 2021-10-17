@@ -4,7 +4,9 @@ import {
   ValidateAssignEmployeeToDepartment,
   ValidateAssignEmployeeToRole,
 } from './update.employee.validation';
-import ValidateGetSingleEmployee from './get.employee.validation';
+import ValidateGetSingleEmployee, {
+  ValidateGetEmployeesByGroup,
+} from './get.employee.validation';
 
 export default {
   ValidateCreateEmployee,
@@ -12,4 +14,5 @@ export default {
   ValidateAssignEmployeeToDepartment,
   ValidateAssignEmployeeToRole,
   ValidateGetSingleEmployee,
+  ValidateGetEmployeesByGroup,
 };
