@@ -114,7 +114,7 @@
     "name": "Auth Service",
     "version": "1.0.0",
     "title": "Dixre | Auth Service",
-    "url": "https://sms-platform-api.herokuapp.com/",
+    "url": "https://sms-platform-api.herokuapp.com",
     "sampleUrl": "http://sample.com"
   }
 }
