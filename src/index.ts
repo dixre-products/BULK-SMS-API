@@ -1,12 +1,12 @@
 import * as bodyParser from 'body-parser';
 import express from 'express';
-import morgan from 'morgan';
+// import morgan from 'morgan';
 // @ts-ignore
 import helmet from 'helmet';
 import routes from './routes';
 import constants from './constants/index';
 import ErrorHandler from './Middlewares/error.handler';
-import Logger, { HttpLogger } from './Logger/index';
+import Logger from './Logger/index';
 
 require('dotenv/config');
 require('./utills/connection');
@@ -23,21 +23,21 @@ process.on('uncaughtException', (err) => {
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  morgan('combined', {
-    skip: (
-      req, // eslint-disable-line
-      res,
-    ) => res.statusCode < 400,
-    stream: {
-      write: (msg: string) => {
-        if (app.get('env') === 'production') {
-          HttpLogger.http(msg);
-        }
-      },
-    },
-  }),
-);
+// app.use(
+//   morgan('combined', {
+//     skip: (
+//       req, // eslint-disable-line
+//       res,
+//     ) => res.statusCode < 400,
+//     stream: {
+//       write: (msg: string) => {
+//         if (app.get('env') === 'production') {
+//           HttpLogger.http(msg);
+//         }
+//       },
+//     },
+//   }),
+// );
 // api doc directory
 app.use('/', express.static('api-doc'));
 
