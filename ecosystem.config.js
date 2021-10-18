@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'Auth Service API',
+    name: 'SMS Platform API',
     script: './build/src/server.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
@@ -8,7 +8,7 @@ module.exports = {
     instances: "max",
     autorestart: true,
     watch: true,
-    max_memory_restart: '1G',
+    max_memory_restart: '400M',
     env: {
       NODE_ENV: 'development'
     },

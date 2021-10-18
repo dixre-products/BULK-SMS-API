@@ -12,7 +12,7 @@
     "compile:tsc": "yarn run tsc ",
     "start:dev:linux": "yarn compile:tsc && yarn lint:fix &&  yarn start:dev &&  yarn run concurrently  \"yarn compile:tsc:watch\" \"yarn prettier-watch\" \"yarn doc:watch\" ",
     "start:dev:win": "yarn compile:tsc && yarn lint:fix && yarn db:start:dev:win && start yarn start:dev &&  yarn run concurrently  \"yarn compile:tsc:watch\" \"yarn prettier-watch\" \"yarn doc:watch\" ",
-    "start": "node build/src/server.js",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "doc": "apidoc -i src/doc/ -o api-doc/ --template ./doc-template",
     "doc:watch": "nodemon --watch build/doc --exec yarn doc",
     "lint": "eslint src/**/*.ts",
