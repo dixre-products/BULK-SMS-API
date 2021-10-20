@@ -10,6 +10,7 @@
  * @apiParam {Object} updates object that contains updates to be applied.
  * @apiParam {String} [updates.name]  The new department name.
  * @apiParam {Number} [updates.credit] number of updated credit
+ * @apiParam {Array}  [updates.senderIds] ids of updated array of senderid
  *
  *
  * @apiSuccessExample Success-Response:
@@ -23,12 +24,21 @@
  *       }
  *     }
  *
- * @apiError id is required.
- * @apiErrorExample InvalidCredential:
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "id is required",
+ *       "message": "reason for invalid Input",
          "error": "INVALID.INPUT"
+ *     }
+ *
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
  *     }
  *
  

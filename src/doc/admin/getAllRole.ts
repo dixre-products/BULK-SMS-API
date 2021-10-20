@@ -31,8 +31,15 @@
    *        }
          ]
  *     }
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
  *
-  * 
  *
  *
  *

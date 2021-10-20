@@ -13,12 +13,6 @@ contact.post(
   HandleAsyncFactory(ContactController.CreateContact),
 );
 
-contact.get(
-  GET_ID_PARAM,
-  HandleAsyncFactory(Validation.ValidateGetSingleContactByGroup),
-  HandleAsyncFactory(ContactController.GetContactByGroup),
-);
-
 contact.put(
   BASE_SUB,
   HandleAsyncFactory(Validation.ValidateUpdateContact),

@@ -13,6 +13,7 @@
  * @apiParam {String} [updates.address] employee address.
  * @apiParam {String} [updates.roleId] employee roleId.
  * @apiParam {String} [updates.groupId] employee groupId.
+ * @apiParam {String} [updates.active] employee status true=active and false=inactive
  *
  *
  * @apiSuccessExample Success-Response:
@@ -25,17 +26,28 @@
             "email": "aaagmai;.com",
             "address": "bbbbb",
             "groupId": "61639a7f4245d1f5bc3e120a",
+            "active": true,
             "roleId": "61639a7f4245d1f5bc3e120a",
  *       }
  *     }
  *
- * @apiError id is required.
- * @apiErrorExample InvalidCredential:
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "id is required",
+ *       "message": "reason for invalid Input",
          "error": "INVALID.INPUT"
  *     }
+ *
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
+ *
  *
  
  *

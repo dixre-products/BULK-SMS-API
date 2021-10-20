@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 import { ContactProps } from '../Types/interfaces';
 
 const Contact: mongoose.Schema = new mongoose.Schema(
@@ -23,5 +24,7 @@ const Contact: mongoose.Schema = new mongoose.Schema(
 
   { autoIndex: false },
 );
+
+Contact.plugin(mongoosePaginate);
 
 export default mongoose.model<ContactProps>('contact', Contact);

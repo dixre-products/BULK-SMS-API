@@ -14,6 +14,7 @@ import models from '../../src/models';
    Test 8 => it should not be able to update if contact ID is incorrect
    Test 9 => should be able to delete a contact with correct ID
 */
+
 let newContact = {
   name: 'test',
   number: 20909,
@@ -87,6 +88,16 @@ describe('Contact Test', () => {
 
   test('Admin should be able to get all Contacts', async (done) => {
     SuperTest.get('/admin/get-contact')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: '',
+          uid: '',
+          role: '',
+        },
+      })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -103,8 +114,18 @@ describe('Contact Test', () => {
   });
 
   test('should be able to get contacts belonging to a group or agencies', async (done) => {
-    SuperTest.get('/contact/' + newDepartmentId)
+    SuperTest.get('/admin/get-contact')
       .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: newDepartmentId,
+          uid: '',
+          role: '',
+        },
+      })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {

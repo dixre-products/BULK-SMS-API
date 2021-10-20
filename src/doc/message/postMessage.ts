@@ -44,29 +44,24 @@
  *       }
  *     }
  *
- * @apiError sender is required.
- * @apiErrorExample InvalidCredential:
+ * 
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "sender is required",
+ *       "message": "reason for invalid Input",
          "error": "INVALID.INPUT"
  *     }
  *
- * @apiError message is required.
- * @apiErrorExample InvalidCredential
- *     HTTP/1.1 400 Conflict
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
  *     {
- *       "message": "message is required",
-         "error": "INVALID.INPUT"
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
  *     }
-
- @apiError groupId is required.
- * @apiErrorExample InvalidCredential
- *     HTTP/1.1 400 Conflict
- *     {
- *       "message": "groupId is required",
-         "error": "INVALID.INPUT"
- *     }
+ *
  * 
  * 
  *

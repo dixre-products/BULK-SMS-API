@@ -12,8 +12,10 @@ const DEPARTMENT = '/department';
 const CONTACT = '/contact';
 const MESSAGE = '/message';
 const Admin = '/admin';
+const SENDERID = '/senderID';
 
 export default {
+  SENDERID,
   LOGIN_BASE,
   SIGNUP_BASE,
   VERIFICATION_BASE,

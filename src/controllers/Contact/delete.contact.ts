@@ -10,9 +10,9 @@ export default async function DeleteContact(
   req: Request,
   res: Response,
 ) {
-  const { id } = req.params;
+  const { ids } = req.params;
 
-  const doc = await models.Contact.findOneAndDelete({ _id: id });
+  const doc = await models.Contact.deleteMany({ _id: ids });
   if (!doc)
     return ResourceNotFound(
       res,

@@ -27,29 +27,25 @@
  *       }
  *     }
  *
- * @apiError Password is required.
- * @apiErrorExample InvalidCredential:
+ * 
+ * 
+ * @apiError Invalid Input
+ * @apiErrorExample Invalid-Input:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "Password is required",
+ *       "message": "reason for invalid Input",
          "error": "INVALID.INPUT"
  *     }
  *
- * @apiError email is required.
- * @apiErrorExample InvalidCredential
- *     HTTP/1.1 400 Conflict
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
  *     {
- *       "message": "email is required",
-         "error": "INVALID.INPUT"
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
  *     }
  *
- * @apiError password is required.
- * @apiErrorExample InvalidCredential
- *     HTTP/1.1 400 Conflict
- *     {
- *       "message": "password is required",
-         "error": "INVALID.INPUT"
- *     }
  *
  * 
  * 

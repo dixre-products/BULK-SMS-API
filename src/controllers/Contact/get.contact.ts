@@ -1,13 +1,33 @@
 import { Request, Response } from 'express';
 import {
-  ProcessingSuccess,
+  ProcessingGetRequestSuccess,
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
 import constants from '../../constants';
+import { getQuery } from '../../utills/utills';
 
-export async function GetAllContact(req: Request, res: Response) {
-  const doc = await models.Contact.find();
+export default async function GetAllContact(
+  req: Request,
+  res: Response,
+) {
+  const requestParams = req.query as any;
+  const { paginationConfig, paginationQuery } = getQuery(
+    requestParams,
+    {
+      uid: '',
+      agency: 'groupId',
+      roles: '',
+    },
+  );
+
+  const doc = await models.Contact.paginate(paginationQuery, {
+    ...paginationConfig,
+    select: {
+      hash: 0,
+      salt: 0,
+    },
+  });
 
   if (!doc)
     return ResourceNotFound(
@@ -15,13 +35,9 @@ export async function GetAllContact(req: Request, res: Response) {
       constants.RequestResponse.ContactNotFound,
     );
 
-  return ProcessingSuccess(res, doc);
-}
-
-export async function GetContactByGroup(req: Request, res: Response) {
-  const { id } = req.params;
-
-  const doc = await models.Contact.find({ groupId: id });
-
-  return ProcessingSuccess(res, doc);
+  return ProcessingGetRequestSuccess(res, {
+    payload: doc.docs,
+    totalDoc: doc.totalDocs,
+    totalPages: doc.totalPages,
+  });
 }

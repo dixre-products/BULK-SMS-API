@@ -16,6 +16,7 @@
  * @apiSuccess {String} payload.address employee address.
  * @apiSuccess {String} payload.roleId employee roleId.
  * @apiSuccess {String} payload.groupId employee department ID.
+ * @apiSuccess {Boolean} payload.active status of employee either true=active and false=inactive
  *
  *
  * @apiSuccessExample Success-Response:
@@ -29,16 +30,29 @@
  *           "address": "bbbbb",
  *           "groupId": "61639a7f4245d1f5bc3e120a",
  *           "roleId": "61639a7f4245d1f5bc3e120a",
+ *           "active": true
  *       }]
  *    }
  *
- * @apiError id is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 404 Forbidden
+ * 
+ * 
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
+ *     HTTP/1.1 400 Forbidden
  *     {
- *        "error": "NOT.FOUND",
-          "message": "department not found with corresponding id"
+ *       "message": "reason for invalid Input",
+         "error": "INVALID.INPUT"
  *     }
+ *
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
+ *
  *
  * 
  *

@@ -7,12 +7,14 @@
  *
  * @apiParam {Number} credit number of credit 
  * @apiParam {String} name name of department.
+ * @apiParam {String} 
  *
 * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  department object from collection
  * @apiSuccess {String} payload._id department ID.
  * @apiSuccess {String} payload.name department name.
- * @apiSuccess {Number} payload.credit number of credit in a department.
+ * @apiSuccess {Number} payload.credit number of credit in a department
+ * @apiSuccess {Array}  payload.senderIds senderids of department
  *
  *
  * @apiSuccessExample Success-Response:
@@ -26,29 +28,21 @@
  *       }
  *     }
  *
- * @apiError id is required.
- * @apiErrorExample InvalidCredential:
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "id is required",
-         "error": "INVALID.INPUT"
- *     }
-
-         
- * @apiError name is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 404 Forbidden
- *     {
- *        "message": "name is required",
+ *       "message": "reason for invalid Input",
          "error": "INVALID.INPUT"
  *     }
  *
- *  @apiError credit is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 404 Forbidden
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
  *     {
- *        "message": "credit is required",
-         "error": "INVALID.INPUT"
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
  *     }
  *
  * 

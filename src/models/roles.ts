@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 import { RoleProps } from '../Types/interfaces';
 
 const Role: mongoose.Schema = new mongoose.Schema(
@@ -22,5 +23,7 @@ const Role: mongoose.Schema = new mongoose.Schema(
 
   { autoIndex: false },
 );
+
+Role.plugin(mongoosePaginate);
 
 export default mongoose.model<RoleProps>('role', Role);

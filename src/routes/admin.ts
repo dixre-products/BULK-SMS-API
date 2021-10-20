@@ -5,7 +5,7 @@ import EmployeeController from '../controllers/Employee';
 import RoleController from '../controllers/Role';
 import MessageController from '../controllers/Messages';
 import AdminController from '../controllers/Admin';
-//
+import GetValidation from '../Validators/Get.Requests/index';
 import DepartmentValidation from '../Validators/Department';
 import EmployeeValidation from '../Validators/Employee';
 import RoleValidation from '../Validators/Role';
@@ -62,6 +62,7 @@ admin.put(
 // Admin: Contact Routes
 admin.get(
   GET_CONTACT,
+  HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(ContactController.GetAllContact),
 );
 

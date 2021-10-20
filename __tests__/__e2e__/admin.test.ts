@@ -11,6 +11,18 @@ import app from '../../src/index';
 
 */
 // login Test Account Creadentials
+
+const requestParam = {
+  pageNumber: 1,
+  pageSize: 10,
+  filter: {
+    searchText: '',
+    agency: '',
+    uid: '',
+    role: '',
+  },
+};
+
 let newAdmin = {
   name: 'test',
   email: 'abc@gmail.com',

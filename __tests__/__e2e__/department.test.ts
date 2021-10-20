@@ -1,6 +1,12 @@
 import superTest from 'supertest';
 import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
+import models from '../../src/models';
+import {
+  DepartmentProps,
+  SenderIds,
+} from '../../src/Types/interfaces';
+import { AnyKindOfDictionary } from 'lodash';
 /*
    Test 1 => Admin should successfully create a department
    Test 2 => Admin should not be abe to create a department if name or credit is not given
@@ -15,7 +21,7 @@ import app from '../../src/index';
 
 */
 // login Test Account Creadentials
-let newDepartment = {
+let newDepartment: any = {
   name: 'test',
   credit: 20,
 };
@@ -25,26 +31,50 @@ let updates = {
   credit: 23,
 };
 
+let newSenderId: any;
+
 const SuperTest = superTest(app);
 
 beforeAll(async () => {
   try {
     await DatabaseConnection.dropCollection('departments');
+    const department = new models.SenderIDs({
+      name: 'Dixre',
+    }) as SenderIds;
+    await department.save();
+    console.log('----------------------before all ---------------');
+    console.log(department);
+    newSenderId = department._id;
   } catch (e) {
     //
   }
 });
 
+const requestParam = {
+  pageNumber: 1,
+  pageSize: 10,
+  filter: {
+    searchText: '',
+    agency: '',
+    uid: '',
+    role: '',
+  },
+};
+
 describe('Department Test', () => {
   let deptID = '';
   test('Admin should successfully create a department', async (done) => {
     SuperTest.post('/admin/create-department')
-      .send(newDepartment)
+      .send({ ...newDepartment, senderIds: [newSenderId] })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
+        console.log(
+          '------------------------------------------------',
+        );
+        console.log(payload);
         deptID = payload._id;
 
         expect(message).toBeDefined();

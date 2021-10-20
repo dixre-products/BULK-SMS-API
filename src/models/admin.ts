@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
-
+import mongoosePaginate from 'mongoose-paginate-v2';
 import { AdminProps } from '../Types/interfaces';
 
 const Admin: Schema = new Schema(
@@ -29,6 +29,7 @@ const Admin: Schema = new Schema(
   { autoIndex: false },
 );
 
+Admin.plugin(mongoosePaginate);
 Admin.methods.setPassword = function setPassword(password) {
   const documents = this as AdminProps;
   documents.salt = bcrypt.genSaltSync(10);

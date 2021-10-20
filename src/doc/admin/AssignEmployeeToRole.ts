@@ -21,25 +21,28 @@
             "address": "bbbbb",
             "groupId": "61639a7f4245d1f5bc3e120a",
             "roleId": "61639a7f4245d1f5bc3e120a",
+            "active": false
  *       }
  *     }
  *
- * @apiError roleId is required.
- * @apiErrorExample InvalidCredential:
+ * @apiError Invalid Input
+ * @apiErrorExample Invalid-Input:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "roleId is required",
-         "error": "INVALID.INPUT"
- *     }
- * @apiError employeeId is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 400 Forbidden
- *     {
- *       "message": "employeeId is required",
+ *       "message": "reason for invalid Input",
          "error": "INVALID.INPUT"
  *     }
  *
- 
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
+ *
+ *
  *
  * 
  * 

@@ -9,7 +9,7 @@
  *  @apiParam {String} id id of the message.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
-* @apiSuccess {Object} payload  message credentials object
+ * @apiSuccess {Object} payload  message credentials object
  * @apiSuccess {String} payload._id message ID.
  * @apiSuccess {Number[]} payload.contacts list of contacts.
  * @apiSuccess {String} payload.message createed message to be sent.
@@ -39,13 +39,23 @@
  *       }
  *     }
  *
- * @apiError id is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 404 Forbidden
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
+ *     HTTP/1.1 400 Forbidden
  *     {
- *        "error": "NOT.FOUND",
-          "message": "message not found with corresponding id"
+ *       "message": "reason for invalid Input",
+         "error": "INVALID.INPUT"
  *     }
+ *
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
+ *
  *
  *
  * 

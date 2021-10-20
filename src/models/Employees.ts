@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcryptjs';
-
+import mongoosePaginate from 'mongoose-paginate-v2';
 import { EmployeeProps } from '../Types/interfaces';
 
 const Employee: mongoose.Schema = new mongoose.Schema(
@@ -38,6 +38,11 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'role',
     },
+
+    active: {
+      type: mongoose.Schema.Types.Boolean,
+      default: true,
+    },
   },
 
   { autoIndex: false },
@@ -48,5 +53,7 @@ Employee.methods.setPassword = function setPassword(password) {
   documents.salt = bcrypt.genSaltSync(10);
   documents.hash = bcrypt.hashSync(password, documents.salt);
 };
+
+Employee.plugin(mongoosePaginate);
 
 export default mongoose.model<EmployeeProps>('employee', Employee);

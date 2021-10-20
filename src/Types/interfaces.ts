@@ -96,9 +96,10 @@ export interface UserProps extends Document {
 }
 
 export interface DepartmentProps extends Document {
-  _id: Types.ObjectId; //eslint-disable-line
+  _id?: Types.ObjectId; //eslint-disable-line
   credit: number;
   name: string;
+  senderIds: any[];
 }
 
 export interface EmployeeProps extends Document {
@@ -107,6 +108,7 @@ export interface EmployeeProps extends Document {
   email: string;
   password: string;
   address: string;
+  active: boolean;
   groupId?: Types.ObjectId;
   roleId?: Types.ObjectId;
   hash: string;
@@ -139,6 +141,11 @@ export interface ContactProps extends Document {
   date: Date;
 }
 
+export interface SenderIds extends Document {
+  name: string;
+  senderIds: any[];
+}
+
 export interface AdminProps extends Document {
   _id: Types.ObjectId; //eslint-disable-line
   name: string;
@@ -161,4 +168,15 @@ export interface MessageProps extends Document {
   contacts: Array<number>;
   time: Date;
   status: string;
+}
+
+export interface RequestParams {
+  pageNumber: number;
+  pageSize: number;
+  filter: {
+    searchText: string;
+    agency: string;
+    uid: string;
+    role: string;
+  };
 }

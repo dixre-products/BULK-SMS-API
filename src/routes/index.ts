@@ -3,6 +3,7 @@ import Department from './department';
 import Contact from './contact';
 import Message from './message';
 import Admin from './admin';
+import SenderID from './senderid';
 
 export default {
   Employee,
@@ -10,4 +11,5 @@ export default {
   Contact,
   Message,
   Admin,
+  SenderID,
 };

@@ -6,7 +6,7 @@
  * @apiSampleRequest off
  *
  *  
- *  @apiParam {String} id id of the contact.
+ * @apiParam {String} id id of the contact.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  role credentials object
@@ -30,17 +30,25 @@
  *       }
  *     }
  *
- * @apiError id is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 404 Forbidden
+ * @apiError Invalid Input
+ * @apiErrorExample InvalidInput:
+ *     HTTP/1.1 400 Forbidden
  *     {
- *        "error": "NOT.FOUND",
-          "message": "Contact not found with corresponding id"
+ *       "message": "reason for invalid Input",
+         "error": "INVALID.INPUT"
+ *     }
+ *
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
  *     }
  *
  *
  * 
- *
  *
  *
  */

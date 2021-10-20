@@ -11,7 +11,7 @@ import Logger, { HttpLogger } from './Logger/index';
 require('dotenv/config');
 require('./utills/connection');
 
-const { EMPLOYEE, DEPARTMENT, CONTACT, MESSAGE, Admin } =
+const { EMPLOYEE, DEPARTMENT, CONTACT, MESSAGE, Admin, SENDERID } =
   constants.RouteBase;
 // Application-Level Middleware
 const app = express();
@@ -47,6 +47,7 @@ app.use(DEPARTMENT, routes.Department);
 app.use(MESSAGE, routes.Message);
 app.use(CONTACT, routes.Contact);
 app.use(Admin, routes.Admin);
+app.use(SENDERID, routes.SenderID);
 
 // Handles error
 app.use(ErrorHandler);

@@ -21,25 +21,29 @@
             "address": "bbbbb",
             "groupId": "61639a7f4245d1f5bc3e120a",
             "departmentId": "61639a7f4245d1f5bc3e120a",
+            "active": false
  *       }
  *     }
  *
- * @apiError departmentId is required.
- * @apiErrorExample InvalidCredential:
+ *
+ * @apiError Invalid Input-Param
+ * @apiErrorExample Invalid-Input:
  *     HTTP/1.1 400 Forbidden
  *     {
- *       "message": "departmentId is required",
-         "error": "INVALID.INPUT"
- *     }
- * @apiError employeeId is required.
- * @apiErrorExample InvalidCredential:
- *     HTTP/1.1 400 Forbidden
- *     {
- *       "message": "employeeId is required",
+ *       "message": "reason for invalid input",
          "error": "INVALID.INPUT"
  *     }
  *
- 
+ * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
+ *
+ *
  *
  * 
  * 

@@ -12,6 +12,7 @@ const requestBodySchema = joi.object({
     address: joi.string(),
     groupId: joi.string(),
     roleId: joi.string(),
+    active: joi.boolean(),
   }),
 });
 

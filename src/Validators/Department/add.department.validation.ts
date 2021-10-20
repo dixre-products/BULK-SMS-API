@@ -5,6 +5,7 @@ import { InvalidInputs } from '../../RequestStatus/status';
 const requestBodySchema = joi.object({
   credit: joi.number().required().label('credit'),
   name: joi.string().required().label('Name'),
+  senderIds: joi.array().items(joi.string()).optional(),
 });
 
 export default function ValidateCreateDepartment(
@@ -21,6 +22,7 @@ export default function ValidateCreateDepartment(
   });
 
   if (error) {
+    console.log(error);
     return InvalidInputs(res, error.message);
   }
   next();

@@ -101,6 +101,17 @@ export const ProcessingSuccess = (res: Response, data: any) => {
     payload: data,
   });
 };
+
+// PROCESSING SUCCESS
+export const ProcessingGetRequestSuccess = (
+  res: Response,
+  data: any,
+) => {
+  res.status(STATUS_CODES.OK.CODE).json({
+    message: STATUS_CODES.OK.STATUS_TEXT,
+    ...data,
+  });
+};
 // AUTH
 
 // UNAUTHORIZED

@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 import { MessageProps } from '../Types/interfaces';
 import MessageStatus from '../constants/enums';
 
@@ -31,5 +32,7 @@ const Message: mongoose.Schema = new mongoose.Schema(
 
   { autoIndex: false },
 );
+
+Message.plugin(mongoosePaginate);
 
 export default mongoose.model<MessageProps>('message', Message);

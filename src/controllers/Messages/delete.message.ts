@@ -6,6 +6,10 @@ export default async function DeleteMessage(
   req: Request,
   res: Response,
 ) {
+  console.log(req.params, req.query);
+  console.log(
+    '**************************************************************************',
+  );
   const { id } = req.params;
 
   const deletedDoc = await models.Message.findOneAndDelete({

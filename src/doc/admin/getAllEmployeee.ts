@@ -22,6 +22,7 @@
                 "address": "bbbbb",
                 "groupId": "61639a7f4245d1f5bc3e120a",
                 "roleId": "61639a7f4245d1f5bc3e120a",
+                "active": true
               },
                {
                 "_id": "61639a7f4245d1f5bc3e120a",
@@ -30,6 +31,7 @@
                 "address": "bbbbb",
                 "groupId": "61639a7f4245d1f5bc3e120a",
                 "roleId": "61639a7f4245d1f5bc3e120a",
+                "active": false
               },
         ]
  *   }
@@ -37,6 +39,13 @@
  *
  * 
  * 
+ * @apiError ServerError Internal server error.
+ * @apiErrorExample Internal-Server-Error:
+ *     HTTP/1.1 500 Internal server error
+ *     {
+ *        "error": "SERVER.ERROR",
+ *        "mesage": "describes reason for error"
+ *     }
  *
  *
  *

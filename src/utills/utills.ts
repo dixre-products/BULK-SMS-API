@@ -1,13 +1,14 @@
+/* eslint-disable radix */
 import * as jwt from 'jsonwebtoken';
 import {
   PhoneNumberFormat as PNF,
   PhoneNumberUtil,
 } from 'google-libphonenumber';
-
+import mongoose from 'mongoose';
 import * as fs from 'fs';
 import config from 'config';
 import constants from '../constants/index';
-import { UserProps } from '../Types/interfaces';
+import { RequestParams, UserProps } from '../Types/interfaces';
 
 const privateKey = fs.readFileSync(
   `${process.env.INIT_CWD}/private.key`,
@@ -107,4 +108,63 @@ export function CheckPassword(pwd: string) {
     return true;
   }
   return false;
+}
+
+type queryConfiguration = {
+  roles: string;
+  uid: string;
+  agency: string;
+};
+
+// compose query base on requestParam which is consistent on GET requests
+export function getQuery(
+  requestParams: RequestParams, // request parameters attatched to all GET requests
+  queryConfig: queryConfiguration, // configuration on fields to consider while composing query with customize fields base on the caller
+) {
+  let query = {}; // query object
+
+  // request parameters destructuring
+  const { filter, pageSize, pageNumber } = requestParams;
+  const { searchText, role, uid, agency } = filter;
+
+  // check if document is to apply the agency filter
+  if (queryConfig.agency && agency) {
+    // compose query with rest operators without losing previous values of object
+    query = {
+      ...query,
+      [queryConfig.agency]: mongoose.Types.ObjectId(agency),
+    };
+  }
+
+  // check if document is to apply the roles filter
+  if (queryConfig.roles && role) {
+    // compose query with rest operators without losing previous values of object
+    query = {
+      ...query,
+      [queryConfig.roles]: mongoose.Types.ObjectId(role),
+    };
+  }
+
+  // check if document is to apply the uid filter
+  if (queryConfig.uid && uid) {
+    // compose query with rest operators without losing previous values of object
+    query = {
+      ...query,
+      [queryConfig.uid]: mongoose.Types.ObjectId(uid),
+    };
+  }
+
+  // check if document is to apply the search filter, note if search is activated we perform a full text search therefore all filters will be ignored
+  if (searchText) {
+    // overides query object
+    query = { $text: { $search: searchText } };
+  }
+
+  return {
+    paginationQuery: query,
+    paginationConfig: {
+      limit: parseInt(pageSize.toString()),
+      page: parseInt(pageNumber.toString()),
+    },
+  };
 }
