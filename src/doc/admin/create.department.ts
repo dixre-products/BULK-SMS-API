@@ -7,7 +7,7 @@
  *
  * @apiParam {Number} credit number of credit 
  * @apiParam {String} name name of department.
- * @apiParam {String} 
+ * 
  *
 * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  department object from collection

@@ -1,19 +1,17 @@
 /**
- * @api {POST} /admin  Create an Admin
- * @apiName PostAdmin
- * @apiGroup Admin
+ * @api {POST} /senderID Create an Admin
+ * @apiName PostSender
+ * @apiGroup Sender
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- * @apiParam {String} email admin email address.
- * @apiParam {String} name admin name.
- * @apiParam {String} password admin password.
+ * @apiParam {String} name of sender.
+ * @apiParam {Array} senderIds IDs of the sender.
  *
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  admin credentials object
- * @apiSuccess {String} payload._id admin ID.
- * @apiSuccess {String} payload.name admin name.
- * @apiSuccess {String} payload.email admin email address.
+ * @apiSuccess {Object} payload  senderIds credentials object
+ * @apiSuccess {String} payload.name  name of sender.
+ * @apiSuccess {String} payload.senderIds IDs of the senders.
  *
  *
  * @apiSuccessExample Success-Response:
@@ -22,8 +20,8 @@
  *       "message": "SUCCESSFULL",
  *       "payload"{
  *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "Admin",
-            "email": "admin@gmail.com",
+            "name": "sender",
+            "senderIds": [],
  *       }
  *     }
  *

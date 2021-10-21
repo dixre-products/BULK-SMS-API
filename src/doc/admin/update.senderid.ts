@@ -1,36 +1,30 @@
 /**
- * @api {POST} /admin  Create an Admin
- * @apiName PostAdmin
- * @apiGroup Admin
+ * @api {PUT} /senderID  Update a role
+ * @apiName UpdateSenderID
+ * @apiGroup Sender
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- * @apiParam {String} email admin email address.
- * @apiParam {String} name admin name.
- * @apiParam {String} password admin password.
  *
- * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  admin credentials object
- * @apiSuccess {String} payload._id admin ID.
- * @apiSuccess {String} payload.name admin name.
- * @apiSuccess {String} payload.email admin email address.
+ * @apiParam {String} id id of the sender to be updated
+ * @apiParam {Object} updates object that contains updates to be applied.
+ * @apiParam {String} [updates.name] updated name
+ * @apiParam {Array} [updates.senderIds] updated senderIds
  *
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
- *     {
+ *    {
  *       "message": "SUCCESSFULL",
  *       "payload"{
  *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "Admin",
-            "email": "admin@gmail.com",
+            "name": "sender",
+            "senderIds": [],
  *       }
  *     }
  *
- * 
- * 
  * @apiError Invalid Input
- * @apiErrorExample Invalid-Input:
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
  *       "message": "reason for invalid Input",
@@ -46,6 +40,7 @@
  *        "mesage": "describes reason for error"
  *     }
  *
+ 
  *
  * 
  * 

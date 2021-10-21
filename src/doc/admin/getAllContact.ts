@@ -6,8 +6,17 @@
  * @apiSampleRequest off
  *
  * 
+ *  @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageSize number of date to query.
+ * @apiParam {Object} filter object that contain query parameters
+ * @apiParam {String} [filter.searchText] search text.
+ * @apiParam {String} [filter.agency] group id.
+ * @apiParam {String} [filter.uid] user ID.
+ * @apiParam {String} [filter.role] Role Id.
+ *
+ * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Array} array Array of contact object from collection
+ * @apiSuccess {Array} payload Array of contact object from collection
  * 
  *
  * @apiSuccessExample Success-Response:
@@ -25,7 +34,9 @@
             "name": "contact1",
             "groupId": "6166f790a3018e4c61aa7b38",
  *       }
-       ]
+       ],
+       "totalDoc": 2,
+      "totalPages": 1
  *   }
  
  *

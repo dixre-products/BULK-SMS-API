@@ -1,19 +1,17 @@
 /**
- * @api {POST} /admin  Create an Admin
- * @apiName PostAdmin
- * @apiGroup Admin
+ * @api {DELETE} /senderID/:id Delete a sender 
+ * @apiName Delete a sender
+ * @apiGroup Sender
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- * @apiParam {String} email admin email address.
- * @apiParam {String} name admin name.
- * @apiParam {String} password admin password.
- *
+ *  
+ * @apiParam {String} id id of the sender.
+ * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  admin credentials object
- * @apiSuccess {String} payload._id admin ID.
- * @apiSuccess {String} payload.name admin name.
- * @apiSuccess {String} payload.email admin email address.
+ * @apiSuccess {Object} payload  sender credentials object
+ * @apiSuccess {String} payload.name sender name.
+ * @apiSuccess {String} payload.senderIds array of sender ids.
  *
  *
  * @apiSuccessExample Success-Response:
@@ -21,16 +19,15 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
- *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "Admin",
-            "email": "admin@gmail.com",
+ *          "_id": "61676654e1647695f9e14eca",
+            "name": "taker",
+            "senderIds": [],
+            
  *       }
  *     }
  *
- * 
- * 
  * @apiError Invalid Input
- * @apiErrorExample Invalid-Input:
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
  *       "message": "reason for invalid Input",
@@ -48,8 +45,6 @@
  *
  *
  * 
- * 
- *
  *
  *
  */
