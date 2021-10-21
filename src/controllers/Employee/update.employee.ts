@@ -41,8 +41,10 @@ export async function AssignEmployeeToDepartment(
   const $EID = Types.ObjectId(employeeId);
   const $DID = Types.ObjectId(departmentId);
 
-  const employeeExist = await models.Employee.findOne($EID);
-  const departmentExist = await models.Department.findOne($DID);
+  const employeeExist = await models.Employee.findOne({ _id: $EID });
+  const departmentExist = await models.Department.findOne({
+    _id: $DID,
+  });
 
   if (!employeeExist)
     return ResourceNotFound(
@@ -77,8 +79,8 @@ export async function AssignEmployeeToRole(
   const $EID = Types.ObjectId(employeeId);
   const $RID = Types.ObjectId(roleId);
 
-  const employeeExist = await models.Employee.findOne($EID);
-  const roleExist = await models.Role.findOne($RID);
+  const employeeExist = await models.Employee.findOne({ _id: $EID });
+  const roleExist = await models.Role.findOne({ _id: $RID });
 
   if (!employeeExist)
     return ResourceNotFound(

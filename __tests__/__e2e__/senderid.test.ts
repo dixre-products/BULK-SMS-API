@@ -70,6 +70,16 @@ describe('SenderID Test', () => {
   test('Admin should be able to get all senderIDs', async (done) => {
     SuperTest.get('/senderID')
       .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: '',
+          uid: '',
+          role: '',
+        },
+      })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {

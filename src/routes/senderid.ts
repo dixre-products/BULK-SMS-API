@@ -2,6 +2,8 @@ import { Router } from 'express';
 import SenderIdController from '../controllers/SenderIDs';
 import Validation from '../Validators/SenderId';
 import constants from '../constants/index';
+import GetValidation from '../Validators/Get.Requests/index';
+
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
 const { GET_ID_PARAM, BASE_SUB } = constants.RoutesSubs;
@@ -15,6 +17,8 @@ senderID.post(
 
 senderID.get(
   BASE_SUB,
+  HandleAsyncFactory(GetValidation),
+
   HandleAsyncFactory(SenderIdController.GetAllSenderId),
 );
 

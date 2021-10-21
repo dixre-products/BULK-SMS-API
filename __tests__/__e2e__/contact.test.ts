@@ -32,17 +32,17 @@ let incorrectId = '6166360199c49afae4f22712';
 var newDepartmentId: any;
 beforeAll(async () => {
   try {
-    await DatabaseConnection.dropCollection('contacts');
     const department = new models.Department({
       name: 'deptX',
       credit: 13,
     }) as DepartmentProps;
     await department.save();
-    newDepartmentId = department._id;
+    newDepartmentId = department._id.toHexString();
   } catch (e) {}
 });
 afterAll(async () => {
   try {
+    await DatabaseConnection.dropCollection('contacts');
     await DatabaseConnection.dropCollection('departments');
   } catch (e) {
     // console.log(e);
@@ -130,6 +130,8 @@ describe('Contact Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
+        console.log('contact message', message);
+
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
         done();
@@ -138,22 +140,6 @@ describe('Contact Test', () => {
         done(e);
       });
   });
-
-  // test('should fail if params is incorrect', async (done) => {
-  //   SuperTest.get('/contact/' + incorrectId)
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(404)
-  //     .then((response) => {
-  //       const { message } = response.body;
-
-  //       expect(message).toBeDefined();
-  //       done();
-  //     })
-  //     .catch((e) => {
-  //       done(e);
-  //     });
-  // });
 
   test(' it should be able to update a contact', async (done) => {
     SuperTest.put('/contact')

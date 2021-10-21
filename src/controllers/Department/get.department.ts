@@ -1,21 +1,43 @@
 import { Request, Response } from 'express';
 import {
+  ProcessingGetRequestSuccess,
   ProcessingSuccess,
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
 import constants from '../../constants';
+import { getQuery } from '../../utills/utills';
 
 export async function GetAllDepartment(req: Request, res: Response) {
-  const doc = await models.Department.find();
+  const requestParams = req.query as any;
+  const { paginationConfig, paginationQuery } = getQuery(
+    requestParams,
+    {
+      uid: '',
+      agency: 'senderIds',
+      roles: '',
+    },
+  );
+
+  const doc = await models.Department.paginate(paginationQuery, {
+    ...paginationConfig,
+    select: {
+      hash: 0,
+      salt: 0,
+    },
+  });
 
   if (!doc)
     return ResourceNotFound(
       res,
-      constants.RequestResponse.DepartmentNotFound,
+      constants.RequestResponse.ContactNotFound,
     );
 
-  return ProcessingSuccess(res, doc);
+  return ProcessingGetRequestSuccess(res, {
+    payload: doc.docs,
+    totalDoc: doc.totalDocs,
+    totalPages: doc.totalPages,
+  });
 }
 
 export async function GetSingleDepartment(

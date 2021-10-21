@@ -84,12 +84,23 @@ describe('Role Test', () => {
   test('Admin should be able to get all role', async (done) => {
     SuperTest.get('/admin/get-role')
       .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: '',
+          uid: '',
+          role: '',
+        },
+      })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
+        console.log(message);
 
         done();
       })
@@ -138,7 +149,6 @@ describe('Role Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        console.log(message);
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -158,7 +168,6 @@ describe('Role Test', () => {
       .expect(400)
       .then((response) => {
         const { message } = response.body;
-        console.log(message);
 
         expect(message).toBeDefined();
 

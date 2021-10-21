@@ -36,7 +36,7 @@ beforeAll(async () => {
       credit: 13,
     }) as DepartmentProps;
     await department.save();
-    newDepartmentId = department._id;
+    newDepartmentId = department._id.toHexString();
   } catch (e) {}
 });
 
@@ -99,6 +99,16 @@ describe('Message Test', () => {
   test(' Admin should be able to get all messages', async (done) => {
     SuperTest.get('/admin/get-message')
       .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: '',
+          uid: '',
+          role: '',
+        },
+      })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
@@ -109,6 +119,35 @@ describe('Message Test', () => {
         done();
       })
       .catch((e) => {
+        done(e);
+      });
+  });
+
+  test(' Admin should be able to get all messages by agency ID', async (done) => {
+    SuperTest.get('/admin/get-message')
+      .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: newDepartmentId,
+          uid: '',
+          role: '',
+        },
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+
+        done();
+      })
+      .catch((e) => {
+        console.log(e);
+
         done(e);
       });
   });

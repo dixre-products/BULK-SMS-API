@@ -1,0 +1,524 @@
+
+{
+  "header": {
+    "reportVersion": 2,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20211021.125642.161132.0.001.json",
+    "dumpEventTime": "2021-10-21T12:56:42Z",
+    "dumpEventTimeStamp": "1634817402974",
+    "processId": 161132,
+    "threadId": null,
+    "cwd": "C:\\Users\\USER\\Desktop\\Dixre\\BULK-SMS-API",
+    "commandLine": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\USER\\Desktop\\Dixre\\BULK-SMS-API\\node_modules\\.bin\\\\..\\jest\\bin\\jest.js",
+      "--watch",
+      "--detectOpenHandles",
+      "--rootDir=__tests__"
+    ],
+    "nodejsVersion": "v12.16.3",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.3",
+      "v8": "7.8.279.23-node.35",
+      "uv": "1.34.2",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.16.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1g",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.3/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18362",
+    "osVersion": "Windows 10 Pro",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i5-4310U CPU @ 2.00GHz",
+        "speed": 2594,
+        "user": 48932578,
+        "nice": 0,
+        "sys": 43694265,
+        "idle": 219256484,
+        "irq": 2165734
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-4310U CPU @ 2.00GHz",
+        "speed": 2594,
+        "user": 51675046,
+        "nice": 0,
+        "sys": 37246984,
+        "idle": 222961109,
+        "irq": 543406
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-4310U CPU @ 2.00GHz",
+        "speed": 2594,
+        "user": 57487343,
+        "nice": 0,
+        "sys": 38358984,
+        "idle": 216036796,
+        "irq": 200093
+      },
+      {
+        "model": "Intel(R) Core(TM) i5-4310U CPU @ 2.00GHz",
+        "speed": 2594,
+        "user": 62073171,
+        "nice": 0,
+        "sys": 40894640,
+        "idle": 208915312,
+        "irq": 172718
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "::1",
+        "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "family": "IPv6",
+        "scopeid": 0
+      },
+      {
+        "name": "Loopback Pseudo-Interface 1",
+        "internal": true,
+        "mac": "00:00:00:00:00:00",
+        "address": "127.0.0.1",
+        "netmask": "255.0.0.0",
+        "family": "IPv4"
+      }
+    ],
+    "host": "DESKTOP-AJO"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff619172449",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+11577"
+    },
+    {
+      "pc": "0x00007ff6191769a9",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+29337"
+    },
+    {
+      "pc": "0x00007ff619175828",
+      "symbol": "std::basic_ostream<char,std::char_traits<char> >::operator<<+24856"
+    },
+    {
+      "pc": "0x00007ff6192ad8c2",
+      "symbol": "v8::base::CPU::has_sse+68658"
+    },
+    {
+      "pc": "0x00007ff619ac9bbe",
+      "symbol": "v8::Isolate::ReportExternalAllocationLimitReached+94"
+    },
+    {
+      "pc": "0x00007ff619ab1c91",
+      "symbol": "v8::SharedArrayBuffer::Externalize+833"
+    },
+    {
+      "pc": "0x00007ff61997e1ec",
+      "symbol": "v8::internal::Heap::EphemeronKeyWriteBarrierFromCode+1436"
+    },
+    {
+      "pc": "0x00007ff619989420",
+      "symbol": "v8::internal::Heap::ProtectUnprotectedMemoryChunks+1312"
+    },
+    {
+      "pc": "0x00007ff619985f44",
+      "symbol": "v8::internal::Heap::PageFlagsAreConsistent+3204"
+    },
+    {
+      "pc": "0x00007ff61997b743",
+      "symbol": "v8::internal::Heap::CollectGarbage+1283"
+    },
+    {
+      "pc": "0x00007ff619979db4",
+      "symbol": "v8::internal::Heap::AddRetainedMap+2452"
+    },
+    {
+      "pc": "0x00007ff61999afbd",
+      "symbol": "v8::internal::Factory::NewFillerObject+61"
+    },
+    {
+      "pc": "0x00007ff619701871",
+      "symbol": "v8::internal::interpreter::JumpTableTargetOffsets::iterator::operator=+1665"
+    },
+    {
+      "pc": "0x00007ff619f16c4d",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+546637"
+    },
+    {
+      "pc": "0x00007ff619e977a4",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+25252"
+    },
+    {
+      "pc": "0x00007ff619f80913",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+979987"
+    },
+    {
+      "pc": "0x00007ff619e9bbfc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42748"
+    },
+    {
+      "pc": "0x00007ff619e9bbfc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42748"
+    },
+    {
+      "pc": "0x00007ff619e9bbfc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42748"
+    },
+    {
+      "pc": "0x00007ff619e9bbfc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42748"
+    },
+    {
+      "pc": "0x00007ff619e9bbfc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42748"
+    },
+    {
+      "pc": "0x00007ff619e9bbfc",
+      "symbol": "v8::internal::SetupIsolateDelegate::SetupHeap+42748"
+    },
+    {
+      "pc": "0x000001b68e777342",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 2185400320,
+    "totalCommittedMemory": 2185400320,
+    "usedMemory": 2118490936,
+    "availableMemory": 58133280,
+    "memoryLimit": 2197815296,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 32505856,
+        "committedMemory": 32505856,
+        "capacity": 16235568,
+        "used": 2172536,
+        "available": 14063032
+      },
+      "old_space": {
+        "memorySize": 1396322304,
+        "committedMemory": 1396322304,
+        "capacity": 1379715384,
+        "used": 1364295680,
+        "available": 15419704
+      },
+      "code_space": {
+        "memorySize": 12488704,
+        "committedMemory": 12488704,
+        "capacity": 11461568,
+        "used": 11461568,
+        "available": 0
+      },
+      "map_space": {
+        "memorySize": 105648128,
+        "committedMemory": 105648128,
+        "capacity": 105144800,
+        "used": 105144800,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 638124032,
+        "committedMemory": 638124032,
+        "capacity": 635380760,
+        "used": 635380760,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 49152,
+        "committedMemory": 49152,
+        "capacity": 2784,
+        "used": 2784,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 16235568,
+        "used": 0,
+        "available": 16235568
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 705.75,
+    "kernelCpuSeconds": 71.265,
+    "cpuConsumptionPercent": 30.6032,
+    "maxRss": 2166915072,
+    "pageFaults": {
+      "IORequired": 3861616,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 213557,
+      "writes": 104
+    }
+  },
+  "libuv": [
+  ],
+  "workers": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\Users\\USER\\Desktop\\Dixre\\BULK-SMS-API",
+    "ALLUSERSPROFILE": "C:\\ProgramData",
+    "APPDATA": "C:\\Users\\USER\\AppData\\Roaming",
+    "CommonProgramFiles": "C:\\Program Files\\Common Files",
+    "CommonProgramFiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "CommonProgramW6432": "C:\\Program Files\\Common Files",
+    "COMPUTERNAME": "DESKTOP-AJO",
+    "ComSpec": "C:\\Windows\\system32\\cmd.exe",
+    "dp0": "C:\\Users\\USER\\AppData\\Roaming\\npm\\",
+    "DriverData": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "heroku": "C:\\Program Files\\heroku\\bin",
+    "HOMEDRIVE": "C:",
+    "HOMEPATH": "\\Users\\USER",
+    "INIT_CWD": "C:\\Users\\USER\\Desktop\\Dixre\\BULK-SMS-API",
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk-12",
+    "JEST_WORKER_ID": "1",
+    "LOCALAPPDATA": "C:\\Users\\USER\\AppData\\Local",
+    "LOGONSERVER": "\\\\DESKTOP-AJO",
+    "mongo": "C:\\Program Files\\MongoDB\\Server\\4.4\\bin",
+    "MOZ_PLUGIN_PATH": "C:\\Program Files (x86)\\Foxit Software\\Foxit Reader\\plugins\\",
+    "NODE": "C:\\Program Files\\nodejs\\node.exe",
+    "NODE_ENV": "test",
+    "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"test\"],\"original\":[\"test\"]}",
+    "npm_config_bin_links": "true",
+    "npm_config_ignore_optional": "",
+    "npm_config_ignore_scripts": "",
+    "npm_config_init_license": "MIT",
+    "npm_config_init_version": "1.0.0",
+    "npm_config_registry": "https://registry.yarnpkg.com",
+    "npm_config_save_prefix": "^",
+    "npm_config_strict_ssl": "true",
+    "npm_config_user_agent": "yarn/1.22.10 npm/? node/v12.16.3 win32 x64",
+    "npm_config_version_commit_hooks": "true",
+    "npm_config_version_git_message": "v%s",
+    "npm_config_version_git_sign": "",
+    "npm_config_version_git_tag": "true",
+    "npm_config_version_tag_prefix": "v",
+    "npm_execpath": "C:\\Users\\USER\\AppData\\Roaming\\npm\\node_modules\\yarn\\bin\\yarn.js",
+    "npm_lifecycle_event": "test",
+    "npm_lifecycle_script": "jest --watch --detectOpenHandles --rootDir=__tests__ ",
+    "npm_node_execpath": "C:\\Program Files\\nodejs\\node.exe",
+    "npm_package_apidoc_name": "Auth Service",
+    "npm_package_apidoc_sampleUrl": "http://sample.com",
+    "npm_package_apidoc_title": "Dixre | Auth Service",
+    "npm_package_apidoc_url": "https://sms-platform-api.herokuapp.com",
+    "npm_package_apidoc_version": "1.0.0",
+    "npm_package_dependencies_axios": "^0.21.1",
+    "npm_package_dependencies_bcryptjs": "^2.4.3",
+    "npm_package_dependencies_body_parser": "^1.18.3",
+    "npm_package_dependencies_config": "^3.3.6",
+    "npm_package_dependencies_cors": "^2.8.5",
+    "npm_package_dependencies_create_hash": "^1.2.0",
+    "npm_package_dependencies_create_hmac": "^1.1.7",
+    "npm_package_dependencies_debug": "^4.3.2",
+    "npm_package_dependencies_diff": "^5.0.0",
+    "npm_package_dependencies_dotenv": "^6.2.0",
+    "npm_package_dependencies_express": "^4.16.4",
+    "npm_package_dependencies_express_brute": "^1.0.1",
+    "npm_package_dependencies_express_brute_mongo": "^1.0.0",
+    "npm_package_dependencies_firebase_admin": "^9.4.2",
+    "npm_package_dependencies_google_libphonenumber": "^3.2.16",
+    "npm_package_dependencies_helmet": "^3.21.0",
+    "npm_package_dependencies_joi": "^17.4.0",
+    "npm_package_dependencies_jsonwebtoken": "^8.5.1",
+    "npm_package_dependencies_lodash": "^4.17.21",
+    "npm_package_dependencies_moment": "^2.29.1",
+    "npm_package_dependencies_mongodb": "^3.6.3",
+    "npm_package_dependencies_mongoose": "^5.7.0",
+    "npm_package_dependencies_mongoose_paginate_v2": "^1.4.2",
+    "npm_package_dependencies_morgan": "^1.10.0",
+    "npm_package_dependencies_pm2": "^4.1.2",
+    "npm_package_dependencies_request": "^2.88.2",
+    "npm_package_dependencies_sinch_request": "^0.0.8",
+    "npm_package_dependencies_ts_node": "^10.2.1",
+    "npm_package_dependencies_twilio": "^3.61.0",
+    "npm_package_dependencies_useragent": "^2.3.0",
+    "npm_package_dependencies_winston": "^3.3.3",
+    "npm_package_dependencies_winston_firebase_transport": "^1.1.0",
+    "npm_package_dependencies_yamlparser": "^0.0.2",
+    "npm_package_dependencies__pm2_io": "^4.3.3",
+    "npm_package_dependencies__types_jsonwebtoken": "^8.5.0",
+    "npm_package_description": "Bulk sms allocation backend using checker and maker Access layer Control System. Application is synonymous to ebulk sms but with the exception that checker and maker integration",
+    "npm_package_devDependencies_apidoc": "^0.26.0",
+    "npm_package_devDependencies_babel_jest": "^26.6.3",
+    "npm_package_devDependencies_concurrently": "^5.3.0",
+    "npm_package_devDependencies_cross_env": "^7.0.3",
+    "npm_package_devDependencies_eslint": "^7.17.0",
+    "npm_package_devDependencies_eslint_config_airbnb_base": "^14.2.1",
+    "npm_package_devDependencies_eslint_config_prettier": "^7.1.0",
+    "npm_package_devDependencies_eslint_plugin_import": "^2.22.1",
+    "npm_package_devDependencies_eslint_plugin_prettier": "^3.3.1",
+    "npm_package_devDependencies_husky": "^7.0.2",
+    "npm_package_devDependencies_jest": "^26.6.3",
+    "npm_package_devDependencies_jsdoc": "^3.6.6",
+    "npm_package_devDependencies_lint_staged": "^10.5.3",
+    "npm_package_devDependencies_nodemon": "^1.18.9",
+    "npm_package_devDependencies_onchange": "^7.1.0",
+    "npm_package_devDependencies_prettier": "^2.2.1",
+    "npm_package_devDependencies_supertest": "^6.1.4",
+    "npm_package_devDependencies_ts_jest": "^26.4.4",
+    "npm_package_devDependencies_typescript": "^4.1.3",
+    "npm_package_devDependencies__babel_core": "^7.12.10",
+    "npm_package_devDependencies__babel_preset_env": "^7.12.11",
+    "npm_package_devDependencies__babel_preset_typescript": "^7.12.7",
+    "npm_package_devDependencies__typescript_eslint_eslint_plugin": "^4.12.0",
+    "npm_package_devDependencies__typescript_eslint_parser": "^4.12.0",
+    "npm_package_devDependencies__types_bcrypt": "^3.0.0",
+    "npm_package_devDependencies__types_bcryptjs": "^2.4.2",
+    "npm_package_devDependencies__types_config": "^0.0.39",
+    "npm_package_devDependencies__types_cors": "^2.8.9",
+    "npm_package_devDependencies__types_create_hash": "^1.2.2",
+    "npm_package_devDependencies__types_create_hmac": "^1.1.0",
+    "npm_package_devDependencies__types_express": "^4.17.10",
+    "npm_package_devDependencies__types_express_brute": "^1.0.0",
+    "npm_package_devDependencies__types_express_jwt": "^6.0.0",
+    "npm_package_devDependencies__types_google_libphonenumber": "^7.4.19",
+    "npm_package_devDependencies__types_helmet": "^4.0.0",
+    "npm_package_devDependencies__types_jest": "^26.0.20",
+    "npm_package_devDependencies__types_lodash": "^4.14.173",
+    "npm_package_devDependencies__types_moment": "^2.13.0",
+    "npm_package_devDependencies__types_mongodb": "^3.6.3",
+    "npm_package_devDependencies__types_mongoose_paginate_v2": "^1.4.0",
+    "npm_package_devDependencies__types_morgan": "^1.9.3",
+    "npm_package_devDependencies__types_node": "^14.14.20",
+    "npm_package_devDependencies__types_supertest": "^2.0.10",
+    "npm_package_devDependencies__types_useragent": "^2.3.0",
+    "npm_package_license": "",
+    "npm_package_main": "build/index.js",
+    "npm_package_name": "Bulk-sms-api",
+    "npm_package_readmeFilename": "README.md",
+    "npm_package_scripts_build": "yarn compile:tsc && yarn doc",
+    "npm_package_scripts_compile_tsc": "yarn run tsc ",
+    "npm_package_scripts_compile_tsc_watch": "yarn run tsc -w",
+    "npm_package_scripts_db_start_dev_linux": "mongod --port 27017 --dbpath /var/lib/mongodb/bulk-sms-api",
+    "npm_package_scripts_db_start_dev_win": "start mongod --port 27017 --dbpath C:/data/bulk-sms-api",
+    "npm_package_scripts_deploy": "git push heroku main ",
+    "npm_package_scripts_doc": "apidoc -i src/doc/ -o api-doc/ --template ./doc-template",
+    "npm_package_scripts_doc_watch": "nodemon --watch build/doc --exec yarn doc",
+    "npm_package_scripts_lint": "eslint src/**/*.ts",
+    "npm_package_scripts_lint_fix": "eslint --fix src/**/*.ts",
+    "npm_package_scripts_prepare": "husky install",
+    "npm_package_scripts_prettier_format": "prettier --config .prettierrc **/*.ts --write",
+    "npm_package_scripts_prettier_watch": "onchange **/*.ts -- prettier --write {{changed}}",
+    "npm_package_scripts_start": "node build/src/server.js",
+    "npm_package_scripts_start_dev": "cross-env NODE_ENV=dev && nodemon build/src/server.js --env dev",
+    "npm_package_scripts_start_dev_linux": "yarn compile:tsc && yarn lint:fix &&  yarn start:dev &&  yarn run concurrently  \"yarn compile:tsc:watch\" \"yarn prettier-watch\" \"yarn doc:watch\" ",
+    "npm_package_scripts_start_dev_win": "yarn compile:tsc && yarn lint:fix && yarn db:start:dev:win && start yarn start:dev &&  yarn run concurrently  \"yarn compile:tsc:watch\" \"yarn prettier-watch\" \"yarn doc:watch\" ",
+    "npm_package_scripts_test": "jest --watch --detectOpenHandles --rootDir=__tests__ ",
+    "npm_package_version": "1.0.0",
+    "NUMBER_OF_PROCESSORS": "4",
+    "OneDrive": "C:\\Users\\USER\\OneDrive",
+    "OS": "Windows_NT",
+    "Path": "C:\\Users\\USER\\AppData\\Local\\Temp\\yarn--1634814863876-0.5874736141820613;C:\\Users\\USER\\Desktop\\Dixre\\BULK-SMS-API\\node_modules\\.bin;C:\\Users\\USER\\AppData\\Local\\Yarn\\Data\\link\\node_modules\\.bin;C:\\Users\\USER\\AppData\\Local\\Yarn\\bin;C:\\Program Files\\libexec\\lib\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files\\lib\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\node-gyp-bin;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files\\nodejs\\;C:\\Program Files\\Git\\cmd;C:\\Program Files\\MongoDB\\Server\\4.4\\bin;C:\\Users\\USER\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Users\\USER\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\USER\\AppData\\Roaming\\npm;C:\\Program Files\\heroku\\bin;C:\\src\\flutter\\bin;C:\\Program Files\\CodeBlocks\\MinGW\\bin",
+    "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC",
+    "PROCESSOR_ARCHITECTURE": "AMD64",
+    "PROCESSOR_IDENTIFIER": "Intel64 Family 6 Model 69 Stepping 1, GenuineIntel",
+    "PROCESSOR_LEVEL": "6",
+    "PROCESSOR_REVISION": "4501",
+    "ProgramData": "C:\\ProgramData",
+    "ProgramFiles": "C:\\Program Files",
+    "ProgramFiles(x86)": "C:\\Program Files (x86)",
+    "ProgramW6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "PSModulePath": "C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "PUBLIC": "C:\\Users\\Public",
+    "SystemDrive": "C:",
+    "SystemRoot": "C:\\Windows",
+    "TEMP": "C:\\Users\\USER\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\USER\\AppData\\Local\\Temp",
+    "USERDOMAIN": "DESKTOP-AJO",
+    "USERDOMAIN_ROAMINGPROFILE": "DESKTOP-AJO",
+    "USERNAME": "USER",
+    "USERPROFILE": "C:\\Users\\USER",
+    "windir": "C:\\Windows",
+    "WSLENV": "WT_SESSION::WT_PROFILE_ID",
+    "WT_PROFILE_ID": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+    "WT_SESSION": "29010735-e7f6-45fe-8b81-3ba0a4b04a64",
+    "YARN_WRAP_OUTPUT": "false",
+    "_prog": "node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\winmmbase.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\System32\\winrnr.dll",
+    "C:\\Windows\\system32\\NLAapi.dll",
+    "C:\\Windows\\system32\\wshbth.dll",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc6.DLL",
+    "C:\\Windows\\SYSTEM32\\dhcpcsvc.DLL",
+    "C:\\Windows\\System32\\rasadhlp.dll",
+    "C:\\Windows\\System32\\fwpuclnt.dll"
+  ]
+}

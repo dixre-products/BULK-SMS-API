@@ -10,6 +10,7 @@ import DepartmentValidation from '../Validators/Department';
 import EmployeeValidation from '../Validators/Employee';
 import RoleValidation from '../Validators/Role';
 import AdminValidation from '../Validators/Admin';
+// import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
@@ -44,6 +45,8 @@ admin.post(
 
 admin.get(
   GET_DEPARTMENT,
+  HandleAsyncFactory(GetValidation),
+
   HandleAsyncFactory(DepartmentController.GetAllDepartment),
 );
 admin.put(
@@ -70,6 +73,8 @@ admin.get(
 
 admin.get(
   GET_MESSAGE,
+  HandleAsyncFactory(GetValidation),
+
   HandleAsyncFactory(MessageController.GetAllMessages),
 );
 
@@ -89,6 +94,7 @@ admin.put(
 
 admin.get(
   GET_EMPLOYEES,
+  HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(EmployeeController.GetAllEmployee),
 );
 
@@ -128,7 +134,8 @@ admin.put(
 
 admin.get(
   GET_ROLE,
-  //   HandleAsyncFactory(ValidateSignUpInput),
+  HandleAsyncFactory(GetValidation),
+
   HandleAsyncFactory(RoleController.GetAllRole),
 );
 
@@ -145,12 +152,15 @@ admin.post(
   HandleAsyncFactory(AdminController.CreateAdmin),
 );
 
-admin.get(BASE_SUB, HandleAsyncFactory(AdminController.GetAllAdmin));
-
 admin.get(
   GET_ID_PARAM,
   HandleAsyncFactory(AdminValidation.ValidateGetSingleAdmin),
   HandleAsyncFactory(AdminController.GetSingleAdmin),
+);
+admin.get(
+  BASE_SUB,
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(AdminController.GetAllAdmin),
 );
 
 admin.put(

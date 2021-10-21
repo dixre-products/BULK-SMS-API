@@ -27,6 +27,7 @@ export default function ValidateCreateContact(
   });
 
   if (error) {
+    console.log('validation error', error);
     return InvalidInputs(res, error.message);
   }
   next();

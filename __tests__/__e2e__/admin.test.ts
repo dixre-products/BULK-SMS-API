@@ -153,4 +153,31 @@ describe('Admin Test', () => {
         done(e);
       });
   });
+
+  test('should be able to get all admins', async (done) => {
+    SuperTest.get('/admin')
+      .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        filter: {
+          searchText: '',
+          agency: '',
+          uid: '',
+          role: '',
+        },
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
 });

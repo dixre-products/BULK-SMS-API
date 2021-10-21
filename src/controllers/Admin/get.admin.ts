@@ -9,7 +9,9 @@ import constants from '../../constants';
 import { getQuery } from '../../utills/utills';
 
 export async function GetAllAdmin(req: Request, res: Response) {
-  const requestParams = req.params as any;
+  const requestParams = req.query as any;
+  console.log('request query', requestParams);
+
   const { paginationConfig, paginationQuery } = getQuery(
     requestParams,
     {

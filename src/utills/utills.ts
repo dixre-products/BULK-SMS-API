@@ -125,7 +125,13 @@ export function getQuery(
 
   // request parameters destructuring
   const { filter, pageSize, pageNumber } = requestParams;
-  const { searchText, role, uid, agency } = filter;
+  const filterCheck = filter || {
+    searchText: '',
+    role: '',
+    agency: '',
+    uid: '',
+  };
+  const { searchText, role, uid, agency } = filterCheck;
 
   // check if document is to apply the agency filter
   if (queryConfig.agency && agency) {
