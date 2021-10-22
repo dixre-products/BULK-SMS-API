@@ -26,6 +26,7 @@ export async function GetAllEmployee(req: Request, res: Response) {
       hash: 0,
       salt: 0,
     },
+    populate: 'groupId roleId',
   });
 
   if (!doc)

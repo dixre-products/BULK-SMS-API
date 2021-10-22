@@ -173,10 +173,8 @@ export interface MessageProps extends Document {
 export interface RequestParams {
   pageNumber: number;
   pageSize: number;
-  filter: {
-    searchText: string;
-    agency: string;
-    uid: string;
-    role: string;
-  };
+  searchText: string;
+  agency: string;
+  uid: string;
+  role: string;
 }

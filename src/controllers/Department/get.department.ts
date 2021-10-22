@@ -25,6 +25,7 @@ export async function GetAllDepartment(req: Request, res: Response) {
       hash: 0,
       salt: 0,
     },
+    populate: 'senderIds',
   });
 
   if (!doc)

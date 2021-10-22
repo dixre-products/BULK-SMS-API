@@ -5,12 +5,10 @@ import { InvalidInputs } from '../../RequestStatus/status';
 const requestBodySchema = joi.object({
   pageNumber: joi.number().required(),
   pageSize: joi.number().required(),
-  filter: joi.object({
-    searchText: joi.string().optional().allow(''),
-    agency: joi.string().optional().allow(''),
-    uid: joi.string().optional().allow(''),
-    role: joi.string().optional().allow(''),
-  }),
+  searchText: joi.string().optional().allow(''),
+  agency: joi.string().optional().allow(''),
+  uid: joi.string().optional().allow(''),
+  role: joi.string().optional().allow(''),
 });
 
 export default function ValidateCreateContact(
