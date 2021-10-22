@@ -7,7 +7,7 @@
  *
  * 
  * 
- *  @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageNumber number of pages.
  * @apiParam {Number} pageSize number of date to query.
  * @apiParam {Object} filter object that contain query parameters
  * @apiParam {String} [filter.searchText] search text.

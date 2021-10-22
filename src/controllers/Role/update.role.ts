@@ -21,6 +21,9 @@ export default async function UpdateRole(
   const doc = await models.Role.findOneAndUpdate(
     { _id: ID },
     updates,
+    {
+      new: true,
+    },
   );
 
   if (!doc)

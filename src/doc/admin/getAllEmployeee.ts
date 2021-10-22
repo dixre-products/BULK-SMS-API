@@ -1,12 +1,12 @@
 /**
- * @api {GET} /admin/get-employee  Get All Employee
+ * @api {GET} /admin/get-employees  Get All Employee
  * @apiName GetAllEmployee
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
  * 
- *  @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageNumber number of pages.
  * @apiParam {Number} pageSize number of date to query.
  * @apiParam {Object} filter object that contain query parameters
  * @apiParam {String} [filter.searchText] search text.
