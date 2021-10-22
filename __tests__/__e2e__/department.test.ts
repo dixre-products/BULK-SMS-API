@@ -29,6 +29,13 @@ let updates = {
 
 let newSenderId: any;
 
+var arrayOfIds = [];
+models.Department.insertMany([newDepartment, newDepartment]).then(
+  (docs) => {
+    docs.forEach((doc) => arrayOfIds.push(doc._id));
+  },
+);
+
 const SuperTest = superTest(app);
 
 beforeAll(async () => {
@@ -275,6 +282,25 @@ describe('Department Test', () => {
         const { message } = response.body;
 
         expect(message).toBeDefined();
+
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('should be able to delete multiple IDs', async (done) => {
+    SuperTest.delete('/admin/delete-groups')
+      .send({ groupIds: arrayOfIds })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
 
         done();
       })

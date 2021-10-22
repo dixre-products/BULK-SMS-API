@@ -1,6 +1,7 @@
 import superTest from 'supertest';
 import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
+import models from '../../src/models';
 /*
    Test 1 => Admin should successfully create a role
    Test 2 => Admin should fail to create a role if name or other required field is not given
@@ -27,6 +28,11 @@ let updates = {
   name: 'taker',
   addContact: false,
 };
+
+var arrayOfIds = [];
+models.Role.insertMany([newRole, newRole]).then((docs) => {
+  docs.forEach((doc) => arrayOfIds.push(doc._id));
+});
 
 const SuperTest = superTest(app);
 
@@ -205,6 +211,25 @@ describe('Role Test', () => {
         const { message, payload } = response.body;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('should be able to delete multiple IDs', async (done) => {
+    SuperTest.delete('/admin/delete-roles')
+      .send({ roleIds: arrayOfIds })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+
         done();
       })
       .catch((e) => {

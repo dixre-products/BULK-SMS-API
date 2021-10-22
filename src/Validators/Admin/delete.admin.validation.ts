@@ -3,10 +3,10 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  groupIds: joi.array().items(joi.string()).label('groupIds'),
+  adminIds: joi.array().items(joi.string()).label('adminIds'),
 });
 
-export default function ValidateMultipleDeleteDept(
+export default function ValidateMultipleDeleteAdmin(
   req: Request,
   res: Response,
   next: NextFunction,

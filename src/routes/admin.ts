@@ -10,6 +10,7 @@ import DepartmentValidation from '../Validators/Department';
 import EmployeeValidation from '../Validators/Employee';
 import RoleValidation from '../Validators/Role';
 import AdminValidation from '../Validators/Admin';
+import ContactValidation from '../Validators/Contact';
 // import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
@@ -33,6 +34,12 @@ const {
   CREATE_ROLE,
   GET_ROLE,
   DELETE_ROLE,
+
+  DELETE_ALL_ADMINS,
+  DELETE_ALL_CONTACTS,
+  DELETE_ALL_GROUPS,
+  DELETE_ALL_EMOLOYEES,
+  DELETE_ALL_ROLES,
 } = constants.RoutesSubs;
 const admin = Router();
 
@@ -62,11 +69,25 @@ admin.put(
   HandleAsyncFactory(DepartmentController.UpdateDepartmentCredit),
 );
 
+admin.delete(
+  DELETE_ALL_GROUPS,
+  HandleAsyncFactory(DepartmentValidation.ValidateDeleteDepartment),
+  HandleAsyncFactory(DepartmentController.DeleteMultipleDepartment),
+);
+
 // Admin: Contact Routes
 admin.get(
   GET_CONTACT,
   HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(ContactController.GetAllContact),
+);
+
+admin.delete(
+  DELETE_ALL_CONTACTS,
+  HandleAsyncFactory(
+    ContactValidation.ValidateMultipleDeleteContacts,
+  ),
+  HandleAsyncFactory(ContactController.DeleteMultipleContacts),
 );
 
 // Admin: Message Routes
@@ -79,6 +100,11 @@ admin.get(
 );
 
 // Admin: Employee Routes
+admin.delete(
+  DELETE_ALL_EMOLOYEES,
+  HandleAsyncFactory(EmployeeValidation.ValidateDeleteEmployee),
+  HandleAsyncFactory(EmployeeController.DeleteMultipleEmployee),
+);
 
 admin.post(
   CREATE_EMPLOYEE,
@@ -120,6 +146,12 @@ admin.delete(
   HandleAsyncFactory(RoleController.DeleteRole),
 );
 
+admin.delete(
+  DELETE_ALL_ROLES,
+  HandleAsyncFactory(RoleValidation.ValidateDeleteMultipleRole),
+  HandleAsyncFactory(RoleController.DeleteMultipleRole),
+);
+
 admin.post(
   CREATE_ROLE,
   HandleAsyncFactory(RoleValidation.ValidateCreateRole),
@@ -150,6 +182,12 @@ admin.post(
   BASE_SUB,
   HandleAsyncFactory(AdminValidation.ValidateCreateAdmin),
   HandleAsyncFactory(AdminController.CreateAdmin),
+);
+
+admin.delete(
+  DELETE_ALL_ADMINS,
+  HandleAsyncFactory(AdminValidation.ValidateDeleteAdmin),
+  HandleAsyncFactory(AdminController.DeleteMultipleAdmin),
 );
 
 admin.get(

@@ -19,6 +19,13 @@ let updates = {
   name: 'colosy',
 };
 
+var arrayOfIds = [];
+models.SenderIDs.insertMany([newSenderID, newSenderID]).then(
+  (docs) => {
+    docs.forEach((doc) => arrayOfIds.push(doc._id));
+  },
+);
+
 const SuperTest = superTest(app);
 
 var newDepartmentId: any;
@@ -133,6 +140,25 @@ describe('SenderID Test', () => {
 
   test('should be able to delete a senderID with correct ID', async (done) => {
     SuperTest.delete('/senderID/' + senderId)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('should be able to delete multiple IDs', async (done) => {
+    SuperTest.delete('/senderID/delete-senders')
+      .send({ senderIds: arrayOfIds })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

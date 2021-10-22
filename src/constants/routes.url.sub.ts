@@ -53,6 +53,13 @@ const UPDATE_ROLE = '/update-role';
 const GET_ID_PARAM = '/:id';
 const BASE_SUB = '/';
 // Admin
+const DELETE_ALL_ADMINS = '/delete-admins';
+const DELETE_ALL_CONTACTS = '/delete-contacts';
+const DELETE_ALL_GROUPS = '/delete-groups';
+const DELETE_ALL_EMOLOYEES = '/delete-employees';
+const DELETE_ALL_MESSAGES = '/delete-messages';
+const DELETE_ALL_ROLES = '/delete-roles';
+const DELETE_ALL_SENDERS = '/delete-senders';
 
 export default {
   GET_EMPLOYESS_BY_GROUP,
@@ -85,4 +92,12 @@ export default {
   CREATE_ROLE,
   GET_ROLE,
   DELETE_ROLE,
+
+  DELETE_ALL_CONTACTS,
+  DELETE_ALL_EMOLOYEES,
+  DELETE_ALL_ADMINS,
+  DELETE_ALL_GROUPS,
+  DELETE_ALL_MESSAGES,
+  DELETE_ALL_ROLES,
+  DELETE_ALL_SENDERS,
 };

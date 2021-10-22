@@ -16,6 +16,15 @@ import models from '../../src/models';
    Test 9 => should be able to delete a contact with correct ID
 */
 
+let newMessage = {
+  contacts: [2314343, 1333134, 41141, 141],
+  message: 'asasasas',
+  sender: 'maker',
+  time: Date.now(),
+  status: 'approved',
+  groupId: newDepartmentId,
+};
+
 let updates = {
   contacts: [1111, 11111, 11111, 1111],
   message: 'bbbb',
@@ -23,6 +32,11 @@ let updates = {
   time: Date.now(),
   status: 'pending',
 };
+
+var arrayOfIds = [];
+models.Message.insertMany([newMessage, newMessage]).then((docs) => {
+  docs.forEach((doc) => arrayOfIds.push(doc._id));
+});
 
 const SuperTest = superTest(app);
 
@@ -39,15 +53,6 @@ beforeAll(async () => {
     newDepartmentId = department._id.toHexString();
   } catch (e) {}
 });
-
-let newMessage = {
-  contacts: [2314343, 1333134, 41141, 141],
-  message: 'asasasas',
-  sender: 'sassss',
-  time: Date.now(),
-  status: 'approved',
-  groupId: newDepartmentId,
-};
 
 afterAll(async () => {
   try {
@@ -242,6 +247,25 @@ describe('Message Test', () => {
 
   test('should be able to delete a contact with correct ID', async (done) => {
     SuperTest.delete('/message/' + newMessageID)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('should be able to delete multiple IDs', async (done) => {
+    SuperTest.delete('/message/delete-messages')
+      .send({ messageIds: arrayOfIds })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)

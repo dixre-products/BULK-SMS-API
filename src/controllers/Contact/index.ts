@@ -1,5 +1,8 @@
 import CreateContact from './add.contact';
-import DeleteContact from './delete.contact';
+import {
+  DeleteContact,
+  DeleteMultipleContacts,
+} from './delete.contact';
 import UpdateContact from './update.contact';
 import GetAllContact from './get.contact';
 
@@ -8,4 +11,5 @@ export default {
   UpdateContact,
   GetAllContact,
   DeleteContact,
+  DeleteMultipleContacts,
 };

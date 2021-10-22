@@ -1,3 +1,4 @@
+import ValidateDeleteEmployee from './delete.employee.validation';
 import ValidateCreateEmployee from './add.employee.validation';
 import {
   ValidateUpdateEmployee,
@@ -15,4 +16,5 @@ export default {
   ValidateAssignEmployeeToRole,
   ValidateGetSingleEmployee,
   ValidateGetEmployeesByGroup,
+  ValidateDeleteEmployee,
 };
