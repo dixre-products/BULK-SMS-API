@@ -6,4 +6,20 @@ enum MessageStatus {
   SENT = 'SENT',
 }
 
+export enum Entities {
+  MESSAGES = 'MESSAGES',
+  CONTACTS = 'CONTACTS',
+  ROLES = 'ROLES',
+  EMPLOYEES = 'EMPLOYEES',
+  SENDERIDS = 'SENDERIDS',
+  DEPARTMENTS = 'DEPARTMENTS',
+  ADMIN = 'ADMIN',
+}
+
+export enum EntitiesAction {
+  DELETE = 'DELETE',
+  UPDATE = 'UPDATE',
+  CREATE = 'CREATE',
+}
+
 export default MessageStatus;

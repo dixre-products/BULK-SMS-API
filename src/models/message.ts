@@ -33,6 +33,7 @@ const Message: mongoose.Schema = new mongoose.Schema(
   { autoIndex: false },
 );
 
+Message.index({ message: 'text' });
 Message.plugin(mongoosePaginate);
 
 export default mongoose.model<MessageProps>('message', Message);

@@ -18,6 +18,7 @@ const Department: Schema = new Schema(
   { autoIndex: false },
 );
 
+Department.index({ name: 'text' });
 Department.plugin(mongoosePaginate);
 
 export default model<DepartmentProps>('department', Department);

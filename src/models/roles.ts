@@ -23,7 +23,6 @@ const Role: mongoose.Schema = new mongoose.Schema(
 
   { autoIndex: false },
 );
-
+Role.index({ name: 'text' });
 Role.plugin(mongoosePaginate);
-
 export default mongoose.model<RoleProps>('role', Role);

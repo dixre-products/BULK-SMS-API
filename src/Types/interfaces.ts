@@ -146,6 +146,23 @@ export interface SenderIds extends Document {
   senderIds: any[];
 }
 
+type payload = {
+  name: string;
+  email: string;
+  entityId: string;
+  address: string;
+  phone: string;
+  message: string;
+};
+export interface Activities extends Document {
+  group: string;
+  user: Types.ObjectId;
+  entity: string;
+  payload: payload[];
+  date: any;
+  type: string;
+}
+
 export interface AdminProps extends Document {
   _id: Types.ObjectId; //eslint-disable-line
   name: string;
@@ -156,6 +173,7 @@ export interface AdminProps extends Document {
 
   /* eslint-disable */
   setPassword: (pwd: string) => void;
+  validatePassword: (password: string) => boolean;
   /* eslint-enable */
 }
 

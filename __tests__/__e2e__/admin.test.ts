@@ -48,6 +48,7 @@ beforeAll(async () => {
 describe('Admin Test', () => {
   let adminID = '';
   let incorrectId = '6166360199c49afae4f22712';
+  let accessToken = '';
 
   test('Admin should successfully create an account', async (done) => {
     SuperTest.post('/admin')
@@ -61,6 +62,30 @@ describe('Admin Test', () => {
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('Should be able to login from a verified account', async (done) => {
+    SuperTest.post('/login')
+      .send({
+        email: newAdmin.email,
+        password: newAdmin.password,
+      })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const data = response.body;
+        expect(response.status).toBe(200);
+        expect(data.message).toBeDefined();
+        expect(data.accessToken).toBeDefined();
+        expect(data.refreshToken).toBeDefined();
+        expect(typeof data.payload).toBe('object');
+        accessToken = data.accessToken;
         done();
       })
       .catch((e) => {

@@ -8,11 +8,10 @@
  * 
  * @apiParam {Number} pageNumber number of pages.
  * @apiParam {Number} pageSize number of date to query.
- * @apiParam {Object} filter object that contain query parameters
- * @apiParam {String} [filter.searchText] search text.
- * @apiParam {String} [filter.agency] group id.
- * @apiParam {String} [filter.uid] user ID.
- * @apiParam {String} [filter.role] Role Id.
+ * @apiParam {String} [searchText] search text.
+ * @apiParam {String} [agency] group id.
+ * @apiParam {String} [uid] user ID.
+ * @apiParam {String} [role] Role Id.
  *
  * 
  * @apiSuccess {String} message  describes the success of the action performed.

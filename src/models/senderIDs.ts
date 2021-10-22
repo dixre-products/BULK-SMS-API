@@ -11,5 +11,7 @@ const SenderID: mongoose.Schema = new mongoose.Schema(
 
   { autoIndex: false },
 );
+
+SenderID.index({ name: 'text' });
 SenderID.plugin(mongoosePaginate);
 export default mongoose.model<SenderIds>('senderID', SenderID);

@@ -48,6 +48,7 @@ const Employee: mongoose.Schema = new mongoose.Schema(
   { autoIndex: false },
 );
 
+Employee.index({ name: 'text', email: 'text', address: 'text' });
 Employee.methods.setPassword = function setPassword(password) {
   const documents = this as EmployeeProps;
   documents.salt = bcrypt.genSaltSync(10);

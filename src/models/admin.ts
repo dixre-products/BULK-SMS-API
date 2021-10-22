@@ -29,6 +29,13 @@ const Admin: Schema = new Schema(
   { autoIndex: false },
 );
 
+Admin.methods.validatePassword = function validatePassword(password) {
+  const documents = this as AdminProps;
+  const hash = bcrypt.compareSync(password, documents.hash);
+  return hash;
+};
+
+Admin.index({ name: 'text', email: 'text' });
 Admin.plugin(mongoosePaginate);
 Admin.methods.setPassword = function setPassword(password) {
   const documents = this as AdminProps;
