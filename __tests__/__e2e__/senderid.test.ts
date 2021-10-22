@@ -19,7 +19,7 @@ let updates = {
   name: 'colosy',
 };
 
-var arrayOfIds = [];
+var arrayOfIds: any[] = [];
 models.SenderIDs.insertMany([newSenderID, newSenderID]).then(
   (docs) => {
     docs.forEach((doc) => arrayOfIds.push(doc._id));

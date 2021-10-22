@@ -29,7 +29,7 @@ let updates = {
 
 let newSenderId: any;
 
-var arrayOfIds = [];
+var arrayOfIds: any[] = [];
 models.Department.insertMany([newDepartment, newDepartment]).then(
   (docs) => {
     docs.forEach((doc) => arrayOfIds.push(doc._id));

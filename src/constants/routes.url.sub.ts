@@ -61,6 +61,12 @@ const DELETE_ALL_MESSAGES = '/delete-messages';
 const DELETE_ALL_ROLES = '/delete-roles';
 const DELETE_ALL_SENDERS = '/delete-senders';
 
+// Report
+const CREATE_REPORT = '/create-report';
+const GET_REPORT = '/get-report';
+const DELETE_REPORT = '/delete-report';
+const DELETE_ALL_REPORTS = '/delete-all-report';
+
 export default {
   GET_EMPLOYESS_BY_GROUP,
   GET_EMPLOYEES,
@@ -100,4 +106,9 @@ export default {
   DELETE_ALL_MESSAGES,
   DELETE_ALL_ROLES,
   DELETE_ALL_SENDERS,
+
+  GET_REPORT,
+  CREATE_REPORT,
+  DELETE_REPORT,
+  DELETE_ALL_REPORTS,
 };

@@ -5,6 +5,7 @@ import Employee from './Employees';
 import Message from './message';
 import Role from './roles';
 import SenderIDs from './senderIDs';
+import Reports from './report';
 
 export default {
   Admin,
@@ -14,4 +15,5 @@ export default {
   Message,
   Role,
   SenderIDs,
+  Reports,
 };

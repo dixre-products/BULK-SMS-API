@@ -96,7 +96,6 @@ export interface UserProps extends Document {
 }
 
 export interface DepartmentProps extends Document {
-  _id?: Types.ObjectId; //eslint-disable-line
   credit: number;
   name: string;
   senderIds: any[];
@@ -139,6 +138,12 @@ export interface ContactProps extends Document {
   number: number;
   groupId: Types.ObjectId;
   date: Date;
+}
+
+export interface ReportProps extends Document {
+  message: string;
+  groupId: Types.ObjectId;
+  employeeId: Types.ObjectId;
 }
 
 export interface SenderIds extends Document {

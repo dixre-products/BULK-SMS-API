@@ -2,6 +2,7 @@ import { Router } from 'express';
 import ContactController from '../controllers/Contact';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
+import ReportController from '../controllers/Report';
 import RoleController from '../controllers/Role';
 import MessageController from '../controllers/Messages';
 import AdminController from '../controllers/Admin';
@@ -11,6 +12,7 @@ import EmployeeValidation from '../Validators/Employee';
 import RoleValidation from '../Validators/Role';
 import AdminValidation from '../Validators/Admin';
 import ContactValidation from '../Validators/Contact';
+import ReportValidation from '../Validators/Report';
 // import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
@@ -40,6 +42,10 @@ const {
   DELETE_ALL_GROUPS,
   DELETE_ALL_EMOLOYEES,
   DELETE_ALL_ROLES,
+
+  DELETE_REPORT,
+  DELETE_ALL_REPORTS,
+  GET_REPORT,
 } = constants.RoutesSubs;
 const admin = Router();
 
@@ -177,6 +183,26 @@ admin.get(
   HandleAsyncFactory(RoleController.GetSingleRole),
 );
 
+// Reports
+
+admin.get(
+  GET_REPORT,
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(ReportController.GetAllReport),
+);
+
+admin.delete(
+  DELETE_REPORT + GET_ID_PARAM,
+  HandleAsyncFactory(ReportValidation.ValidateDeleteReport),
+  HandleAsyncFactory(ReportController.DeleteReport),
+);
+
+admin.delete(
+  DELETE_ALL_REPORTS,
+  HandleAsyncFactory(ReportValidation.ValidateMultipleDeleteReports),
+  HandleAsyncFactory(ReportController.DeleteMultipleReports),
+);
+
 // Admin Route
 admin.post(
   BASE_SUB,
@@ -207,5 +233,4 @@ admin.put(
   HandleAsyncFactory(AdminController.UpdateAdmin),
 );
 
-//
 export default admin;

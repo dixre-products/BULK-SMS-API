@@ -28,7 +28,7 @@ let updates = {
   number: 23,
   // groupId: newDepartmentId,
 };
-var arrayOfIds = [];
+var arrayOfIds: any[] = [];
 models.Contact.insertMany([newContact, newContact]).then((docs) => {
   docs.forEach((doc) => arrayOfIds.push(doc._id));
 });

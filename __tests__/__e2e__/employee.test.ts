@@ -37,7 +37,7 @@ let updates = {
   email: 'bbbbbb@gmailcom',
   address: 'bbbbb',
 };
-var arrayOfIds = [];
+var arrayOfIds: any[] = [];
 models.Employee.insertMany([newEmployee, newEmployee]).then(
   (docs) => {
     docs.forEach((doc) => arrayOfIds.push(doc._id));

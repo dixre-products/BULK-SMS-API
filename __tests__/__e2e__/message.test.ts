@@ -3,6 +3,8 @@ import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
 import { DepartmentProps } from '../../src/Types/interfaces';
 import models from '../../src/models';
+import MessageStatus from '../../src/constants/enums';
+
 /*
    Test 1 => it should successfully create a messsage
    Test 2 => it should fail to create message if required field is not given
@@ -20,8 +22,8 @@ let newMessage = {
   contacts: [2314343, 1333134, 41141, 141],
   message: 'asasasas',
   sender: 'maker',
+  status: MessageStatus.APPROVED,
   time: Date.now(),
-  status: 'approved',
   groupId: newDepartmentId,
 };
 
@@ -33,7 +35,7 @@ let updates = {
   status: 'pending',
 };
 
-var arrayOfIds = [];
+var arrayOfIds: any[] = [];
 models.Message.insertMany([newMessage, newMessage]).then((docs) => {
   docs.forEach((doc) => arrayOfIds.push(doc._id));
 });

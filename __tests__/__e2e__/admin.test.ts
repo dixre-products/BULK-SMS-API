@@ -36,7 +36,7 @@ let updates = {
   password: 'bbb',
 };
 
-var arrayOfIds = [];
+var arrayOfIds: any[] = [];
 models.Admin.insertMany([newAdmin, newAdmin]).then((docs) => {
   docs.forEach((doc) => arrayOfIds.push(doc._id));
 });
