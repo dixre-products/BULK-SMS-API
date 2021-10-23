@@ -13,10 +13,6 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
-    password: {
-      type: mongoose.Schema.Types.String,
-    },
-
     hash: {
       type: mongoose.Schema.Types.String,
     },

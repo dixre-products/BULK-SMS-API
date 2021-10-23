@@ -13,9 +13,9 @@
  * @apiSuccess {Object} payload the user object
  * @apiSuccess {String} payload.accessToken  admin access token expires.
  * @apiSuccess {String} payload.refreshToken  admin refresh token which is required to get new access tokens
- * @apiSuccess {string} payload._id the ID of the admin
- * @apiSuccess {string} payload.email email of admin
- * @apiSuccess {string} payload.name admin full name
+ * @apiSuccess {string} payloaduser.._id the ID of the admin
+ * @apiSuccess {string} payload.user.email email of admin
+ * @apiSuccess {string} payload.user.name admin full name
  *
  *
  * @apiSuccessExample Success-Response:

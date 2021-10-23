@@ -172,7 +172,6 @@ export interface AdminProps extends Document {
   _id: Types.ObjectId; //eslint-disable-line
   name: string;
   email: string;
-  password: string;
   hash: string;
   salt: string;
 

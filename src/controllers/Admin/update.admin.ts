@@ -5,7 +5,6 @@ import {
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
-import { AdminProps } from '../../Types/interfaces';
 import constants from '../../constants';
 
 export default async function UpdateAdmin(
@@ -14,9 +13,18 @@ export default async function UpdateAdmin(
 ) {
   const { id, updates } = req.body as {
     id: string;
-    updates: AdminProps;
+    updates: any;
+    password: string;
   };
   const ID = Types.ObjectId(id);
+
+  let password = '';
+
+  if (updates?.password) {
+    password = updates.password;
+  }
+
+  delete updates.password;
 
   const doc = await models.Admin.findOneAndUpdate(
     { _id: ID },
@@ -24,8 +32,12 @@ export default async function UpdateAdmin(
   ).select({
     hash: 0,
     salt: 0,
-    password: 0,
   });
+
+  if (password) {
+    doc?.setPassword(password);
+  }
+  doc?.save();
 
   if (!doc)
     return ResourceNotFound(

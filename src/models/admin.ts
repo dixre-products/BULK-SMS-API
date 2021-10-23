@@ -13,10 +13,6 @@ const Admin: Schema = new Schema(
       type: Schema.Types.String,
     },
 
-    password: {
-      type: Schema.Types.String,
-    },
-
     hash: {
       type: Schema.Types.String,
     },
