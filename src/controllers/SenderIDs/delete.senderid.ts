@@ -6,10 +6,7 @@ import {
 import models from '../../models';
 import constants from '../../constants';
 
-export default async function DeleteSenderId(
-  req: Request,
-  res: Response,
-) {
+export async function DeleteSenderId(req: Request, res: Response) {
   const { id } = req.params;
 
   const doc = await models.SenderIDs.findOneAndDelete({ _id: id });
@@ -18,6 +15,21 @@ export default async function DeleteSenderId(
       res,
       constants.RequestResponse.ContactNotFoundWithId,
     );
+
+  return ProcessingSuccess(res, doc);
+}
+
+export async function DeleteMultipleSenders(
+  req: Request,
+  res: Response,
+) {
+  const { senderIds } = req.body as {
+    senderIds: string[];
+  };
+
+  const doc = await models.SenderIDs.deleteMany({
+    _id: { $in: senderIds },
+  });
 
   return ProcessingSuccess(res, doc);
 }

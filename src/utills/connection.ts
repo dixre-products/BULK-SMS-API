@@ -6,7 +6,7 @@ connect(config.get('DB_CONNECTION_STRING'), {
   useCreateIndex: true,
   autoReconnect: true,
   keepAlive: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: false,
   keepAliveInitialDelay: 450000,
 })
   .then(() => {

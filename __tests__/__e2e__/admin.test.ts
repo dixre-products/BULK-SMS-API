@@ -1,6 +1,7 @@
 import superTest from 'supertest';
 import DatabaseConnection from '../../src/utills/connection';
 import app from '../../src/index';
+import models from '../../src/models';
 /*
    Test 1 => Admin should successfully create an account
    Test 2 => Admin should not be able to create an account if required field is no provided
@@ -34,6 +35,11 @@ let updates = {
   email: 'def@gmail.com',
   password: 'bbb',
 };
+
+var arrayOfIds: any[] = [];
+models.Admin.insertMany([newAdmin, newAdmin]).then((docs) => {
+  docs.forEach((doc) => arrayOfIds.push(doc._id));
+});
 
 const SuperTest = superTest(app);
 
@@ -199,6 +205,25 @@ describe('Admin Test', () => {
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
+
+  test('should be able to delete multiple IDs', async (done) => {
+    SuperTest.delete('/admin/delete-admins')
+      .send({ adminIds: arrayOfIds })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
+
         done();
       })
       .catch((e) => {

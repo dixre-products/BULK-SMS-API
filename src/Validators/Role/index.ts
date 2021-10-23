@@ -1,6 +1,9 @@
 import ValidateCreateRole from './add.role.validation';
 import ValidateUpdateRole from './update.role.validation';
-import ValidateDeleteRole from './delete.role.validation';
+import {
+  ValidateDeleteRole,
+  ValidateDeleteMultipleRole,
+} from './delete.role.validation';
 import ValidateGetSingleRole from './get.role.validation';
 
 export default {
@@ -8,4 +11,5 @@ export default {
   ValidateUpdateRole,
   ValidateGetSingleRole,
   ValidateDeleteRole,
+  ValidateDeleteMultipleRole,
 };

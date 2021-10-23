@@ -13,6 +13,7 @@ const CONTACT = '/contact';
 const MESSAGE = '/message';
 const Admin = '/admin';
 const SENDERID = '/senderID';
+const REPORT = '/report';
 
 export default {
   SENDERID,
@@ -29,4 +30,5 @@ export default {
   CONTACT,
   MESSAGE,
   Admin,
+  REPORT,
 };

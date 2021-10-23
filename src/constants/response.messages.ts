@@ -23,6 +23,7 @@ const ContactNotFound = 'Contact not found';
 const DepartmentNotFound = 'Department not found';
 const EmployeeNotFound = 'Employee not found';
 const MessageNotFound = 'Message not found';
+const ReportNotFound = 'Report not found';
 const RoleNotFound = 'Role not found';
 const AdminNotFoundWithId = 'Admin not found with corresponding id';
 const ContactNotFoundWithId =
@@ -35,6 +36,7 @@ const MessageNotFoundWithId =
   'Message not found with corresponding id';
 const RoleNotFoundWithId = 'Role not found with corresponding id';
 const UserNotFoundWithId = 'User not found with corresponding id';
+const ReportNotFoundWithId = 'Report not found with corresponding id';
 
 export default {
   UserNotFound,
@@ -67,4 +69,6 @@ export default {
   MessageNotFoundWithId,
   RoleNotFoundWithId,
   UserNotFoundWithId,
+  ReportNotFound,
+  ReportNotFoundWithId,
 };

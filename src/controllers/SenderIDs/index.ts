@@ -1,5 +1,8 @@
 import AddSenderId from './add.senderid';
-import DeleteSenderId from './delete.senderid';
+import {
+  DeleteSenderId,
+  DeleteMultipleSenders,
+} from './delete.senderid';
 import UpdateSenderId from './update.senderid';
 import GetAllSenderId from './get.senderid';
 
@@ -8,4 +11,5 @@ export default {
   UpdateSenderId,
   GetAllSenderId,
   DeleteSenderId,
+  DeleteMultipleSenders,
 };

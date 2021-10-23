@@ -1,4 +1,5 @@
 import CreateEmployee from './add.employee';
+import DeleteMultipleEmployee from './delete.employee';
 import {
   UpdateEmployee,
   AssignEmployeeToDepartment,
@@ -18,4 +19,5 @@ export default {
   AssignEmployeeToDepartment,
   AssignEmployeeToRole,
   GetAllEmployeeByAgency,
+  DeleteMultipleEmployee,
 };

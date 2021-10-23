@@ -1,5 +1,5 @@
 import CreateDepartment from './add.department';
-// import CdeleteDepartment from './delete.department';
+import DeleteMultipleDepartment from './delete.department';
 import {
   UpdateDepartment,
   UpdateDepartmentCredit,
@@ -16,4 +16,5 @@ export default {
   UpdateDepartmentCredit,
   GetAllDepartment,
   GetSingleDepartment,
+  DeleteMultipleDepartment,
 };

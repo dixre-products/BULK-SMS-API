@@ -2,6 +2,7 @@ import { Router } from 'express';
 import ContactController from '../controllers/Contact';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
+import ReportController from '../controllers/Report';
 import RoleController from '../controllers/Role';
 import MessageController from '../controllers/Messages';
 import AdminController from '../controllers/Admin';
@@ -13,6 +14,8 @@ import AdminValidation from '../Validators/Admin';
 import LoginAccount from '../controllers/Auth/login';
 import LoginValidation from '../Validators/Auth/index';
 import ProtectAdminRoute from '../Middlewares/admin.protected.routes';
+import ContactValidation from '../Validators/Contact';
+import ReportValidation from '../Validators/Report';
 // import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
@@ -36,6 +39,16 @@ const {
   CREATE_ROLE,
   GET_ROLE,
   DELETE_ROLE,
+
+  DELETE_ALL_ADMINS,
+  DELETE_ALL_CONTACTS,
+  DELETE_ALL_GROUPS,
+  DELETE_ALL_EMOLOYEES,
+  DELETE_ALL_ROLES,
+
+  DELETE_REPORT,
+  DELETE_ALL_REPORTS,
+  GET_REPORT,
 } = constants.RoutesSubs;
 
 const { LOGIN_BASE } = constants.RouteBase;
@@ -77,12 +90,26 @@ admin.put(
   HandleAsyncFactory(DepartmentController.UpdateDepartmentCredit),
 );
 
+admin.delete(
+  DELETE_ALL_GROUPS,
+  HandleAsyncFactory(DepartmentValidation.ValidateDeleteDepartment),
+  HandleAsyncFactory(DepartmentController.DeleteMultipleDepartment),
+);
+
 // Admin: Contact Routes
 admin.get(
   GET_CONTACT,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(ContactController.GetAllContact),
+);
+
+admin.delete(
+  DELETE_ALL_CONTACTS,
+  HandleAsyncFactory(
+    ContactValidation.ValidateMultipleDeleteContacts,
+  ),
+  HandleAsyncFactory(ContactController.DeleteMultipleContacts),
 );
 
 // Admin: Message Routes
@@ -96,6 +123,11 @@ admin.get(
 );
 
 // Admin: Employee Routes
+admin.delete(
+  DELETE_ALL_EMOLOYEES,
+  HandleAsyncFactory(EmployeeValidation.ValidateDeleteEmployee),
+  HandleAsyncFactory(EmployeeController.DeleteMultipleEmployee),
+);
 
 admin.post(
   CREATE_EMPLOYEE,
@@ -143,6 +175,12 @@ admin.delete(
   HandleAsyncFactory(RoleController.DeleteRole),
 );
 
+admin.delete(
+  DELETE_ALL_ROLES,
+  HandleAsyncFactory(RoleValidation.ValidateDeleteMultipleRole),
+  HandleAsyncFactory(RoleController.DeleteMultipleRole),
+);
+
 admin.post(
   CREATE_ROLE,
   HandleAsyncFactory(ProtectAdminRoute),
@@ -172,12 +210,38 @@ admin.get(
   HandleAsyncFactory(RoleController.GetSingleRole),
 );
 
+// Reports
+
+admin.get(
+  GET_REPORT,
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(ReportController.GetAllReport),
+);
+
+admin.delete(
+  DELETE_REPORT + GET_ID_PARAM,
+  HandleAsyncFactory(ReportValidation.ValidateDeleteReport),
+  HandleAsyncFactory(ReportController.DeleteReport),
+);
+
+admin.delete(
+  DELETE_ALL_REPORTS,
+  HandleAsyncFactory(ReportValidation.ValidateMultipleDeleteReports),
+  HandleAsyncFactory(ReportController.DeleteMultipleReports),
+);
+
 // Admin Route
 admin.post(
   BASE_SUB,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateCreateAdmin),
   HandleAsyncFactory(AdminController.CreateAdmin),
+);
+
+admin.delete(
+  DELETE_ALL_ADMINS,
+  HandleAsyncFactory(AdminValidation.ValidateDeleteAdmin),
+  HandleAsyncFactory(AdminController.DeleteMultipleAdmin),
 );
 
 admin.get(
@@ -200,5 +264,4 @@ admin.put(
   HandleAsyncFactory(AdminController.UpdateAdmin),
 );
 
-//
 export default admin;

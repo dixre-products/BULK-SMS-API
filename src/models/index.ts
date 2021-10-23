@@ -6,6 +6,7 @@ import Message from './message';
 import Role from './roles';
 import SenderIDs from './senderIDs';
 import Activities from './activities';
+import Reports from './report';
 
 export default {
   Admin,
@@ -16,4 +17,5 @@ export default {
   Role,
   SenderIDs,
   Activities,
+  Reports,
 };

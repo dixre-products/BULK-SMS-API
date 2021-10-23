@@ -2,10 +2,7 @@ import { Request, Response } from 'express';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 
-export default async function DeleteMessage(
-  req: Request,
-  res: Response,
-) {
+export async function DeleteMessage(req: Request, res: Response) {
   console.log(req.params, req.query);
   console.log(
     '**************************************************************************',
@@ -25,4 +22,19 @@ export default async function DeleteMessage(
   );
 
   return ProcessingSuccess(res, deletedDoc);
+}
+
+export async function DeleteMultipleMessage(
+  req: Request,
+  res: Response,
+) {
+  const { messageIds } = req.body as {
+    messageIds: string[];
+  };
+
+  const doc = await models.Message.deleteMany({
+    _id: { $in: messageIds },
+  });
+
+  return ProcessingSuccess(res, doc);
 }

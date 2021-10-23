@@ -6,18 +6,32 @@ import {
 import models from '../../models';
 import constants from '../../constants';
 
-export default async function DeleteContact(
-  req: Request,
-  res: Response,
-) {
+export async function DeleteContact(req: Request, res: Response) {
   const { ids } = req.params;
 
-  const doc = await models.Contact.deleteMany({ _id: ids });
+  const doc = await models.Contact.findOneAndDelete({ _id: ids });
   if (!doc)
     return ResourceNotFound(
       res,
       constants.RequestResponse.ContactNotFoundWithId,
     );
+
+  return ProcessingSuccess(res, doc);
+}
+
+export async function DeleteMultipleContacts(
+  req: Request,
+  res: Response,
+) {
+  const { contactIds } = req.body as {
+    contactIds: string[];
+  };
+
+  /* eslint-enable */
+
+  const doc = await models.Contact.deleteMany({
+    _id: { $in: contactIds },
+  });
 
   return ProcessingSuccess(res, doc);
 }

@@ -1,4 +1,5 @@
 import ValidateCreateDepartment from './add.department.validation';
+import ValidateDeleteDepartment from './delete.department.validation';
 import {
   ValidateUpdateDepartment,
   ValidateUpdateDepartmentCredit,
@@ -10,4 +11,5 @@ export default {
   ValidateCreateDepartment,
   ValidateUpdateDepartment,
   ValidateUpdateDepartmentCredit,
+  ValidateDeleteDepartment,
 };

@@ -3,10 +3,14 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  id: joi.string().required().label('Message ID'),
+  id: joi.string().required().label('Record ID'),
 });
 
-export function ValidateDeleteMessage(
+const requestBodySchemaMultiple = joi.object({
+  reportIds: joi.array().items(joi.string()).label('reportIds'),
+});
+
+export function ValidateDeleteReport(
   req: Request,
   res: Response,
   next: NextFunction,
@@ -25,11 +29,7 @@ export function ValidateDeleteMessage(
   next();
 }
 
-const requestBodySchemaMultiple = joi.object({
-  messageIds: joi.array().items(joi.string()).label('messageIds'),
-});
-
-export function ValidateMultipleDeleteMessage(
+export function ValidateMultipleDeleteReports(
   req: Request,
   res: Response,
   next: NextFunction,

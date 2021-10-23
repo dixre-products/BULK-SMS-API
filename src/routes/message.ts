@@ -5,7 +5,8 @@ import ProtectRoutes from '../Middlewares/check.route.access';
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 
-const { GET_ID_PARAM, BASE_SUB } = constants.RoutesSubs;
+const { GET_ID_PARAM, BASE_SUB, DELETE_ALL_MESSAGES } =
+  constants.RoutesSubs;
 const message = Router();
 
 message.post(
@@ -20,6 +21,12 @@ message.put(
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateUpdateMessage),
   HandleAsyncFactory(MessageController.UpdateMessage),
+);
+
+message.delete(
+  DELETE_ALL_MESSAGES,
+  HandleAsyncFactory(Validation.ValidateMultipleDeleteMessage),
+  HandleAsyncFactory(MessageController.DeleteMultipleMessage),
 );
 
 message.delete(

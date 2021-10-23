@@ -6,28 +6,30 @@ import {
 import models from '../../models';
 import constants from '../../constants';
 
-export async function DeleteRole(req: Request, res: Response) {
+export async function DeleteReport(req: Request, res: Response) {
   const { id } = req.params;
 
-  const doc = await models.Role.findOneAndDelete({ _id: id });
+  const doc = await models.Reports.deleteOne({ _id: id });
   if (!doc)
     return ResourceNotFound(
       res,
-      constants.RequestResponse.RoleNotFound,
+      constants.RequestResponse.ReportNotFoundWithId,
     );
+
   return ProcessingSuccess(res, doc);
 }
 
-export async function DeleteMultipleRole(
+export async function DeleteMultipleReports(
   req: Request,
   res: Response,
 ) {
-  const { roleIds } = req.body as {
-    roleIds: string[];
+  const { reportIds } = req.body as {
+    reportIds: string[];
   };
+  // console.log('req contacts', contactIds);
 
-  const doc = await models.Role.deleteMany({
-    _id: { $in: roleIds },
+  const doc = await models.Reports.deleteMany({
+    _id: { $in: reportIds },
   });
 
   return ProcessingSuccess(res, doc);
