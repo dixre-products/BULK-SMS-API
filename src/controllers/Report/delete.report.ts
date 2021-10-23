@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
   ResourceNotFound,
@@ -28,19 +27,6 @@ export async function DeleteMultipleReports(
     reportIds: string[];
   };
   // console.log('req contacts', contactIds);
-
-  /* eslint-disable */
-  for (const ids of reportIds) {
-    const ID = Types.ObjectId(ids);
-
-    const Exist = await models.Reports.findOne({ _id: ID });
-    if (!Exist)
-      return ResourceNotFound(
-        res,
-        constants.RequestResponse.ReportNotFoundWithId,
-      );
-  }
-  /* eslint-enable */
 
   const doc = await models.Reports.deleteMany({
     _id: { $in: reportIds },

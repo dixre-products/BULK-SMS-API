@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
   ResourceNotFound,
@@ -27,19 +26,6 @@ export async function DeleteMultipleSenders(
   const { senderIds } = req.body as {
     senderIds: string[];
   };
-
-  /* eslint-disable */
-  for (const ids of senderIds) {
-    const ID = Types.ObjectId(ids);
-
-    const Exist = await models.SenderIDs.findOne({ _id: ID });
-    if (!Exist)
-      return ResourceNotFound(
-        res,
-        constants.RequestResponse.RoleNotFoundWithId,
-      );
-  }
-  /* eslint-enable */
 
   const doc = await models.SenderIDs.deleteMany({
     _id: { $in: senderIds },

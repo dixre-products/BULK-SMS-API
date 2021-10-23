@@ -1,11 +1,6 @@
 import { Request, Response } from 'express';
-import { Types } from 'mongoose';
-import {
-  ProcessingSuccess,
-  ResourceNotFound,
-} from '../../RequestStatus/status';
+import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
-import constants from '../../constants';
 
 export async function DeleteMessage(req: Request, res: Response) {
   console.log(req.params, req.query);
@@ -36,19 +31,6 @@ export async function DeleteMultipleMessage(
   const { messageIds } = req.body as {
     messageIds: string[];
   };
-
-  /* eslint-disable */
-  for (const ids of messageIds) {
-    const ID = Types.ObjectId(ids);
-
-    const Exist = await models.Message.findOne({ _id: ID });
-    if (!Exist)
-      return ResourceNotFound(
-        res,
-        constants.RequestResponse.MessageNotFoundWithId,
-      );
-  }
-  /* eslint-enable */
 
   const doc = await models.Message.deleteMany({
     _id: { $in: messageIds },
