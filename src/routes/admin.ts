@@ -56,7 +56,6 @@ const admin = Router();
 
 admin.post(
   LOGIN_BASE,
-  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(LoginValidation.LoginAdmin),
   HandleAsyncFactory(LoginAccount),
 );
