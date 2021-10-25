@@ -59,9 +59,7 @@ beforeAll(async () => {
 afterAll(async () => {
   try {
     // await DatabaseConnection.dropCollection('departments');
-  } catch (e) {
-    // console.log(e);
-  }
+  } catch (e) {}
 });
 describe('Message Test', () => {
   let newMessageID = '';
@@ -79,8 +77,6 @@ describe('Message Test', () => {
         done();
       })
       .catch((e) => {
-        // console.log(e);
-
         done(e);
       });
   });
@@ -97,8 +93,6 @@ describe('Message Test', () => {
         done();
       })
       .catch((e) => {
-        // console.log(e);
-
         done(e);
       });
   });
@@ -109,17 +103,17 @@ describe('Message Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: '',
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: '',
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
+        console.log('message output', message);
+
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
 
@@ -136,12 +130,10 @@ describe('Message Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: newDepartmentId,
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: newDepartmentId,
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -153,8 +145,6 @@ describe('Message Test', () => {
         done();
       })
       .catch((e) => {
-        console.log(e);
-
         done(e);
       });
   });
@@ -171,8 +161,6 @@ describe('Message Test', () => {
         done();
       })
       .catch((e) => {
-        console.log(e);
-
         done(e);
       });
   });

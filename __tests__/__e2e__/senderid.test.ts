@@ -80,16 +80,15 @@ describe('SenderID Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: '',
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: '',
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
+        // console.log('sender error message', response);
         const { message, payload } = response.body;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -157,7 +156,7 @@ describe('SenderID Test', () => {
   });
 
   test('should be able to delete multiple IDs', async (done) => {
-    SuperTest.delete('/senderID/delete-senders')
+    SuperTest.delete('/admin/delete-senders')
       .send({ senderIds: arrayOfIds })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)

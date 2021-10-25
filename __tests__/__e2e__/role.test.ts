@@ -93,12 +93,10 @@ describe('Role Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: '',
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: '',
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -106,7 +104,6 @@ describe('Role Test', () => {
         const { message, payload } = response.body;
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
-        console.log(message);
 
         done();
       })

@@ -98,12 +98,10 @@ describe('Contact Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: '',
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: '',
+        uid: '',
+        role: '',
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -126,18 +124,15 @@ describe('Contact Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: newDepartmentId,
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: newDepartmentId,
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        console.log('contact message', message);
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -156,7 +151,6 @@ describe('Contact Test', () => {
       .expect(200)
       .then((response) => {
         const { message, payload } = response.body;
-        console.log(message);
 
         expect(message).toBeDefined();
         expect(typeof payload).toBe('object');
@@ -176,7 +170,6 @@ describe('Contact Test', () => {
       .expect(400)
       .then((response) => {
         const { message } = response.body;
-        console.log(message);
 
         expect(message).toBeDefined();
 
@@ -224,7 +217,7 @@ describe('Contact Test', () => {
   });
 
   test('should be able to delete multiple IDs', async (done) => {
-    SuperTest.delete('/admin/delete-contacts')
+    SuperTest.delete('/contact/delete-contacts')
       .send({ contactIds: arrayOfIds })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)

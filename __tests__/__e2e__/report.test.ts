@@ -50,83 +50,81 @@ describe('Report Test', () => {
       });
   });
 
-  // test('it should fail to create a report if message  field is not given', async (done) => {
-  //   SuperTest.post('/report/create-report')
-  //     .send({})
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(400)
-  //     .then((response) => {
-  //       const { message } = response.body;
-  //       expect(message).toBeDefined();
-  //       done();
-  //     })
-  //     .catch((e) => {
-  //       done(e);
-  //     });
-  // });
+  test('it should fail to create a report if message  field is not given', async (done) => {
+    SuperTest.post('/report/create-report')
+      .send({})
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(400)
+      .then((response) => {
+        const { message } = response.body;
+        expect(message).toBeDefined();
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
 
-  // test('Admin should be able to get all reports', async (done) => {
-  //   SuperTest.get('/admin/get-report')
-  //     .set('Accept', 'application/json')
-  //     .query({
-  //       pageNumber: 1,
-  //       pageSize: 10,
-  //       filter: {
-  //         searchText: '',
-  //         agency: '',
-  //         uid: '',
-  //         role: '',
-  //       },
-  //     })
-  //     .expect('Content-Type', /json/)
-  //     .expect(200)
-  //     .then((response) => {
-  //       const { message, payload } = response.body;
-  //       expect(message).toBeDefined();
-  //       expect(typeof payload).toBe('object');
+  test('Admin should be able to get all reports', async (done) => {
+    SuperTest.get('/admin/get-report')
+      .set('Accept', 'application/json')
+      .query({
+        pageNumber: 1,
+        pageSize: 10,
+        searchText: '',
+        agency: '',
+        uid: '',
+        role: '',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
 
-  //       done();
-  //     })
-  //     .catch((e) => {
-  //       done(e);
-  //     });
-  // });
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
 
-  // test('should be able to delete a report with correct ID', async (done) => {
-  //   SuperTest.delete('/admin/delete-report/' + reportID)
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(200)
-  //     .then((response) => {
-  //       const { message, payload } = response.body;
+  test('should be able to delete a report with correct ID', async (done) => {
+    SuperTest.delete('/admin/delete-report/' + reportID)
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
 
-  //       expect(message).toBeDefined();
-  //       expect(typeof payload).toBe('object');
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
 
-  //       done();
-  //     })
-  //     .catch((e) => {
-  //       done(e);
-  //     });
-  // });
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
 
-  // test('should be able to delete multiple IDs', async (done) => {
-  //   SuperTest.delete('/admin/delete-all-report/')
-  //     .send({ reportIds: arrayOfIds })
-  //     .set('Accept', 'application/json')
-  //     .expect('Content-Type', /json/)
-  //     .expect(200)
-  //     .then((response) => {
-  //       const { message, payload } = response.body;
+  test('should be able to delete multiple IDs', async (done) => {
+    SuperTest.delete('/admin/delete-reports/')
+      .send({ reportIds: arrayOfIds })
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((response) => {
+        const { message, payload } = response.body;
 
-  //       expect(message).toBeDefined();
-  //       expect(typeof payload).toBe('object');
+        expect(message).toBeDefined();
+        expect(typeof payload).toBe('object');
 
-  //       done();
-  //     })
-  //     .catch((e) => {
-  //       done(e);
-  //     });
-  // });
+        done();
+      })
+      .catch((e) => {
+        done(e);
+      });
+  });
 });

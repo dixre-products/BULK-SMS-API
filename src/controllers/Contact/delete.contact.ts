@@ -7,9 +7,9 @@ import models from '../../models';
 import constants from '../../constants';
 
 export async function DeleteContact(req: Request, res: Response) {
-  const { ids } = req.params;
+  const { id } = req.params;
 
-  const doc = await models.Contact.findOneAndDelete({ _id: ids });
+  const doc = await models.Contact.findOneAndDelete({ _id: id });
   if (!doc)
     return ResourceNotFound(
       res,

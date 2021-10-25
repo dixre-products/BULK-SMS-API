@@ -32,7 +32,7 @@ let newSenderId: any;
 var arrayOfIds: any[] = [];
 models.Department.insertMany([newDepartment, newDepartment]).then(
   (docs) => {
-    docs.forEach((doc) => arrayOfIds.push(doc._id));
+    docs.map((doc) => arrayOfIds.push(doc._id));
   },
 );
 
@@ -117,12 +117,10 @@ describe('Department Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: '',
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: '',
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -144,12 +142,10 @@ describe('Department Test', () => {
       .query({
         pageNumber: 1,
         pageSize: 10,
-        filter: {
-          searchText: '',
-          agency: newSenderId,
-          uid: '',
-          role: '',
-        },
+        searchText: '',
+        agency: newSenderId,
+        uid: '',
+        role: '',
       })
       .expect('Content-Type', /json/)
       .expect(200)
