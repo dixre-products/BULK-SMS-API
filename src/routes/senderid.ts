@@ -32,12 +32,6 @@ senderID.put(
 );
 
 senderID.delete(
-  DELETE_ALL_SENDERS,
-  HandleAsyncFactory(Validation.ValidateDeleteMultipleSender),
-  HandleAsyncFactory(SenderIdController.DeleteMultipleSenders),
-);
-
-senderID.delete(
   GET_ID_PARAM,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateDeleteSenderID),

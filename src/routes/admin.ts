@@ -4,6 +4,7 @@ import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
 import ReportController from '../controllers/Report';
 import RoleController from '../controllers/Role';
+import SenderController from '../controllers/SenderIDs';
 import MessageController from '../controllers/Messages';
 import AdminController from '../controllers/Admin';
 import GetValidation from '../Validators/Get.Requests/index';
@@ -14,7 +15,7 @@ import AdminValidation from '../Validators/Admin';
 import LoginAccount from '../controllers/Auth/login';
 import LoginValidation from '../Validators/Auth/index';
 import ProtectAdminRoute from '../Middlewares/admin.protected.routes';
-import ContactValidation from '../Validators/Contact';
+import SenderValidation from '../Validators/SenderId';
 import ReportValidation from '../Validators/Report';
 // import GetRequestValidation from '../Validators/Get.Requests';
 
@@ -41,7 +42,7 @@ const {
   DELETE_ROLE,
 
   DELETE_ALL_ADMINS,
-  DELETE_ALL_CONTACTS,
+  DELETE_ALL_SENDERS,
   DELETE_ALL_GROUPS,
   DELETE_ALL_EMOLOYEES,
   DELETE_ALL_ROLES,
@@ -101,14 +102,6 @@ admin.get(
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(ContactController.GetAllContact),
-);
-
-admin.delete(
-  DELETE_ALL_CONTACTS,
-  HandleAsyncFactory(
-    ContactValidation.ValidateMultipleDeleteContacts,
-  ),
-  HandleAsyncFactory(ContactController.DeleteMultipleContacts),
 );
 
 // Admin: Message Routes
@@ -261,6 +254,14 @@ admin.put(
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateUpdateAdmin),
   HandleAsyncFactory(AdminController.UpdateAdmin),
+);
+
+// Sender
+
+admin.delete(
+  DELETE_ALL_SENDERS,
+  HandleAsyncFactory(SenderValidation.ValidateDeleteMultipleSender),
+  HandleAsyncFactory(SenderController.DeleteMultipleSenders),
 );
 
 export default admin;
