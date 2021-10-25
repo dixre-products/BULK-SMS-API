@@ -1,15 +1,15 @@
 /**
- * @api {DELETE} /admin/delete-reports Delete multiple report 
- * @apiName Delete multiple report
- * @apiGroup Admin
+ * @api {DELETE} /contact/delete-contacts Delete multiple contacts 
+ * @apiName Delete multiple contacts
+ * @apiGroup Contact
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
  *  
- * @apiParam {String} reportIds Array of report ids to be deleted.
+ * @apiParam {String} contactIds Array of contacts ids to be deleted.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  report credentials object
+ * @apiSuccess {Object} payload  contact credentials object
  * @apiSuccess {Number} payload.deletedCount number of items deleted.
  * @apiSuccess {Number} payload.ok 
  * @apiSuccess {Number} payload.n 

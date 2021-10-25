@@ -31,6 +31,7 @@ const ADD_CREDIT = '/add-credit';
 
 // Contact Endpoint
 const GET_CONTACT = '/get-contact';
+const DELETE_ALL_CONTACTS = '/delete-contacts';
 
 // Message Endpoint
 const GET_MESSAGE = '/get-message';
@@ -54,7 +55,6 @@ const GET_ID_PARAM = '/:id';
 const BASE_SUB = '/';
 // Admin
 const DELETE_ALL_ADMINS = '/delete-admins';
-const DELETE_ALL_CONTACTS = '/delete-contacts';
 const DELETE_ALL_GROUPS = '/delete-groups';
 const DELETE_ALL_EMOLOYEES = '/delete-employees';
 const DELETE_ALL_MESSAGES = '/delete-messages';
@@ -65,7 +65,7 @@ const DELETE_ALL_SENDERS = '/delete-senders';
 const CREATE_REPORT = '/create-report';
 const GET_REPORT = '/get-report';
 const DELETE_REPORT = '/delete-report';
-const DELETE_ALL_REPORTS = '/delete-all-report';
+const DELETE_ALL_REPORTS = '/delete-reports';
 
 export default {
   GET_EMPLOYESS_BY_GROUP,
@@ -106,9 +106,9 @@ export default {
   DELETE_ALL_MESSAGES,
   DELETE_ALL_ROLES,
   DELETE_ALL_SENDERS,
+  DELETE_ALL_REPORTS,
 
   GET_REPORT,
   CREATE_REPORT,
   DELETE_REPORT,
-  DELETE_ALL_REPORTS,
 };

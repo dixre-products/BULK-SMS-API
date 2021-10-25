@@ -1,15 +1,15 @@
 /**
- * @api {DELETE} /admin/delete-reports Delete multiple report 
- * @apiName Delete multiple report
+ * @api {DELETE} /admin/delete-employees Delete multiple Employees 
+ * @apiName Delete multiple Employees
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
  *  
- * @apiParam {String} reportIds Array of report ids to be deleted.
+ * @apiParam {String} employeeIds Array of Employees ids to be deleted.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  report credentials object
+ * @apiSuccess {Object} payload  Employee credentials object
  * @apiSuccess {Number} payload.deletedCount number of items deleted.
  * @apiSuccess {Number} payload.ok 
  * @apiSuccess {Number} payload.n 
