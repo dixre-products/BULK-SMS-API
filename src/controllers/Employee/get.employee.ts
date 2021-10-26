@@ -16,7 +16,7 @@ export async function GetAllEmployee(req: Request, res: Response) {
     {
       uid: '',
       agency: 'groupId',
-      roles: '',
+      roles: 'roleId',
     },
   );
 
