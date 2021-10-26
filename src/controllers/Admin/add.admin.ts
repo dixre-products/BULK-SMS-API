@@ -26,7 +26,6 @@ export default async function CreateAdmin(
   }).select({
     hash: 0,
     salt: 0,
-    password: 0,
   });
 
   return ProcessingSuccess(res, createdAdmin);

@@ -30,11 +30,13 @@ export default async function CreateEmployee(
 
   const createdEmployee = await models.Employee.findOne({
     _id: id,
-  }).select({
-    hash: 0,
-    salt: 0,
-    password: 0,
-  });
+  })
+    .populate('groupId roleId')
+    .select({
+      hash: 0,
+      salt: 0,
+      password: 0,
+    });
 
   return ProcessingSuccess(res, createdEmployee);
 }
