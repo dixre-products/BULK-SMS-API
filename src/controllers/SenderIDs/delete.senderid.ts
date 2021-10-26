@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
   ResourceNotFound,
@@ -26,9 +27,13 @@ export async function DeleteMultipleSenders(
   const { senderIds } = req.body as {
     senderIds: string[];
   };
+  const formatIds: Types.ObjectId[] = [];
+  senderIds.forEach((id: string) => {
+    formatIds.push(Types.ObjectId(id));
+  });
 
   const doc = await models.SenderIDs.deleteMany({
-    _id: { $in: senderIds },
+    _id: { $in: formatIds },
   });
 
   return ProcessingSuccess(res, doc);

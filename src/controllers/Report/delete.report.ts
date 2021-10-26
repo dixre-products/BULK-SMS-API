@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
   ResourceNotFound,
@@ -27,9 +28,13 @@ export async function DeleteMultipleReports(
     reportIds: string[];
   };
   // console.log('req contacts', contactIds);
+  const formatIds: Types.ObjectId[] = [];
+  reportIds.forEach((id: string) => {
+    formatIds.push(Types.ObjectId(id));
+  });
 
   const doc = await models.Reports.deleteMany({
-    _id: { $in: reportIds },
+    _id: { $in: formatIds },
   });
 
   return ProcessingSuccess(res, doc);

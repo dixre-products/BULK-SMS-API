@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
   ResourceNotFound,
@@ -26,8 +27,13 @@ export async function DeleteMultipleRole(
     roleIds: string[];
   };
 
+  const formatIds: Types.ObjectId[] = [];
+  roleIds.forEach((id: string) => {
+    formatIds.push(Types.ObjectId(id));
+  });
+
   const doc = await models.Role.deleteMany({
-    _id: { $in: roleIds },
+    _id: { $in: formatIds },
   });
 
   return ProcessingSuccess(res, doc);

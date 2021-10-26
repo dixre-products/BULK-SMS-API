@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Types } from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 
@@ -32,8 +33,13 @@ export async function DeleteMultipleMessage(
     messageIds: string[];
   };
 
+  const formatIds: Types.ObjectId[] = [];
+  messageIds.forEach((id: string) => {
+    formatIds.push(Types.ObjectId(id));
+  });
+
   const doc = await models.Message.deleteMany({
-    _id: { $in: messageIds },
+    _id: { $in: formatIds },
   });
 
   return ProcessingSuccess(res, doc);
