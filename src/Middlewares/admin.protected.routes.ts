@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { UnAuthorized } from '../RequestStatus/status';
-// import { decodeJwtToken } from '../utills/utills';
+import { decodeJwtToken } from '../utills/utills';
 import app from '../index';
 
 export default async function ValidateAccessToken(
@@ -10,15 +10,14 @@ export default async function ValidateAccessToken(
 ) {
   try {
     if (app.get('env') === 'production') {
-      // const { authorization } = req.headers;
-      // const accessToken = authorization?.split(' ')[1];
-      // const access = decodeJwtToken(accessToken as any) as any; // throws error if not valid
-      // if (access.userId.isAdmin) {
-      //   res.locals.id = access._id; // eslint-disable-line
-      //   return next();
-      // }
-      // return UnAuthorized(res);
-      next();
+      const { authorization } = req.headers;
+      const accessToken = authorization?.split(' ')[1];
+      const access = decodeJwtToken(accessToken as any) as any; // throws error if not valid
+      if (access.userId.isAdmin) {
+        res.locals.id = access._id; // eslint-disable-line
+        return next();
+      }
+      return UnAuthorized(res);
     }
     next();
   } catch (e) {
