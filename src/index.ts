@@ -3,7 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 // @ts-ignore
 import helmet from 'helmet';
-import * as cors from 'cors';
+import cors from 'cors';
 import routes from './routes';
 import constants from './constants/index';
 import ErrorHandler from './Middlewares/error.handler';
