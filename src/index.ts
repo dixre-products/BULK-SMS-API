@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 // @ts-ignore
 import helmet from 'helmet';
+import * as cors from 'cors';
 import routes from './routes';
 import constants from './constants/index';
 import ErrorHandler from './Middlewares/error.handler';
@@ -27,6 +28,7 @@ process.on('uncaughtException', (err) => {
   Logger.error(err.message);
 });
 
+app.use(cors({ origin: '*' }));
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
