@@ -7,7 +7,7 @@ import {
 } from '../constants/enums';
 import { Activities as ActivitiesProps } from '../Types/interfaces';
 
-const { CREATE, UPDATE, DELETE } = EntitiesAction;
+const { CREATE, UPDATE, DELETE, LOGIN } = EntitiesAction;
 const {
   DEPARTMENTS,
   MESSAGES,
@@ -19,7 +19,7 @@ const {
   REPORTS,
 } = Entities;
 
-const { ADMIN_ACCOUNT, AGENCY_ACCOUNT, LOGIN } = ACCOUNT_TYPE; // eslint-disable-line
+const { ADMIN_ACCOUNT, AGENCY_ACCOUNT } = ACCOUNT_TYPE; // eslint-disable-line
 const Activities: Schema = new Schema(
   {
     group: { type: Schema.Types.String },
