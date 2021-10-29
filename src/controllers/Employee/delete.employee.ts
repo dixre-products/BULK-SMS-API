@@ -22,7 +22,7 @@ export default async function DeleteMultipleEmployee(
   });
   const DeletedEmployees: any[] = [];
   const employeeAccounts = await models.Employee.find({
-    _id: formatIds, // eslint-disable-line;
+    _id: { $in: formatIds }, // eslint-disable-line;
   });
   // eslint-disable-next-line
   for (let employee of employeeAccounts) {
@@ -44,11 +44,11 @@ export default async function DeleteMultipleEmployee(
       date: Date.now(),
     });
   }
-  const Activity = new models.Activities(DeletedEmployees);
-
+  const Activity = new models.Activities();
   const doc = await models.Employee.deleteMany({
     _id: { $in: formatIds },
   });
-  await Activity.save();
+
+  await Activity.collection.insertMany(DeletedEmployees);
   return ProcessingSuccess(res, doc);
 }

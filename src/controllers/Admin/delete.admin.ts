@@ -20,7 +20,7 @@ export default async function DeleteMultipleAdmin(
     formatIds.push(Types.ObjectId(id));
   });
   const adminAccounts = await models.Admin.find({
-    _id: formatIds, // eslint-disable-line
+    _id: { $in: formatIds }, // eslint-disable-line
   });
   const DeletedAdmins: any[] = [];
   // eslint-disable-next-line
@@ -43,13 +43,14 @@ export default async function DeleteMultipleAdmin(
       date: Date.now(),
     });
   }
-  const Activity = new models.Activities(DeletedAdmins);
+  const Activity = new models.Activities();
 
   /* eslint-enable */
 
   const doc = await models.Admin.deleteMany({
     _id: { $in: formatIds },
   });
-  await Activity.save();
+
+  await Activity.collection.insertMany(DeletedAdmins);
   return ProcessingSuccess(res, doc);
 }
