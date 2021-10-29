@@ -1,6 +1,10 @@
 import { Schema, model } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { Entities, EntitiesAction } from '../constants/enums';
+import {
+  Entities,
+  EntitiesAction,
+  ACCOUNT_TYPE,
+} from '../constants/enums';
 import { Activities as ActivitiesProps } from '../Types/interfaces';
 
 const { CREATE, UPDATE, DELETE } = EntitiesAction;
@@ -11,8 +15,11 @@ const {
   ROLES,
   SENDERIDS,
   EMPLOYEES,
+  ADMIN,
+  REPORTS,
 } = Entities;
 
+const { ADMIN_ACCOUNT, AGENCY_ACCOUNT } = ACCOUNT_TYPE; // eslint-disable-line
 const Activities: Schema = new Schema(
   {
     group: { type: Schema.Types.String },
@@ -21,10 +28,17 @@ const Activities: Schema = new Schema(
 
     admin: { type: Schema.Types.ObjectId, ref: 'admin' },
 
+    userType: {
+      type: Schema.Types.String,
+      enum: [ADMIN_ACCOUNT, AGENCY_ACCOUNT],
+    },
+
     type: {
       type: Schema.Types.String,
       enum: [CREATE, UPDATE, DELETE],
     },
+
+    description: Schema.Types.String,
 
     entity: {
       type: Schema.Types.String,
@@ -35,18 +49,21 @@ const Activities: Schema = new Schema(
         ROLES,
         SENDERIDS,
         EMPLOYEES,
+        ADMIN,
+        REPORTS,
       ],
     },
 
-    payload: [
-      {
-        name: Schema.Types.String,
-        email: Schema.Types.String,
-        entityId: Schema.Types.String,
-        address: Schema.Types.String,
-        phone: Schema.Types.String,
-      },
-    ],
+    payload: {
+      name: Schema.Types.String,
+      email: Schema.Types.String,
+      phoneNumber: Schema.Types.String,
+      phoneNumbers: [Schema.Types.String],
+      message: Schema.Types.String,
+      id: Schema.Types.ObjectId,
+      address: Schema.Types.String,
+    },
+
     date: { type: Schema.Types.Date, default: Date.now() },
   },
 

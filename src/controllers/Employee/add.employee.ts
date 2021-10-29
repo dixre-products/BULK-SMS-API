@@ -3,6 +3,11 @@ import { Types } from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { EmployeeSignupProps } from '../../Types/interfaces';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function CreateEmployee(
   req: Request,
@@ -15,7 +20,22 @@ export default async function CreateEmployee(
   const $ROLEID = Types.ObjectId(roleId);
 
   const employee = new models.Employee();
-
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.EMPLOYEES,
+    type: EntitiesAction.CREATE,
+    description: 'New Employee account created',
+    payload: {
+      name,
+      email,
+      id: employee._id, // eslint-disable-line
+      address,
+    },
+    date: Date.now(),
+  });
   employee.setPassword(password);
 
   employee.name = name;
@@ -26,6 +46,7 @@ export default async function CreateEmployee(
   employee.roleId = $ROLEID;
 
   await employee.save({ validateBeforeSave: false });
+
   const id = employee._id; //eslint-disable-line
 
   const createdEmployee = await models.Employee.findOne({
@@ -37,6 +58,7 @@ export default async function CreateEmployee(
       salt: 0,
       password: 0,
     });
+  await Activity.save();
 
   return ProcessingSuccess(res, createdEmployee);
 }

@@ -1,6 +1,11 @@
 import { Request, Response } from 'express';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function CreateAdmin(
   req: Request,
@@ -13,6 +18,21 @@ export default async function CreateAdmin(
   };
 
   const admin = new models.Admin();
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.ADMIN,
+    type: EntitiesAction.CREATE,
+    description: 'New Admin account created',
+    payload: {
+      name,
+      email,
+      id: admin._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
 
   admin.setPassword(password);
 
@@ -28,5 +48,6 @@ export default async function CreateAdmin(
     salt: 0,
   });
 
+  await Activity.save();
   return ProcessingSuccess(res, createdAdmin);
 }

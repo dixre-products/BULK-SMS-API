@@ -14,12 +14,19 @@ export enum Entities {
   SENDERIDS = 'SENDERIDS',
   DEPARTMENTS = 'DEPARTMENTS',
   ADMIN = 'ADMIN',
+  REPORTS = 'REPORTS',
 }
 
 export enum EntitiesAction {
   DELETE = 'DELETE',
   UPDATE = 'UPDATE',
   CREATE = 'CREATE',
+  LOGIN = 'LOGIN',
+}
+
+export enum ACCOUNT_TYPE {
+  ADMIN_ACCOUNT = 'ADMIN-ACCOUNT',
+  AGENCY_ACCOUNT = 'AGENCY-ACCOUNT',
 }
 
 export default MessageStatus;

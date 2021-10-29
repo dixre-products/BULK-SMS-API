@@ -7,6 +7,11 @@ import {
 import models from '../../models';
 import { EmployeeSignupProps } from '../../Types/interfaces';
 import constants from '../../constants';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export async function UpdateEmployee(req: Request, res: Response) {
   const { id, updates } = req.body as {
@@ -64,7 +69,23 @@ export async function AssignEmployeeToDepartment(
     },
     { new: true },
   ).populate('groupId roleId');
-
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.EMPLOYEES,
+    type: EntitiesAction.UPDATE,
+    description: 'Employee account updated',
+    payload: {
+      name: doc?.name,
+      email: doc?.email,
+      address: doc?.address,
+      id: doc?._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
+  await Activity.save();
   return ProcessingSuccess(res, doc);
 }
 

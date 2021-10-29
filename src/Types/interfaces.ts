@@ -102,7 +102,6 @@ export interface DepartmentProps extends Document {
 }
 
 export interface EmployeeProps extends Document {
-  _id: Types.ObjectId; //eslint-disable-line
   name: string;
   email: string;
   password: string;
@@ -154,22 +153,31 @@ export interface SenderIds extends Document {
 type payload = {
   name: string;
   email: string;
-  entityId: string;
-  address: string;
-  phone: string;
+  phoneNumber: string;
+  phoneNumbers: string[];
   message: string;
+  id: Types.ObjectId;
+  address: string;
+  description: string;
 };
 export interface Activities extends Document {
   group: string;
+
   user: Types.ObjectId;
-  entity: string;
-  payload: payload[];
-  date: any;
+
+  admin: Types.ObjectId;
+
+  userType: string;
+
   type: string;
+
+  entity: string;
+
+  payload: payload;
+  date: any;
 }
 
 export interface AdminProps extends Document {
-  _id: Types.ObjectId; //eslint-disable-line
   name: string;
   email: string;
   hash: string;
