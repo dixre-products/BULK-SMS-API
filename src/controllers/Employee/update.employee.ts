@@ -31,7 +31,24 @@ export async function UpdateEmployee(req: Request, res: Response) {
       res,
       constants.RequestResponse.EmployeeNotFound,
     );
-
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.EMPLOYEES,
+    type: EntitiesAction.UPDATE,
+    description: 'Employee Account details updated !!!',
+    payload: {
+      name: doc?.name,
+      email: doc?.email,
+      address: doc?.address,
+      id: doc?._id, // eslint-disable-line
+      department: (doc as any).groupId.name,
+    },
+    date: Date.now(),
+  });
+  await Activity.save();
   return ProcessingSuccess(res, doc);
 }
 
@@ -76,12 +93,13 @@ export async function AssignEmployeeToDepartment(
     user: res.locals.id,
     entity: Entities.EMPLOYEES,
     type: EntitiesAction.UPDATE,
-    description: 'Employee account updated',
+    description: 'Employee department changed successfully!!!',
     payload: {
       name: doc?.name,
       email: doc?.email,
       address: doc?.address,
       id: doc?._id, // eslint-disable-line
+      department: departmentExist.name,
     },
     date: Date.now(),
   });

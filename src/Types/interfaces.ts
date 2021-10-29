@@ -159,6 +159,7 @@ type payload = {
   id: Types.ObjectId;
   address: string;
   description: string;
+  department: string;
 };
 export interface Activities extends Document {
   group: string;
