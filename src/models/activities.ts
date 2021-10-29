@@ -19,7 +19,7 @@ const {
   REPORTS,
 } = Entities;
 
-const { ADMIN_ACCOUNT, AGENCY_ACCOUNT } = ACCOUNT_TYPE; // eslint-disable-line
+const { ADMIN_ACCOUNT, AGENCY_ACCOUNT, LOGIN } = ACCOUNT_TYPE; // eslint-disable-line
 const Activities: Schema = new Schema(
   {
     group: { type: Schema.Types.String },
@@ -35,7 +35,7 @@ const Activities: Schema = new Schema(
 
     type: {
       type: Schema.Types.String,
-      enum: [CREATE, UPDATE, DELETE],
+      enum: [CREATE, UPDATE, DELETE, LOGIN],
     },
 
     description: Schema.Types.String,
