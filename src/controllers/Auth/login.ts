@@ -16,10 +16,17 @@ export default async function loginAccount(
   req: Request,
   res: Response,
 ) {
+  // COLLECT REQUEST BODY
+  // ==========================
+
   const { email, password } = req.body as {
     password: string;
     email: string;
   };
+
+  // FIND EMAIL ADDRESS
+  // ==============================
+
   const doc = await models.Admin.findOne({
     email: email.toLowerCase(),
   });
@@ -27,13 +34,18 @@ export default async function loginAccount(
   if (!doc) return InvalidCredential(res);
   if (!doc.validatePassword(password)) return InvalidCredential(res);
 
-  // credentials successful login
+  // credentials successful login OBJECT
   const responseObj: any = doc.toObject();
   delete responseObj.hash;
   delete responseObj.salt;
   delete responseObj.__v; //eslint-disable-line
 
+  // CUSTOM TOKEN GENERATOR
+  // ================================
+
   const tokens = getTokens({ ...responseObj, isAdmin: true } as any);
+
+  // ACTIVITY LOGGER
   const Activity = new models.Activities({
     group: '',
     userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
@@ -49,11 +61,11 @@ export default async function loginAccount(
     },
     date: Date.now(),
   });
-  await Activity.save();
+  await Activity.save(); // SAVE ACTIVITY
   return LoginSuccess(
     res,
     tokens.accessToken,
     tokens.refreshToken,
     responseObj,
-  );
+  ); // SUCCESS RESPONSE
 }

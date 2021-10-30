@@ -12,17 +12,26 @@ export default async function DeleteMultipleAdmin(
   req: Request,
   res: Response,
 ) {
+  // GET REQUEST BODY
+  // ====================================
   const { adminIds } = req.body as {
     adminIds: string[];
   };
+
+  // TRANSFORM STRING HEX-IDs INTO BSON-OBJECTS
   const formatIds: Types.ObjectId[] = [];
   adminIds.forEach((id: string) => {
     formatIds.push(Types.ObjectId(id));
   });
+
+  // FIND ALL ADMIN ACCOUNT SELECTED TO BE DELETED
   const adminAccounts = await models.Admin.find({
     _id: { $in: formatIds }, // eslint-disable-line
   });
-  const DeletedAdmins: any[] = [];
+
+  // ACTIVITY LOGGER
+  // ===============================================
+  const DeletedAdmins: any[] = []; // HOLD ACTIVITY LOG FOR EACH ACCOUNT DELETED
   // eslint-disable-next-line
   for (let admin of adminAccounts) {
     // eslint-disable-next-line
@@ -43,14 +52,16 @@ export default async function DeleteMultipleAdmin(
       date: Date.now(),
     });
   }
-  const Activity = new models.Activities();
+  const Activity = new models.Activities(); // CREATE A NEW ACTIVITY OBJECT
 
   /* eslint-enable */
 
+  // DELETE ACCOUNTS
   const doc = await models.Admin.deleteMany({
     _id: { $in: formatIds },
   });
 
+  // INSERT ALL ACTIVITIES
   await Activity.collection.insertMany(DeletedAdmins);
-  return ProcessingSuccess(res, doc);
+  return ProcessingSuccess(res, doc); // SUCCESS RESPONSE
 }

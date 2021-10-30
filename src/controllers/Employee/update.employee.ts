@@ -45,6 +45,7 @@ export async function UpdateEmployee(req: Request, res: Response) {
       address: doc?.address,
       id: doc?._id, // eslint-disable-line
       department: (doc as any).groupId.name,
+      role: (doc as any).roleId.name,
     },
     date: Date.now(),
   });
@@ -100,6 +101,7 @@ export async function AssignEmployeeToDepartment(
       address: doc?.address,
       id: doc?._id, // eslint-disable-line
       department: departmentExist.name,
+      role: (doc as any).roleId.name,
     },
     date: Date.now(),
   });

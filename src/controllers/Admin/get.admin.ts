@@ -11,6 +11,7 @@ import { getQuery } from '../../utills/utills';
 export async function GetAllAdmin(req: Request, res: Response) {
   const requestParams = req.query as any;
 
+  // CUSTOM QUERY COMPOSER
   const { paginationConfig, paginationQuery } = getQuery(
     requestParams,
     {

@@ -11,13 +11,23 @@ export default async function CreateAdmin(
   req: Request,
   res: Response,
 ) {
+  // COLLECT REQUEST BODY
+  // ==============================
   const { email, name, password } = req.body as {
     email: string;
     name: string;
     password: string;
   };
 
-  const admin = new models.Admin();
+  const admin = new models.Admin({
+    email,
+    name,
+  }); // INTIALIZE A NEW ADMIN OBJECT
+
+  admin.setPassword(password); // SET NEW ADMIN PASSWORD
+
+  // ACTIVITY LOGGER
+  // ===============================================
   const Activity = new models.Activities({
     group: '',
     userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
@@ -34,20 +44,16 @@ export default async function CreateAdmin(
     date: Date.now(),
   });
 
-  admin.setPassword(password);
+  await admin.save({ validateBeforeSave: false }); // WRITE NEW ADMIN TO DB
 
-  admin.name = name;
-  admin.email = email;
-
-  await admin.save({ validateBeforeSave: false });
-  const id = admin._id; //eslint-disable-line
+  // GET NEW ACCOUNT CREATED
   const createdAdmin = await models.Admin.findOne({
-    _id: id,
+    _id: admin._id, // eslint-disable-line
   }).select({
     hash: 0,
     salt: 0,
   });
 
-  await Activity.save();
-  return ProcessingSuccess(res, createdAdmin);
+  await Activity.save(); // SAVE  ACTIVITY  LOG
+  return ProcessingSuccess(res, createdAdmin); // RESPONSE SUCCESS WITH NEW ADMIN
 }

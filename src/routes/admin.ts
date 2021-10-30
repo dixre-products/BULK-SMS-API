@@ -92,6 +92,7 @@ admin.put(
 
 admin.delete(
   DELETE_ALL_GROUPS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(DepartmentValidation.ValidateDeleteDepartment),
   HandleAsyncFactory(DepartmentController.DeleteMultipleDepartment),
 );
@@ -117,6 +118,7 @@ admin.get(
 // Admin: Employee Routes
 admin.delete(
   DELETE_ALL_EMOLOYEES,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(EmployeeValidation.ValidateDeleteEmployee),
   HandleAsyncFactory(EmployeeController.DeleteMultipleEmployee),
 );
@@ -169,6 +171,7 @@ admin.delete(
 
 admin.delete(
   DELETE_ALL_ROLES,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(RoleValidation.ValidateDeleteMultipleRole),
   HandleAsyncFactory(RoleController.DeleteMultipleRole),
 );
@@ -206,18 +209,21 @@ admin.get(
 
 admin.get(
   GET_REPORT,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(ReportController.GetAllReport),
 );
 
 admin.delete(
   DELETE_REPORT + GET_ID_PARAM,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(ReportValidation.ValidateDeleteReport),
   HandleAsyncFactory(ReportController.DeleteReport),
 );
 
 admin.delete(
   DELETE_ALL_REPORTS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(ReportValidation.ValidateMultipleDeleteReports),
   HandleAsyncFactory(ReportController.DeleteMultipleReports),
 );
@@ -232,6 +238,7 @@ admin.post(
 
 admin.delete(
   DELETE_ALL_ADMINS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateDeleteAdmin),
   HandleAsyncFactory(AdminController.DeleteMultipleAdmin),
 );
@@ -260,6 +267,7 @@ admin.put(
 
 admin.delete(
   DELETE_ALL_SENDERS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(SenderValidation.ValidateDeleteMultipleSender),
   HandleAsyncFactory(SenderController.DeleteMultipleSenders),
 );

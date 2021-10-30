@@ -25,6 +25,7 @@ contact.put(
 
 contact.delete(
   DELETE_ALL_CONTACTS,
+  HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateMultipleDeleteContacts),
   HandleAsyncFactory(ContactController.DeleteMultipleContacts),
 );

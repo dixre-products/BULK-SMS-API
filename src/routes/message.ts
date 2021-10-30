@@ -25,6 +25,7 @@ message.put(
 
 message.delete(
   DELETE_ALL_MESSAGES,
+  HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateMultipleDeleteMessage),
   HandleAsyncFactory(MessageController.DeleteMultipleMessage),
 );

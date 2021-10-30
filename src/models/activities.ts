@@ -63,6 +63,7 @@ const Activities: Schema = new Schema(
       id: Schema.Types.ObjectId,
       address: Schema.Types.String,
       department: Schema.Types.String,
+      role: Schema.Types.String,
     },
 
     date: { type: Schema.Types.Date, default: Date.now() },

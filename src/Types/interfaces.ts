@@ -160,6 +160,7 @@ type payload = {
   address: string;
   description: string;
   department: string;
+  role: string;
 };
 export interface Activities extends Document {
   group: string;
