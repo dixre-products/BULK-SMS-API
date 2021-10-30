@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
-import {
-  ProcessingSuccess,
-  ResourceNotFound,
-} from '../../RequestStatus/status';
+import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { RoleProps } from '../../Types/interfaces';
-import constants from '../../constants';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function UpdateRole(
   req: Request,
@@ -26,11 +27,25 @@ export default async function UpdateRole(
     },
   );
 
-  if (!doc)
-    return ResourceNotFound(
-      res,
-      constants.RequestResponse.RoleNotFound,
-    );
+  // ACTIVITY LOGGER
+  // ============================
+
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.ROLES,
+    type: EntitiesAction.UPDATE,
+    description: 'Role updated',
+    payload: {
+      name: doc?.name,
+      id: doc?._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
+
+  await Activity.save();
 
   return ProcessingSuccess(res, doc);
 }

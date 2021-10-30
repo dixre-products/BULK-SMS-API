@@ -17,6 +17,9 @@ import LoginValidation from '../Validators/Auth/index';
 import ProtectAdminRoute from '../Middlewares/admin.protected.routes';
 import SenderValidation from '../Validators/SenderId';
 import ReportValidation from '../Validators/Report';
+import ActivitiesValidator from '../Validators/Activities/get.activities.validation';
+import Activities from '../controllers/Activities';
+
 // import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
@@ -41,19 +44,37 @@ const {
   GET_ROLE,
   DELETE_ROLE,
 
-  DELETE_ALL_ADMINS,
-  DELETE_ALL_SENDERS,
-  DELETE_ALL_GROUPS,
-  DELETE_ALL_EMOLOYEES,
-  DELETE_ALL_ROLES,
+  DELETE_MULTIPLE_ADMINS,
+  DELETE_MULTIPLE_SENDERS,
+  DELETE_MULTIPLE_GROUPS,
+  DELETE_MULTIPLE_EMOLOYEES,
+  DELETE_MULTIPLE_ROLES,
 
   DELETE_REPORT,
-  DELETE_ALL_REPORTS,
+  DELETE_MULTIPLE_REPORTS,
   GET_REPORT,
+
+  ACTIVITIES,
 } = constants.RoutesSubs;
 
 const { LOGIN_BASE } = constants.RouteBase;
 const admin = Router();
+
+// Activities
+admin.get(
+  ACTIVITIES,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(Activities.GetAllActivity),
+);
+
+// Activities
+admin.delete(
+  ACTIVITIES,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(ActivitiesValidator),
+  HandleAsyncFactory(Activities.DeleteMulitipleActivity),
+);
 
 admin.post(
   LOGIN_BASE,
@@ -91,7 +112,7 @@ admin.put(
 );
 
 admin.delete(
-  DELETE_ALL_GROUPS,
+  DELETE_MULTIPLE_GROUPS,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(DepartmentValidation.ValidateDeleteDepartment),
   HandleAsyncFactory(DepartmentController.DeleteMultipleDepartment),
@@ -117,7 +138,7 @@ admin.get(
 
 // Admin: Employee Routes
 admin.delete(
-  DELETE_ALL_EMOLOYEES,
+  DELETE_MULTIPLE_EMOLOYEES,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(EmployeeValidation.ValidateDeleteEmployee),
   HandleAsyncFactory(EmployeeController.DeleteMultipleEmployee),
@@ -170,7 +191,7 @@ admin.delete(
 );
 
 admin.delete(
-  DELETE_ALL_ROLES,
+  DELETE_MULTIPLE_ROLES,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(RoleValidation.ValidateDeleteMultipleRole),
   HandleAsyncFactory(RoleController.DeleteMultipleRole),
@@ -222,7 +243,7 @@ admin.delete(
 );
 
 admin.delete(
-  DELETE_ALL_REPORTS,
+  DELETE_MULTIPLE_REPORTS,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(ReportValidation.ValidateMultipleDeleteReports),
   HandleAsyncFactory(ReportController.DeleteMultipleReports),
@@ -237,7 +258,7 @@ admin.post(
 );
 
 admin.delete(
-  DELETE_ALL_ADMINS,
+  DELETE_MULTIPLE_ADMINS,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateDeleteAdmin),
   HandleAsyncFactory(AdminController.DeleteMultipleAdmin),
@@ -266,7 +287,7 @@ admin.put(
 // Sender
 
 admin.delete(
-  DELETE_ALL_SENDERS,
+  DELETE_MULTIPLE_SENDERS,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(SenderValidation.ValidateDeleteMultipleSender),
   HandleAsyncFactory(SenderController.DeleteMultipleSenders),

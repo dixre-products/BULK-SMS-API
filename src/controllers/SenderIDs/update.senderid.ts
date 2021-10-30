@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
-import {
-  ProcessingSuccess,
-  ResourceNotFound,
-} from '../../RequestStatus/status';
+import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { SenderIds } from '../../Types/interfaces';
-import constants from '../../constants';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function UpdateSenderId(
   req: Request,
@@ -24,11 +25,25 @@ export default async function UpdateSenderId(
     { new: true },
   );
 
-  if (!doc)
-    return ResourceNotFound(
-      res,
-      constants.RequestResponse.ContactNotFound,
-    );
+  // ACTIVITY LOGGER
+  // ============================
+
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.SENDERIDS,
+    type: EntitiesAction.UPDATE,
+    description: 'SenderId updated',
+    payload: {
+      name: doc?.name,
+      id: doc?._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
+
+  await Activity.save();
 
   return ProcessingSuccess(res, doc);
 }

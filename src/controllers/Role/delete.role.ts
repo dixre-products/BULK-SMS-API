@@ -6,6 +6,11 @@ import {
 } from '../../RequestStatus/status';
 import models from '../../models';
 import constants from '../../constants';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export async function DeleteRole(req: Request, res: Response) {
   const { id } = req.params;
@@ -16,6 +21,26 @@ export async function DeleteRole(req: Request, res: Response) {
       res,
       constants.RequestResponse.RoleNotFound,
     );
+
+  // ACTIVITY LOGGER
+  // ============================
+
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.ROLES,
+    type: EntitiesAction.DELETE,
+    description: 'Role deleted',
+    payload: {
+      name: doc?.name,
+      id: doc?._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
+
+  await Activity.save();
   return ProcessingSuccess(res, doc);
 }
 
@@ -32,9 +57,37 @@ export async function DeleteMultipleRole(
     formatIds.push(Types.ObjectId(id));
   });
 
+  const DeletedRoles: any[] = [];
+
+  const roles = await models.Role.find({
+    _id: { $in: formatIds }, // eslint-disable-line;
+  });
+  // eslint-disable-next-line
+  for (let role of roles) {
+    // eslint-disable-next-line
+
+    DeletedRoles.push({
+      group: '',
+      userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+      admin: res.locals.id, // eslint-disable-line
+      user: res.locals.id,
+      entity: Entities.ROLES,
+      type: EntitiesAction.DELETE,
+      description: 'Role  deleted',
+      payload: {
+        name: role?.name,
+        id: role?._id, // eslint-disable-line
+      },
+      date: Date.now(),
+    });
+  }
+  const Activity = new models.Activities();
+
   const doc = await models.Role.deleteMany({
     _id: { $in: formatIds },
   });
+
+  await Activity.collection.insertMany(DeletedRoles);
 
   return ProcessingSuccess(res, doc);
 }

@@ -197,7 +197,7 @@ export interface MessageProps extends Document {
   sender: string;
   groupId: Types.ObjectId;
   date: Date;
-  contacts: Array<number>;
+  contacts: Array<string>;
   time: Date;
   status: string;
 }

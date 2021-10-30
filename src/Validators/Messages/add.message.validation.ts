@@ -8,7 +8,11 @@ const requestBodySchema = joi.object({
   time: joi.date().label('Time'),
   status: joi.string().required().label('Status'),
   groupId: joi.string().label('Group ID'),
-  contacts: joi.array().required().label('Contacts'),
+  contacts: joi
+    .array()
+    .items(joi.string())
+    .required()
+    .label('Contacts'),
 });
 
 export default function ValidateCreateMessage(

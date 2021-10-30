@@ -6,7 +6,7 @@ const requestBodySchema = joi.object({
   id: joi.string().required().label('Contact ID'),
 
   updates: joi.object({
-    number: joi.number(),
+    number: joi.string(),
     name: joi.string(),
     groupId: joi.string(),
     date: joi.date(),

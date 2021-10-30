@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function CreateDepartment(
   req: Request,
@@ -14,6 +19,24 @@ export default async function CreateDepartment(
   };
 
   const department = new models.Department();
+
+  // ACTIVITY LOGGER
+  // ===============================================
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.DEPARTMENTS,
+    type: EntitiesAction.CREATE,
+    description: 'New Department created',
+    payload: {
+      name,
+      id: department._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
+
   const formatSenderIds: any[] = [];
 
   senderIds.forEach((val) => {
@@ -25,6 +48,6 @@ export default async function CreateDepartment(
   const doc = department.populate('senderIds');
 
   await department.save({ validateBeforeSave: false });
-
+  await Activity.save({ validateBeforeSave: false });
   return ProcessingSuccess(res, doc);
 }

@@ -5,7 +5,7 @@ import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 import ProtectRoutes from '../Middlewares/check.route.access';
 
-const { GET_ID_PARAM, BASE_SUB, DELETE_ALL_CONTACTS } =
+const { GET_ID_PARAM, BASE_SUB, DELETE_MULTIPLE_CONTACTS } =
   constants.RoutesSubs;
 const contact = Router();
 
@@ -24,7 +24,7 @@ contact.put(
 );
 
 contact.delete(
-  DELETE_ALL_CONTACTS,
+  DELETE_MULTIPLE_CONTACTS,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateMultipleDeleteContacts),
   HandleAsyncFactory(ContactController.DeleteMultipleContacts),

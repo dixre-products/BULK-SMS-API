@@ -17,6 +17,9 @@ const VERIFICATION_CODE = '/code'; // verification
 
 // RESET PASSWORD
 
+// ACTIVITIES
+const ACTIVITIES = '/activities';
+
 // PROFILE
 const GET_PROFILE = '/:uid';
 const PROFILE = '/';
@@ -31,7 +34,7 @@ const ADD_CREDIT = '/add-credit';
 
 // Contact Endpoint
 const GET_CONTACT = '/get-contact';
-const DELETE_ALL_CONTACTS = '/delete-contacts';
+const DELETE_MULTIPLE_CONTACTS = '/delete-contacts';
 
 // Message Endpoint
 const GET_MESSAGE = '/get-message';
@@ -54,18 +57,18 @@ const UPDATE_ROLE = '/update-role';
 const GET_ID_PARAM = '/:id';
 const BASE_SUB = '/';
 // Admin
-const DELETE_ALL_ADMINS = '/delete-admins';
-const DELETE_ALL_GROUPS = '/delete-groups';
-const DELETE_ALL_EMOLOYEES = '/delete-employees';
-const DELETE_ALL_MESSAGES = '/delete-messages';
-const DELETE_ALL_ROLES = '/delete-roles';
-const DELETE_ALL_SENDERS = '/delete-senders';
+const DELETE_MULTIPLE_ADMINS = '/delete-admins';
+const DELETE_MULTIPLE_GROUPS = '/delete-groups';
+const DELETE_MULTIPLE_EMOLOYEES = '/delete-employees';
+const DELETE_MULTIPLE_MESSAGES = '/delete-messages';
+const DELETE_MULTIPLE_ROLES = '/delete-roles';
+const DELETE_MULTIPLE_SENDERS = '/delete-senders';
 
 // Report
 const CREATE_REPORT = '/create-report';
 const GET_REPORT = '/get-report';
 const DELETE_REPORT = '/delete-report';
-const DELETE_ALL_REPORTS = '/delete-reports';
+const DELETE_MULTIPLE_REPORTS = '/delete-reports';
 
 export default {
   GET_EMPLOYESS_BY_GROUP,
@@ -99,16 +102,18 @@ export default {
   GET_ROLE,
   DELETE_ROLE,
 
-  DELETE_ALL_CONTACTS,
-  DELETE_ALL_EMOLOYEES,
-  DELETE_ALL_ADMINS,
-  DELETE_ALL_GROUPS,
-  DELETE_ALL_MESSAGES,
-  DELETE_ALL_ROLES,
-  DELETE_ALL_SENDERS,
-  DELETE_ALL_REPORTS,
+  DELETE_MULTIPLE_CONTACTS,
+  DELETE_MULTIPLE_EMOLOYEES,
+  DELETE_MULTIPLE_ADMINS,
+  DELETE_MULTIPLE_GROUPS,
+  DELETE_MULTIPLE_MESSAGES,
+  DELETE_MULTIPLE_ROLES,
+  DELETE_MULTIPLE_SENDERS,
+  DELETE_MULTIPLE_REPORTS,
 
   GET_REPORT,
   CREATE_REPORT,
   DELETE_REPORT,
+
+  ACTIVITIES,
 };

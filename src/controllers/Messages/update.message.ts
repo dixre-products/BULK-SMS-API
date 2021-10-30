@@ -1,12 +1,13 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
-import {
-  ProcessingSuccess,
-  ResourceNotFound,
-} from '../../RequestStatus/status';
+import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { MessageProps } from '../../Types/interfaces';
-import constants from '../../constants';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function UpdateMessage(
   req: Request,
@@ -23,11 +24,27 @@ export default async function UpdateMessage(
     updates,
   );
 
-  if (!doc)
-    return ResourceNotFound(
-      res,
-      constants.RequestResponse.MessageNotFound,
-    );
+  // ACTIVITY LOGGER
+  // ============================
+
+  const Activity = new models.Activities({
+    group: res.locals.groupId,
+    userType: ACCOUNT_TYPE.AGENCY_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.MESSAGES,
+    type: EntitiesAction.UPDATE,
+    description: 'Message updated',
+    payload: {
+      message: doc?.message,
+      phoneNumbers: doc?.contacts,
+      time: doc?.time,
+      id: doc?._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
+
+  await Activity.save();
 
   return ProcessingSuccess(res, doc);
 }

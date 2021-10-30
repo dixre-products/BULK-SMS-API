@@ -21,7 +21,7 @@ export default async function CreateEmployee(
 
   const employee = new models.Employee();
   const Activity = new models.Activities({
-    group: '',
+    group: groupId,
     userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
     admin: res.locals.id, // eslint-disable-line
     user: res.locals.id,

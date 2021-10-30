@@ -3,6 +3,11 @@ import { Types } from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { MessageProps } from '../../Types/interfaces';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
 
 export default async function Createmessage(
   req: Request,
@@ -13,7 +18,7 @@ export default async function Createmessage(
       message: string;
       sender: string;
       groupId: string;
-      contacts: Array<number>;
+      contacts: string[];
       time: Date;
       status: any;
     };
@@ -21,6 +26,25 @@ export default async function Createmessage(
   const $GROUPID = Types.ObjectId(groupId);
 
   const newMessage = (await new models.Message()) as MessageProps;
+
+  // ACTIVITY LOGGER
+  // ===============================================
+  const Activity = new models.Activities({
+    group: groupId,
+    userType: ACCOUNT_TYPE.AGENCY_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.MESSAGES,
+    type: EntitiesAction.CREATE,
+    description: 'New message created',
+    payload: {
+      message,
+      phoneNumbers: contacts,
+      time,
+      id: newMessage._id, // eslint-disable-line
+    },
+    date: Date.now(),
+  });
 
   newMessage.contacts.push(...contacts);
   newMessage.message = message;
@@ -38,6 +62,6 @@ export default async function Createmessage(
     { new: true },
   );
   await newMessage.save({ validateBeforeSave: false });
-
+  await Activity.save({ validateBeforeSave: false });
   return ProcessingSuccess(res, newMessage);
 }
