@@ -44,6 +44,13 @@ const Employee: mongoose.Schema = new mongoose.Schema(
   { autoIndex: false },
 );
 
+Employee.methods.validatePassword = function validatePassword(
+  password,
+) {
+  const documents = this as EmployeeProps;
+  const hash = bcrypt.compareSync(password, documents.hash);
+  return hash;
+};
 Employee.index({ name: 'text', email: 'text', address: 'text' });
 Employee.methods.setPassword = function setPassword(password) {
   const documents = this as EmployeeProps;

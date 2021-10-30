@@ -114,6 +114,7 @@ export interface EmployeeProps extends Document {
 
   /* eslint-disable */
   setPassword: (pwd: string) => void;
+  validatePassword: (password: string) => boolean;
   /* eslint-enable */
 }
 
