@@ -1,21 +1,21 @@
 /**
- * @api {post} /employee/login  Admin login
- * @apiName Admin login
- * @apiGroup Admin
+ * @api {post} /employee/login  Employee login
+ * @apiName Employee login
+ * @apiGroup Employee
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- * @apiParam {String} email Admin email address.
+ * @apiParam {String} email employee email address.
  * @apiParam {String} password users account password.
  *
  * @apiSuccess {String} message  describes the success of the action performed.
 
  * @apiSuccess {Object} payload the user object
- * @apiSuccess {String} payload.accessToken  admin access token expires.
- * @apiSuccess {String} payload.refreshToken  admin refresh token which is required to get new access tokens
- * @apiSuccess {string} payloaduser.._id the ID of the admin
- * @apiSuccess {string} payload.user.email email of admin
- * @apiSuccess {string} payload.user.name admin full name
+ * @apiSuccess {String} payload.accessToken  employee access token expires.
+ * @apiSuccess {String} payload.refreshToken  employee refresh token which is required to get new access tokens
+ * @apiSuccess {string} payloaduser.._id the ID of the employee
+ * @apiSuccess {string} payload.user.email email of employee
+ * @apiSuccess {string} payload.user.name employee full name
  *
  *
  * @apiSuccessExample Success-Response:
