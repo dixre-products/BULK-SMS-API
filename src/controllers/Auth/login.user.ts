@@ -29,7 +29,7 @@ export default async function loginAccount(
 
   const doc = await models.Employee.findOne({
     email: email.toLowerCase(),
-  });
+  }).populate('groupId roleId');
 
   if (!doc) return InvalidCredential(res);
   if (!doc.validatePassword(password)) return InvalidCredential(res);
