@@ -19,10 +19,11 @@ export default async function AllActivity(
   );
 
   const doc = await models.Activities.paginate(
-    { ...paginationQuery, date: -1 },
+    { ...paginationQuery },
     {
       ...paginationConfig,
       populate: 'user admin',
+      sort: { date: -1 },
     },
   );
 
