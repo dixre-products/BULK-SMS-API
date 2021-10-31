@@ -13,15 +13,12 @@ export default async function Createmessage(
   req: Request,
   res: Response,
 ) {
-  const { contacts, message, sender, time, status, groupId } =
-    req.body as {
-      message: string;
-      sender: string;
-      groupId: string;
-      contacts: string[];
-      time: Date;
-      status: any;
-    };
+  const { contacts, message, sender, groupId } = req.body as {
+    message: string;
+    sender: string;
+    groupId: string;
+    contacts: string[];
+  };
 
   const $GROUPID = Types.ObjectId(groupId);
 
@@ -40,7 +37,6 @@ export default async function Createmessage(
     payload: {
       message,
       phoneNumbers: contacts,
-      time,
       id: newMessage._id, // eslint-disable-line
     },
     date: Date.now(),
@@ -50,8 +46,6 @@ export default async function Createmessage(
   newMessage.message = message;
   newMessage.sender = sender;
 
-  newMessage.time = time;
-  newMessage.status = status;
   newMessage.groupId = $GROUPID;
 
   await models.Department.findOneAndUpdate(

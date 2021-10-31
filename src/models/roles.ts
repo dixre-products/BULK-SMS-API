@@ -19,6 +19,10 @@ const Role: mongoose.Schema = new mongoose.Schema(
     addContact: {
       type: Boolean,
     },
+    date: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now(),
+    },
   },
 
   { autoIndex: false },

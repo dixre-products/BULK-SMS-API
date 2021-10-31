@@ -7,7 +7,6 @@
  *
  * @apiParam {String} number contact phone number
  * @apiParam {String} name contact name.
- * @apiParam {String} date date.
  * @apiParam {String} groupId department id
  *
  * @apiSuccess {String} message  describes the success of the action performed.

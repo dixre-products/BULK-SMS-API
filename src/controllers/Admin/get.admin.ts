@@ -48,7 +48,6 @@ export async function GetSingleAdmin(req: Request, res: Response) {
   const doc = await models.Admin.findOne({ _id: id }).select({
     hash: 0,
     salt: 0,
-    password: 0,
   });
 
   if (!doc)

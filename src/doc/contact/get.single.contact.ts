@@ -1,18 +1,22 @@
 /**
- * @api {PUT} /contact  Update a contact
- * @apiName UpdateContact
+ * @api {GET} /contact/:id Get a single contact
+ * @apiName Get a contact
  * @apiGroup Contact
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- *
- * @apiParam {String} id id of the contact to be updated
- * @apiParam {Object} updates object that contains updates to be applied.
- * @apiParam {String} [updates.name]  The new contact name.
- * @apiParam {String} [updates.number] The new contact phone number
  *  
+ *  @apiParam {String} id id of the Contact.
  * 
- * 
+ * @apiSuccess {String} message  describes the success of the action performed.
+ * @apiSuccess {Object} payload  contact credentials object
+ * @apiSuccess {String} payload._id contact ID.
+ * @apiSuccess {String} payload.name contact name.
+ * @apiSuccess {String} payload.date created date.
+ * @apiSuccess {String} payload.number contact number.
+ * @apiSuccess {String} payload.groupId department ID.
+ *
+ *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {
@@ -42,9 +46,6 @@
  *        "error": "SERVER.ERROR",
  *        "mesage": "describes reason for error"
  *     }
- *
- *
- 
  *
  * 
  * 

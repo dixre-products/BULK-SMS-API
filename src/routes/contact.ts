@@ -42,8 +42,15 @@ contact.delete(
 contact.delete(
   GET_ID_PARAM,
   HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(Validation.ValidateDeleteContact),
+  HandleAsyncFactory(Validation.ValidateGetSingleContact),
   HandleAsyncFactory(ContactController.DeleteContact),
+);
+
+contact.get(
+  GET_ID_PARAM,
+  HandleAsyncFactory(ProtectRoutes),
+  HandleAsyncFactory(Validation.ValidateGetSingleContact),
+  HandleAsyncFactory(ContactController.GetSingleContact),
 );
 
 export default contact;

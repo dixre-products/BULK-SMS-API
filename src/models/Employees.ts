@@ -39,6 +39,10 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.Boolean,
       default: true,
     },
+    date: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now(),
+    },
   },
 
   { autoIndex: false },

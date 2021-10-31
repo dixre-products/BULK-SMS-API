@@ -8,7 +8,7 @@ const Contact: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
-    phone: {
+    number: {
       type: mongoose.Schema.Types.String,
     },
 
@@ -19,6 +19,7 @@ const Contact: mongoose.Schema = new mongoose.Schema(
 
     date: {
       type: mongoose.Schema.Types.Date,
+      default: Date.now(),
     },
   },
 

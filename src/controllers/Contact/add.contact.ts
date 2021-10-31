@@ -46,5 +46,9 @@ export default async function CreateContact(
 
   await contact.save({ validateBeforeSave: false });
   await Activity.save({ validateBeforeSave: false });
-  return ProcessingSuccess(res, contact);
+
+  const createdContact = await models.Contact.findOne({
+    _id: contact._id, // eslint-disable-line
+  });
+  return ProcessingSuccess(res, createdContact);
 }

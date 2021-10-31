@@ -6,6 +6,7 @@ const requestBodySchema = joi.object({
   number: joi.string().required().label('Phone Number'),
   name: joi.string().required().label('Name'),
   groupId: joi.string().label('Group ID'),
+  sender: joi.string().optional().allow(''),
 });
 
 export default function ValidateCreateContact(

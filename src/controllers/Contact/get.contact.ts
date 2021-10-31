@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
+import { Types } from 'mongoose';
 import {
   ProcessingGetRequestSuccess,
+  ProcessingSuccess,
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
@@ -40,4 +42,13 @@ export default async function GetAllContact(
     totalDoc: doc.totalDocs,
     totalPages: doc.totalPages,
   });
+}
+
+export async function GetSingleContact(req: Request, res: Response) {
+  const { id } = req.params as any;
+
+  const contact = await models.Contact.findOne({
+    _id: Types.ObjectId(id), // eslint-disable-line
+  });
+  return ProcessingSuccess(res, contact);
 }

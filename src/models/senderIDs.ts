@@ -7,6 +7,10 @@ const SenderID: mongoose.Schema = new mongoose.Schema(
     name: {
       type: mongoose.Schema.Types.String,
     },
+    date: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now(),
+    },
   },
 
   { autoIndex: false },

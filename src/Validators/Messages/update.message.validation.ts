@@ -6,14 +6,7 @@ const requestBodySchema = joi.object({
   id: joi.string().required().label('Message ID'),
 
   updates: joi.object({
-    sender: joi.string(),
     message: joi.string(),
-    status: joi.string(),
-    time: joi.date(),
-    date: joi.date(),
-    groupId: joi.string(),
-
-    contacts: joi.array(),
   }),
 });
 

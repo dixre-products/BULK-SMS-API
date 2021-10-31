@@ -27,7 +27,7 @@ const Message: mongoose.Schema = new mongoose.Schema(
       ref: 'department',
     },
 
-    date: { type: mongoose.Schema.Types.Date },
+    date: { type: mongoose.Schema.Types.Date, default: Date.now() },
   },
 
   { autoIndex: false },

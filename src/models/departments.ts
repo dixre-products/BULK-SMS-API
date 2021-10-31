@@ -14,6 +14,10 @@ const Department: Schema = new Schema(
       type: [Schema.Types.ObjectId],
       ref: 'senderID',
     },
+    date: {
+      type: Schema.Types.Date,
+      default: Date.now(),
+    },
   },
   { autoIndex: false },
 );

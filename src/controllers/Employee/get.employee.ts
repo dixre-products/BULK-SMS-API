@@ -68,7 +68,6 @@ export async function GetSingleEmployee(req: Request, res: Response) {
     .select({
       hash: 0,
       salt: 0,
-      password: 0,
     });
 
   if (!doc)

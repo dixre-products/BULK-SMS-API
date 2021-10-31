@@ -8,8 +8,6 @@ const requestBodySchema = joi.object({
   updates: joi.object({
     number: joi.string(),
     name: joi.string(),
-    groupId: joi.string(),
-    date: joi.date(),
   }),
 });
 

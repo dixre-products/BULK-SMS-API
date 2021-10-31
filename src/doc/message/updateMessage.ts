@@ -8,13 +8,7 @@
  *
  * @apiParam {String} id id of the message to be updated
  * @apiParam {Object} updates object that contains updates to be applied.
- * @apiParam {String} [updates.contacts]  The new contacts lists.
- * @apiParam {String} [updates.message]  The new createed message to be sent.
- * @apiParam {String} [updates.time] The new time.
- * @apiParam {String} [updates.date] updated date
- * @apiParam {String} [updates.sender] updated sender
- * @apiParam {String} [updates.status] updated status of the message.
- * @apiParam {String} [updates.groupId] The new department ID
+ * @apiParam {String} [updates.message]  The new created message to be sent.
  *  
  * 
  *  @apiSuccess {String} message  describes the success of the action performed.
