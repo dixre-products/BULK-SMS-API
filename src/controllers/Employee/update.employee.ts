@@ -44,8 +44,8 @@ export async function UpdateEmployee(req: Request, res: Response) {
       email: doc?.email,
       address: doc?.address,
       id: doc?._id, // eslint-disable-line
-      department: (doc as any).groupId.name,
-      role: (doc as any).roleId.name,
+      department: doc.groupId ? (doc as any).groupId.name : '',
+      role: doc.roleId ? (doc as any).roleId.name : '',
     },
     date: Date.now(),
   });
@@ -145,7 +145,6 @@ export async function AssignEmployeeToRole(
     .select({
       hash: 0,
       salt: 0,
-      password: 0,
     });
 
   return ProcessingSuccess(res, doc);
