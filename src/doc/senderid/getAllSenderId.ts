@@ -9,7 +9,7 @@
  * @apiParam {Number} pageNumber number of pages.
  * @apiParam {Number} pageSize number of date to query.
  * @apiParam {String} [searchText] search text.
- * @apiParam {String} [agency] group id.
+ * @apiParam {String} agency group id.
  * @apiParam {String} [uid] user ID.
  * @apiParam {String} [role] Role Id.
  *
