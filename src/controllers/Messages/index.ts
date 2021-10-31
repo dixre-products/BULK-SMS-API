@@ -4,13 +4,12 @@ import {
   DeleteMultipleMessage,
 } from './delete.message';
 import UpdateMessage from './update.message';
-import { GetAllMessages, GetMessageByGroup } from './get.message';
+import GetAllMessages from './get.message';
 
 export default {
   CreateMessage,
   UpdateMessage,
   GetAllMessages,
-  GetMessageByGroup,
   DeleteMessage,
   DeleteMultipleMessage,
 };

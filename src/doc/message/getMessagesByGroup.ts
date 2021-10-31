@@ -1,13 +1,18 @@
 /**
- * @api {GET} /message/:id Get all messages belonging to agency
+ * @api {GET} /message Get all messages belonging to agency
  * @apiName Get all message for an agency
  * @apiGroup Message
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
  *  
- *  @apiParam {String} id department ID or agency ID .
- * 
+ * @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageSize number of date to query.
+ * @apiParam {String} [searchText] search text.
+ * @apiParam {String} [agency] group id.
+ * @apiParam {String} [uid] user ID.
+ * @apiParam {String} [role] Role Id.
+ * * 
  * @apiSuccess {String} message  describes the success of the action performed.
 * @apiSuccess {Object} payload  message credentials Array
  * @apiSuccess {String} payload._id message ID.

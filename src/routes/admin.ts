@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import ContactController from '../controllers/Contact';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
 import ReportController from '../controllers/Report';
@@ -33,7 +32,6 @@ const {
   GET_DEPARTMENT,
   UPDATE_DEPARTMENT,
   ADD_CREDIT,
-  GET_CONTACT,
   GET_MESSAGE,
   CREATE_EMPLOYEE,
   GET_EMPLOYEES,
@@ -116,14 +114,6 @@ admin.delete(
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(DepartmentValidation.ValidateDeleteDepartment),
   HandleAsyncFactory(DepartmentController.DeleteMultipleDepartment),
-);
-
-// Admin: Contact Routes
-admin.get(
-  GET_CONTACT,
-  HandleAsyncFactory(ProtectAdminRoute),
-  HandleAsyncFactory(GetValidation),
-  HandleAsyncFactory(ContactController.GetAllContact),
 );
 
 // Admin: Message Routes

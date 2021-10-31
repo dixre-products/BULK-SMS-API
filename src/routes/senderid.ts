@@ -2,9 +2,9 @@ import { Router } from 'express';
 import SenderIdController from '../controllers/SenderIDs';
 import Validation from '../Validators/SenderId';
 import constants from '../constants/index';
-import GetValidation from '../Validators/Get.Requests/index';
 import ProtectRoutes from '../Middlewares/check.route.access';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
+import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
 
 const { GET_ID_PARAM, BASE_SUB } = constants.RoutesSubs;
 const senderID = Router();
@@ -19,7 +19,7 @@ senderID.post(
 senderID.get(
   BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(UserGetValidator),
   HandleAsyncFactory(SenderIdController.GetAllSenderId),
 );
 

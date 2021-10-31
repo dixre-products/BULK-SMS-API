@@ -4,6 +4,7 @@ import Validation from '../Validators/Messages';
 import ProtectRoutes from '../Middlewares/check.route.access';
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
+import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
 
 const { GET_ID_PARAM, BASE_SUB, DELETE_MULTIPLE_MESSAGES } =
   constants.RoutesSubs;
@@ -38,10 +39,10 @@ message.delete(
 );
 
 message.get(
-  GET_ID_PARAM,
+  BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(Validation.ValidateGetSingleMessageByGroup),
-  HandleAsyncFactory(MessageController.GetMessageByGroup),
+  HandleAsyncFactory(UserGetValidator),
+  HandleAsyncFactory(MessageController.GetAllMessages),
 );
 
 export default message;
