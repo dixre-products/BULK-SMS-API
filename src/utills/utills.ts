@@ -29,7 +29,7 @@ export function encodeToJwtToken(
     algorithm: config.get('JWT_ALGO') as jwt.Algorithm,
   };
   if (expire) {
-    signOptions.expiresIn = expire;
+    // signOptions.expiresIn = expire;
   }
 
   try {

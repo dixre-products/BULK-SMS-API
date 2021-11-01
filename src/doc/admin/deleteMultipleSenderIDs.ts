@@ -6,10 +6,10 @@
  * @apiSampleRequest off
  *
  *  
- * @apiParam {String} employeeIds Array of Sender ids to be deleted.
+ * @apiParam {String} senderIds Array of Sender ids to be deleted.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  Employee credentials object
+ * @apiSuccess {Object} payload  SenderId payload object
  * @apiSuccess {Number} payload.deletedCount number of items deleted.
  * @apiSuccess {Number} payload.ok 
  * @apiSuccess {Number} payload.n 

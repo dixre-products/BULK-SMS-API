@@ -1,7 +1,7 @@
 /**
- * @api {GET} /senderID/ Get All sender IDs
+ * @api {GET} /admin/senderID/ Get All sender IDs
  * @apiName GetAllSenderIds
- * @apiGroup Sender
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *

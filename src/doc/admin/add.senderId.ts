@@ -1,7 +1,7 @@
 /**
  * @api {POST} /admin/senderID  Create a senderID
  * @apiName Post senderID
- * @apiGroup senderID
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *

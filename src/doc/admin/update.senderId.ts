@@ -1,7 +1,7 @@
 /**
  * @api {PUT} /admin/senderID  Update a senderID
  * @apiName Update senderID
- * @apiGroup senderID
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  * 
