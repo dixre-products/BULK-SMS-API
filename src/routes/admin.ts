@@ -43,7 +43,6 @@ const {
   DELETE_ROLE,
 
   DELETE_MULTIPLE_ADMINS,
-  DELETE_MULTIPLE_SENDERS_ID,
   DELETE_MULTIPLE_GROUPS,
   DELETE_MULTIPLE_EMOLOYEES,
   DELETE_MULTIPLE_ROLES,
@@ -87,7 +86,7 @@ admin.delete(
 );
 
 admin.delete(
-  `${SENDERID}${DELETE_MULTIPLE_SENDERS_ID}`,
+  `${SENDERID}`,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(Validation.ValidateDeleteMultipleSenderIds),
   HandleAsyncFactory(SenderIdController.DeleteMultipleSenderIds),
