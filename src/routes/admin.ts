@@ -71,6 +71,13 @@ admin.get(
   HandleAsyncFactory(SenderIdController.GetAllSenderId),
 );
 
+admin.get(
+  `${SENDERID}${GET_ID_PARAM}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateGetSenderID),
+  HandleAsyncFactory(SenderIdController.GetSingleSenderID),
+);
+
 admin.put(
   SENDERID,
   HandleAsyncFactory(ProtectAdminRoute),

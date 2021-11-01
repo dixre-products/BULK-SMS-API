@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import {
   ProcessingGetRequestSuccess,
+  ProcessingSuccess,
   ResourceNotFound,
 } from '../../RequestStatus/status';
 import models from '../../models';
@@ -41,4 +42,18 @@ export default async function GetSenderIDs(
     totalDoc: doc.totalDocs,
     totalPages: doc.totalPages,
   });
+}
+
+export async function GetSingleSenderID(req: Request, res: Response) {
+  const { id } = req.params;
+
+  const doc = await models.SenderIDs.findOne({ _id: id });
+
+  if (!doc)
+    return ResourceNotFound(
+      res,
+      constants.RequestResponse.RoleNotFoundWithId,
+    );
+
+  return ProcessingSuccess(res, doc);
 }

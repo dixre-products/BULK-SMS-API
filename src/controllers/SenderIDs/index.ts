@@ -4,7 +4,7 @@ import {
   DeleteMultipleSenders as DeleteMultipleSenderIds,
 } from './delete.senderid';
 import UpdateSenderId from './update.senderid';
-import GetAllSenderId from './get.senderid';
+import GetAllSenderId, { GetSingleSenderID } from './get.senderid';
 
 export default {
   AddSenderId,
@@ -12,4 +12,5 @@ export default {
   GetAllSenderId,
   DeleteSenderId,
   DeleteMultipleSenderIds,
+  GetSingleSenderID,
 };
