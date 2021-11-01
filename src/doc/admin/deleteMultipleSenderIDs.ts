@@ -1,27 +1,29 @@
 /**
- * @api {PUT} /senderID  Update a senderID
- * @apiName Update senderID
- * @apiGroup senderID
+ * @api {DELETE} /admin/senderID Delete multiple SenderIDs 
+ * @apiName Delete multiple SenderIDs
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
- * 
- * 
- *
- *
- * @apiParam {String} id id of the senderID to be updated
- * @apiParam {Object} updates object that contains updates to be applied.
- * @apiParam {String} [updates.name]  The new senderID name.
  *
  *  
+ * @apiParam {String} employeeIds Array of Sender ids to be deleted.
  * 
- * 
+ * @apiSuccess {String} message  describes the success of the action performed.
+ * @apiSuccess {Object} payload  Employee credentials object
+ * @apiSuccess {Number} payload.deletedCount number of items deleted.
+ * @apiSuccess {Number} payload.ok 
+ * @apiSuccess {Number} payload.n 
+ *
+ *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
- *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "Admin"
+            "n": 1,
+            "ok": 1,
+             "deletedCount": 2,
+            
  *       }
  *     }
  *
@@ -43,11 +45,7 @@
  *     }
  *
  *
- *
- *
  * 
- * 
- *
  *
  *
  */

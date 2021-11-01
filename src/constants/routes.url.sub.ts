@@ -62,7 +62,7 @@ const DELETE_MULTIPLE_GROUPS = '/delete-groups';
 const DELETE_MULTIPLE_EMOLOYEES = '/delete-employees';
 const DELETE_MULTIPLE_MESSAGES = '/delete-messages';
 const DELETE_MULTIPLE_ROLES = '/delete-roles';
-const DELETE_MULTIPLE_SENDERS = '/delete-senders';
+const DELETE_MULTIPLE_SENDERS_ID = '/delete-senderIds';
 
 // Report
 const CREATE_REPORT = '/create-report';
@@ -108,7 +108,7 @@ export default {
   DELETE_MULTIPLE_GROUPS,
   DELETE_MULTIPLE_MESSAGES,
   DELETE_MULTIPLE_ROLES,
-  DELETE_MULTIPLE_SENDERS,
+  DELETE_MULTIPLE_SENDERS_ID,
   DELETE_MULTIPLE_REPORTS,
 
   GET_REPORT,

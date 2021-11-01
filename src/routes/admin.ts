@@ -3,7 +3,6 @@ import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
 import ReportController from '../controllers/Report';
 import RoleController from '../controllers/Role';
-import SenderController from '../controllers/SenderIDs';
 import MessageController from '../controllers/Messages';
 import AdminController from '../controllers/Admin';
 import GetValidation from '../Validators/Get.Requests/index';
@@ -14,10 +13,11 @@ import AdminValidation from '../Validators/Admin';
 import LoginAccount from '../controllers/Auth/login';
 import LoginValidation from '../Validators/Auth/index';
 import ProtectAdminRoute from '../Middlewares/admin.protected.routes';
-import SenderValidation from '../Validators/SenderId';
 import ReportValidation from '../Validators/Report';
 import ActivitiesValidator from '../Validators/Activities/get.activities.validation';
 import Activities from '../controllers/Activities';
+import SenderIdController from '../controllers/SenderIDs';
+import Validation from '../Validators/SenderId';
 
 // import GetRequestValidation from '../Validators/Get.Requests';
 
@@ -43,7 +43,7 @@ const {
   DELETE_ROLE,
 
   DELETE_MULTIPLE_ADMINS,
-  DELETE_MULTIPLE_SENDERS,
+  DELETE_MULTIPLE_SENDERS_ID,
   DELETE_MULTIPLE_GROUPS,
   DELETE_MULTIPLE_EMOLOYEES,
   DELETE_MULTIPLE_ROLES,
@@ -55,8 +55,43 @@ const {
   ACTIVITIES,
 } = constants.RoutesSubs;
 
-const { LOGIN_BASE } = constants.RouteBase;
+const { LOGIN_BASE, SENDERID } = constants.RouteBase;
 const admin = Router();
+
+admin.post(
+  SENDERID,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateCreateSenderId),
+  HandleAsyncFactory(SenderIdController.AddSenderId),
+);
+
+admin.get(
+  `${SENDERID}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(SenderIdController.GetAllSenderId),
+);
+
+admin.put(
+  SENDERID,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateUpdateSenderId),
+  HandleAsyncFactory(SenderIdController.UpdateSenderId),
+);
+
+admin.delete(
+  `${SENDERID}${GET_ID_PARAM}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateDeleteSenderID),
+  HandleAsyncFactory(SenderIdController.DeleteSenderId),
+);
+
+admin.delete(
+  `${SENDERID}${DELETE_MULTIPLE_SENDERS_ID}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateDeleteMultipleSenderIds),
+  HandleAsyncFactory(SenderIdController.DeleteMultipleSenderIds),
+);
 
 // Activities
 admin.get(
@@ -272,15 +307,6 @@ admin.put(
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateUpdateAdmin),
   HandleAsyncFactory(AdminController.UpdateAdmin),
-);
-
-// Sender
-
-admin.delete(
-  DELETE_MULTIPLE_SENDERS,
-  HandleAsyncFactory(ProtectAdminRoute),
-  HandleAsyncFactory(SenderValidation.ValidateDeleteMultipleSender),
-  HandleAsyncFactory(SenderController.DeleteMultipleSenders),
 );
 
 export default admin;

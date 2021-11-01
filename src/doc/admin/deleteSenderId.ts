@@ -1,28 +1,30 @@
 /**
- * @api {POST} /senderID  Create a senderID
- * @apiName Post senderID
+ * @api {DELETE} /admin/senderID/:id Delete a senderID
+ * @apiName Delete a senderID
  * @apiGroup senderID
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- * @apiParam {String} name senderID name.
- *
+ *  
+ *  @apiParam {String} id id of the senderID.
+ * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  senderID object
+*  @apiSuccess {Object} payload  senderID  object
  * @apiSuccess {String} payload._id senderID ID.
- * @apiSuccess {String} payload.name senderID name..
+ * @apiSuccess {String} payload.name senderID name 
  *
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {
  *       "message": "SUCCESSFULL",
- *       "payload":{
+ *       "payload"{
  *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "Admin",
+            "name": "Dixre"
  *       }
  *     }
  *
+ * 
  * @apiError Invalid Input
  * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
@@ -40,6 +42,9 @@
  *        "mesage": "describes reason for error"
  *     }
  *
+ *
+ *
+ * 
  *
  *
  *

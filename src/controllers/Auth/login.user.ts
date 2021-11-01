@@ -48,10 +48,10 @@ export default async function loginAccount(
   // ACTIVITY LOGGER
   const Activity = new models.Activities({
     group: '',
-    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    userType: ACCOUNT_TYPE.AGENCY_ACCOUNT,
     admin: responseObj._id, // eslint-disable-line
     user: responseObj._id, // eslint-disable-line
-    entity: Entities.ADMIN,
+    entity: Entities.EMPLOYEES,
     type: EntitiesAction.LOGIN,
     description: 'User loged in!!',
     payload: {
