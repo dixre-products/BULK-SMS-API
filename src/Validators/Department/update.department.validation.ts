@@ -5,7 +5,6 @@ import { InvalidInputs } from '../../RequestStatus/status';
 const requestBodySchemaCredit = joi.object({
   id: joi.string().required().label('Department ID'),
   credit: joi.number().optional().allow('').label('credit'),
-  senderIds: joi.array().items(joi.string()).optional().allow(),
 });
 
 const requestBodySchema = joi.object({
@@ -13,6 +12,7 @@ const requestBodySchema = joi.object({
   updates: joi.object({
     credit: joi.number(),
     name: joi.string(),
+    senderIds: joi.array().items(joi.string()).optional().allow(''),
   }),
 });
 

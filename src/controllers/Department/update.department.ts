@@ -33,9 +33,10 @@ export async function UpdateDepartment(req: Request, res: Response) {
       ...updates,
       $inc: { credit: updates.credit },
     } as updatesProps;
-    // @ts-ignore
-    delete updates.credit;
   }
+
+  // @ts-ignore
+  delete updates.credit;
 
   const doc = await models.Department.findOneAndUpdate(
     { _id: ID },
