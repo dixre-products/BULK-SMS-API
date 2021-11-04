@@ -15,7 +15,7 @@ const InvalidInput = 'INVALID.INPUT';
 const UserSuspended = 'USER.SUSPENDED';
 const PinNotTimeOut = 'PIN.NOT.TIMEOUT';
 const MAX_TRIALS_EXCEEDED = 'MAX.TRIALS.EXCEEDED';
-
+const REQUEST_NOT_ALLOWED = 'NOT.ALLOWED';
 const UserNotFound = 'USER.NOT.FOUND';
 
 const AdminNotFound = 'Admin not found';
@@ -39,6 +39,7 @@ const UserNotFoundWithId = 'User not found with corresponding id';
 const ReportNotFoundWithId = 'Report not found with corresponding id';
 
 export default {
+  REQUEST_NOT_ALLOWED,
   UserNotFound,
   LoginSuccess,
   InvalidCredential,

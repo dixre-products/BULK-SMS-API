@@ -1,6 +1,5 @@
 /* eslint-disable */
 enum MessageStatus {
-  NOT_APPROVED = 'NOT_APPROVED',
   APPROVED = 'APPROVED',
   PENDING = 'PENDING',
   SENT = 'SENT',
@@ -15,6 +14,14 @@ export enum Entities {
   DEPARTMENTS = 'DEPARTMENTS',
   ADMIN = 'ADMIN',
   REPORTS = 'REPORTS',
+}
+
+export enum ReportStatus {
+  REJECTED = 'REJECTED',
+  APPROVED = 'APPROVED',
+  INPROGRESS = 'INPROGRESS',
+  RECEIVED = 'RECIEVED',
+  DEFAULT = 'DEFAULT',
 }
 
 export enum EntitiesAction {

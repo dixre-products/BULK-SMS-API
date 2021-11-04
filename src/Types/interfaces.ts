@@ -210,4 +210,5 @@ export interface RequestParams {
   agency: string;
   uid: string;
   role: string;
+  status: string;
 }

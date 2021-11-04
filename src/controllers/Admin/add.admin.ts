@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import { ProcessingSuccess } from '../../RequestStatus/status';
+import {
+  ProcessingSuccess,
+  UserExist,
+} from '../../RequestStatus/status';
 import models from '../../models';
 import {
   ACCOUNT_TYPE,
@@ -18,6 +21,13 @@ export default async function CreateAdmin(
     name: string;
     password: string;
   };
+
+  // CHECKS IF ACCOUNT ALREADY EXIST
+  const findAccount = await models.Admin.findOne({
+    email: new RegExp(`^${email}$`, 'i'),
+  });
+
+  if (findAccount) return UserExist(res);
 
   const admin = new models.Admin({
     email,

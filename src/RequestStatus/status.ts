@@ -161,3 +161,10 @@ export const UserDoesNotExist = (res: Response) => {
     error: Constants.RequestResponse.UserNotFound,
   });
 };
+
+export const RequestNotAllowed = (res: Response) => {
+  res.status(STATUS_CODES.CONFLICT.CODE).json({
+    message: Constants.Validations.REQUEST_NOT_ALLOWED,
+    error: Constants.RequestResponse.REQUEST_NOT_ALLOWED,
+  });
+};

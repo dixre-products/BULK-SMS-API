@@ -47,7 +47,9 @@ export async function GetSingleDepartment(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Department.findOne({ _id: id });
+  const doc = await models.Department.findOne({ _id: id }).populate(
+    'senderIds',
+  );
 
   if (!doc)
     return ResourceNotFound(

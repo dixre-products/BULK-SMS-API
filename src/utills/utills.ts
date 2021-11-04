@@ -114,6 +114,7 @@ type queryConfiguration = {
   roles: string;
   uid: string;
   agency: string;
+  status?: string;
 };
 
 // compose query base on requestParam which is consistent on GET requests
@@ -124,8 +125,15 @@ export function getQuery(
   let query = {}; // query object
 
   // request parameters destructuring
-  const { searchText, role, uid, agency, pageSize, pageNumber } =
-    requestParams;
+  const {
+    searchText,
+    role,
+    uid,
+    agency,
+    pageSize,
+    pageNumber,
+    status,
+  } = requestParams;
 
   // check if document is to apply the agency filter
   if (queryConfig.agency && agency) {
@@ -151,6 +159,15 @@ export function getQuery(
     query = {
       ...query,
       [queryConfig.uid]: mongoose.Types.ObjectId(uid),
+    };
+  }
+
+  // check if document is to apply the status filter
+  if (queryConfig.status && status) {
+    // compose query with rest operators without losing previous values of object
+    query = {
+      ...query,
+      [queryConfig.status]: status,
     };
   }
 

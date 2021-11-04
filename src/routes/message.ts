@@ -6,8 +6,12 @@ import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
 
-const { GET_ID_PARAM, BASE_SUB, DELETE_MULTIPLE_MESSAGES } =
-  constants.RoutesSubs;
+const {
+  GET_ID_PARAM,
+  BASE_SUB,
+  DELETE_MULTIPLE_MESSAGES,
+  SEND_MESSAGE,
+} = constants.RoutesSubs;
 const message = Router();
 
 message.post(
@@ -45,4 +49,10 @@ message.get(
   HandleAsyncFactory(MessageController.GetAllMessages),
 );
 
+message.put(
+  SEND_MESSAGE,
+  HandleAsyncFactory(ProtectRoutes),
+  HandleAsyncFactory(Validation.ValidateUpdateMessage),
+  HandleAsyncFactory(MessageController.SendMessage),
+);
 export default message;

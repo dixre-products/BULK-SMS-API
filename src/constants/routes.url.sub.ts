@@ -38,6 +38,7 @@ const DELETE_MULTIPLE_CONTACTS = '/delete-contacts';
 
 // Message Endpoint
 const GET_MESSAGE = '/get-message';
+const SEND_MESSAGE = '/send-message';
 
 // Employee Endpoint
 const CREATE_EMPLOYEE = '/create-employee';
@@ -71,6 +72,7 @@ const DELETE_REPORT = '/delete-report';
 const DELETE_MULTIPLE_REPORTS = '/delete-reports';
 
 export default {
+  SEND_MESSAGE,
   GET_EMPLOYESS_BY_GROUP,
   GET_EMPLOYEES,
   PROFILE,

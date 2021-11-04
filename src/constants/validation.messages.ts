@@ -16,7 +16,7 @@ const PIN_NOT_TIMED_OUT =
 const INCORRECT_PASSWORD = 'Incorrect password please try again.';
 
 const USER_EXIST =
-  'Account is already in use by another user, please a different phone number';
+  'Email is already in use by another account, please use a different email';
 
 const SERVER_ERROR =
   'An unexpected error is preventing the server from processing the request please try again later.';
@@ -34,7 +34,11 @@ const VERIFICATION_TOKEN_EXPIRE =
 
 const USER_NOT_EXIST = 'The user does not exist';
 
+const REQUEST_NOT_ALLOWED =
+  'Request not allowed, you might be trying to perform an operation that is not allowed e.g updating a message after it is sent';
+
 export default {
+  REQUEST_NOT_ALLOWED,
   USER_NOT_EXIST,
   INVALID_PASSWORD,
   INVALID_CREDENTIALS,

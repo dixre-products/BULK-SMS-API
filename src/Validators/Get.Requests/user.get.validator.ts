@@ -7,6 +7,7 @@ const requestBodySchema = joi.object({
   pageSize: joi.number().required(),
   searchText: joi.string().optional().allow(''),
   agency: joi.string().required(),
+  status: joi.string().optional().allow(''),
   uid: joi.string().optional().allow(''),
   role: joi.string().optional().allow(''),
 });

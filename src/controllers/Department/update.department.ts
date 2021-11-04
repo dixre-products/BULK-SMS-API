@@ -8,11 +8,16 @@ import {
   EntitiesAction,
 } from '../../constants/enums';
 
+type updatesProps = {
+  name: string;
+  credit: number;
+  senderIds: any[];
+};
 export async function UpdateDepartment(req: Request, res: Response) {
-  const { id, updates } = req.body as {
+  const { id } = req.body as {
     id: string;
-    updates: { name: string; credit: number; senderIds: any[] };
   };
+  let updates = req.body.updates as updatesProps;
 
   const ID = Types.ObjectId(id);
   if (updates.senderIds) {
@@ -23,11 +28,20 @@ export async function UpdateDepartment(req: Request, res: Response) {
     updates.senderIds = formattedIDS;
   }
 
+  if (updates.credit) {
+    updates = {
+      ...updates,
+      $inc: { credit: updates.credit },
+    } as updatesProps;
+    // @ts-ignore
+    delete updates.credit;
+  }
+
   const doc = await models.Department.findOneAndUpdate(
     { _id: ID },
     updates,
     { new: true },
-  );
+  ).populate('senderIds');
 
   // ACTIVITY LOGGER
   // ============================

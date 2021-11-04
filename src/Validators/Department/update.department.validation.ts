@@ -4,7 +4,7 @@ import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchemaCredit = joi.object({
   id: joi.string().required().label('Department ID'),
-  credit: joi.number().required().label('credit'),
+  credit: joi.number().optional().allow('').label('credit'),
   senderIds: joi.array().items(joi.string()).optional().allow(),
 });
 

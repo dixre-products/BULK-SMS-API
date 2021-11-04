@@ -3,7 +3,7 @@ import {
   DeleteMessage,
   DeleteMultipleMessage,
 } from './delete.message';
-import UpdateMessage from './update.message';
+import UpdateMessage, { SendMessage } from './update.message';
 import GetAllMessages from './get.message';
 
 export default {
@@ -12,4 +12,5 @@ export default {
   GetAllMessages,
   DeleteMessage,
   DeleteMultipleMessage,
+  SendMessage,
 };
