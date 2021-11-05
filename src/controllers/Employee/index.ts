@@ -12,7 +12,7 @@ import {
 } from './get.employee';
 import RequestRessetEmail, {
   RessetPassword,
-} from '../Admin/password.resets';
+} from './resset.passwords';
 
 export default {
   CreateEmployee,
