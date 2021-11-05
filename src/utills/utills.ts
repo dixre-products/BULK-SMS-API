@@ -213,7 +213,7 @@ export async function sendRessetPasswordLink(
         {
           From: {
             Email: 'developers@dixre.com',
-            Name: 'WaypointDelivery',
+            Name: 'SMS Platform',
           },
           To: [
             {
