@@ -18,6 +18,9 @@ import ActivitiesValidator from '../Validators/Activities/get.activities.validat
 import Activities from '../controllers/Activities';
 import SenderIdController from '../controllers/SenderIDs';
 import Validation from '../Validators/SenderId';
+import ValidateRessetPasswordEmail from '../Validators/PasswordResset/validate.email.resset.password';
+import ValidateRessetPassword from '../Validators/PasswordResset/validate.password.resset';
+import ExtractInfoMiddleware from '../Middlewares/extract.info.header';
 
 // import GetRequestValidation from '../Validators/Get.Requests';
 
@@ -52,10 +55,26 @@ const {
   GET_REPORT,
 
   ACTIVITIES,
+
+  RESSET_PASSWORD,
+  SEND_RESSET_PASSWORD_LINK,
 } = constants.RoutesSubs;
 
 const { LOGIN_BASE, SENDERID } = constants.RouteBase;
 const admin = Router();
+
+admin.post(
+  SEND_RESSET_PASSWORD_LINK,
+  HandleAsyncFactory(ValidateRessetPasswordEmail),
+  HandleAsyncFactory(AdminController.RequestRessetEmail),
+);
+
+admin.post(
+  RESSET_PASSWORD,
+  HandleAsyncFactory(ExtractInfoMiddleware),
+  HandleAsyncFactory(ValidateRessetPassword),
+  HandleAsyncFactory(AdminController.RessetPassword),
+);
 
 admin.post(
   SENDERID,

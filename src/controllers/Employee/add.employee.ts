@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
-import { ProcessingSuccess } from '../../RequestStatus/status';
+import {
+  ProcessingSuccess,
+  UserExist,
+} from '../../RequestStatus/status';
 import models from '../../models';
 import { EmployeeSignupProps } from '../../Types/interfaces';
 import {
@@ -15,6 +18,13 @@ export default async function CreateEmployee(
 ) {
   const { email, name, password, address, groupId, roleId } =
     req.body as EmployeeSignupProps;
+
+  // CHECKS IF ACCOUNT ALREADY EXIST
+  const findAccount = await models.Admin.findOne({
+    email: new RegExp(`^${email}$`, 'i'),
+  });
+
+  if (findAccount) return UserExist(res);
 
   const $GROUPID = Types.ObjectId(groupId);
   const $ROLEID = Types.ObjectId(roleId);

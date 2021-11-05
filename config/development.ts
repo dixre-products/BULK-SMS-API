@@ -17,6 +17,8 @@ const {
   MESSENGER_ID,
   APP_ID,
   MEASUREMENT_ID,
+  MAILJET_PUBLIC,
+  MAILJET_PRIVATE,
 } = process.env;
 
 export default {
@@ -36,6 +38,8 @@ export default {
   TWILIO_ACCOUNT_SID,
   TWILIO_MESSAGING_SID,
   TWILIO_PHONE_NUMBER,
+  MAILJET_PUBLIC,
+  MAILJET_PRIVATE,
 
   API_KEY,
   AUTH_DOMAIN,

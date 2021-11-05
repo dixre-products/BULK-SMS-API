@@ -1,5 +1,6 @@
 /* eslint-disable radix */
 import * as jwt from 'jsonwebtoken';
+import * as mailjet from 'node-mailjet';
 import {
   PhoneNumberFormat as PNF,
   PhoneNumberUtil,
@@ -184,4 +185,47 @@ export function getQuery(
       page: parseInt(pageNumber.toString()),
     },
   };
+}
+
+export async function sendRessetPasswordLink(
+  token: string,
+  user: { name: string; isAdmin: boolean; email: string },
+) {
+  let html = `<h3>Hi ${user.name}.</h3>`;
+  if (user.isAdmin) {
+    html += `Use this link  <a href="https://sms-platform-admin.herokuapp.com./auth/reset-password/${token}">Resset password link to resset your account password for SMS platform</a>`;
+  } else {
+    html += `Use this link  <a href="https://sms-platform-agencies.herokuapp.com/auth/reset-password/${token}">Resset password link to resset your account password for SMS platform</a>`;
+  }
+  html +=
+    '<p> If you did not initiate this action, you can ignore this email. ';
+  html += '<p>Thank you.</p>';
+  html += 'SMS plafform  Team!';
+
+  await mailjet
+    .connect(
+      config.get('MAILJET_PUBLIC'),
+      config.get('MAILJET_PRIVATE'),
+    )
+    .post('send', { version: 'v3.1' })
+    .request({
+      Messages: [
+        {
+          From: {
+            Email: 'developers@dixre.com',
+            Name: 'WaypointDelivery',
+          },
+          To: [
+            {
+              Email: user.email,
+              Name: `${user.name}`,
+            },
+          ],
+          Subject: 'Password Resset email.',
+          TextPart: '',
+          HTMLPart: html,
+          CustomID: 'AppGettingStartedTest',
+        },
+      ],
+    });
 }

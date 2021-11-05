@@ -7,7 +7,8 @@ import {
 } from '../constants/enums';
 import { Activities as ActivitiesProps } from '../Types/interfaces';
 
-const { CREATE, UPDATE, DELETE, LOGIN } = EntitiesAction;
+const { CREATE, UPDATE, DELETE, LOGIN, PASSWORD_RESSET } =
+  EntitiesAction;
 const {
   DEPARTMENTS,
   MESSAGES,
@@ -35,7 +36,7 @@ const Activities: Schema = new Schema(
 
     type: {
       type: Schema.Types.String,
-      enum: [CREATE, UPDATE, DELETE, LOGIN],
+      enum: [CREATE, UPDATE, DELETE, LOGIN, PASSWORD_RESSET],
     },
 
     description: Schema.Types.String,

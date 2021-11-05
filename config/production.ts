@@ -26,6 +26,8 @@ const {
   APP_ID,
   MEASUREMENT_ID,
   CLUSTER,
+  MAILJET_PUBLIC,
+  MAILJET_PRIVATE,
 } = process.env;
 
 export default {
@@ -53,4 +55,6 @@ export default {
   MESSENGER_ID,
   APP_ID,
   MEASUREMENT_ID,
+  MAILJET_PUBLIC,
+  MAILJET_PRIVATE,
 };

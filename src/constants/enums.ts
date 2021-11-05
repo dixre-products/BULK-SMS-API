@@ -29,6 +29,7 @@ export enum EntitiesAction {
   UPDATE = 'UPDATE',
   CREATE = 'CREATE',
   LOGIN = 'LOGIN',
+  PASSWORD_RESSET = 'PASSWORD-RESSET',
 }
 
 export enum ACCOUNT_TYPE {

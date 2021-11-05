@@ -24,8 +24,6 @@ const ACTIVITIES = '/activities';
 const GET_PROFILE = '/:uid';
 const PROFILE = '/';
 
-const RESSET_PASSWORD = '/';
-
 // Department Endpoint
 const CREATE_DEPARTMENT = '/create-department';
 const GET_DEPARTMENT = '/get-department';
@@ -71,6 +69,10 @@ const GET_REPORT = '/get-report';
 const DELETE_REPORT = '/delete-report';
 const DELETE_MULTIPLE_REPORTS = '/delete-reports';
 
+// resset password
+const SEND_RESSET_PASSWORD_LINK = '/send-reset-password-link';
+const RESSET_PASSWORD = '/reset-password';
+
 export default {
   SEND_MESSAGE,
   GET_EMPLOYESS_BY_GROUP,
@@ -84,6 +86,8 @@ export default {
   VERIFICATION_CALL,
   VERIFICATION_CODE,
   VERIFICATION_SMS,
+
+  SEND_RESSET_PASSWORD_LINK,
   RESSET_PASSWORD,
 
   GET_ID_PARAM,
