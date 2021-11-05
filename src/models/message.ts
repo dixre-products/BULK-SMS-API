@@ -27,6 +27,8 @@ const Message: mongoose.Schema = new mongoose.Schema(
     },
 
     date: { type: mongoose.Schema.Types.Date, default: Date.now() },
+
+    scheduleDate: { type: mongoose.Schema.Types.Date },
   },
 
   { autoIndex: false },

@@ -49,7 +49,7 @@ export default async function CreateEmployee(
   employee.setPassword(password);
 
   employee.name = name;
-  employee.email = email;
+  employee.email = email.toLowerCase();
   employee.address = address;
 
   employee.groupId = $GROUPID;

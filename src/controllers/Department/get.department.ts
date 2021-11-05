@@ -21,6 +21,7 @@ export async function GetAllDepartment(req: Request, res: Response) {
 
   const doc = await models.Department.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,

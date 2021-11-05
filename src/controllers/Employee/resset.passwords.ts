@@ -25,7 +25,7 @@ export default async function RequestRessetEmail(
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Employee.findOne(
     {
-      email: new RegExp(`^${email}$`, 'i'),
+      email: email.toLowerCase(),
     },
     {
       hash: 0,

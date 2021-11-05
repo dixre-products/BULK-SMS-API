@@ -21,6 +21,7 @@ export async function GetAllRole(req: Request, res: Response) {
 
   const doc = await models.Role.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,

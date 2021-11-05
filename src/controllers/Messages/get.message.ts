@@ -25,6 +25,7 @@ export default async function GetAllMessages(
 
   const doc = await models.Message.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,

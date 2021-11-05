@@ -7,6 +7,7 @@ const requestBodySchema = joi.object({
 
   updates: joi.object({
     message: joi.string(),
+    scheduleDate: joi.date().optional().allow(''),
   }),
 });
 

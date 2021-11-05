@@ -9,6 +9,7 @@
  * @apiParam {String} message message to be sent.
  * @apiParam {String} [sender]  message sender
  * @apiParam {String} groupId department id
+ * @apiParam {Date}   [scheduleDate] date for message to be sent
  *
  * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  message credentials object

@@ -23,6 +23,7 @@ export async function GetAllAdmin(req: Request, res: Response) {
 
   const doc = await models.Admin.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,

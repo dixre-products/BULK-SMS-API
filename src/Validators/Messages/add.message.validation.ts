@@ -11,6 +11,11 @@ const requestBodySchema = joi.object({
     .items(joi.string())
     .required()
     .label('Contacts'),
+  scheduleDate: joi
+    .date()
+    .optional()
+    .allow('')
+    .label('Scheduled Date'),
 });
 
 export default function ValidateCreateMessage(

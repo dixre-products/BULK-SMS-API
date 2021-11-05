@@ -22,6 +22,7 @@ export async function GetAllEmployee(req: Request, res: Response) {
 
   const doc = await models.Employee.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,
@@ -47,9 +48,9 @@ export async function GetAllEmployeeByAgency(
   res: Response,
 ) {
   const { groupId } = req.params; // department, group or agancy ID
-  const doc = await models.Employee.find({ groupId }).populate(
-    'groupId roleId',
-  );
+  const doc = await models.Employee.find({ groupId })
+    .populate('groupId roleId')
+    .sort({ date: -1 });
 
   if (!doc)
     return ResourceNotFound(

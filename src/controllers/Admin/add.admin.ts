@@ -24,13 +24,13 @@ export default async function CreateAdmin(
 
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Admin.findOne({
-    email: new RegExp(`^${email}$`, 'i'),
+    email: email.toLowerCase(),
   });
 
   if (findAccount) return UserExist(res);
 
   const admin = new models.Admin({
-    email,
+    email: email.toLowerCase(),
     name,
   }); // INTIALIZE A NEW ADMIN OBJECT
 

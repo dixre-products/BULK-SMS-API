@@ -201,6 +201,7 @@ export interface MessageProps extends Document {
   contacts: Array<string>;
   time: Date;
   status: string;
+  scheduleDate: Date;
 }
 
 export interface RequestParams {

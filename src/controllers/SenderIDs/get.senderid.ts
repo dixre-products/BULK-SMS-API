@@ -24,6 +24,7 @@ export default async function GetSenderIDs(
 
   const doc = await models.SenderIDs.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,

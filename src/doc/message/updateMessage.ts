@@ -9,9 +9,9 @@
  * @apiParam {String} id id of the message to be updated
  * @apiParam {Object} updates object that contains updates to be applied.
  * @apiParam {String} [updates.message]  The new created message to be sent.
- *  
+ * @apiParam {Date}   [updates.scheduleDate] date for message to be sent
  * 
- *  @apiSuccess {String} message  describes the success of the action performed.
+ * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  message credentials object
  * @apiSuccess {String} payload._id message ID.
  * @apiSuccess {Number[]} payload.contacts list of contacts.

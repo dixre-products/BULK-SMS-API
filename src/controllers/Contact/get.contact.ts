@@ -25,6 +25,7 @@ export default async function GetAllContact(
 
   const doc = await models.Contact.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,
