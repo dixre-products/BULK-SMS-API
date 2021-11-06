@@ -70,7 +70,7 @@ export async function RessetPassword(req: Request, res: Response) {
   const { password } = req.body as EmployeeSignupProps;
 
   // CHECKS IF ACCOUNT ALREADY EXIST
-  const findAccount = await models.Admin.findOne(
+  const findAccount = await models.Employee.findOne(
     {
       _id: Types.ObjectId(res.locals.id),
     },
