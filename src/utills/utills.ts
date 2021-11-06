@@ -193,9 +193,9 @@ export async function sendRessetPasswordLink(
 ) {
   let html = `<h3>Hi ${user.name}.</h3>`;
   if (user.isAdmin) {
-    html += `Use this link  <a href="https://sms-platform-admin.herokuapp.com./auth/reset-password/${token}">Resset password link to resset your account password for SMS platform</a>`;
+    html += `Use this link  <a href="https://sms-platform-admin.herokuapp.com/auth/reset-password/${token}">Resset password link to resset your account password for SMS platform</a>`;
   } else {
-    html += `Use this link  <a href="https://sms-platform-agencies.herokuapp.com/auth/reset-password/${token}">Resset password link to resset your account password for SMS platform</a>`;
+    html += `Use this link  <a href="https://sms-platform-agencies.herokuapp.com/auth/reset-password/${token}">Reset password link to resset your account password for SMS platform</a>`;
   }
   html +=
     '<p> If you did not initiate this action, you can ignore this email. ';
