@@ -69,6 +69,8 @@ export default async function RequestRessetEmail(
 export async function RessetPassword(req: Request, res: Response) {
   const { password } = req.body as EmployeeSignupProps;
 
+  console.log(password);
+  console.log(res.locals.id);
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Employee.findOne(
     {
