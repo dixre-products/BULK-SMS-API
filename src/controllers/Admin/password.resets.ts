@@ -34,9 +34,10 @@ export default async function RequestRessetEmail(
   );
 
   if (!findAccount) return UserDoesNotExist(res);
+  const $findAccount = findAccount.toObject();
 
   const { accessToken } = getTokens({
-    ...findAccount,
+    ...$findAccount,
     isAdmin: true,
   } as any);
 
