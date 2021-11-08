@@ -7,9 +7,11 @@ import {
 } from 'google-libphonenumber';
 import mongoose from 'mongoose';
 import * as fs from 'fs';
+import nodeCron from 'node-cron';
 import config from 'config';
 import constants from '../constants/index';
 import { RequestParams, UserProps } from '../Types/interfaces';
+import models from '../models/index';
 
 const privateKey = fs.readFileSync(
   `${process.env.INIT_CWD}/private.key`,
@@ -21,6 +23,77 @@ const publicKey = fs.readFileSync(
 );
 
 require('dotenv/config');
+
+const credentials = {
+  apiKey: config.get('AFRICATALKING_API_KEY'),
+  username: config.get('AFRICATALKING_API_USERNAME'),
+};
+
+// Initialize the SDK
+const AfricasTalking = require('africastalking')(credentials);
+
+const sms = AfricasTalking.SMS;
+
+export function getPhoneNumberInfo(
+  phone: string,
+  countryCode: string,
+) {
+  try {
+    // Get an instance of `PhoneNumberUtil`.
+    const phoneUtil = PhoneNumberUtil.getInstance();
+
+    // Parse number with country code and keep raw input.
+    const number = phoneUtil.parseAndKeepRawInput(phone, countryCode);
+
+    // Print the phone's
+    const phoneNumber = phoneUtil.format(number, PNF.E164);
+
+    return phoneNumber;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+}
+
+export async function MessageService(
+  phoneNumbers: string[],
+  message: string,
+) {
+  const messageContacts: string[] = [];
+  phoneNumbers.forEach((phone) => {
+    messageContacts.push(getPhoneNumberInfo(phone, 'NG'));
+  });
+  const options = {
+    // Set the numbers you want to send to in international format
+    to: messageContacts,
+    // Set your message
+    message,
+    // Set your shortCode or senderId
+    from: 'Dixre',
+  };
+
+  // That’s it, hit send and we’ll take care of the rest
+  return sms.send(options);
+}
+
+nodeCron.schedule('* 10 * * *', async () => {
+  const messages = await models.Message.find({
+    scheduleDate: { $lte: Date.now },
+  });
+
+  /* eslint-disable */
+  for (let message of messages) {
+    await MessageService(message.contacts, message.message);
+    await models.Department.findOneAndUpdate(
+      {
+        _id: message.groupId, // eslint-disable
+      },
+      {
+        $inc: { credit: -message.contacts.length },
+      },
+    );
+  }
+  /* eslint-enable */
+});
 
 export function encodeToJwtToken(
   data: any,
@@ -82,26 +155,6 @@ export function GeneratePin() {
     .join(',');
 }
 
-export async function getPhoneNumberInfo(
-  phone: string,
-  countryCode: string,
-) {
-  try {
-    // Get an instance of `PhoneNumberUtil`.
-    const phoneUtil = PhoneNumberUtil.getInstance();
-
-    // Parse number with country code and keep raw input.
-    const number = phoneUtil.parseAndKeepRawInput(phone, countryCode);
-
-    // Print the phone's
-    const phoneNumber = phoneUtil.format(number, PNF.E164);
-
-    return phoneNumber;
-  } catch (err: any) {
-    throw new Error(err.message);
-  }
-}
-
 export function CheckPassword(pwd: string) {
   const passw = /^[A-Za-z]\w{7,14}$/;
 
@@ -116,6 +169,7 @@ type queryConfiguration = {
   uid: string;
   agency: string;
   status?: string;
+  userType?: string;
 };
 
 // compose query base on requestParam which is consistent on GET requests
@@ -134,6 +188,7 @@ export function getQuery(
     pageSize,
     pageNumber,
     status,
+    userType,
   } = requestParams;
 
   // check if document is to apply the agency filter
@@ -178,11 +233,20 @@ export function getQuery(
     query = { $text: { $search: searchText } };
   }
 
+  // check if document is to apply the status filter
+  if (queryConfig.userType && userType) {
+    // compose query with rest operators without losing previous values of object
+    query = {
+      ...query,
+      [queryConfig.userType]: userType,
+    };
+  }
+
   return {
     paginationQuery: query,
     paginationConfig: {
-      limit: parseInt(pageSize.toString()),
-      page: parseInt(pageNumber.toString()),
+      limit: parseInt(pageSize.toString()), // eslint-disable-line
+      page: parseInt(pageNumber.toString()), // eslint-disable-line
     },
   };
 }

@@ -15,6 +15,7 @@ export default async function AllActivity(
       uid: '',
       agency: 'group',
       roles: 'roleId',
+      userType: 'userType',
     },
   );
 

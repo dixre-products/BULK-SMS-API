@@ -5,6 +5,7 @@ import { InvalidInputs } from '../../RequestStatus/status';
 const requestBodySchema = joi.object({
   pageNumber: joi.number().required(),
   pageSize: joi.number().required(),
+  userType: joi.string().optional().allow(''),
   searchText: joi.string().optional().allow(''),
   agency: joi.string().required(),
   status: joi.string().optional().allow(''),

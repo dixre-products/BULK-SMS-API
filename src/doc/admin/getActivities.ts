@@ -12,6 +12,7 @@
  * @apiParam {String} [agency] group id.
  * @apiParam {String} [uid] user ID.
  * @apiParam {String} [role] Role Id.
+ * @paiParam {String} [userType] filter by userType, value should be either ADMIN-ACCOUNT or AGENCY-ACCOUNT
  * 
  * 
  * @apiSuccess {String} message  describes the success of the action performed.

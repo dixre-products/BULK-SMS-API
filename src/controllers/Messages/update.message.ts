@@ -11,6 +11,7 @@ import MessageStatus, {
   Entities,
   EntitiesAction,
 } from '../../constants/enums';
+import { MessageService } from '../../utills/utills';
 
 export default async function UpdateMessage(
   req: Request,
@@ -62,17 +63,35 @@ export async function SendMessage(req: Request, res: Response) {
   const ID = Types.ObjectId(id);
 
   const getMessage = await models.Message.findOne({ _id: ID }); // eslint-disable-line
+
   if (getMessage?.status !== MessageStatus.PENDING)
     return RequestNotAllowed(res);
+
+  const messageString = getMessage.message;
+  if (!getMessage.scheduleDate) {
+    await MessageService(getMessage.contacts, messageString);
+  }
+
   const doc = await models.Message.findOneAndUpdate(
     { _id: ID }, // eslint-disable-line
     {
-      status: MessageStatus.SENT,
+      status: !getMessage.scheduleDate
+        ? MessageStatus.SENT
+        : MessageStatus.APPROVED,
     },
     {
       new: true,
     },
   ).populate('groupId');
+
+  await models.Department.findOneAndUpdate(
+    {
+      _id: getMessage.groupId, // eslint-disable
+    },
+    {
+      $inc: { credit: -getMessage.contacts.length },
+    },
+  );
 
   // ACTIVITY LOGGER
   // ============================
@@ -84,7 +103,9 @@ export async function SendMessage(req: Request, res: Response) {
     user: res.locals.id,
     entity: Entities.MESSAGES,
     type: EntitiesAction.UPDATE,
-    description: 'Message approved by maker and sent',
+    description: getMessage.scheduleDate
+      ? 'Message approved by checker'
+      : 'Message approved by checker and sent',
     payload: {
       message: doc?.message,
       phoneNumbers: doc?.contacts,
