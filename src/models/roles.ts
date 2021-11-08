@@ -12,6 +12,11 @@ const Role: mongoose.Schema = new mongoose.Schema(
       type: Boolean,
     },
 
+    composeMessage: {
+      type: Boolean,
+      default: false,
+    },
+
     readMessage: {
       type: Boolean,
     },

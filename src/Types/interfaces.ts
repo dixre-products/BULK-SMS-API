@@ -132,6 +132,7 @@ export interface RoleProps extends Document {
   readMessage: boolean;
   name: string;
   addContact: boolean;
+  composeMessage: boolean;
 }
 export interface ContactProps extends Document {
   name: string;

@@ -6,6 +6,7 @@ const requestBodySchema = joi.object({
   sendMessage: joi.boolean().required().label('send message'),
   readMessage: joi.boolean().required().label('read Message'),
   addContact: joi.boolean().required().label('add Contact'),
+  composeMessage: joi.boolean().required().label('Compose message'),
   name: joi.string().required().label('name'),
 });
 

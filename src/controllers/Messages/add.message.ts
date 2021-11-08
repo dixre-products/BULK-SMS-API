@@ -47,7 +47,7 @@ export default async function Createmessage(
   newMessage.contacts.push(...contacts);
   newMessage.message = message;
   newMessage.sender = sender;
-  newMessage.scheduleDate = scheduleDate;
+  newMessage.scheduleDate = new Date(scheduleDate);
   newMessage.groupId = $GROUPID;
 
   await models.Department.findOneAndUpdate(

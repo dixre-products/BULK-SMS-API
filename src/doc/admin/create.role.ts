@@ -10,6 +10,7 @@
  * @apiParam {Boolean} readMessage can read message.
  * @apiParam {String} name name of role.
  * @apiParam {Boolean} addContact csn add contact
+ * @apiParam {Boolean} composeMessage can compose message
  *
  * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  role credentials object
@@ -17,6 +18,7 @@
  * @apiSuccess {Boolean} payload.addContact can add contact.
  * @apiSuccess {Boolean} payload.sendMessage can send message.
  * @apiSuccess {Boolean} payload.readMessage can read message.
+ * @apiSuccess {Boolean} payload.composeMessage can compose message
  * @apiSuccess {String} payload.name role name.
  *
  *
@@ -30,6 +32,7 @@
             "sendMessage": false,
             "readMessage": false,
             "addContact": true,
+            "composeMessage": false,
  *       }
  *     }
  *

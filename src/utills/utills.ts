@@ -12,6 +12,7 @@ import config from 'config';
 import constants from '../constants/index';
 import { RequestParams, UserProps } from '../Types/interfaces';
 import models from '../models/index';
+import MessageStatus from '../constants/enums';
 
 const privateKey = fs.readFileSync(
   `${process.env.INIT_CWD}/private.key`,
@@ -78,6 +79,7 @@ export async function MessageService(
 nodeCron.schedule('* 10 * * *', async () => {
   const messages = await models.Message.find({
     scheduleDate: { $lte: Date.now },
+    status: MessageStatus.APPROVED,
   });
 
   /* eslint-disable */

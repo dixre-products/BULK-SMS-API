@@ -12,6 +12,7 @@
  * @apiParam {Boolean} [updates.sendMessage]  updated field.
  * @apiParam {Boolean} [updates.readMessage]  updated field.
  * @apiParam {String} [updates.name] updated name
+ * @apiParam {Boolean} [updates.composeMessage] can compose message
  *
  *
  * @apiSuccessExample Success-Response:
@@ -23,6 +24,7 @@
             "name": "taker",
             "sendMessage": false,
             "readMessage": false,
+            "composeMessage":false,
             "addContact": true,
  *       }
  *     }

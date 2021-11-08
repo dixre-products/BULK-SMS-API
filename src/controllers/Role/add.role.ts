@@ -11,11 +11,18 @@ export default async function CreateRole(
   req: Request,
   res: Response,
 ) {
-  const { sendMessage, readMessage, name, addContact } = req.body as {
+  const {
+    sendMessage,
+    readMessage,
+    name,
+    addContact,
+    composeMessage,
+  } = req.body as {
     sendMessage: boolean;
     readMessage: boolean;
     name: string;
     addContact: boolean;
+    composeMessage: boolean;
   };
 
   // const $UID = Types.ObjectId(groupId);
@@ -42,6 +49,7 @@ export default async function CreateRole(
   role.sendMessage = sendMessage;
   role.readMessage = readMessage;
   role.addContact = addContact;
+  role.composeMessage = composeMessage;
 
   await role.save({ validateBeforeSave: false });
   await Activity.save({ validateBeforeSave: false });
