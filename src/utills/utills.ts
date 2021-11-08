@@ -170,7 +170,7 @@ type queryConfiguration = {
   agency: string;
   status?: string;
   userType?: string;
-  date: any;
+  date?: any;
 };
 
 // compose query base on requestParam which is consistent on GET requests
