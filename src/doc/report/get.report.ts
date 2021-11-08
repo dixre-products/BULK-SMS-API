@@ -1,6 +1,6 @@
 /**
  * @api {GET} /report  Get All Report by agency
- * @apiName GetAllReport
+ * @apiName GetAllReport by agency
  * @apiGroup Report
  * @apiVersion  1.0.0
  * @apiSampleRequest off
