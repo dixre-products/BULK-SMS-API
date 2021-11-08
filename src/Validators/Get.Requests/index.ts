@@ -8,6 +8,7 @@ const requestBodySchema = joi.object({
   searchText: joi.string().optional().allow(''),
   agency: joi.string().optional().allow(''),
   uid: joi.string().optional().allow(''),
+  userType: joi.string().optional().allow(''),
   role: joi.string().optional().allow(''),
 });
 
