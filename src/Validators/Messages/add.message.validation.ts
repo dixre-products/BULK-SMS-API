@@ -32,6 +32,7 @@ export default function ValidateCreateMessage(
   });
 
   if (error) {
+    console.log(error);
     return InvalidInputs(res, error.message);
   }
   next();
