@@ -26,7 +26,7 @@ const Contact: mongoose.Schema = new mongoose.Schema(
   { autoIndex: false },
 );
 
-Contact.index({ name: 'text', phone: 'text' });
+Contact.index({ name: 'text', number: 'text' });
 Contact.plugin(mongoosePaginate);
 
 export default mongoose.model<ContactProps>('contact', Contact);
