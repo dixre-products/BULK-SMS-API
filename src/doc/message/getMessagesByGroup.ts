@@ -13,6 +13,8 @@
  * @apiParam {String} [status] status can be APPROVED, PENDING, SENT.
  * @apiParam {String} [uid] user ID.
  * @apiParam {String} [role] Role Id.
+ * @apiParam {String} [startDate] date to start searching messages
+ * @apiParam {String} [endDate] date to stop searching messages
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
 * @apiSuccess {Object} payload  message credentials Array

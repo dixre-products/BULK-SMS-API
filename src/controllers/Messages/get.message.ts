@@ -20,6 +20,7 @@ export default async function GetAllMessages(
       agency: 'groupId',
       roles: '',
       status: 'status',
+      date: 'date',
     },
   );
 

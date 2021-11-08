@@ -170,6 +170,7 @@ type queryConfiguration = {
   agency: string;
   status?: string;
   userType?: string;
+  date: any;
 };
 
 // compose query base on requestParam which is consistent on GET requests
@@ -189,6 +190,8 @@ export function getQuery(
     pageNumber,
     status,
     userType,
+    startDate,
+    endDate,
   } = requestParams;
 
   // check if document is to apply the agency filter
@@ -239,6 +242,18 @@ export function getQuery(
     query = {
       ...query,
       [queryConfig.userType]: userType,
+    };
+  }
+
+  // check if document is to apply the status filter
+  if (queryConfig.date && startDate && endDate) {
+    // compose query with rest operators without losing previous values of object
+    query = {
+      ...query,
+      [queryConfig.date]: {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
+      },
     };
   }
 

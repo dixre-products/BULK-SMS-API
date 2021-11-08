@@ -11,6 +11,8 @@ const requestBodySchema = joi.object({
   status: joi.string().optional().allow(''),
   uid: joi.string().optional().allow(''),
   role: joi.string().optional().allow(''),
+  startDate: joi.string().optional().allow(''),
+  endDate: joi.string().optional().allow(''),
 });
 
 export default function UserGetValidator(

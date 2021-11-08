@@ -213,4 +213,6 @@ export interface RequestParams {
   role: string;
   status: string;
   userType: string;
+  startDate: any;
+  endDate: any;
 }
