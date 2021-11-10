@@ -39,9 +39,11 @@ export default async function CreateDepartment(
 
   const formatSenderIds: any[] = [];
 
-  senderIds.forEach((val) => {
-    formatSenderIds.push(mongoose.Types.ObjectId(val));
-  });
+  if (senderIds) {
+    senderIds.forEach((val) => {
+      formatSenderIds.push(mongoose.Types.ObjectId(val));
+    });
+  }
   department.name = name;
   department.credit = credit;
   department.senderIds = formatSenderIds;
