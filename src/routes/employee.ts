@@ -28,6 +28,13 @@ employee.post(
   HandleAsyncFactory(EmployeeController.RequestRessetEmail),
 );
 
+employee.get(
+  ACTIVITIES,
+  HandleAsyncFactory(ProtectRoutes),
+  HandleAsyncFactory(UserGetValidator),
+  HandleAsyncFactory(Activities.GetAllActivity),
+);
+
 employee.post(
   RESSET_PASSWORD,
   HandleAsyncFactory(ExtractInfoMiddleware),
@@ -53,13 +60,6 @@ employee.get(
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateGetEmployeesByGroup),
   HandleAsyncFactory(EmployeeController.GetAllEmployeeByAgency),
-);
-
-employee.get(
-  ACTIVITIES,
-  HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(UserGetValidator),
-  HandleAsyncFactory(Activities.GetAllActivity),
 );
 
 export default employee;
