@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ContactController from '../controllers/Contact';
+import ContactGroupController from '../controllers/ContactGroup';
 import Validation from '../Validators/ContactGroup';
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
@@ -16,7 +16,7 @@ contactGroup.post(
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(AddContactPermission),
   HandleAsyncFactory(Validation.ValidateCreateContactGroup),
-  HandleAsyncFactory(ContactController.CreateContact),
+  HandleAsyncFactory(ContactGroupController.CreateContactGroup),
 );
 
 contactGroup.put(
@@ -24,7 +24,7 @@ contactGroup.put(
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(AddContactPermission),
   HandleAsyncFactory(Validation.ValidateUpdateContactGroup),
-  HandleAsyncFactory(ContactController.UpdateContact),
+  HandleAsyncFactory(ContactGroupController.UpdateContactGroup),
 );
 
 // Admin: Contact Routes
@@ -32,21 +32,23 @@ contactGroup.get(
   BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(UserGetValidator),
-  HandleAsyncFactory(ContactController.GetAllContact),
+  HandleAsyncFactory(ContactGroupController.GetAllContactGroup),
 );
 
 contactGroup.delete(
   DELETE_MULTIPLE_CONTACTS,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateMultipleDeleteContactsGroup),
-  HandleAsyncFactory(ContactController.DeleteMultipleContacts),
+  HandleAsyncFactory(
+    ContactGroupController.DeleteMultipleContactsGroup,
+  ),
 );
 
 contactGroup.get(
   GET_ID_PARAM,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateGetSingleContactGroup),
-  HandleAsyncFactory(ContactController.GetSingleContact),
+  HandleAsyncFactory(ContactGroupController.GetSingleContactGroup),
 );
 
 export default contactGroup;

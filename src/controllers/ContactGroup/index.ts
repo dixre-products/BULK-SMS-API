@@ -1,15 +1,17 @@
-import CreateContact from './add.contact.group';
+import CreateContactGroup from './add.contact.group';
 import {
   DeleteContactGroup,
   DeleteMultipleContactsGroup,
 } from './delete.contact.group';
-import UpdateContact from './update.contact';
-import GetAllContact, { GetSingleContactGroup } from './get.contact';
+import UpdateContactGroup from './update.contact.group';
+import GetAllContactGroup, {
+  GetSingleContactGroup,
+} from './get.contact.group';
 
 export default {
-  CreateContact,
-  UpdateContact,
-  GetAllContact,
+  CreateContactGroup,
+  UpdateContactGroup,
+  GetAllContactGroup,
   DeleteContactGroup,
   DeleteMultipleContactsGroup,
   GetSingleContactGroup,
