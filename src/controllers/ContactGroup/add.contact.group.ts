@@ -44,7 +44,7 @@ export default async function CreateContactGroup(
   await contactGroup.save({ validateBeforeSave: false });
   await Activity.save({ validateBeforeSave: false });
 
-  const createdContact = await models.Contact.findOne({
+  const createdContact = await models.ContactGroup.findOne({
     _id: contactGroup._id, // eslint-disable-line
   });
   return ProcessingSuccess(res, createdContact);
