@@ -21,7 +21,7 @@ export default async function UpdateContact(
   const contactsIDs = [] as Types.ObjectId[];
   if (updates.contacts) {
     updates.contacts.forEach((ids) => {
-      updates.contacts.push(Types.ObjectId(ids as any));
+      contactsIDs.push(Types.ObjectId(ids as any));
     });
     // @ts-ignore
     delete updates.contacts;
