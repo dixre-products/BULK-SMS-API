@@ -29,6 +29,7 @@ export default async function UpdateMessage(
   const doc = await models.Message.findOneAndUpdate(
     { _id: ID }, // eslint-disable-line
     updates,
+    { new: true },
   );
 
   // ACTIVITY LOGGER
