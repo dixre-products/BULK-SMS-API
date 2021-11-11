@@ -8,6 +8,7 @@ import {
   Entities,
   EntitiesAction,
 } from '../../constants/enums';
+import { RemoveDuplicate } from '../../utills/utills';
 
 export default async function UpdateContact(
   req: Request,
@@ -20,7 +21,10 @@ export default async function UpdateContact(
   const ID = Types.ObjectId(id);
   const contactsIDs = [] as Types.ObjectId[];
   if (updates.contacts) {
-    updates.contacts.forEach((ids) => {
+    const newContactInGroup = RemoveDuplicate(
+      updates.contacts as any[],
+    );
+    newContactInGroup.forEach((ids) => {
       contactsIDs.push(Types.ObjectId(ids as any));
     });
     // @ts-ignore
@@ -30,7 +34,7 @@ export default async function UpdateContact(
     { _id: ID },
     {
       ...updates,
-      $addToSet: { contacts: contactsIDs },
+      contacts: contactsIDs,
     },
     { new: true },
   ).populate('contacts');

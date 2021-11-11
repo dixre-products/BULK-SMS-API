@@ -149,6 +149,15 @@ export function getTokens(userCreds: UserProps) {
   }
 }
 
+export function RemoveDuplicate(arr: string[]) {
+  const newSet = new Set(arr);
+  const newArr: string[] = [];
+  newSet.forEach((element) => {
+    newArr.push(element);
+  });
+  return newArr;
+}
+
 export function GeneratePin() {
   return (Math.floor(Math.random() * 10000) + 10000)
     .toString()
