@@ -54,6 +54,6 @@ export async function GetSingleContactGroup(
 
   const contactGroup = await models.ContactGroup.findOne({
     _id: Types.ObjectId(id), // eslint-disable-line
-  });
+  }).populate('contacts');
   return ProcessingSuccess(res, contactGroup);
 }
