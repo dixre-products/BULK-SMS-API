@@ -8,7 +8,7 @@ export default async function AllActivity(
   res: Response,
 ) {
   const requestParams = req.query as any;
-
+  console.log(requestParams);
   const { paginationConfig, paginationQuery } = getQuery(
     requestParams,
     {
