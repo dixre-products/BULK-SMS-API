@@ -18,6 +18,8 @@ const {
   EMPLOYEES,
   ADMIN,
   REPORTS,
+  CONTACTS_GROUP,
+  SETTINGS,
 } = Entities;
 
 const { ADMIN_ACCOUNT, AGENCY_ACCOUNT } = ACCOUNT_TYPE; // eslint-disable-line
@@ -52,6 +54,8 @@ const Activities: Schema = new Schema(
         EMPLOYEES,
         ADMIN,
         REPORTS,
+        CONTACTS_GROUP,
+        SETTINGS,
       ],
     },
 
@@ -65,6 +69,8 @@ const Activities: Schema = new Schema(
       address: Schema.Types.String,
       department: Schema.Types.String,
       role: Schema.Types.String,
+      mininumReloadThreshold: Schema.Types.Number,
+      maximumReloadThreshold: Schema.Types.Number,
     },
 
     date: { type: Schema.Types.Date, default: Date.now() },

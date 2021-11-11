@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import EmployeeController from '../controllers/Employee';
 import Validation from '../Validators/Employee';
+import Activities from '../controllers/Activities';
 import ProtectRoutes from '../Middlewares/check.route.access';
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
@@ -9,12 +10,14 @@ import LoginAccount from '../controllers/Auth/login.user';
 import ValidateRessetPasswordEmail from '../Validators/PasswordResset/validate.email.resset.password';
 import ValidateRessetPassword from '../Validators/PasswordResset/validate.password.resset';
 import ExtractInfoMiddleware from '../Middlewares/extract.info.header';
+import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
 
 const {
   GET_ID_PARAM,
   GET_EMPLOYESS_BY_GROUP,
   SEND_RESSET_PASSWORD_LINK,
   RESSET_PASSWORD,
+  ACTIVITIES,
 } = constants.RoutesSubs;
 const { LOGIN_BASE } = constants.RouteBase;
 const employee = Router();
@@ -50,6 +53,13 @@ employee.get(
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateGetEmployeesByGroup),
   HandleAsyncFactory(EmployeeController.GetAllEmployeeByAgency),
+);
+
+employee.get(
+  ACTIVITIES,
+  HandleAsyncFactory(ProtectRoutes),
+  HandleAsyncFactory(UserGetValidator),
+  HandleAsyncFactory(Activities.GetAllActivity),
 );
 
 export default employee;

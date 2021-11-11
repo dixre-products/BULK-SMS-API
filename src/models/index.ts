@@ -7,6 +7,8 @@ import Role from './roles';
 import SenderIDs from './senderIDs';
 import Activities from './activities';
 import Reports from './report';
+import ContactGroup from './contact.group';
+import Settings from './settings';
 
 export default {
   Admin,
@@ -18,4 +20,6 @@ export default {
   SenderIDs,
   Activities,
   Reports,
+  ContactGroup,
+  Settings,
 };

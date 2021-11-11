@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
+import SettingsController from '../controllers/Settings';
 import ReportController from '../controllers/Report';
 import RoleController from '../controllers/Role';
 import MessageController from '../controllers/Messages';
@@ -21,6 +22,7 @@ import Validation from '../Validators/SenderId';
 import ValidateRessetPasswordEmail from '../Validators/PasswordResset/validate.email.resset.password';
 import ValidateRessetPassword from '../Validators/PasswordResset/validate.password.resset';
 import ExtractInfoMiddleware from '../Middlewares/extract.info.header';
+import ValidateUpdateSettings from '../Validators/settings/update.settings.validation';
 
 // import GetRequestValidation from '../Validators/Get.Requests';
 
@@ -58,10 +60,24 @@ const {
 
   RESSET_PASSWORD,
   SEND_RESSET_PASSWORD_LINK,
+  SETTINGS,
 } = constants.RoutesSubs;
 
 const { LOGIN_BASE, SENDERID } = constants.RouteBase;
 const admin = Router();
+
+admin.put(
+  SETTINGS,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(ValidateUpdateSettings),
+  HandleAsyncFactory(SettingsController.UpdateSettings),
+);
+
+admin.get(
+  SETTINGS,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(SettingsController.GetSettings),
+);
 
 admin.post(
   SEND_RESSET_PASSWORD_LINK,

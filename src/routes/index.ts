@@ -5,6 +5,7 @@ import Message from './message';
 import Admin from './admin';
 import SenderID from './senderid';
 import Report from './report';
+import ContactGroup from './contact.group';
 
 export default {
   Employee,
@@ -14,4 +15,5 @@ export default {
   Admin,
   SenderID,
   Report,
+  ContactGroup,
 };

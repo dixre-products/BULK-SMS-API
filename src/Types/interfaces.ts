@@ -141,6 +141,13 @@ export interface ContactProps extends Document {
   date: Date;
 }
 
+export interface ContactGroupProps extends Document {
+  name: string;
+  contacts: Types.ObjectId[];
+  groupId: Types.ObjectId;
+  date: Date;
+}
+
 export interface ReportProps extends Document {
   message: string;
   groupId: Types.ObjectId;
@@ -150,6 +157,11 @@ export interface ReportProps extends Document {
 export interface SenderIds extends Document {
   name: string;
   senderIds: any[];
+}
+
+export interface Settings extends Document {
+  maximumReloadThreshold: number;
+  minimumReloadThreshold: number;
 }
 
 type payload = {
@@ -163,6 +175,8 @@ type payload = {
   description: string;
   department: string;
   role: string;
+  mininumReloadThreshold: number;
+  maximumReloadThreshold: number;
 };
 export interface Activities extends Document {
   group: string;

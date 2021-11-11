@@ -20,6 +20,7 @@ const {
   Admin,
   SENDERID,
   REPORT,
+  CONTACT_GROUP,
 } = constants.RouteBase;
 // Application-Level Middleware
 const app = express();
@@ -58,6 +59,7 @@ app.use(CONTACT, routes.Contact);
 app.use(Admin, routes.Admin);
 app.use(SENDERID, routes.SenderID);
 app.use(REPORT, routes.Report);
+app.use(CONTACT_GROUP, routes.ContactGroup);
 
 // Handles error
 app.use(ErrorHandler);

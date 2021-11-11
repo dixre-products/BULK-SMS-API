@@ -3,15 +3,16 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  id: joi.string().required().label('Contact ID'),
+  name: joi.string().required().label('Name'),
+  groupId: joi.string().label('Group ID'),
 });
 
-export default function ValidateGetContactByGroup(
+export default function ValidateCreateContactGroup(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
-  const { error } = requestBodySchema.validate(req.params, {
+  const { error } = requestBodySchema.validate(req.body, {
     errors: {
       wrap: {
         label: '',

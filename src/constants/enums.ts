@@ -14,6 +14,8 @@ export enum Entities {
   DEPARTMENTS = 'DEPARTMENTS',
   ADMIN = 'ADMIN',
   REPORTS = 'REPORTS',
+  CONTACTS_GROUP = 'CONTACT GROUP',
+  SETTINGS = 'SETTINGS',
 }
 
 export enum ReportStatus {

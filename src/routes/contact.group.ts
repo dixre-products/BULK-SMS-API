@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import ContactController from '../controllers/Contact';
-import Validation from '../Validators/Contact';
+import Validation from '../Validators/ContactGroup';
 import constants from '../constants/index';
 import HandleAsyncFactory from '../Middlewares/async.error.handler';
 import ProtectRoutes from '../Middlewares/check.route.access';
@@ -9,50 +9,44 @@ import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
 
 const { GET_ID_PARAM, BASE_SUB, DELETE_MULTIPLE_CONTACTS } =
   constants.RoutesSubs;
-const contact = Router();
+const contactGroup = Router();
 
-contact.post(
+contactGroup.post(
   BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(AddContactPermission),
-  HandleAsyncFactory(Validation.ValidateCreateContact),
+  HandleAsyncFactory(Validation.ValidateCreateContactGroup),
   HandleAsyncFactory(ContactController.CreateContact),
 );
 
-contact.put(
+contactGroup.put(
   BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(Validation.ValidateUpdateContact),
+  HandleAsyncFactory(AddContactPermission),
+  HandleAsyncFactory(Validation.ValidateUpdateContactGroup),
   HandleAsyncFactory(ContactController.UpdateContact),
 );
 
 // Admin: Contact Routes
-contact.get(
+contactGroup.get(
   BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(UserGetValidator),
   HandleAsyncFactory(ContactController.GetAllContact),
 );
 
-contact.delete(
+contactGroup.delete(
   DELETE_MULTIPLE_CONTACTS,
   HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(Validation.ValidateMultipleDeleteContacts),
+  HandleAsyncFactory(Validation.ValidateMultipleDeleteContactsGroup),
   HandleAsyncFactory(ContactController.DeleteMultipleContacts),
 );
 
-contact.delete(
+contactGroup.get(
   GET_ID_PARAM,
   HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(Validation.ValidateGetSingleContact),
-  HandleAsyncFactory(ContactController.DeleteContact),
-);
-
-contact.get(
-  GET_ID_PARAM,
-  HandleAsyncFactory(ProtectRoutes),
-  HandleAsyncFactory(Validation.ValidateGetSingleContact),
+  HandleAsyncFactory(Validation.ValidateGetSingleContactGroup),
   HandleAsyncFactory(ContactController.GetSingleContact),
 );
 
-export default contact;
+export default contactGroup;

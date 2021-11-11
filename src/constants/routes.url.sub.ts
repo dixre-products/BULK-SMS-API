@@ -20,6 +20,9 @@ const VERIFICATION_CODE = '/code'; // verification
 // ACTIVITIES
 const ACTIVITIES = '/activities';
 
+// SETTINGS
+const SETTINGS = '/settings';
+
 // PROFILE
 const GET_PROFILE = '/:uid';
 const PROFILE = '/';
@@ -74,6 +77,8 @@ const SEND_RESSET_PASSWORD_LINK = '/send-reset-password-link';
 const RESSET_PASSWORD = '/reset-password';
 
 export default {
+  SETTINGS,
+
   SEND_MESSAGE,
   GET_EMPLOYESS_BY_GROUP,
   GET_EMPLOYEES,

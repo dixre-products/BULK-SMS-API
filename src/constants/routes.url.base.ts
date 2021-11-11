@@ -14,8 +14,11 @@ const MESSAGE = '/message';
 const Admin = '/admin';
 const SENDERID = '/senderID';
 const REPORT = '/report';
+const CONTACT_GROUP = '/contact-group';
 
 export default {
+  CONTACT_GROUP,
+
   SENDERID,
   LOGIN_BASE,
   SIGNUP_BASE,
