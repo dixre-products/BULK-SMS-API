@@ -7,8 +7,7 @@ import ProtectRoutes from '../Middlewares/check.route.access';
 import AddContactPermission from '../Middlewares/permission.checker/permission.add.contact';
 import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
 
-const { GET_ID_PARAM, BASE_SUB, DELETE_MULTIPLE_CONTACTS } =
-  constants.RoutesSubs;
+const { GET_ID_PARAM, BASE_SUB } = constants.RoutesSubs;
 const contactGroup = Router();
 
 contactGroup.post(
@@ -36,7 +35,7 @@ contactGroup.get(
 );
 
 contactGroup.delete(
-  DELETE_MULTIPLE_CONTACTS,
+  BASE_SUB,
   HandleAsyncFactory(ProtectRoutes),
   HandleAsyncFactory(Validation.ValidateMultipleDeleteContactsGroup),
   HandleAsyncFactory(
