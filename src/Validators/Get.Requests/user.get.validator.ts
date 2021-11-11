@@ -20,6 +20,7 @@ export default function UserGetValidator(
   res: Response,
   next: NextFunction,
 ) {
+  console.log(req.query);
   const { error } = requestBodySchema.validate(req.query, {
     errors: {
       wrap: {
