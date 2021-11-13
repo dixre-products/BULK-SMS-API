@@ -7,7 +7,6 @@ import {
 } from 'google-libphonenumber';
 import mongoose from 'mongoose';
 import * as fs from 'fs';
-import nodeCron from 'node-cron';
 import config from 'config';
 import constants from '../constants/index';
 import { RequestParams, UserProps } from '../Types/interfaces';
@@ -76,32 +75,31 @@ export async function MessageService(
   return sms.send(options);
 }
 
-nodeCron
-  .schedule('* 10 * * *', async () => {
-    const messages = await models.Message.find({
-      scheduleDate: { $lte: Date.now },
-      status: MessageStatus.APPROVED,
-    });
+setInterval(async () => {
+  const messages = await models.Message.find({
+    scheduleDate: { $lte: Date.now },
+    status: MessageStatus.APPROVED,
+  });
 
-    /* eslint-disable */
-    for (let message of messages) {
-      console.log('We are sending message');
-      console.log(message.message);
-      await MessageService(message.contacts, message.message);
-      message.status = MessageStatus.SENT;
-      await message.save();
-      await models.Department.findOneAndUpdate(
-        {
-          _id: message.groupId, // eslint-disable
-        },
-        {
-          $inc: { credit: -message.contacts.length },
-        },
-      );
-    }
-    /* eslint-enable */
-  })
-  .start();
+  /* eslint-disable */
+  for (let message of messages) {
+    console.log('We are sending message');
+    console.log(message.message);
+    await MessageService(message.contacts, message.message);
+    message.status = MessageStatus.SENT;
+    await message.save();
+    await models.Department.findOneAndUpdate(
+      {
+        _id: message.groupId, // eslint-disable
+      },
+      {
+        $inc: { credit: -message.contacts.length },
+      },
+    );
+  }
+}, 600000);
+
+/* eslint-enable */
 
 export function encodeToJwtToken(
   data: any,
