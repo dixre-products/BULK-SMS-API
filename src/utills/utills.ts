@@ -76,30 +76,32 @@ export async function MessageService(
   return sms.send(options);
 }
 
-nodeCron.schedule('* 10 * * *', async () => {
-  const messages = await models.Message.find({
-    scheduleDate: { $lte: Date.now },
-    status: MessageStatus.APPROVED,
-  });
+nodeCron
+  .schedule('* 10 * * *', async () => {
+    const messages = await models.Message.find({
+      scheduleDate: { $lte: Date.now },
+      status: MessageStatus.APPROVED,
+    });
 
-  /* eslint-disable */
-  for (let message of messages) {
-    console.log('We are sending message');
-    console.log(message.message);
-    await MessageService(message.contacts, message.message);
-    message.status = MessageStatus.SENT;
-    await message.save();
-    await models.Department.findOneAndUpdate(
-      {
-        _id: message.groupId, // eslint-disable
-      },
-      {
-        $inc: { credit: -message.contacts.length },
-      },
-    );
-  }
-  /* eslint-enable */
-});
+    /* eslint-disable */
+    for (let message of messages) {
+      console.log('We are sending message');
+      console.log(message.message);
+      await MessageService(message.contacts, message.message);
+      message.status = MessageStatus.SENT;
+      await message.save();
+      await models.Department.findOneAndUpdate(
+        {
+          _id: message.groupId, // eslint-disable
+        },
+        {
+          $inc: { credit: -message.contacts.length },
+        },
+      );
+    }
+    /* eslint-enable */
+  })
+  .start();
 
 export function encodeToJwtToken(
   data: any,
