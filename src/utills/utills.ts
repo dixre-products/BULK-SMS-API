@@ -84,7 +84,11 @@ nodeCron.schedule('* 10 * * *', async () => {
 
   /* eslint-disable */
   for (let message of messages) {
+    console.log('We are sending message');
+    console.log(message.message);
     await MessageService(message.contacts, message.message);
+    message.status = MessageStatus.SENT;
+    await message.save();
     await models.Department.findOneAndUpdate(
       {
         _id: message.groupId, // eslint-disable
