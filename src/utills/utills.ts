@@ -77,7 +77,7 @@ export async function MessageService(
 
 setInterval(async () => {
   const messages = await models.Message.find({
-    scheduleDate: { $lte: Date.now },
+    scheduleDate: { $lte: Date.now() },
     status: MessageStatus.APPROVED,
   });
 
