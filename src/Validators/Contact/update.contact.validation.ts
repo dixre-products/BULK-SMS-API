@@ -8,6 +8,7 @@ const requestBodySchema = joi.object({
   updates: joi.object({
     number: joi.string(),
     name: joi.string(),
+    countryCode: joi.string(),
   }),
 });
 
