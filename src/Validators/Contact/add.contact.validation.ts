@@ -6,13 +6,18 @@ const requestBodySchema = joi.object({
   contacts: joi
     .array()
     .items(
-      joi.object({
-        number: joi.string().required().label('Phone Number'),
-        name: joi.string().required().label('Name'),
-        groupId: joi.string().label('Group ID'),
-        countryCode: joi.string().length(2).label('Country code'),
-        sender: joi.string().optional().allow(''),
-      }),
+      joi
+        .object({
+          number: joi.string().required().label('Phone Number'),
+          name: joi.string().required().label('Name'),
+          groupId: joi.string().label('Group ID').required(),
+          countryCode: joi
+            .string()
+            .length(2)
+            .required()
+            .label('Country code'),
+        })
+        .required(),
     )
     .required(),
 });
