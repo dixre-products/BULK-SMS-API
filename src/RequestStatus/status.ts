@@ -95,10 +95,15 @@ export const ProcessingError = (res: Response) => {
 };
 
 // PROCESSING SUCCESS
-export const ProcessingSuccess = (res: Response, data: any) => {
+export const ProcessingSuccess = (
+  res: Response,
+  data: any,
+  extraPayload?: any,
+) => {
   res.status(STATUS_CODES.OK.CODE).json({
     message: STATUS_CODES.OK.STATUS_TEXT,
     payload: data,
+    extraPayload,
   });
 };
 

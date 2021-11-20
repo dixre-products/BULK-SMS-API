@@ -52,5 +52,5 @@ export default async function CreateContact(
 
   await models.Activities.insertMany(Activities);
 
-  return ProcessingSuccess(res, docs);
+  return ProcessingSuccess(res, docs, [...docs, ...getAllContacts]);
 }
