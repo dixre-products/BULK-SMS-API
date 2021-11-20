@@ -13,7 +13,22 @@ export default async function CreateContact(
 ) {
   const { contacts } = req.body;
 
-  const docs = await models.Contact.insertMany(contacts);
+  const contactNumbers = contacts.map(
+    (contact: any) => contact.number,
+  );
+
+  const getAllContacts = await models.Contact.find({
+    number: { $in: contactNumbers },
+  });
+
+  const existingContacts = getAllContacts.map(
+    (existingContact) => existingContact.number,
+  );
+  const contactsToAdd = contacts.filter(
+    (contact: any) => existingContacts.indexOf(contact.number) === -1,
+  );
+
+  const docs = await models.Contact.insertMany(contactsToAdd as any);
 
   const Activities = [] as any[];
 
