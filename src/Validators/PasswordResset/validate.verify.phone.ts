@@ -3,17 +3,15 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  email: joi.string().required().label('Email'),
-  name: joi.string().required().label('Name'),
-  password: joi.string().required().label('Password'),
-  phoneNumber: joi.string().allow(''),
-  countryCode: joi.string().length(2).allow(''),
-  address: joi.string().required().label('Address'),
-  groupId: joi.string().label('Group ID'),
-  roleId: joi.string().label('Role ID'),
+  phoneNumber: joi.string().required().min(8).label('Phone number'),
+  countryCode: joi
+    .string()
+    .length(2)
+    .required()
+    .label('Country code'),
 });
 
-export default function ValidateCreateEmployee(
+export default function ValidateNumberVerification(
   req: Request,
   res: Response,
   next: NextFunction,

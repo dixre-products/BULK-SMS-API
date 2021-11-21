@@ -9,6 +9,18 @@ const Admin: Schema = new Schema(
       type: Schema.Types.String,
     },
 
+    phoneNumber: {
+      type: Schema.Types.String,
+    },
+
+    phoneNumberInternational: {
+      type: Schema.Types.String,
+    },
+
+    countryCode: {
+      type: Schema.Types.String,
+    },
+
     name: {
       type: Schema.Types.String,
     },

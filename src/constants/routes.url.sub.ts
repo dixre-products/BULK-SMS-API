@@ -14,6 +14,7 @@ const VERIFICATION = '/';
 const VERIFICATION_CALL = '/call'; // verification
 const VERIFICATION_SMS = '/sms'; // verification
 const VERIFICATION_CODE = '/code'; // verification
+const VERIFIFY_CODE = '/verify-code'; // verification
 
 // RESET PASSWORD
 
@@ -74,6 +75,7 @@ const DELETE_MULTIPLE_REPORTS = '/delete-reports';
 
 // resset password
 const SEND_RESSET_PASSWORD_LINK = '/send-reset-password-link';
+const SEND_RESSET_PASSWORD_SMS = '/send-reset-password-sms';
 const RESSET_PASSWORD = '/reset-password';
 
 export default {
@@ -93,6 +95,8 @@ export default {
   VERIFICATION_SMS,
 
   SEND_RESSET_PASSWORD_LINK,
+  SEND_RESSET_PASSWORD_SMS,
+  VERIFIFY_CODE,
   RESSET_PASSWORD,
 
   GET_ID_PARAM,

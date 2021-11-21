@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 import * as fs from 'fs';
 import config from 'config';
 import constants from '../constants/index';
-import { RequestParams, UserProps } from '../Types/interfaces';
+import { RequestParams } from '../Types/interfaces';
 import models from '../models/index';
 import MessageStatus from '../constants/enums';
 
@@ -57,18 +57,15 @@ export function getPhoneNumberInfo(
 export async function MessageService(
   phoneNumbers: string[],
   message: string,
+  // senderId?: string,
 ) {
-  const messageContacts: string[] = [];
-  phoneNumbers.forEach((phone) => {
-    messageContacts.push(getPhoneNumberInfo(phone, 'NG'));
-  });
   const options = {
     // Set the numbers you want to send to in international format
-    to: messageContacts,
+    to: phoneNumbers,
     // Set your message
     message,
     // Set your shortCode or senderId
-    from: 'Dixre',
+    from: '',
   };
 
   // That’s it, hit send and we’ll take care of the rest
@@ -137,7 +134,7 @@ export function decodeJwtToken(token: string) {
   }
 }
 
-export function getTokens(userCreds: UserProps) {
+export function getTokens(userCreds: any) {
   try {
     const accessToken = encodeToJwtToken(
       {
@@ -316,6 +313,50 @@ export async function sendRessetPasswordLink(
             },
           ],
           Subject: 'Password Resset email.',
+          TextPart: '',
+          HTMLPart: html,
+          CustomID: 'AppGettingStartedTest',
+        },
+      ],
+    });
+}
+
+export async function sendAccountCredentials(
+  name: string,
+  email: string,
+  password: string,
+  phoneNumber: string,
+) {
+  let html = `<h3>Hi ${name}.</h3>`;
+
+  html +=
+    '<p> This are your credentials for SMS platform. You can use your email and password or phone and password to login. </p>';
+  html += `<h3> Email </h3>:  ${email}`;
+  html += `<h3> PhoneNumber </h3>:  ${phoneNumber}`;
+  html += `<h3> Password </h3> :${password}`;
+  html += '<p>Thank you.</p>';
+  html += 'SMS plafform  Team!';
+
+  await mailjet
+    .connect(
+      config.get('MAILJET_PUBLIC'),
+      config.get('MAILJET_PRIVATE'),
+    )
+    .post('send', { version: 'v3.1' })
+    .request({
+      Messages: [
+        {
+          From: {
+            Email: 'developers@dixre.com',
+            Name: 'SMS Platform',
+          },
+          To: [
+            {
+              Email: email,
+              Name: name,
+            },
+          ],
+          Subject: 'Account Information.',
           TextPart: '',
           HTMLPart: html,
           CustomID: 'AppGettingStartedTest',

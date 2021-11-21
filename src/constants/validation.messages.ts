@@ -16,7 +16,7 @@ const PIN_NOT_TIMED_OUT =
 const INCORRECT_PASSWORD = 'Incorrect password please try again.';
 
 const USER_EXIST =
-  'Email is already in use by another account, please use a different email';
+  'Email or  phone number  is already in use by another account, please use a different email or phone number';
 
 const SERVER_ERROR =
   'An unexpected error is preventing the server from processing the request please try again later.';

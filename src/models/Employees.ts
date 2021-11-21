@@ -13,6 +13,18 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
+    phoneNumberInternational: {
+      type: mongoose.Schema.Types.String,
+    },
+
+    phoneNumber: {
+      type: mongoose.Schema.Types.String,
+    },
+
+    countryCode: {
+      type: mongoose.Schema.Types.String,
+    },
+
     hash: {
       type: mongoose.Schema.Types.String,
     },

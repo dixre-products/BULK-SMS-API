@@ -24,11 +24,18 @@ export default async function loginAccount(
     email: string;
   };
 
-  // FIND EMAIL ADDRESS
+  // FIND EMAIL ADDRESS OR PHONE NUMBER
   // ==============================
 
   const doc = await models.Employee.findOne({
-    email: email.toLowerCase(),
+    $or: [
+      {
+        email: email.toLowerCase(),
+      },
+      {
+        phoneNumber: email.trim(),
+      },
+    ],
   })
     .populate('groupId roleId')
     .populate('groupId.senderIds');

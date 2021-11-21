@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 import {
+  InvalidInputs,
   ProcessingSuccess,
   UserExist,
 } from '../../RequestStatus/status';
@@ -11,25 +12,71 @@ import {
   Entities,
   EntitiesAction,
 } from '../../constants/enums';
+import {
+  getPhoneNumberInfo,
+  sendAccountCredentials,
+} from '../../utills/utills';
 
 export default async function CreateEmployee(
   req: Request,
   res: Response,
 ) {
-  const { email, name, password, address, groupId, roleId } =
-    req.body as EmployeeSignupProps;
+  const {
+    email,
+    name,
+    password,
+    address,
+    groupId,
+    roleId,
+    phoneNumber,
+    countryCode,
+  } = req.body as EmployeeSignupProps;
+
+  const employee = new models.Employee();
 
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Admin.findOne({
-    email: new RegExp(`^${email}$`, 'i'),
+    $or: [
+      {
+        email: new RegExp(`^${email}$`, 'i'),
+      },
+      {
+        phoneNumber: phoneNumber.trim(),
+      },
+    ],
   });
+
+  // PHONE NUMBER INTEGRATION
+  if (phoneNumber) {
+    try {
+      const phoneInfo = getPhoneNumberInfo(phoneNumber, countryCode);
+      if (phoneInfo) {
+        employee.phoneNumberInternational = phoneInfo;
+        employee.phoneNumber = phoneNumber;
+        employee.countryCode = countryCode;
+      }
+
+      if (!email && !phoneInfo) {
+        return InvalidInputs(
+          res,
+          'Email or phone number must be provided',
+        );
+      }
+    } catch {
+      if (!email) {
+        return InvalidInputs(
+          res,
+          'Email or phone number must be provided',
+        );
+      }
+    }
+  }
 
   if (findAccount) return UserExist(res);
 
   const $GROUPID = Types.ObjectId(groupId);
   const $ROLEID = Types.ObjectId(roleId);
 
-  const employee = new models.Employee();
   const Activity = new models.Activities({
     group: groupId,
     userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
@@ -49,7 +96,7 @@ export default async function CreateEmployee(
   employee.setPassword(password);
 
   employee.name = name;
-  employee.email = email.toLowerCase();
+  employee.email = email.toLowerCase().trim();
   employee.address = address;
 
   employee.groupId = $GROUPID;
@@ -68,6 +115,13 @@ export default async function CreateEmployee(
       salt: 0,
       password: 0,
     });
+
+  await sendAccountCredentials(
+    name,
+    email.trim(),
+    password,
+    phoneNumber,
+  );
   await Activity.save();
 
   return ProcessingSuccess(res, createdEmployee);

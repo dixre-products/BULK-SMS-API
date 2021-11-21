@@ -28,7 +28,14 @@ export default async function loginAccount(
   // ==============================
 
   const doc = await models.Admin.findOne({
-    email: email.toLowerCase(),
+    $or: [
+      {
+        email: email.toLowerCase(),
+      },
+      {
+        phoneNumber: email.trim(),
+      },
+    ],
   });
 
   if (!doc) return InvalidCredential(res);

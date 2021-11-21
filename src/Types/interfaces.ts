@@ -49,6 +49,8 @@ export interface UserProps extends Document {
 
   phoneNumber: string;
 
+  countryCode: string;
+
   localPhoneNumber: string;
 
   email: string;
@@ -104,6 +106,9 @@ export interface DepartmentProps extends Document {
 export interface EmployeeProps extends Document {
   name: string;
   email: string;
+  phoneNumber: string;
+  phoneNumberInternational: string;
+  countryCode: string;
   password: string;
   address: string;
   active: boolean;
@@ -121,6 +126,8 @@ export interface EmployeeProps extends Document {
 export interface EmployeeSignupProps extends Document {
   name: string;
   email: string;
+  phoneNumber: string;
+  countryCode: string;
   password: string;
   address: string;
   groupId: string;
@@ -203,6 +210,9 @@ export interface AdminProps extends Document {
   name: string;
   email: string;
   hash: string;
+  phoneNumber: string;
+  phoneNumberInternational: string;
+  countryCode: string;
   salt: string;
 
   /* eslint-disable */

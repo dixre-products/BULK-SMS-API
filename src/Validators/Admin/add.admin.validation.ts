@@ -4,6 +4,8 @@ import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
   email: joi.string().required().label('Email'),
+  phoneNumber: joi.string().allow(''),
+  countryCode: joi.string().length(2).allow(''),
   name: joi.string().required().label('Name'),
   password: joi.string().required().label('Password'),
 });

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {
+  InvalidInputs,
   ProcessingSuccess,
   UserExist,
 } from '../../RequestStatus/status';
@@ -9,6 +10,10 @@ import {
   Entities,
   EntitiesAction,
 } from '../../constants/enums';
+import {
+  getPhoneNumberInfo,
+  sendAccountCredentials,
+} from '../../utills/utills';
 
 export default async function CreateAdmin(
   req: Request,
@@ -16,24 +21,56 @@ export default async function CreateAdmin(
 ) {
   // COLLECT REQUEST BODY
   // ==============================
-  const { email, name, password } = req.body as {
-    email: string;
-    name: string;
-    password: string;
-  };
-
-  // CHECKS IF ACCOUNT ALREADY EXIST
-  const findAccount = await models.Admin.findOne({
-    email: email.toLowerCase(),
-  });
-
-  if (findAccount) return UserExist(res);
+  const { email, name, password, phoneNumber, countryCode } =
+    req.body as {
+      email: string;
+      name: string;
+      password: string;
+      phoneNumber: string;
+      countryCode: string;
+    };
 
   const admin = new models.Admin({
-    email: email.toLowerCase(),
+    email: email.toLowerCase().trim(),
     name,
     date: new Date(),
   }); // INTIALIZE A NEW ADMIN OBJECT
+
+  // CHECKS IF ACCOUNT ALREADY EXIST
+  const findAccount = await models.Admin.findOne({
+    $or: [
+      { email: email.toLowerCase() },
+      { phoneNumber: phoneNumber.trim() },
+    ],
+  });
+
+  // PHONE NUMBER INTEGRATION
+  if (phoneNumber) {
+    try {
+      const phoneInfo = getPhoneNumberInfo(phoneNumber, countryCode);
+      if (phoneInfo) {
+        admin.phoneNumberInternational = phoneInfo;
+        admin.phoneNumber = phoneNumber;
+        admin.countryCode = countryCode;
+      }
+
+      if (!email && !phoneInfo) {
+        return InvalidInputs(
+          res,
+          'Email or phone number must be provided',
+        );
+      }
+    } catch {
+      if (!email) {
+        return InvalidInputs(
+          res,
+          'Email or phone number must be provided',
+        );
+      }
+    }
+  }
+
+  if (findAccount) return UserExist(res);
 
   admin.setPassword(password); // SET NEW ADMIN PASSWORD
 
@@ -65,6 +102,12 @@ export default async function CreateAdmin(
     salt: 0,
   });
 
+  await sendAccountCredentials(
+    name,
+    email.trim(),
+    password,
+    phoneNumber,
+  );
   await Activity.save(); // SAVE  ACTIVITY  LOG
   return ProcessingSuccess(res, createdAdmin); // RESPONSE SUCCESS WITH NEW ADMIN
 }

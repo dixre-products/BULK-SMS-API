@@ -11,10 +11,18 @@ import ValidateRessetPasswordEmail from '../Validators/PasswordResset/validate.e
 import ValidateRessetPassword from '../Validators/PasswordResset/validate.password.resset';
 import ExtractInfoMiddleware from '../Middlewares/extract.info.header';
 import UserGetValidator from '../Validators/Get.Requests/user.get.validator';
+import ValidatePhoneNumberVerification from '../Validators/PasswordResset/validate.verify.phone';
+import ValidateVerificationPin from '../Validators/PasswordResset/validate.verify.code';
+import {
+  SendSMSVerificationPin,
+  verifyCode,
+} from '../controllers/Employee/verification';
 
 const {
   GET_ID_PARAM,
   GET_EMPLOYESS_BY_GROUP,
+  SEND_RESSET_PASSWORD_SMS,
+  VERIFIFY_CODE,
   SEND_RESSET_PASSWORD_LINK,
   RESSET_PASSWORD,
   ACTIVITIES,
@@ -40,6 +48,18 @@ employee.post(
   HandleAsyncFactory(ExtractInfoMiddleware),
   HandleAsyncFactory(ValidateRessetPassword),
   HandleAsyncFactory(EmployeeController.RessetPassword),
+);
+
+employee.post(
+  SEND_RESSET_PASSWORD_SMS,
+  HandleAsyncFactory(ValidatePhoneNumberVerification),
+  HandleAsyncFactory(SendSMSVerificationPin),
+);
+
+employee.post(
+  VERIFIFY_CODE,
+  HandleAsyncFactory(ValidateVerificationPin),
+  HandleAsyncFactory(verifyCode),
 );
 
 employee.get(
