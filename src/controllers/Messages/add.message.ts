@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { MessageProps } from '../../Types/interfaces';
-import {
+import MessageStatus, {
   ACCOUNT_TYPE,
   Entities,
   EntitiesAction,
@@ -50,6 +50,9 @@ export default async function Createmessage(
   newMessage.scheduleDate = new Date(scheduleDate);
   newMessage.groupId = $GROUPID;
   newMessage.date = new Date();
+  newMessage.status = scheduleDate
+    ? MessageStatus.APPROVED
+    : MessageStatus.PENDING;
 
   await models.Department.findOneAndUpdate(
     { _id: $GROUPID },
