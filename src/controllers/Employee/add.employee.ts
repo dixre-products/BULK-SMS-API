@@ -44,7 +44,7 @@ export default async function CreateEmployee(
       id: employee._id, // eslint-disable-line
       address,
     },
-    date: Date.now(),
+    date: new Date(),
   });
   employee.setPassword(password);
 

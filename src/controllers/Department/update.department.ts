@@ -59,7 +59,7 @@ export async function UpdateDepartment(req: Request, res: Response) {
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save({ validateBeforeSave: false });
@@ -100,7 +100,7 @@ export async function UpdateDepartmentCredit(
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();

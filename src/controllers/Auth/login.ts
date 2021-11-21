@@ -59,7 +59,7 @@ export default async function loginAccount(
       email: doc?.email,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
   await Activity.save(); // SAVE ACTIVITY
   return LoginSuccess(

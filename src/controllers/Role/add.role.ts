@@ -42,7 +42,7 @@ export default async function CreateRole(
       name,
       id: role._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   role.name = name;

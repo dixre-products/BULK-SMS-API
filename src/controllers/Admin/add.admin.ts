@@ -32,6 +32,7 @@ export default async function CreateAdmin(
   const admin = new models.Admin({
     email: email.toLowerCase(),
     name,
+    date: new Date(),
   }); // INTIALIZE A NEW ADMIN OBJECT
 
   admin.setPassword(password); // SET NEW ADMIN PASSWORD
@@ -51,7 +52,7 @@ export default async function CreateAdmin(
       email,
       id: admin._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await admin.save({ validateBeforeSave: false }); // WRITE NEW ADMIN TO DB

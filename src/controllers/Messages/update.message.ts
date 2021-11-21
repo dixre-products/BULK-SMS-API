@@ -49,7 +49,7 @@ export default async function UpdateMessage(
       time: doc?.time,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -113,7 +113,7 @@ export async function SendMessage(req: Request, res: Response) {
       time: doc?.time,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();

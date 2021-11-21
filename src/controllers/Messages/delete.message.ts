@@ -30,7 +30,7 @@ export async function DeleteMessage(req: Request, res: Response) {
       message: deletedDoc?.message,
       id: deletedDoc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -84,7 +84,7 @@ export async function DeleteMultipleMessage(
         time: message.time,
         id: message._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities(); // CREATE A NEW ACTIVITY OBJECT

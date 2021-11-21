@@ -36,7 +36,7 @@ export async function DeleteReport(req: Request, res: Response) {
       message: doc?.message,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -77,7 +77,7 @@ export async function DeleteMultipleReports(
         message: report?.message,
         id: report?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities();

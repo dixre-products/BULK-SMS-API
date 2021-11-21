@@ -133,6 +133,7 @@ export interface RoleProps extends Document {
   name: string;
   addContact: boolean;
   composeMessage: boolean;
+  date: Date;
 }
 export interface ContactProps extends Document {
   name: string;
@@ -152,16 +153,19 @@ export interface ReportProps extends Document {
   message: string;
   groupId: Types.ObjectId;
   employeeId: Types.ObjectId;
+  date: Date;
 }
 
 export interface SenderIds extends Document {
   name: string;
   senderIds: any[];
+  date: Date;
 }
 
 export interface Settings extends Document {
   maximumReloadThreshold: number;
   minimumReloadThreshold: number;
+  date: Date;
 }
 
 type payload = {
@@ -205,6 +209,7 @@ export interface AdminProps extends Document {
   setPassword: (pwd: string) => void;
   validatePassword: (password: string) => boolean;
   /* eslint-enable */
+  date: Date;
 }
 
 export interface MessageProps extends Document {

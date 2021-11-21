@@ -41,7 +41,7 @@ export default async function DeleteMultipleEmployee(
         email: employee?.email,
         id: employee?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities();

@@ -37,7 +37,7 @@ export async function DeleteRole(req: Request, res: Response) {
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -78,7 +78,7 @@ export async function DeleteMultipleRole(
         name: role?.name,
         id: role?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities();

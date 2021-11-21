@@ -34,7 +34,7 @@ export default async function CreateDepartment(
       name,
       id: department._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   const formatSenderIds: any[] = [];

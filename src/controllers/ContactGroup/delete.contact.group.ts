@@ -39,7 +39,7 @@ export async function DeleteContactGroup(
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -83,7 +83,7 @@ export async function DeleteMultipleContactsGroup(
         name: contact?.name,
         id: contact?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities(); // CREATE A NEW ACTIVITY OBJECT

@@ -46,7 +46,7 @@ export default async function CreateContact(
         phoneNumber: document.number,
         id: document._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   });
 

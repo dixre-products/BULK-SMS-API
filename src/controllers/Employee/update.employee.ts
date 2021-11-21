@@ -47,7 +47,7 @@ export async function UpdateEmployee(req: Request, res: Response) {
       department: doc.groupId ? (doc as any).groupId.name : '',
       role: doc.roleId ? (doc as any).roleId.name : '',
     },
-    date: Date.now(),
+    date: new Date(),
   });
   await Activity.save();
   return ProcessingSuccess(res, doc);
@@ -103,7 +103,7 @@ export async function AssignEmployeeToDepartment(
       department: departmentExist.name,
       role: (doc as any).roleId.name,
     },
-    date: Date.now(),
+    date: new Date(),
   });
   await Activity.save();
   return ProcessingSuccess(res, doc);

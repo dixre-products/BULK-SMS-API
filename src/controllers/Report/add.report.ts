@@ -36,12 +36,13 @@ export default async function CreateReport(
       message,
       id: report._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   report.message = message;
   report.employeeId = $EID;
   report.groupId = $GID;
+  report.date = new Date();
 
   await report.save({ validateBeforeSave: false });
   await Activity.save({ validateBeforeSave: false });

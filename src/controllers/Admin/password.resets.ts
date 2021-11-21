@@ -60,7 +60,7 @@ export default async function RequestRessetEmail(
       email: findAccount.email,
       id: findAccount._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -100,7 +100,7 @@ export async function RessetPassword(req: Request, res: Response) {
       email: findAccount.email,
       id: findAccount._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
