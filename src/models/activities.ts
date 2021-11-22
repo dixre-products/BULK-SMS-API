@@ -25,7 +25,7 @@ const {
 const { ADMIN_ACCOUNT, AGENCY_ACCOUNT } = ACCOUNT_TYPE; // eslint-disable-line
 const Activities: Schema = new Schema(
   {
-    group: { type: Schema.Types.ObjectId, ref: 'department' },
+    group: { type: Schema.Types.String },
 
     user: { type: Schema.Types.ObjectId, ref: 'employee' },
 
