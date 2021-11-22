@@ -90,7 +90,7 @@ export async function SendMessage(req: Request, res: Response) {
       _id: getMessage.groupId, // eslint-disable
     },
     {
-      $inc: { credit: -getMessage.contacts.length },
+      $inc: { credit: -(getMessage.contacts.length * 4) },
     },
   );
 
