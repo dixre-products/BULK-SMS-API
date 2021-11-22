@@ -31,13 +31,16 @@ export default async function CreateAdmin(
       phoneNumber: string;
       countryCode: string;
     };
+  const query = [];
 
   if (email) {
     email = email.trim().toLowerCase();
+    query.push({ email });
   }
 
   if (phoneNumber) {
     phoneNumber = phoneNumber.trim();
+    query.push({ phoneNumber });
   }
 
   const admin = new models.Admin({
@@ -48,13 +51,8 @@ export default async function CreateAdmin(
 
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Admin.findOne({
-    $or: [{ email }, { phoneNumber }],
+    $or: query,
   });
-  console.log(
-    'THis is the value _===================================',
-  );
-  console.log(findAccount);
-  console.log(email, phoneNumber);
 
   // PHONE NUMBER INTEGRATION
   if (phoneNumber) {

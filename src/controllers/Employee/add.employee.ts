@@ -36,27 +36,21 @@ export default async function CreateEmployee(
   /* eslint-enable */
   const employee = new models.Employee();
 
+  const query = [];
+
   if (email) {
     email = email.trim().toLowerCase();
+    query.push({ email });
   }
 
   if (phoneNumber) {
     phoneNumber = phoneNumber.trim();
+    query.push({ phoneNumber });
   }
-
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Employee.findOne({
-    $or: [
-      {
-        email: new RegExp(`^${email}$`, 'i'),
-      },
-      {
-        phoneNumber,
-      },
-    ],
+    $or: query,
   });
-
-  console.log(email, phoneNumber);
 
   // PHONE NUMBER INTEGRATION
   if (phoneNumber) {
@@ -85,11 +79,6 @@ export default async function CreateEmployee(
   }
 
   if (findAccount) return UserExist(res);
-
-  console.log(
-    'THis is the value _===================================',
-  );
-  console.log(findAccount);
 
   const $GROUPID = Types.ObjectId(groupId);
   const $ROLEID = Types.ObjectId(roleId);
