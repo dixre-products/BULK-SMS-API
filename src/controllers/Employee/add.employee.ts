@@ -45,7 +45,7 @@ export default async function CreateEmployee(
   }
 
   // CHECKS IF ACCOUNT ALREADY EXIST
-  const findAccount = await models.Admin.findOne({
+  const findAccount = await models.Employee.findOne({
     $or: [
       {
         email: new RegExp(`^${email}$`, 'i'),
@@ -83,6 +83,11 @@ export default async function CreateEmployee(
   }
 
   if (findAccount) return UserExist(res);
+
+  console.log(
+    'THis is the value _===================================',
+  );
+  console.log(findAccount);
 
   const $GROUPID = Types.ObjectId(groupId);
   const $ROLEID = Types.ObjectId(roleId);

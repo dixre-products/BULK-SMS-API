@@ -50,6 +50,10 @@ export default async function CreateAdmin(
   const findAccount = await models.Admin.findOne({
     $or: [{ email }, { phoneNumber }],
   });
+  console.log(
+    'THis is the value _===================================',
+  );
+  console.log(findAccount);
 
   // PHONE NUMBER INTEGRATION
   if (phoneNumber) {
