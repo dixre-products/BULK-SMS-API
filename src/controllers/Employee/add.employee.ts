@@ -56,6 +56,8 @@ export default async function CreateEmployee(
     ],
   });
 
+  console.log(email, phoneNumber);
+
   // PHONE NUMBER INTEGRATION
   if (phoneNumber) {
     try {

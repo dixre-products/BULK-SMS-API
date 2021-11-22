@@ -54,6 +54,7 @@ export default async function CreateAdmin(
     'THis is the value _===================================',
   );
   console.log(findAccount);
+  console.log(email, phoneNumber);
 
   // PHONE NUMBER INTEGRATION
   if (phoneNumber) {
