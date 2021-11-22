@@ -29,6 +29,8 @@ const credentials = {
   username: config.get('AFRICATALKING_API_USERNAME'),
 };
 
+console.log(credentials);
+
 // Initialize the SDK
 const AfricasTalking = require('africastalking')(credentials);
 

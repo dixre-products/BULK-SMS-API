@@ -12,6 +12,7 @@ import {
 } from '../../constants/enums';
 import {
   getPhoneNumberInfo,
+  MessageService,
   sendAccountCredentials,
 } from '../../utills/utills';
 
@@ -102,12 +103,18 @@ export default async function CreateAdmin(
     salt: 0,
   });
 
-  await sendAccountCredentials(
-    name,
-    email.trim(),
-    password,
-    phoneNumber,
-  );
+  if (email) {
+    await sendAccountCredentials(
+      name,
+      email.trim(),
+      password,
+      phoneNumber,
+    );
+  } else {
+    const message = `Your Credentials for SMS platform is Phone number : ${phoneNumber} password : ${password}`;
+    await MessageService([admin.phoneNumberInternational], message);
+  }
+
   await Activity.save(); // SAVE  ACTIVITY  LOG
   return ProcessingSuccess(res, createdAdmin); // RESPONSE SUCCESS WITH NEW ADMIN
 }

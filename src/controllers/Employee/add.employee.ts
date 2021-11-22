@@ -14,6 +14,7 @@ import {
 } from '../../constants/enums';
 import {
   getPhoneNumberInfo,
+  MessageService,
   sendAccountCredentials,
 } from '../../utills/utills';
 
@@ -116,12 +117,20 @@ export default async function CreateEmployee(
       password: 0,
     });
 
-  await sendAccountCredentials(
-    name,
-    email.trim(),
-    password,
-    phoneNumber,
-  );
+  if (email) {
+    await sendAccountCredentials(
+      name,
+      email.trim(),
+      password,
+      phoneNumber,
+    );
+  } else {
+    const message = `Your Credentials for SMS platform is Phone number : ${phoneNumber} password : ${password}`;
+    await MessageService(
+      [employee.phoneNumberInternational],
+      message,
+    );
+  }
   await Activity.save();
 
   return ProcessingSuccess(res, createdEmployee);
