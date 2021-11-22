@@ -22,7 +22,8 @@ export default async function CreateEmployee(
   req: Request,
   res: Response,
 ) {
-  const {
+  /* eslint-disable */
+  let {
     email,
     name,
     password,
@@ -32,8 +33,16 @@ export default async function CreateEmployee(
     phoneNumber,
     countryCode,
   } = req.body as EmployeeSignupProps;
-
+  /* eslint-enable */
   const employee = new models.Employee();
+
+  if (email) {
+    email = email.trim().toLowerCase();
+  }
+
+  if (phoneNumber) {
+    phoneNumber = phoneNumber.trim();
+  }
 
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Admin.findOne({
@@ -42,7 +51,7 @@ export default async function CreateEmployee(
         email: new RegExp(`^${email}$`, 'i'),
       },
       {
-        phoneNumber: phoneNumber.trim(),
+        phoneNumber,
       },
     ],
   });
@@ -97,7 +106,7 @@ export default async function CreateEmployee(
   employee.setPassword(password);
 
   employee.name = name;
-  employee.email = email.toLowerCase().trim();
+  employee.email = email;
   employee.address = address;
 
   employee.groupId = $GROUPID;
@@ -118,12 +127,7 @@ export default async function CreateEmployee(
     });
 
   if (email) {
-    await sendAccountCredentials(
-      name,
-      email.trim(),
-      password,
-      phoneNumber,
-    );
+    await sendAccountCredentials(name, email, password, phoneNumber);
   } else {
     const message = `Your Credentials for SMS platform is Phone number : ${phoneNumber} password : ${password}`;
     await MessageService(

@@ -22,7 +22,8 @@ export default async function CreateAdmin(
 ) {
   // COLLECT REQUEST BODY
   // ==============================
-  const { email, name, password, phoneNumber, countryCode } =
+  // eslint-disable-next-line
+  let { email, name, password, phoneNumber, countryCode } =
     req.body as {
       email: string;
       name: string;
@@ -31,18 +32,23 @@ export default async function CreateAdmin(
       countryCode: string;
     };
 
+  if (email) {
+    email = email.trim().toLowerCase();
+  }
+
+  if (phoneNumber) {
+    phoneNumber = phoneNumber.trim();
+  }
+
   const admin = new models.Admin({
-    email: email.toLowerCase().trim(),
+    email,
     name,
     date: new Date(),
   }); // INTIALIZE A NEW ADMIN OBJECT
 
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Admin.findOne({
-    $or: [
-      { email: email.toLowerCase() },
-      { phoneNumber: phoneNumber.trim() },
-    ],
+    $or: [{ email }, { phoneNumber }],
   });
 
   // PHONE NUMBER INTEGRATION
@@ -104,12 +110,7 @@ export default async function CreateAdmin(
   });
 
   if (email) {
-    await sendAccountCredentials(
-      name,
-      email.trim(),
-      password,
-      phoneNumber,
-    );
+    await sendAccountCredentials(name, email, password, phoneNumber);
   } else {
     const message = `Your Credentials for SMS platform is Phone number : ${phoneNumber} password : ${password}`;
     await MessageService([admin.phoneNumberInternational], message);
