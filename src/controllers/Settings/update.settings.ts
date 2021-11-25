@@ -16,22 +16,28 @@ export default async function UpdateSettings(
     updates: Settings;
   };
 
-  const getDoc = await models.Settings.findOne({});
+  const getDoc = await models.Settings.find();
 
-  if (!getDoc) {
+  let doc;
+
+  if (!getDoc[0]) {
     const createSettins = new models.Settings({
       maximumReloadThreshold: 0,
       minimumReloadThreshold: 0,
     });
 
     await createSettins.save({ validateBeforeSave: false });
+    const getCreatedDoc = await models.Settings.find();
+    doc = getCreatedDoc[0]; // eslint-disable-line
   }
 
-  const doc = await models.Settings.findOneAndUpdate(
-    { _id: getDoc?._id }, // eslint-disable-line
-    updates,
-    { new: true },
-  );
+  if (getDoc[0]) {
+    doc = await models.Settings.findOneAndUpdate(
+      { _id: getDoc[0]._id }, // eslint-disable-line
+      updates,
+      { new: true },
+    );
+  }
 
   // ACTIVITY LOGGER
   // ============================
