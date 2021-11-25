@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import GetApplicationInfo from '../controllers/Admin/application.info';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
 import SettingsController from '../controllers/Settings';
@@ -68,6 +69,7 @@ const {
   SEND_RESSET_PASSWORD_SMS,
   VERIFIFY_CODE,
   SETTINGS,
+  APPLICATION_INFO,
 } = constants.RoutesSubs;
 
 const { LOGIN_BASE, SENDERID } = constants.RouteBase;
@@ -78,6 +80,12 @@ admin.put(
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(ValidateUpdateSettings),
   HandleAsyncFactory(SettingsController.UpdateSettings),
+);
+
+admin.get(
+  APPLICATION_INFO,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetApplicationInfo),
 );
 
 admin.get(

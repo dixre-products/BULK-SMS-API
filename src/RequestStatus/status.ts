@@ -29,6 +29,14 @@ export const InvalidCredential = (res: Response) => {
   });
 };
 
+// INVALID CREDENTIALS
+export const RequestForbidden = (res: Response, message: string) => {
+  res.status(STATUS_CODES.FORBIDDEN.CODE).json({
+    message,
+    error: Constants.RequestResponse.InvalidCredential,
+  });
+};
+
 // SUSPENDS USER
 export const SuspendUser = (res: Response) => {
   res.status(STATUS_CODES.FORBIDDEN.CODE).json({

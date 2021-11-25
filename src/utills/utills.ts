@@ -11,7 +11,7 @@ import config from 'config';
 import constants from '../constants/index';
 import { RequestParams } from '../Types/interfaces';
 import models from '../models/index';
-import MessageStatus from '../constants/enums';
+// import MessageStatus from '../constants/enums';
 
 const privateKey = fs.readFileSync(
   `${process.env.INIT_CWD}/private.key`,
@@ -35,6 +35,7 @@ console.log(credentials);
 const AfricasTalking = require('africastalking')(credentials);
 
 const sms = AfricasTalking.SMS;
+const application = AfricasTalking.APPLICATION;
 
 export function getPhoneNumberInfo(
   phone: string,
@@ -56,6 +57,30 @@ export function getPhoneNumberInfo(
   }
 }
 
+export async function GetApplicationInformation() {
+  const { UserData } = await application.fetchApplicationData();
+  const balanceInteger = parseFloat(UserData.balance.split(' ')[1]);
+  return balanceInteger;
+}
+
+export async function getAccountDetails() {
+  const balanceAfricatalking = await GetApplicationInformation();
+  const allDepartment = await models.Department.find({});
+  const allocated = allDepartment.map(
+    (department) => department.credit,
+  );
+  const totalAmountAllocated = allocated.reduce(
+    (curr, next) => curr + next,
+  );
+
+  return {
+    balanceAfterAllocation:
+      balanceAfricatalking - totalAmountAllocated,
+    totalAmountAllocated,
+    totalBalance: balanceAfricatalking,
+  };
+}
+
 export async function MessageService(
   phoneNumbers: string[],
   message: string,
@@ -74,29 +99,29 @@ export async function MessageService(
   return sms.send(options);
 }
 
-setInterval(async () => {
-  const messages = await models.Message.find({
-    scheduleDate: { $lte: Date.now() },
-    status: MessageStatus.APPROVED,
-  });
+// setInterval(async () => {
+//   const messages = await models.Message.find({
+//     scheduleDate: { $lte: Date.now() },
+//     status: MessageStatus.APPROVED,
+//   });
 
-  /* eslint-disable */
-  for (let message of messages) {
-    console.log('We are sending message');
-    console.log(message.message);
-    await MessageService(message.contacts, message.message);
-    message.status = MessageStatus.SENT;
-    await message.save();
-    await models.Department.findOneAndUpdate(
-      {
-        _id: message.groupId, // eslint-disable
-      },
-      {
-        $inc: { credit: -message.contacts.length },
-      },
-    );
-  }
-}, 600000);
+//   /* eslint-disable */
+//   for (let message of messages) {
+//     console.log('We are sending message');
+//     console.log(message.message);
+//     await MessageService(message.contacts, message.message);
+//     message.status = MessageStatus.SENT;
+//     await message.save();
+//     await models.Department.findOneAndUpdate(
+//       {
+//         _id: message.groupId, // eslint-disable
+//       },
+//       {
+//         $inc: { credit: -message.contacts.length },
+//       },
+//     );
+//   }
+// }, 600000);
 
 /* eslint-enable */
 

@@ -16,10 +16,19 @@ export default async function UpdateSettings(
     updates: Settings;
   };
 
-  const getDoc = await models.Settings.find();
+  const getDoc = await models.Settings.findOne({});
+
+  if (!getDoc) {
+    const createSettins = new models.Settings({
+      maximumReloadThreshold: 0,
+      minimumReloadThreshold: 0,
+    });
+
+    await createSettins.save({ validateBeforeSave: false });
+  }
 
   const doc = await models.Contact.findOneAndUpdate(
-    { _id: getDoc[0]._id }, // eslint-disable-line
+    { _id: getDoc?._id }, // eslint-disable-line
     updates,
     { new: true },
   );

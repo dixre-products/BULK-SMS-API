@@ -10,9 +10,14 @@ const requestBodySchemaCredit = joi.object({
 const requestBodySchema = joi.object({
   id: joi.string().required().label('Department ID'),
   updates: joi.object({
-    credit: joi.number(),
-    name: joi.string(),
-    senderIds: joi.array().items(joi.string()).optional().allow(''),
+    credit: joi.number().label('credit'),
+    name: joi.string().label('name'),
+    senderIds: joi
+      .array()
+      .items(joi.string())
+      .optional()
+      .allow('')
+      .label('sender IDs'),
   }),
 });
 

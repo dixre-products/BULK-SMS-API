@@ -78,9 +78,12 @@ const SEND_RESSET_PASSWORD_LINK = '/send-reset-password-link';
 const SEND_RESSET_PASSWORD_SMS = '/send-reset-password-sms';
 const RESSET_PASSWORD = '/reset-password';
 
+// Application
+const APPLICATION_INFO = 'platform-info';
+
 export default {
   SETTINGS,
-
+  APPLICATION_INFO,
   SEND_MESSAGE,
   GET_EMPLOYESS_BY_GROUP,
   GET_EMPLOYEES,
