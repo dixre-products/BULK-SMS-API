@@ -144,7 +144,7 @@ export async function verifyCode(req: Request, res: Response) {
     });
 
     const objectifyBSON = user?.toObject() as EmployeeProps;
-    const tokens = getTokens({ ...objectifyBSON, isAdmin: true });
+    const tokens = getTokens({ ...objectifyBSON, isAdmin: false });
     const { accessToken } = tokens;
 
     return ProcessingSuccess(res, { token: accessToken });
