@@ -38,6 +38,7 @@ export async function UpdateEmployee(req: Request, res: Response) {
       updates.countryCode,
     );
     doc.phoneNumberInternational = intlPhoneNumber;
+    await doc.save({ validateBeforeSave: false });
   }
   const Activity = new models.Activities({
     group: '',
