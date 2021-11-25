@@ -27,7 +27,7 @@ export default async function UpdateSettings(
     await createSettins.save({ validateBeforeSave: false });
   }
 
-  const doc = await models.Contact.findOneAndUpdate(
+  const doc = await models.Settings.findOneAndUpdate(
     { _id: getDoc?._id }, // eslint-disable-line
     updates,
     { new: true },
@@ -45,7 +45,6 @@ export default async function UpdateSettings(
     type: EntitiesAction.UPDATE,
     description: 'Settings updated successfully',
     payload: {
-      name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
     date: new Date(),
