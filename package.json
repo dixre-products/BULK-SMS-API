@@ -75,6 +75,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@marcinkowalczyk/sms-counter": "^1.0.1",
     "@pm2/io": "^4.3.3",
     "@types/jsonwebtoken": "^8.5.0",
     "africastalking": "^0.5.4",

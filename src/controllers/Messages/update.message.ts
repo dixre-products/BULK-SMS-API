@@ -13,6 +13,8 @@ import MessageStatus, {
 } from '../../constants/enums';
 import { MessageService } from '../../utills/utills';
 
+const SmsCounter = require('@marcinkowalczyk/sms-counter');
+
 export default async function UpdateMessage(
   req: Request,
   res: Response,
@@ -64,7 +66,7 @@ export async function SendMessage(req: Request, res: Response) {
   const ID = Types.ObjectId(id);
 
   const getMessage = await models.Message.findOne({ _id: ID }); // eslint-disable-line
-
+  const { messages } = SmsCounter.count(getMessage?.message);
   if (getMessage?.status !== MessageStatus.PENDING)
     return RequestNotAllowed(res);
 
@@ -90,7 +92,7 @@ export async function SendMessage(req: Request, res: Response) {
       _id: getMessage.groupId, // eslint-disable
     },
     {
-      $inc: { credit: -(getMessage.contacts.length * 4) },
+      $inc: { credit: -(messages * 4) },
     },
   );
 

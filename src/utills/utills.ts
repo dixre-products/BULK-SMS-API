@@ -11,6 +11,7 @@ import config from 'config';
 import constants from '../constants/index';
 import { RequestParams } from '../Types/interfaces';
 import models from '../models/index';
+
 // import MessageStatus from '../constants/enums';
 
 const privateKey = fs.readFileSync(
@@ -34,7 +35,7 @@ console.log(credentials);
 // Initialize the SDK
 const AfricasTalking = require('africastalking')(credentials);
 
-const sms = AfricasTalking.SMS;
+// const sms = AfricasTalking.SMS;
 const application = AfricasTalking.APPLICATION;
 
 export function getPhoneNumberInfo(
@@ -82,21 +83,22 @@ export async function getAccountDetails() {
 }
 
 export async function MessageService(
-  phoneNumbers: string[],
-  message: string,
+  phoneNumbers: string[], // eslint-disable-line
+  message: string, // eslint-disable-line
   // senderId?: string,
 ) {
-  const options = {
-    // Set the numbers you want to send to in international format
-    to: phoneNumbers,
-    // Set your message
-    message,
-    // Set your shortCode or senderId
-    from: '',
-  };
+  // const options = {
+  //   // Set the numbers you want to send to in international format
+  //   to: phoneNumbers,
+  //   // Set your message
+  //   message,
+  //   // Set your shortCode or senderId
+  //   from: '',
+  // };
 
   // That’s it, hit send and we’ll take care of the rest
-  return sms.send(options);
+  // await sms.send(options);
+  return true;
 }
 
 // setInterval(async () => {
