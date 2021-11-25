@@ -42,7 +42,7 @@ export async function SendSMSVerificationPin(
   );
 
   const PhoneNumberExist = await models.Admin.findOne({
-    phoneNumber: intlFormat,
+    phoneNumberInternational: intlFormat,
   });
 
   if (!PhoneNumberExist) return InvalidCredential(res);
