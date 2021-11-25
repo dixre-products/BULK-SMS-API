@@ -12,7 +12,8 @@ connect(config.get('DB_CONNECTION_STRING'), {
   .then(() => {
     console.log('Database connected');
   })
-  .catch(() => {
+  .catch((e) => {
+    console.log(e);
     console.log('Database not connected');
   });
 

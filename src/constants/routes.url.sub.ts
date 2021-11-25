@@ -79,7 +79,7 @@ const SEND_RESSET_PASSWORD_SMS = '/send-reset-password-sms';
 const RESSET_PASSWORD = '/reset-password';
 
 // Application
-const APPLICATION_INFO = 'platform-info';
+const APPLICATION_INFO = '/platform-info';
 
 export default {
   SETTINGS,
