@@ -12,12 +12,11 @@ export default async function UpdateSettings(
   req: Request,
   res: Response,
 ) {
-  const { updates } = req.body as {
+  const updates = req.body as {
     updates: Settings;
   };
 
   const getDoc = await models.Settings.find();
-
   let doc;
 
   if (!getDoc[0]) {
@@ -50,9 +49,7 @@ export default async function UpdateSettings(
     entity: Entities.SETTINGS,
     type: EntitiesAction.UPDATE,
     description: 'Settings updated successfully',
-    payload: {
-      id: doc?._id, // eslint-disable-line
-    },
+    payload: {},
     date: new Date(),
   });
 
