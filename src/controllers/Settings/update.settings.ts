@@ -20,10 +20,7 @@ export default async function UpdateSettings(
   let doc;
 
   if (!getDoc[0]) {
-    const createSettins = new models.Settings({
-      maximumReloadThreshold: 0,
-      minimumReloadThreshold: 0,
-    });
+    const createSettins = new models.Settings(updates);
 
     await createSettins.save({ validateBeforeSave: false });
     const getCreatedDoc = await models.Settings.find();

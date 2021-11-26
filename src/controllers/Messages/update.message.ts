@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
+  RequestForbidden,
   RequestNotAllowed,
 } from '../../RequestStatus/status';
 import models from '../../models';
@@ -69,6 +70,17 @@ export async function SendMessage(req: Request, res: Response) {
   const { messages } = SmsCounter.count(getMessage?.message);
   if (getMessage?.status !== MessageStatus.PENDING)
     return RequestNotAllowed(res);
+
+  const { credit } = (await models.Department.findOne({
+    _id: getMessage.groupId, // eslint-disable
+  })) as any;
+
+  if (credit < messages * 4) {
+    return RequestForbidden(
+      res,
+      'Insufficient credit to complete sending of message',
+    );
+  }
 
   const messageString = getMessage.message;
   if (!getMessage.scheduleDate) {

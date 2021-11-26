@@ -54,13 +54,6 @@ export default async function Createmessage(
     ? MessageStatus.APPROVED
     : MessageStatus.PENDING;
 
-  await models.Department.findOneAndUpdate(
-    { _id: $GROUPID },
-    {
-      $inc: { credit: -newMessage.contacts.length },
-    },
-    { new: true },
-  );
   await newMessage.save({ validateBeforeSave: false });
   await Activity.save({ validateBeforeSave: false });
   return ProcessingSuccess(res, newMessage);
