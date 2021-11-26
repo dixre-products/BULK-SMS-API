@@ -22,8 +22,15 @@ export default async function CreateDepartment(
     credit: number;
     senderIds: string[];
   };
-  const { maximumReloadThreshold, minimumReleadThreshold } =
-    (await models.Settings.findOne({})) as any;
+  let minimumReleadThreshold = 0;
+  let maximumReloadThreshold = 0;
+
+  const getSettings = await models.Settings.findOne({});
+
+  if (getSettings) {
+    minimumReleadThreshold = getSettings.minimumReloadThreshold;
+    maximumReloadThreshold = getSettings.maximumReloadThreshold;
+  }
 
   if (credit && credit !== 0) {
     if (credit < minimumReleadThreshold) {
