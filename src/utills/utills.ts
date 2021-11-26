@@ -70,9 +70,13 @@ export async function getAccountDetails() {
   const allocated = allDepartment.map(
     (department) => department.credit,
   );
-  const totalAmountAllocated = allocated.reduce(
-    (curr, next) => curr + next,
-  );
+  let totalAmountAllocated = 0;
+
+  if (allocated.length > 0) {
+    totalAmountAllocated = allocated.reduce(
+      (curr, next) => curr + next,
+    );
+  }
 
   return {
     balanceAfterAllocation:
