@@ -46,7 +46,7 @@ export default async function DeleteMultipleDepartment(
         name: department?.name,
         id: department?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities(); // CREATE A NEW ACTIVITY OBJECT

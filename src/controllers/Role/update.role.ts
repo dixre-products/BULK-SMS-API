@@ -42,7 +42,7 @@ export default async function UpdateRole(
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();

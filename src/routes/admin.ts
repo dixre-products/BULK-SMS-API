@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import GetApplicationInfo from '../controllers/Admin/application.info';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
 import SettingsController from '../controllers/Settings';
@@ -20,10 +21,15 @@ import Activities from '../controllers/Activities';
 import SenderIdController from '../controllers/SenderIDs';
 import Validation from '../Validators/SenderId';
 import ValidateRessetPasswordEmail from '../Validators/PasswordResset/validate.email.resset.password';
+import ValidatePhoneNumberVerification from '../Validators/PasswordResset/validate.verify.phone';
+import ValidateVerificationPin from '../Validators/PasswordResset/validate.verify.code';
 import ValidateRessetPassword from '../Validators/PasswordResset/validate.password.resset';
 import ExtractInfoMiddleware from '../Middlewares/extract.info.header';
 import ValidateUpdateSettings from '../Validators/settings/update.settings.validation';
-
+import {
+  SendSMSVerificationPin,
+  verifyCode,
+} from '../controllers/Admin/verification';
 // import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
@@ -60,7 +66,10 @@ const {
 
   RESSET_PASSWORD,
   SEND_RESSET_PASSWORD_LINK,
+  SEND_RESSET_PASSWORD_SMS,
+  VERIFIFY_CODE,
   SETTINGS,
+  APPLICATION_INFO,
 } = constants.RoutesSubs;
 
 const { LOGIN_BASE, SENDERID } = constants.RouteBase;
@@ -74,6 +83,12 @@ admin.put(
 );
 
 admin.get(
+  APPLICATION_INFO,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetApplicationInfo),
+);
+
+admin.get(
   SETTINGS,
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(SettingsController.GetSettings),
@@ -83,6 +98,18 @@ admin.post(
   SEND_RESSET_PASSWORD_LINK,
   HandleAsyncFactory(ValidateRessetPasswordEmail),
   HandleAsyncFactory(AdminController.RequestRessetEmail),
+);
+
+admin.post(
+  SEND_RESSET_PASSWORD_SMS,
+  HandleAsyncFactory(ValidatePhoneNumberVerification),
+  HandleAsyncFactory(SendSMSVerificationPin),
+);
+
+admin.post(
+  VERIFIFY_CODE,
+  HandleAsyncFactory(ValidateVerificationPin),
+  HandleAsyncFactory(verifyCode),
 );
 
 admin.post(

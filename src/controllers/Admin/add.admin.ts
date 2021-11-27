@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import {
+  InvalidInputs,
   ProcessingSuccess,
   UserExist,
 } from '../../RequestStatus/status';
@@ -9,6 +10,11 @@ import {
   Entities,
   EntitiesAction,
 } from '../../constants/enums';
+import {
+  getPhoneNumberInfo,
+  MessageService,
+  sendAccountCredentials,
+} from '../../utills/utills';
 
 export default async function CreateAdmin(
   req: Request,
@@ -16,23 +22,65 @@ export default async function CreateAdmin(
 ) {
   // COLLECT REQUEST BODY
   // ==============================
-  const { email, name, password } = req.body as {
-    email: string;
-    name: string;
-    password: string;
-  };
+  // eslint-disable-next-line
+  let { email, name, password, phoneNumber, countryCode } =
+    req.body as {
+      email: string;
+      name: string;
+      password: string;
+      phoneNumber: string;
+      countryCode: string;
+    };
+  const query = [];
+
+  if (email) {
+    email = email.trim().toLowerCase();
+    query.push({ email });
+  }
+
+  if (phoneNumber) {
+    phoneNumber = phoneNumber.trim();
+    query.push({ phoneNumber });
+  }
+
+  const admin = new models.Admin({
+    email,
+    name,
+    date: new Date(),
+  }); // INTIALIZE A NEW ADMIN OBJECT
 
   // CHECKS IF ACCOUNT ALREADY EXIST
   const findAccount = await models.Admin.findOne({
-    email: email.toLowerCase(),
+    $or: query,
   });
 
-  if (findAccount) return UserExist(res);
+  // PHONE NUMBER INTEGRATION
+  if (phoneNumber) {
+    try {
+      const phoneInfo = getPhoneNumberInfo(phoneNumber, countryCode);
+      if (phoneInfo) {
+        admin.phoneNumberInternational = phoneInfo;
+        admin.phoneNumber = phoneNumber;
+        admin.countryCode = countryCode;
+      }
 
-  const admin = new models.Admin({
-    email: email.toLowerCase(),
-    name,
-  }); // INTIALIZE A NEW ADMIN OBJECT
+      if (!email && !phoneInfo) {
+        return InvalidInputs(
+          res,
+          'Email or phone number must be provided',
+        );
+      }
+    } catch {
+      if (!email) {
+        return InvalidInputs(
+          res,
+          'Email or phone number must be provided',
+        );
+      }
+    }
+  }
+
+  if (findAccount) return UserExist(res);
 
   admin.setPassword(password); // SET NEW ADMIN PASSWORD
 
@@ -51,7 +99,7 @@ export default async function CreateAdmin(
       email,
       id: admin._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await admin.save({ validateBeforeSave: false }); // WRITE NEW ADMIN TO DB
@@ -63,6 +111,13 @@ export default async function CreateAdmin(
     hash: 0,
     salt: 0,
   });
+
+  if (email) {
+    await sendAccountCredentials(name, email, password, phoneNumber);
+  } else {
+    const message = `Your Credentials for SMS platform is Phone number : ${phoneNumber} password : ${password}`;
+    await MessageService([admin.phoneNumberInternational], message);
+  }
 
   await Activity.save(); // SAVE  ACTIVITY  LOG
   return ProcessingSuccess(res, createdAdmin); // RESPONSE SUCCESS WITH NEW ADMIN

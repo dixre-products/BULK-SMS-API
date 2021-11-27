@@ -28,7 +28,14 @@ export default async function loginAccount(
   // ==============================
 
   const doc = await models.Admin.findOne({
-    email: email.toLowerCase(),
+    $or: [
+      {
+        email: email.toLowerCase(),
+      },
+      {
+        phoneNumber: email.trim(),
+      },
+    ],
   });
 
   if (!doc) return InvalidCredential(res);
@@ -59,7 +66,7 @@ export default async function loginAccount(
       email: doc?.email,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
   await Activity.save(); // SAVE ACTIVITY
   return LoginSuccess(

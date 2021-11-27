@@ -8,6 +8,8 @@ const Contact: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
+    countryCode: { type: mongoose.Schema.Types.String },
+
     number: {
       type: mongoose.Schema.Types.String,
     },

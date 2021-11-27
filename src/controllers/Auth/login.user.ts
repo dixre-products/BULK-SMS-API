@@ -24,11 +24,18 @@ export default async function loginAccount(
     email: string;
   };
 
-  // FIND EMAIL ADDRESS
+  // FIND EMAIL ADDRESS OR PHONE NUMBER
   // ==============================
 
   const doc = await models.Employee.findOne({
-    email: email.toLowerCase(),
+    $or: [
+      {
+        email: email.toLowerCase(),
+      },
+      {
+        phoneNumber: email.trim(),
+      },
+    ],
   })
     .populate('groupId roleId')
     .populate('groupId.senderIds');
@@ -61,7 +68,7 @@ export default async function loginAccount(
       email: doc?.email,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
   await Activity.save(); // SAVE ACTIVITY
   return LoginSuccess(

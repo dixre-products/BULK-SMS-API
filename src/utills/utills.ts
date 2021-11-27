@@ -9,9 +9,10 @@ import mongoose from 'mongoose';
 import * as fs from 'fs';
 import config from 'config';
 import constants from '../constants/index';
-import { RequestParams, UserProps } from '../Types/interfaces';
+import { RequestParams } from '../Types/interfaces';
 import models from '../models/index';
-import MessageStatus from '../constants/enums';
+
+// import MessageStatus from '../constants/enums';
 
 const privateKey = fs.readFileSync(
   `${process.env.INIT_CWD}/private.key`,
@@ -29,10 +30,13 @@ const credentials = {
   username: config.get('AFRICATALKING_API_USERNAME'),
 };
 
+console.log(credentials);
+
 // Initialize the SDK
 const AfricasTalking = require('africastalking')(credentials);
 
 const sms = AfricasTalking.SMS;
+const application = AfricasTalking.APPLICATION;
 
 export function getPhoneNumberInfo(
   phone: string,
@@ -54,50 +58,75 @@ export function getPhoneNumberInfo(
   }
 }
 
+export async function GetApplicationInformation() {
+  const { UserData } = await application.fetchApplicationData();
+  const balanceInteger = parseFloat(UserData.balance.split(' ')[1]);
+  return balanceInteger;
+}
+
+export async function getAccountDetails() {
+  const balanceAfricatalking = await GetApplicationInformation();
+  const allDepartment = await models.Department.find({});
+  const allocated = allDepartment.map(
+    (department) => department.credit,
+  );
+  let totalAmountAllocated = 0;
+
+  if (allocated.length > 0) {
+    totalAmountAllocated = allocated.reduce(
+      (curr, next) => curr + next,
+    );
+  }
+
+  return {
+    balanceAfterAllocation:
+      balanceAfricatalking - totalAmountAllocated,
+    totalAmountAllocated,
+    totalBalance: balanceAfricatalking,
+  };
+}
+
 export async function MessageService(
-  phoneNumbers: string[],
-  message: string,
+  phoneNumbers: string[], // eslint-disable-line
+  message: string, // eslint-disable-line
+  // senderId?: string,
 ) {
-  const messageContacts: string[] = [];
-  phoneNumbers.forEach((phone) => {
-    messageContacts.push(getPhoneNumberInfo(phone, 'NG'));
-  });
   const options = {
     // Set the numbers you want to send to in international format
-    to: messageContacts,
+    to: phoneNumbers,
     // Set your message
     message,
     // Set your shortCode or senderId
-    from: 'Dixre',
+    from: 'AFRICASTKNG',
   };
 
   // That’s it, hit send and we’ll take care of the rest
   return sms.send(options);
 }
 
-setInterval(async () => {
-  const messages = await models.Message.find({
-    scheduleDate: { $lte: Date.now() },
-    status: MessageStatus.APPROVED,
-  });
+// setInterval(async () => {
+//   const messages = await models.Message.find({
+//     scheduleDate: { $lte: Date.now() },
+//     status: MessageStatus.APPROVED,
+//   });
 
-  /* eslint-disable */
-  for (let message of messages) {
-    console.log('We are sending message');
-    console.log(message.message);
-    await MessageService(message.contacts, message.message);
-    message.status = MessageStatus.SENT;
-    await message.save();
-    await models.Department.findOneAndUpdate(
-      {
-        _id: message.groupId, // eslint-disable
-      },
-      {
-        $inc: { credit: -message.contacts.length },
-      },
-    );
-  }
-}, 600000);
+//   /* eslint-disable */
+//   for (let message of messages) {
+//     console.log('We are sending message');
+//     console.log(message.message);
+//     await MessageService(message.contacts, message.message);
+//     message.status = MessageStatus.SENT;
+//     await message.save();
+//     await models.Department.findOneAndUpdate(
+//       {
+//         _id: message.groupId, // eslint-disable
+//       },
+//       {
+//         $inc: { credit: -message.contacts.length },
+//       },
+//     );
+//   }
+// }, 600000);
 
 /* eslint-enable */
 
@@ -137,7 +166,7 @@ export function decodeJwtToken(token: string) {
   }
 }
 
-export function getTokens(userCreds: UserProps) {
+export function getTokens(userCreds: any) {
   try {
     const accessToken = encodeToJwtToken(
       {
@@ -316,6 +345,50 @@ export async function sendRessetPasswordLink(
             },
           ],
           Subject: 'Password Resset email.',
+          TextPart: '',
+          HTMLPart: html,
+          CustomID: 'AppGettingStartedTest',
+        },
+      ],
+    });
+}
+
+export async function sendAccountCredentials(
+  name: string,
+  email: string,
+  password: string,
+  phoneNumber: string,
+) {
+  let html = `<h3>Hi ${name}.</h3>`;
+
+  html +=
+    '<p> This are your credentials for SMS platform. You can use your email and password or phone and password to login. </p>';
+  html += `<h3> Email </h3>:  ${email}`;
+  html += `<h3> PhoneNumber </h3>:  ${phoneNumber}`;
+  html += `<h3> Password </h3> :${password}`;
+  html += '<p>Thank you.</p>';
+  html += 'SMS plafform  Team!';
+
+  await mailjet
+    .connect(
+      config.get('MAILJET_PUBLIC'),
+      config.get('MAILJET_PRIVATE'),
+    )
+    .post('send', { version: 'v3.1' })
+    .request({
+      Messages: [
+        {
+          From: {
+            Email: 'developers@dixre.com',
+            Name: 'SMS Platform',
+          },
+          To: [
+            {
+              Email: email,
+              Name: name,
+            },
+          ],
+          Subject: 'Account Information.',
           TextPart: '',
           HTMLPart: html,
           CustomID: 'AppGettingStartedTest',

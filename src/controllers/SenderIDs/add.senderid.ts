@@ -32,7 +32,7 @@ export default async function CreateSenderID(
       name,
       id: senderID._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   senderID.name = name;

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Types } from 'mongoose';
 import {
   ProcessingSuccess,
+  RequestForbidden,
   RequestNotAllowed,
 } from '../../RequestStatus/status';
 import models from '../../models';
@@ -12,6 +13,8 @@ import MessageStatus, {
   EntitiesAction,
 } from '../../constants/enums';
 import { MessageService } from '../../utills/utills';
+
+const SmsCounter = require('@marcinkowalczyk/sms-counter');
 
 export default async function UpdateMessage(
   req: Request,
@@ -49,7 +52,7 @@ export default async function UpdateMessage(
       time: doc?.time,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -64,9 +67,20 @@ export async function SendMessage(req: Request, res: Response) {
   const ID = Types.ObjectId(id);
 
   const getMessage = await models.Message.findOne({ _id: ID }); // eslint-disable-line
-
+  const { messages } = SmsCounter.count(getMessage?.message);
   if (getMessage?.status !== MessageStatus.PENDING)
     return RequestNotAllowed(res);
+
+  const { credit } = (await models.Department.findOne({
+    _id: getMessage.groupId, // eslint-disable
+  })) as any;
+
+  if (credit < messages * 4) {
+    return RequestForbidden(
+      res,
+      'Insufficient credit to complete sending of message',
+    );
+  }
 
   const messageString = getMessage.message;
   if (!getMessage.scheduleDate) {
@@ -90,7 +104,7 @@ export async function SendMessage(req: Request, res: Response) {
       _id: getMessage.groupId, // eslint-disable
     },
     {
-      $inc: { credit: -getMessage.contacts.length },
+      $inc: { credit: -(messages * 4) },
     },
   );
 
@@ -113,7 +127,7 @@ export async function SendMessage(req: Request, res: Response) {
       time: doc?.time,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();

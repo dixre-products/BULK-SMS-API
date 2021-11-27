@@ -1647,6 +1647,11 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
+"@marcinkowalczyk/sms-counter@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@marcinkowalczyk/sms-counter/-/sms-counter-1.0.1.tgz#78ee574e6682cd0c497d7b5aea2cfe460e5e5768"
+  integrity sha512-7OS4lTes0f89M/AZ+As0Aki/oVDt4l73TPePpErZIf0Tka2tmdtWN6HDRsfB+YvF07SfWMstMv5/V36ozwDvAA==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"

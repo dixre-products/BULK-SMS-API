@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import { ProcessingSuccess } from '../../RequestStatus/status';
 import models from '../../models';
 import { MessageProps } from '../../Types/interfaces';
-import {
+import MessageStatus, {
   ACCOUNT_TYPE,
   Entities,
   EntitiesAction,
@@ -41,7 +41,7 @@ export default async function Createmessage(
       phoneNumbers: contacts,
       id: newMessage._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   newMessage.contacts.push(...contacts);
@@ -49,14 +49,11 @@ export default async function Createmessage(
   newMessage.sender = sender;
   newMessage.scheduleDate = new Date(scheduleDate);
   newMessage.groupId = $GROUPID;
+  newMessage.date = new Date();
+  newMessage.status = scheduleDate
+    ? MessageStatus.APPROVED
+    : MessageStatus.PENDING;
 
-  await models.Department.findOneAndUpdate(
-    { _id: $GROUPID },
-    {
-      $inc: { credit: -newMessage.contacts.length },
-    },
-    { new: true },
-  );
   await newMessage.save({ validateBeforeSave: false });
   await Activity.save({ validateBeforeSave: false });
   return ProcessingSuccess(res, newMessage);

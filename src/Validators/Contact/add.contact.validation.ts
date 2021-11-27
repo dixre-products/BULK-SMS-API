@@ -3,10 +3,23 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  number: joi.string().required().label('Phone Number'),
-  name: joi.string().required().label('Name'),
-  groupId: joi.string().label('Group ID'),
-  sender: joi.string().optional().allow(''),
+  contacts: joi
+    .array()
+    .items(
+      joi
+        .object({
+          number: joi.string().required().label('Phone Number'),
+          name: joi.string().required().label('Name'),
+          groupId: joi.string().label('Group ID').required(),
+          countryCode: joi
+            .string()
+            .length(2)
+            .required()
+            .label('Country code'),
+        })
+        .required(),
+    )
+    .required(),
 });
 
 export default function ValidateCreateContact(

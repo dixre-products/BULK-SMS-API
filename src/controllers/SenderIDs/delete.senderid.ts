@@ -36,7 +36,7 @@ export async function DeleteSenderId(req: Request, res: Response) {
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();
@@ -77,7 +77,7 @@ export async function DeleteMultipleSenders(
         name: senderId?.name,
         id: senderId?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities();

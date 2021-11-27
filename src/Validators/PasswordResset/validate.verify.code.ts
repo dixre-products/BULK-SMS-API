@@ -3,16 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  id: joi.string().required().label('Contact ID'),
-
-  updates: joi.object({
-    number: joi.string(),
-    name: joi.string(),
-    countryCode: joi.string(),
-  }),
+  token: joi.string().required(),
+  pin: joi.string().required(),
 });
 
-export default function ValidateUpdateContact(
+export default function ValidateVerificationPin(
   req: Request,
   res: Response,
   next: NextFunction,

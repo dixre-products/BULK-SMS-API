@@ -49,7 +49,7 @@ export default async function DeleteMultipleAdmin(
         email: admin?.email,
         id: admin?._id, // eslint-disable-line
       },
-      date: Date.now(),
+      date: new Date(),
     });
   }
   const Activity = new models.Activities(); // CREATE A NEW ACTIVITY OBJECT

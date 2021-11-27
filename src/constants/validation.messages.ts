@@ -16,7 +16,7 @@ const PIN_NOT_TIMED_OUT =
 const INCORRECT_PASSWORD = 'Incorrect password please try again.';
 
 const USER_EXIST =
-  'Email is already in use by another account, please use a different email';
+  'Email or  phone number  is already in use by another account, please use a different email or phone number';
 
 const SERVER_ERROR =
   'An unexpected error is preventing the server from processing the request please try again later.';
@@ -37,7 +37,18 @@ const USER_NOT_EXIST = 'The user does not exist';
 const REQUEST_NOT_ALLOWED =
   'Request not allowed, you might be trying to perform an operation that is not allowed e.g updating a message after it is sent';
 
+const QUTO_LIMIT_EXCEEDED =
+  'You have exhausted your allocation quota please top up your subscription to be able to allocate SMS credit.';
+
+const MAXIMUM_ALLOCATION_QUTO_EXCEEDED =
+  'You have exceeded the maximum reload threshold, adjust the amount and try again';
+
+const MINIMUM_ALLOCATION_QUOTA_NOT_ATTAINED =
+  'Credit amount does not satisfy the minimum reload threshold, please adjust the amount and try again.';
 export default {
+  QUTO_LIMIT_EXCEEDED,
+  MINIMUM_ALLOCATION_QUOTA_NOT_ATTAINED,
+  MAXIMUM_ALLOCATION_QUTO_EXCEEDED,
   REQUEST_NOT_ALLOWED,
   USER_NOT_EXIST,
   INVALID_PASSWORD,

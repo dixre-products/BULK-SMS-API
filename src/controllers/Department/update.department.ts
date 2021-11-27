@@ -1,12 +1,17 @@
 import { Request, Response } from 'express';
 import { Types } from 'mongoose';
-import { ProcessingSuccess } from '../../RequestStatus/status';
+import {
+  ProcessingSuccess,
+  RequestForbidden,
+} from '../../RequestStatus/status';
 import models from '../../models';
 import {
   ACCOUNT_TYPE,
   Entities,
   EntitiesAction,
 } from '../../constants/enums';
+import { getAccountDetails } from '../../utills/utills';
+import constants from '../../constants';
 
 type updatesProps = {
   name: string;
@@ -29,10 +34,38 @@ export async function UpdateDepartment(req: Request, res: Response) {
   }
 
   if (updates.credit) {
-    updates = {
-      ...updates,
-      $inc: { credit: updates.credit },
-    } as updatesProps;
+    // check for reload thresholds
+    const { balanceAfterAllocation } = await getAccountDetails();
+    const { maximumReloadThreshold, minimumReleadThreshold } =
+      (await models.Settings.findOne({})) as any;
+
+    if (updates.credit && updates.credit !== 0) {
+      if (updates.credit < minimumReleadThreshold) {
+        return RequestForbidden(
+          res,
+          constants.Validations.MINIMUM_ALLOCATION_QUOTA_NOT_ATTAINED,
+        );
+      }
+      if (updates.credit > maximumReloadThreshold) {
+        return RequestForbidden(
+          res,
+          constants.Validations.MAXIMUM_ALLOCATION_QUTO_EXCEEDED,
+        );
+      }
+    }
+
+    // check quota before attempting allocation
+    if (updates.credit <= balanceAfterAllocation) {
+      updates = {
+        ...updates,
+        $inc: { credit: updates.credit },
+      } as updatesProps;
+    } else {
+      return RequestForbidden(
+        res,
+        constants.Validations.QUTO_LIMIT_EXCEEDED,
+      );
+    }
   }
 
   // @ts-ignore
@@ -59,7 +92,7 @@ export async function UpdateDepartment(req: Request, res: Response) {
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save({ validateBeforeSave: false });
@@ -100,7 +133,7 @@ export async function UpdateDepartmentCredit(
       name: doc?.name,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   await Activity.save();

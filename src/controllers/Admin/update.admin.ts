@@ -79,7 +79,7 @@ export default async function UpdateAdmin(
       email: doc?.email,
       id: doc?._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
   if (!doc)
     return ResourceNotFound(

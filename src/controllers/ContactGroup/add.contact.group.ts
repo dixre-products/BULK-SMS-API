@@ -35,7 +35,7 @@ export default async function CreateContactGroup(
       name,
       id: contactGroup._id, // eslint-disable-line
     },
-    date: Date.now(),
+    date: new Date(),
   });
 
   contactGroup.name = name;

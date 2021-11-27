@@ -12,17 +12,28 @@ export default async function UpdateSettings(
   req: Request,
   res: Response,
 ) {
-  const { updates } = req.body as {
+  const updates = req.body as {
     updates: Settings;
   };
 
   const getDoc = await models.Settings.find();
+  let doc;
 
-  const doc = await models.Contact.findOneAndUpdate(
-    { _id: getDoc[0]._id }, // eslint-disable-line
-    updates,
-    { new: true },
-  );
+  if (!getDoc[0]) {
+    const createSettins = new models.Settings(updates);
+
+    await createSettins.save({ validateBeforeSave: false });
+    const getCreatedDoc = await models.Settings.find();
+    doc = getCreatedDoc[0]; // eslint-disable-line
+  }
+
+  if (getDoc[0]) {
+    doc = await models.Settings.findOneAndUpdate(
+      { _id: getDoc[0]._id }, // eslint-disable-line
+      updates,
+      { new: true },
+    );
+  }
 
   // ACTIVITY LOGGER
   // ============================
@@ -35,11 +46,8 @@ export default async function UpdateSettings(
     entity: Entities.SETTINGS,
     type: EntitiesAction.UPDATE,
     description: 'Settings updated successfully',
-    payload: {
-      name: doc?.name,
-      id: doc?._id, // eslint-disable-line
-    },
-    date: Date.now(),
+    payload: {},
+    date: new Date(),
   });
 
   await Activity.save({ validateBeforeSave: false });
