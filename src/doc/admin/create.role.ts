@@ -6,9 +6,9 @@
  * @apiSampleRequest off
  * 
  *
+ * @apiParam {String} name name of role.
  * @apiParam {Boolean} sendMessage can send message.
  * @apiParam {Boolean} readMessage can read message.
- * @apiParam {String} name name of role.
  * @apiParam {Boolean} addContact csn add contact
  * @apiParam {Boolean} composeMessage can compose message
  *

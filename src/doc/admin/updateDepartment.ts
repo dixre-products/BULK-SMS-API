@@ -20,7 +20,14 @@
  *       "payload"{
  *          "_id": "6167ec5c549f4c75397eec44",
             "name": "dept",
-            "credit": 22,
+            "credit": 313,
+            "senderIds": [
+                 {
+ *                   "_id": "6167ec5c549f4c75397eec44",
+                     "name": "Admin",
+ *              }
+            ...
+            ],
  *       }
  *     }
  *

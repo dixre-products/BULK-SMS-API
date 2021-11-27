@@ -9,23 +9,26 @@
 
  * 
  * 
- * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  admin object from collection
+* @apiSuccess {String} message  describes the success of the action performed.
+ * @apiSuccess {Object} payload  role credentials object
  * @apiSuccess {String} payload._id role ID.
  * @apiSuccess {Boolean} payload.addContact can add contact.
  * @apiSuccess {Boolean} payload.sendMessage can send message.
  * @apiSuccess {Boolean} payload.readMessage can read message.
- * @apiSuccess {String} payload.name role name
- *
+ * @apiSuccess {Boolean} payload.composeMessage can compose message
+ * @apiSuccess {String} payload.name role name.
+ * 
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
- *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "Admin",
-            "email": "admin@gmail.com",
+ *            "_id": "61676654e1647695f9e14eca",
+              "name": "taker",
+              "sendMessage": false,
+              "readMessage": false,
+              "addContact": true,
  *       }
  *     }
  *

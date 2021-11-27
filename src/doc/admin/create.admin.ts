@@ -8,12 +8,16 @@
  * @apiParam {String} email admin email address.
  * @apiParam {String} name admin name.
  * @apiParam {String} password admin password.
+ * @apiParam {String} phoneNumber admin phone Number.
+ * @apiParam {String} countryCode admin country code.
  *
  * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  admin credentials object
  * @apiSuccess {String} payload._id admin ID.
  * @apiSuccess {String} payload.name admin name.
  * @apiSuccess {String} payload.email admin email address.
+ * @apiSuccess {String} payload.phoneNumber admin phone Number.
+ * @apiSuccess {String} payload.countryCode admin email address.
  *
  *
  * @apiSuccessExample Success-Response:
@@ -24,6 +28,10 @@
  *          "_id": "6167ec5c549f4c75397eec44",
             "name": "Admin",
             "email": "admin@gmail.com",
+            "date": "20-22-2020",
+            "phoneNumberInternational": "+234938333383",
+            "phoneNumber": "0803737373737",
+            "countryCode": "NG",
  *       }
  *     }
  *

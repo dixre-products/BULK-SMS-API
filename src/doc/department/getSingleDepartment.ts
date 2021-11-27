@@ -13,6 +13,7 @@
  * @apiSuccess {String} payload._id department ID.
  * @apiSuccess {String} payload.name department name.
  * @apiSuccess {Number} payload.credit number of credit in a department.
+ * @apiSuccess {Array} payload.senderIds Array of sender ID objects.
  *
  *
  * @apiSuccessExample Success-Response:
@@ -23,6 +24,13 @@
  *          "_id": "6167ec5c549f4c75397eec44",
             "name": "dept",
             "credit": 313,
+            "senderIds": [
+                 {
+ *                   "_id": "6167ec5c549f4c75397eec44",
+                     "name": "Admin",
+ *              }
+            ...
+            ],
  *       }
  *     }
  *

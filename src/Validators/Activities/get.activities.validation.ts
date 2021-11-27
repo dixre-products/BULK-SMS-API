@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
-  id: joi.string().required().label('Employee ID'),
+  activitiesId: joi.string().required().label('Employee ID'),
 });
 
 const requestBodySchema1 = joi.object({

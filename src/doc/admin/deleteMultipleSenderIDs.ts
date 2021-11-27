@@ -5,7 +5,7 @@
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- *  
+ *   
  * @apiParam {String} senderIds Array of Sender ids to be deleted.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.

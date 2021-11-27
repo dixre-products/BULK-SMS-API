@@ -1,7 +1,7 @@
 /**
  * @api {DELETE} /admin/delete-report/:id Delete a report 
  * @apiName Delete a report
- * @apiGroup Report
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *

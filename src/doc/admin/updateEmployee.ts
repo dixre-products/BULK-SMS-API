@@ -13,6 +13,8 @@
  * @apiParam {String} [updates.address] employee address.
  * @apiParam {String} [updates.roleId] employee roleId.
  * @apiParam {String} [updates.groupId] employee groupId.
+ * @apiSuccess {String} [updates.phoneNumber] new employee phone Number.
+ * @apiSuccess {String} [updates.countryCode] new employee email address.
  * @apiParam {String} [updates.active] employee status true=active and false=inactive
  *
  *
@@ -21,13 +23,26 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
-            "_id": "61639a7f4245d1f5bc3e120a",
+           "_id": "61639a7f4245d1f5bc3e120a",
             "name": "ayindexxxxxx21",
             "email": "aaagmai;.com",
             "address": "bbbbb",
-            "groupId": "61639a7f4245d1f5bc3e120a",
+            "phoneNumberInternational": "+234938333383",
+            "phoneNumber": "0803737373737",
             "active": true,
-            "roleId": "61639a7f4245d1f5bc3e120a",
+            "groupId":{
+      *          "_id": "6167ec5c549f4c75397eec44",
+                  "name": "dept",
+                  "credit": 313,
+      *       },
+            "roleId":{
+   *          "_id": "61676654e1647695f9e14eca",
+               "name": "taker",
+               "sendMessage": false,
+               "readMessage": false,
+               "addContact": true,
+               "composeMessage": false,
+ *        }
  *       }
  *     }
  *

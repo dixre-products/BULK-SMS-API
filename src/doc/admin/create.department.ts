@@ -7,6 +7,7 @@
  *
  * @apiParam {Number} credit number of credit 
  * @apiParam {String} name name of department.
+ * @apiParam {String} senderIds Array of sender IDs.
  * 
  *
 * @apiSuccess {String} message  describes the success of the action performed.
@@ -24,7 +25,14 @@
  *       "payload"{
  *          "_id": "6167ec5c549f4c75397eec44",
             "name": "dept",
-            "credit": 13,
+            "credit": 313,
+            "senderIds": [
+                 {
+ *                   "_id": "6167ec5c549f4c75397eec44",
+                     "name": "Admin",
+ *              }
+            ...
+            ],
  *       }
  *     }
  *

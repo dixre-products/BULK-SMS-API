@@ -1,7 +1,7 @@
 /**
  * @api {GET} /admin/get-report  Get All Report
  * @apiName GetAllReport
- * @apiGroup Report
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *

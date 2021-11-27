@@ -33,7 +33,11 @@
             "message": "asasasas",
             "sender": "sassss",
             "status": "approved",
-            "groupId": "61664190dd57d724b1b49c23",,
+             "groupId":{
+      *          "_id": "6167ec5c549f4c75397eec44",
+                  "name": "dept",
+                  "credit": 313,
+      *       },
  *       }
  *     }
  *

@@ -22,15 +22,14 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"[
-   *        {
-   *          "_id": "6167ec5c549f4c75397eec44",
-               "name": "Admin",
-               "email": "admin@gmail.com",
-   *        },
             {
-   *          "_id": "6167ec5c549f4c75397eec44",
-               "name": "Admin",
-               "email": "admin@gmail.com",
+   *        "_id": "6167ec5c549f4c75397eec44",
+            "name": "Admin",
+            "email": "admin@gmail.com",
+            "date": "20-22-2020",
+            "phoneNumberInternational": "+234938333383",
+            "phoneNumber": "0803737373737",
+            "countryCode": "NG",
    *        },
               ....
               ....

@@ -4,7 +4,6 @@
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
- *
  *  
  * @apiParam {String} reportIds Array of report ids to be deleted.
  * 

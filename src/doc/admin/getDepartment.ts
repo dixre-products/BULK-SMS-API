@@ -28,11 +28,15 @@
  *          "_id": "6167ec5c549f4c75397eec44",
             "name": "dept",
             "credit": 313,
- *       },"payload"{
- *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "dept",
-            "credit": 313,
- *       },
+            "senderIds": [
+                 {
+ *                   "_id": "6167ec5c549f4c75397eec44",
+                     "name": "Admin",
+ *              }
+            ...
+            ],
+ *       }
+ *     }
          ],
          "totalDoc": 2,
           "totalPages": 1

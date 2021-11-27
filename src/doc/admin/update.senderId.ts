@@ -12,7 +12,7 @@
  * @apiParam {Object} updates object that contains updates to be applied.
  * @apiParam {String} [updates.name]  The new senderID name.
  *
- *  
+ *   
  * 
  * 
  * @apiSuccessExample Success-Response:

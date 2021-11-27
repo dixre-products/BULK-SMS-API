@@ -50,6 +50,7 @@
           "totalDoc": 2,
           "totalPages": 1
  *     }
+          
  *
  * 
  * @apiError ServerError Internal server error.

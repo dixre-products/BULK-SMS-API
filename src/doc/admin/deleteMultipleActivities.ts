@@ -24,7 +24,7 @@
             "ok": 1,
              "deletedCount": 2,
             
- *       }
+ *      }
  *     }
  *
  * @apiError Invalid Input

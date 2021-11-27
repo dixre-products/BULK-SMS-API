@@ -1,7 +1,7 @@
 /**
  * @api {DELETE} /admin/senderID/:id Delete a senderID
  * @apiName Delete a senderID
- * @apiGroup senderID
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *

@@ -4,7 +4,7 @@
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
- *
+ * 
  * @apiParam {String} name senderID name.
  *
  * @apiSuccess {String} message  describes the success of the action performed.

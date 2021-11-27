@@ -15,7 +15,6 @@
  *     HTTP/1.1 200 Successful
  *     {
  *       "message": "SUCCESS",
- *
  *     }
  *
  * @apiError InvalidInput Invalid input parameters.

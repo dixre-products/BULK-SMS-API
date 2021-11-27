@@ -9,7 +9,7 @@
  *  @apiParam {String} id id of the contact.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
-* @apiSuccess {Object} payload  contact credentials object
+ * @apiSuccess {Object} payload  contact credentials object
  * @apiSuccess {String} payload._id contact ID.
  * @apiSuccess {String} payload.name contact name.
  * @apiSuccess {String} payload.date created date.

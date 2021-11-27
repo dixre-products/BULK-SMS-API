@@ -8,10 +8,10 @@
  *
  * @apiParam {String} id id of the admin to be updated
  * @apiParam {Object} updates object that contains updates to be applied.
+ * @apiParam {String} [updates.name] updated name
  * @apiParam {Boolean} [updates.addContact] updated field.
  * @apiParam {Boolean} [updates.sendMessage]  updated field.
  * @apiParam {Boolean} [updates.readMessage]  updated field.
- * @apiParam {String} [updates.name] updated name
  * @apiParam {Boolean} [updates.composeMessage] can compose message
  *
  *

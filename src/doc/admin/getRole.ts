@@ -25,13 +25,6 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"[
-   *        {
-   *           "_id": "61676654e1647695f9e14eca",
-              "name": "taker",
-              "sendMessage": false,
-              "readMessage": false,
-              "addContact": true,
-   *        },
             {
    *           "_id": "61676654e1647695f9e14eca",
               "name": "taker",

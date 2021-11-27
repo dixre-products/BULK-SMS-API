@@ -1,17 +1,18 @@
 /**
- * @api {POST} /senderID Create an Admin
- * @apiName PostSender
- * @apiGroup Sender
+ * @api {DELETE} /admin/delete-groups Delete multiple Departments 
+ * @apiName Delete multiple Departments
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
- * @apiParam {String} name of sender.
- * @apiParam {Array} senderIds IDs of the sender.
- *
+ *  
+ * @apiParam {String} groupIds Array of Departments ids to be deleted.
+ * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  senderIds credentials object
- * @apiSuccess {String} payload.name  name of sender.
- * @apiSuccess {String} payload.senderIds IDs of the senders.
+ * @apiSuccess {Object} payload  Employee credentials object
+ * @apiSuccess {Number} payload.deletedCount number of items deleted.
+ * @apiSuccess {Number} payload.ok 
+ * @apiSuccess {Number} payload.n 
  *
  *
  * @apiSuccessExample Success-Response:
@@ -19,16 +20,15 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
- *          "_id": "6167ec5c549f4c75397eec44",
-            "name": "sender",
-            "senderIds": [],
+            "n": 1,
+            "ok": 1,
+             "deletedCount": 2,
+            
  *       }
  *     }
  *
- * 
- * 
  * @apiError Invalid Input
- * @apiErrorExample Invalid-Input:
+ * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden
  *     {
  *       "message": "reason for invalid Input",
@@ -46,8 +46,6 @@
  *
  *
  * 
- * 
- *
  *
  *
  */

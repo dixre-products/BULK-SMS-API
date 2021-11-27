@@ -17,6 +17,7 @@
  * @apiSuccess {String} payload.groupId department ID who owns the contact group.
  *
  *
+ * 
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {
