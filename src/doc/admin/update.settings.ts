@@ -5,6 +5,12 @@
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  *
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     }
+ *
  *
  * @apiParam {Number} [maximumReloadThreshold] maximum limit to reload agencies
  * @apiParam {Number} [minimumReloadThreshold] minimum reload limit
