@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import ContactController from '../controllers/Contact';
+import GetApplicationInfo from '../controllers/Admin/application.info';
 import DepartmentController from '../controllers/Department';
 import EmployeeController from '../controllers/Employee';
+import SettingsController from '../controllers/Settings';
 import ReportController from '../controllers/Report';
 import RoleController from '../controllers/Role';
-import SenderController from '../controllers/SenderIDs';
 import MessageController from '../controllers/Messages';
 import AdminController from '../controllers/Admin';
 import GetValidation from '../Validators/Get.Requests/index';
@@ -15,8 +15,21 @@ import AdminValidation from '../Validators/Admin';
 import LoginAccount from '../controllers/Auth/login';
 import LoginValidation from '../Validators/Auth/index';
 import ProtectAdminRoute from '../Middlewares/admin.protected.routes';
-import SenderValidation from '../Validators/SenderId';
 import ReportValidation from '../Validators/Report';
+import ActivitiesValidator from '../Validators/Activities/get.activities.validation';
+import Activities from '../controllers/Activities';
+import SenderIdController from '../controllers/SenderIDs';
+import Validation from '../Validators/SenderId';
+import ValidateRessetPasswordEmail from '../Validators/PasswordResset/validate.email.resset.password';
+import ValidatePhoneNumberVerification from '../Validators/PasswordResset/validate.verify.phone';
+import ValidateVerificationPin from '../Validators/PasswordResset/validate.verify.code';
+import ValidateRessetPassword from '../Validators/PasswordResset/validate.password.resset';
+import ExtractInfoMiddleware from '../Middlewares/extract.info.header';
+import ValidateUpdateSettings from '../Validators/settings/update.settings.validation';
+import {
+  SendSMSVerificationPin,
+  verifyCode,
+} from '../controllers/Admin/verification';
 // import GetRequestValidation from '../Validators/Get.Requests';
 
 import constants from '../constants/index';
@@ -30,7 +43,6 @@ const {
   GET_DEPARTMENT,
   UPDATE_DEPARTMENT,
   ADD_CREDIT,
-  GET_CONTACT,
   GET_MESSAGE,
   CREATE_EMPLOYEE,
   GET_EMPLOYEES,
@@ -41,19 +53,129 @@ const {
   GET_ROLE,
   DELETE_ROLE,
 
-  DELETE_ALL_ADMINS,
-  DELETE_ALL_SENDERS,
-  DELETE_ALL_GROUPS,
-  DELETE_ALL_EMOLOYEES,
-  DELETE_ALL_ROLES,
+  DELETE_MULTIPLE_ADMINS,
+  DELETE_MULTIPLE_GROUPS,
+  DELETE_MULTIPLE_EMOLOYEES,
+  DELETE_MULTIPLE_ROLES,
 
   DELETE_REPORT,
-  DELETE_ALL_REPORTS,
+  DELETE_MULTIPLE_REPORTS,
   GET_REPORT,
+
+  ACTIVITIES,
+
+  RESSET_PASSWORD,
+  SEND_RESSET_PASSWORD_LINK,
+  SEND_RESSET_PASSWORD_SMS,
+  VERIFIFY_CODE,
+  SETTINGS,
+  APPLICATION_INFO,
 } = constants.RoutesSubs;
 
-const { LOGIN_BASE } = constants.RouteBase;
+const { LOGIN_BASE, SENDERID } = constants.RouteBase;
 const admin = Router();
+
+admin.put(
+  SETTINGS,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(ValidateUpdateSettings),
+  HandleAsyncFactory(SettingsController.UpdateSettings),
+);
+
+admin.get(
+  APPLICATION_INFO,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetApplicationInfo),
+);
+
+admin.get(
+  SETTINGS,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(SettingsController.GetSettings),
+);
+
+admin.post(
+  SEND_RESSET_PASSWORD_LINK,
+  HandleAsyncFactory(ValidateRessetPasswordEmail),
+  HandleAsyncFactory(AdminController.RequestRessetEmail),
+);
+
+admin.post(
+  SEND_RESSET_PASSWORD_SMS,
+  HandleAsyncFactory(ValidatePhoneNumberVerification),
+  HandleAsyncFactory(SendSMSVerificationPin),
+);
+
+admin.post(
+  VERIFIFY_CODE,
+  HandleAsyncFactory(ValidateVerificationPin),
+  HandleAsyncFactory(verifyCode),
+);
+
+admin.post(
+  RESSET_PASSWORD,
+  HandleAsyncFactory(ExtractInfoMiddleware),
+  HandleAsyncFactory(ValidateRessetPassword),
+  HandleAsyncFactory(AdminController.RessetPassword),
+);
+
+admin.post(
+  SENDERID,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateCreateSenderId),
+  HandleAsyncFactory(SenderIdController.AddSenderId),
+);
+
+admin.get(
+  `${SENDERID}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(SenderIdController.GetAllSenderId),
+);
+
+admin.get(
+  `${SENDERID}${GET_ID_PARAM}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateGetSenderID),
+  HandleAsyncFactory(SenderIdController.GetSingleSenderID),
+);
+
+admin.put(
+  SENDERID,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateUpdateSenderId),
+  HandleAsyncFactory(SenderIdController.UpdateSenderId),
+);
+
+admin.delete(
+  `${SENDERID}${GET_ID_PARAM}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateDeleteSenderID),
+  HandleAsyncFactory(SenderIdController.DeleteSenderId),
+);
+
+admin.delete(
+  `${SENDERID}`,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(Validation.ValidateDeleteMultipleSenderIds),
+  HandleAsyncFactory(SenderIdController.DeleteMultipleSenderIds),
+);
+
+// Activities
+admin.get(
+  ACTIVITIES,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(GetValidation),
+  HandleAsyncFactory(Activities.GetAllActivity),
+);
+
+// Activities
+admin.delete(
+  ACTIVITIES,
+  HandleAsyncFactory(ProtectAdminRoute),
+  HandleAsyncFactory(ActivitiesValidator),
+  HandleAsyncFactory(Activities.DeleteMulitipleActivity),
+);
 
 admin.post(
   LOGIN_BASE,
@@ -91,17 +213,10 @@ admin.put(
 );
 
 admin.delete(
-  DELETE_ALL_GROUPS,
+  DELETE_MULTIPLE_GROUPS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(DepartmentValidation.ValidateDeleteDepartment),
   HandleAsyncFactory(DepartmentController.DeleteMultipleDepartment),
-);
-
-// Admin: Contact Routes
-admin.get(
-  GET_CONTACT,
-  HandleAsyncFactory(ProtectAdminRoute),
-  HandleAsyncFactory(GetValidation),
-  HandleAsyncFactory(ContactController.GetAllContact),
 );
 
 // Admin: Message Routes
@@ -116,7 +231,8 @@ admin.get(
 
 // Admin: Employee Routes
 admin.delete(
-  DELETE_ALL_EMOLOYEES,
+  DELETE_MULTIPLE_EMOLOYEES,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(EmployeeValidation.ValidateDeleteEmployee),
   HandleAsyncFactory(EmployeeController.DeleteMultipleEmployee),
 );
@@ -168,7 +284,8 @@ admin.delete(
 );
 
 admin.delete(
-  DELETE_ALL_ROLES,
+  DELETE_MULTIPLE_ROLES,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(RoleValidation.ValidateDeleteMultipleRole),
   HandleAsyncFactory(RoleController.DeleteMultipleRole),
 );
@@ -206,18 +323,21 @@ admin.get(
 
 admin.get(
   GET_REPORT,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(GetValidation),
   HandleAsyncFactory(ReportController.GetAllReport),
 );
 
 admin.delete(
   DELETE_REPORT + GET_ID_PARAM,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(ReportValidation.ValidateDeleteReport),
   HandleAsyncFactory(ReportController.DeleteReport),
 );
 
 admin.delete(
-  DELETE_ALL_REPORTS,
+  DELETE_MULTIPLE_REPORTS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(ReportValidation.ValidateMultipleDeleteReports),
   HandleAsyncFactory(ReportController.DeleteMultipleReports),
 );
@@ -231,7 +351,8 @@ admin.post(
 );
 
 admin.delete(
-  DELETE_ALL_ADMINS,
+  DELETE_MULTIPLE_ADMINS,
+  HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateDeleteAdmin),
   HandleAsyncFactory(AdminController.DeleteMultipleAdmin),
 );
@@ -254,14 +375,6 @@ admin.put(
   HandleAsyncFactory(ProtectAdminRoute),
   HandleAsyncFactory(AdminValidation.ValidateUpdateAdmin),
   HandleAsyncFactory(AdminController.UpdateAdmin),
-);
-
-// Sender
-
-admin.delete(
-  DELETE_ALL_SENDERS,
-  HandleAsyncFactory(SenderValidation.ValidateDeleteMultipleSender),
-  HandleAsyncFactory(SenderController.DeleteMultipleSenders),
 );
 
 export default admin;

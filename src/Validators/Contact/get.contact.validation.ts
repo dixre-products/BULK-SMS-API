@@ -6,7 +6,7 @@ const requestBodySchema = joi.object({
   id: joi.string().required().label('Contact ID'),
 });
 
-export default function ValidateGetSingleContactByGroup(
+export default function ValidateGetContactByGroup(
   req: Request,
   res: Response,
   next: NextFunction,

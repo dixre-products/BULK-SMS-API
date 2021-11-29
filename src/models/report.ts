@@ -17,6 +17,10 @@ const Report: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'department',
     },
+    date: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now(),
+    },
   },
 
   { autoIndex: false },

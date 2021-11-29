@@ -9,6 +9,7 @@ const requestBodySchema = joi.object({
     sendMessage: joi.boolean(),
     readMessage: joi.boolean(),
     addContact: joi.boolean(),
+    composeMessage: joi.boolean(),
     name: joi.string(),
   }),
 });

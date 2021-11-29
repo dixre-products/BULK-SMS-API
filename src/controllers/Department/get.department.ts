@@ -21,6 +21,7 @@ export async function GetAllDepartment(req: Request, res: Response) {
 
   const doc = await models.Department.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,
@@ -47,7 +48,9 @@ export async function GetSingleDepartment(
 ) {
   const { id } = req.params;
 
-  const doc = await models.Department.findOne({ _id: id });
+  const doc = await models.Department.findOne({ _id: id }).populate(
+    'senderIds',
+  );
 
   if (!doc)
     return ResourceNotFound(

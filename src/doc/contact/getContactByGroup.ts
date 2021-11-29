@@ -1,13 +1,24 @@
 /**
- * @api {GET} /contact/:id Get all contact by group
+ * @api {GET} /contact Get all contact by group
  * @apiName Get all contacts belonging to a an agency or group
  * @apiGroup Contact
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
- * @apiParam {String} id id of the group.
- * 
+ * @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageSize number of date to query.
+ * @apiParam {String} [searchText] search text.
+ * @apiParam {String} agency group id.
+ * @apiParam {String} [uid] user ID.
+ * @apiParam {String} [role] Role Id.
+ * * 
  * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  contact credentials Array
  * @apiSuccess {String} payload._id contact ID.

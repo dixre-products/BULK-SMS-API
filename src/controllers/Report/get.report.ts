@@ -23,6 +23,7 @@ export default async function GetAllReport(
 
   const doc = await models.Reports.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,

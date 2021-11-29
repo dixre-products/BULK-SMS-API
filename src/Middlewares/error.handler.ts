@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
-import Loggers, { TestLogger } from '../Logger';
+// import Loggers, { TestLogger } from '../Logger';
 import { ProcessingError } from '../RequestStatus/status';
-import app from '../index';
+// import app from '../index';
 
 export default async function ErrorHandler(
   err: any,
@@ -9,12 +9,13 @@ export default async function ErrorHandler(
   res: Response, // eslint-disable-line,
   next: NextFunction, // eslint-disable-line
 ) {
-  if (app.get('env') === 'production') {
-    Loggers.error(err.message);
-  }
+  console.log(err);
+  // if (app.get('env') === 'production') {
+  //   Loggers.error(err.message);
+  // }
 
-  if (app.get('env') === 'test') {
-    TestLogger.error(err.message);
-  }
+  // if (app.get('env') === 'test') {
+  //   TestLogger.error(err.message);
+  // }
   return ProcessingError(res);
 }

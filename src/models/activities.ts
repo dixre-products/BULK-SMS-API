@@ -1,9 +1,14 @@
 import { Schema, model } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-import { Entities, EntitiesAction } from '../constants/enums';
+import {
+  Entities,
+  EntitiesAction,
+  ACCOUNT_TYPE,
+} from '../constants/enums';
 import { Activities as ActivitiesProps } from '../Types/interfaces';
 
-const { CREATE, UPDATE, DELETE } = EntitiesAction;
+const { CREATE, UPDATE, DELETE, LOGIN, PASSWORD_RESSET } =
+  EntitiesAction;
 const {
   DEPARTMENTS,
   MESSAGES,
@@ -11,8 +16,13 @@ const {
   ROLES,
   SENDERIDS,
   EMPLOYEES,
+  ADMIN,
+  REPORTS,
+  CONTACTS_GROUP,
+  SETTINGS,
 } = Entities;
 
+const { ADMIN_ACCOUNT, AGENCY_ACCOUNT } = ACCOUNT_TYPE; // eslint-disable-line
 const Activities: Schema = new Schema(
   {
     group: { type: Schema.Types.String },
@@ -21,10 +31,17 @@ const Activities: Schema = new Schema(
 
     admin: { type: Schema.Types.ObjectId, ref: 'admin' },
 
+    userType: {
+      type: Schema.Types.String,
+      enum: [ADMIN_ACCOUNT, AGENCY_ACCOUNT],
+    },
+
     type: {
       type: Schema.Types.String,
-      enum: [CREATE, UPDATE, DELETE],
+      enum: [CREATE, UPDATE, DELETE, LOGIN, PASSWORD_RESSET],
     },
+
+    description: Schema.Types.String,
 
     entity: {
       type: Schema.Types.String,
@@ -35,18 +52,27 @@ const Activities: Schema = new Schema(
         ROLES,
         SENDERIDS,
         EMPLOYEES,
+        ADMIN,
+        REPORTS,
+        CONTACTS_GROUP,
+        SETTINGS,
       ],
     },
 
-    payload: [
-      {
-        name: Schema.Types.String,
-        email: Schema.Types.String,
-        entityId: Schema.Types.String,
-        address: Schema.Types.String,
-        phone: Schema.Types.String,
-      },
-    ],
+    payload: {
+      name: Schema.Types.String,
+      email: Schema.Types.String,
+      phoneNumber: Schema.Types.String,
+      phoneNumbers: [Schema.Types.String],
+      message: Schema.Types.String,
+      id: Schema.Types.ObjectId,
+      address: Schema.Types.String,
+      department: Schema.Types.String,
+      role: Schema.Types.String,
+      mininumReloadThreshold: Schema.Types.Number,
+      maximumReloadThreshold: Schema.Types.Number,
+    },
+
     date: { type: Schema.Types.Date, default: Date.now() },
   },
 

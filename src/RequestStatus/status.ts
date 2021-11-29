@@ -29,6 +29,14 @@ export const InvalidCredential = (res: Response) => {
   });
 };
 
+// INVALID CREDENTIALS
+export const RequestForbidden = (res: Response, message: string) => {
+  res.status(STATUS_CODES.FORBIDDEN.CODE).json({
+    message,
+    error: Constants.RequestResponse.InvalidCredential,
+  });
+};
+
 // SUSPENDS USER
 export const SuspendUser = (res: Response) => {
   res.status(STATUS_CODES.FORBIDDEN.CODE).json({
@@ -95,10 +103,15 @@ export const ProcessingError = (res: Response) => {
 };
 
 // PROCESSING SUCCESS
-export const ProcessingSuccess = (res: Response, data: any) => {
+export const ProcessingSuccess = (
+  res: Response,
+  data: any,
+  extraPayload?: any,
+) => {
   res.status(STATUS_CODES.OK.CODE).json({
     message: STATUS_CODES.OK.STATUS_TEXT,
     payload: data,
+    extraPayload,
   });
 };
 
@@ -159,5 +172,12 @@ export const UserDoesNotExist = (res: Response) => {
   res.status(STATUS_CODES.NOT_FOUND.CODE).json({
     message: Constants.Validations.USER_NOT_EXIST,
     error: Constants.RequestResponse.UserNotFound,
+  });
+};
+
+export const RequestNotAllowed = (res: Response) => {
+  res.status(STATUS_CODES.CONFLICT.CODE).json({
+    message: Constants.Validations.REQUEST_NOT_ALLOWED,
+    error: Constants.RequestResponse.REQUEST_NOT_ALLOWED,
   });
 };

@@ -4,10 +4,10 @@ import {
   ValidateMultipleDeleteContacts,
 } from './delete.contact.validation';
 import ValidateUpdateContact from './update.contact.validation';
-import ValidateGetSingleContactByGroup from './get.contact.validation';
+import ValidateGetSingleContact from './get.contact.validation';
 
 export default {
-  ValidateGetSingleContactByGroup,
+  ValidateGetSingleContact,
   ValidateUpdateContact,
   ValidateDeleteContact,
   ValidateCreateContact,

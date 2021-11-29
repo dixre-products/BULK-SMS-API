@@ -4,14 +4,21 @@
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *
  * @apiParam {String} id id of the admin to be updated
  * @apiParam {Object} updates object that contains updates to be applied.
+ * @apiParam {String} [updates.name] updated name
  * @apiParam {Boolean} [updates.addContact] updated field.
  * @apiParam {Boolean} [updates.sendMessage]  updated field.
  * @apiParam {Boolean} [updates.readMessage]  updated field.
- * @apiParam {String} [updates.name] updated name
+ * @apiParam {Boolean} [updates.composeMessage] can compose message
  *
  *
  * @apiSuccessExample Success-Response:
@@ -23,6 +30,7 @@
             "name": "taker",
             "sendMessage": false,
             "readMessage": false,
+            "composeMessage":false,
             "addContact": true,
  *       }
  *     }

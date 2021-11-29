@@ -49,6 +49,8 @@ export interface UserProps extends Document {
 
   phoneNumber: string;
 
+  countryCode: string;
+
   localPhoneNumber: string;
 
   email: string;
@@ -102,9 +104,11 @@ export interface DepartmentProps extends Document {
 }
 
 export interface EmployeeProps extends Document {
-  _id: Types.ObjectId; //eslint-disable-line
   name: string;
   email: string;
+  phoneNumber: string;
+  phoneNumberInternational: string;
+  countryCode: string;
   password: string;
   address: string;
   active: boolean;
@@ -115,12 +119,15 @@ export interface EmployeeProps extends Document {
 
   /* eslint-disable */
   setPassword: (pwd: string) => void;
+  validatePassword: (password: string) => boolean;
   /* eslint-enable */
 }
 
 export interface EmployeeSignupProps extends Document {
   name: string;
   email: string;
+  phoneNumber: string;
+  countryCode: string;
   password: string;
   address: string;
   groupId: string;
@@ -132,6 +139,8 @@ export interface RoleProps extends Document {
   readMessage: boolean;
   name: string;
   addContact: boolean;
+  composeMessage: boolean;
+  date: Date;
 }
 export interface ContactProps extends Document {
   name: string;
@@ -140,45 +149,77 @@ export interface ContactProps extends Document {
   date: Date;
 }
 
+export interface ContactGroupProps extends Document {
+  name: string;
+  contacts: Types.ObjectId[];
+  groupId: Types.ObjectId;
+  date: Date;
+}
+
 export interface ReportProps extends Document {
   message: string;
   groupId: Types.ObjectId;
   employeeId: Types.ObjectId;
+  date: Date;
 }
 
 export interface SenderIds extends Document {
   name: string;
   senderIds: any[];
+  date: Date;
+}
+
+export interface Settings extends Document {
+  maximumReloadThreshold: number;
+  minimumReloadThreshold: number;
+  date: Date;
 }
 
 type payload = {
   name: string;
   email: string;
-  entityId: string;
-  address: string;
-  phone: string;
+  phoneNumber: string;
+  phoneNumbers: string[];
   message: string;
+  id: Types.ObjectId;
+  address: string;
+  description: string;
+  department: string;
+  role: string;
+  mininumReloadThreshold: number;
+  maximumReloadThreshold: number;
 };
 export interface Activities extends Document {
   group: string;
+
   user: Types.ObjectId;
-  entity: string;
-  payload: payload[];
-  date: any;
+
+  admin: Types.ObjectId;
+
+  userType: string;
+
   type: string;
+
+  entity: string;
+
+  payload: payload;
+  date: any;
 }
 
 export interface AdminProps extends Document {
-  _id: Types.ObjectId; //eslint-disable-line
   name: string;
   email: string;
   hash: string;
+  phoneNumber: string;
+  phoneNumberInternational: string;
+  countryCode: string;
   salt: string;
 
   /* eslint-disable */
   setPassword: (pwd: string) => void;
   validatePassword: (password: string) => boolean;
   /* eslint-enable */
+  date: Date;
 }
 
 export interface MessageProps extends Document {
@@ -187,9 +228,10 @@ export interface MessageProps extends Document {
   sender: string;
   groupId: Types.ObjectId;
   date: Date;
-  contacts: Array<number>;
+  contacts: Array<string>;
   time: Date;
   status: string;
+  scheduleDate: any;
 }
 
 export interface RequestParams {
@@ -199,4 +241,8 @@ export interface RequestParams {
   agency: string;
   uid: string;
   role: string;
+  status: string;
+  userType: string;
+  startDate: any;
+  endDate: any;
 }

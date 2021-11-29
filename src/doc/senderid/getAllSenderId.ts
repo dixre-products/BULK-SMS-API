@@ -1,9 +1,23 @@
 /**
- * @api {GET} /senderID/ Get all senderIDs
+ * @api {GET} /senderID Get all senderIDs
  * @apiName Get all senderIDs
  * @apiGroup senderID
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ *  @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
+ * 
+ *
+ * 
+ * @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageSize number of date to query.
+ * @apiParam {String} [searchText] search text.
+ * @apiParam {String} agency group id.
+ * @apiParam {String} [uid] user ID.
+ * @apiParam {String} [role] Role Id.
  *
  *
  * @apiSuccess {String} message  describes the success of the action performed.

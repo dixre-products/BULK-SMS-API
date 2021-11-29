@@ -14,7 +14,7 @@ export default async function ValidateAccessToken(
       const accessToken = authorization?.split(' ')[1];
       const access = decodeJwtToken(accessToken as any) as any; // throws error if not valid
       if (access.userId.isAdmin) {
-        res.locals.id = access._id; // eslint-disable-line
+        res.locals.id = access.userId._id; // eslint-disable-line
         return next();
       }
       return UnAuthorized(res);

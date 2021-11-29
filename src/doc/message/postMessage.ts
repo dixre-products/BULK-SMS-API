@@ -7,11 +7,16 @@
  *
  * @apiParam {Number[]} contacts List of contacts 
  * @apiParam {String} message message to be sent.
- * @apiParam {String} date date.
- * @apiParam {String} time time created.
- * @apiParam {String} sender  message sender
- * @apiParam {String} status current status of the message.
+ * @apiParam {String} [sender]  message sender
  * @apiParam {String} groupId department id
+ * @apiParam {Date}   [scheduleDate] date for message to be sent
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
+ * 
+ * 
  *
  * @apiSuccess {String} message  describes the success of the action performed.
  * @apiSuccess {Object} payload  message credentials object

@@ -3,6 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 // @ts-ignore
 import helmet from 'helmet';
+import cors from 'cors';
 import routes from './routes';
 import constants from './constants/index';
 import ErrorHandler from './Middlewares/error.handler';
@@ -19,6 +20,7 @@ const {
   Admin,
   SENDERID,
   REPORT,
+  CONTACT_GROUP,
 } = constants.RouteBase;
 // Application-Level Middleware
 const app = express();
@@ -27,6 +29,7 @@ process.on('uncaughtException', (err) => {
   Logger.error(err.message);
 });
 
+app.use(cors({ origin: '*' }));
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -56,6 +59,7 @@ app.use(CONTACT, routes.Contact);
 app.use(Admin, routes.Admin);
 app.use(SENDERID, routes.SenderID);
 app.use(REPORT, routes.Report);
+app.use(CONTACT_GROUP, routes.ContactGroup);
 
 // Handles error
 app.use(ErrorHandler);

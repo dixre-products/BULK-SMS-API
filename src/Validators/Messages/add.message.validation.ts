@@ -4,11 +4,18 @@ import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchema = joi.object({
   message: joi.string().required().label('Message'),
-  sender: joi.string().required().label('Sender'),
-  time: joi.date().label('Time'),
-  status: joi.string().required().label('Status'),
+  sender: joi.string().optional().allow('').label('Sender'),
   groupId: joi.string().label('Group ID'),
-  contacts: joi.array().required().label('Contacts'),
+  contacts: joi
+    .array()
+    .items(joi.string())
+    .required()
+    .label('Contacts'),
+  scheduleDate: joi
+    .date()
+    .optional()
+    .allow('')
+    .label('Scheduled Date'),
 });
 
 export default function ValidateCreateMessage(

@@ -10,6 +10,9 @@ import {
   GetSingleEmployee,
   GetAllEmployeeByAgency,
 } from './get.employee';
+import RequestRessetEmail, {
+  RessetPassword,
+} from './resset.passwords';
 
 export default {
   CreateEmployee,
@@ -20,4 +23,6 @@ export default {
   AssignEmployeeToRole,
   GetAllEmployeeByAgency,
   DeleteMultipleEmployee,
+  RequestRessetEmail,
+  RessetPassword,
 };

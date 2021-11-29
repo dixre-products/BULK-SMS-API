@@ -4,15 +4,20 @@ import { InvalidInputs } from '../../RequestStatus/status';
 
 const requestBodySchemaCredit = joi.object({
   id: joi.string().required().label('Department ID'),
-  credit: joi.number().required().label('credit'),
-  senderIds: joi.array().items(joi.string()).optional().allow(),
+  credit: joi.number().optional().allow('').label('credit'),
 });
 
 const requestBodySchema = joi.object({
   id: joi.string().required().label('Department ID'),
   updates: joi.object({
-    credit: joi.number(),
-    name: joi.string(),
+    credit: joi.number().label('credit'),
+    name: joi.string().label('name'),
+    senderIds: joi
+      .array()
+      .items(joi.string())
+      .optional()
+      .allow('')
+      .label('sender IDs'),
   }),
 });
 

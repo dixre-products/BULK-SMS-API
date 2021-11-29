@@ -10,16 +10,15 @@ const Message: mongoose.Schema = new mongoose.Schema(
     message: { type: mongoose.Schema.Types.String },
 
     sender: { type: mongoose.Schema.Types.String },
-    time: { type: mongoose.Schema.Types.Date },
 
     status: {
       type: mongoose.Schema.Types.String,
       enum: [
-        MessageStatus.NOT_APPROVED,
         MessageStatus.APPROVED,
         MessageStatus.PENDING,
         MessageStatus.SENT,
       ],
+      default: MessageStatus.PENDING,
     },
 
     groupId: {
@@ -27,7 +26,9 @@ const Message: mongoose.Schema = new mongoose.Schema(
       ref: 'department',
     },
 
-    date: { type: mongoose.Schema.Types.Date },
+    date: { type: mongoose.Schema.Types.Date, default: Date.now() },
+
+    scheduleDate: { type: mongoose.Schema.Types.Date },
   },
 
   { autoIndex: false },

@@ -11,6 +11,7 @@ import { getQuery } from '../../utills/utills';
 export async function GetAllAdmin(req: Request, res: Response) {
   const requestParams = req.query as any;
 
+  // CUSTOM QUERY COMPOSER
   const { paginationConfig, paginationQuery } = getQuery(
     requestParams,
     {
@@ -22,6 +23,7 @@ export async function GetAllAdmin(req: Request, res: Response) {
 
   const doc = await models.Admin.paginate(paginationQuery, {
     ...paginationConfig,
+    sort: { date: -1 },
     select: {
       hash: 0,
       salt: 0,
@@ -47,7 +49,6 @@ export async function GetSingleAdmin(req: Request, res: Response) {
   const doc = await models.Admin.findOne({ _id: id }).select({
     hash: 0,
     salt: 0,
-    password: 0,
   });
 
   if (!doc)

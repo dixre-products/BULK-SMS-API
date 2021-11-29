@@ -13,6 +13,18 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
+    phoneNumberInternational: {
+      type: mongoose.Schema.Types.String,
+    },
+
+    phoneNumber: {
+      type: mongoose.Schema.Types.String,
+    },
+
+    countryCode: {
+      type: mongoose.Schema.Types.String,
+    },
+
     hash: {
       type: mongoose.Schema.Types.String,
     },
@@ -39,11 +51,22 @@ const Employee: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.Boolean,
       default: true,
     },
+    date: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now(),
+    },
   },
 
   { autoIndex: false },
 );
 
+Employee.methods.validatePassword = function validatePassword(
+  password,
+) {
+  const documents = this as EmployeeProps;
+  const hash = bcrypt.compareSync(password, documents.hash);
+  return hash;
+};
 Employee.index({ name: 'text', email: 'text', address: 'text' });
 Employee.methods.setPassword = function setPassword(password) {
   const documents = this as EmployeeProps;

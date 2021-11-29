@@ -12,12 +12,21 @@ const Role: mongoose.Schema = new mongoose.Schema(
       type: Boolean,
     },
 
+    composeMessage: {
+      type: Boolean,
+      default: false,
+    },
+
     readMessage: {
       type: Boolean,
     },
 
     addContact: {
       type: Boolean,
+    },
+    date: {
+      type: mongoose.Schema.Types.Date,
+      default: Date.now(),
     },
   },
 

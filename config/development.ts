@@ -17,6 +17,14 @@ const {
   MESSENGER_ID,
   APP_ID,
   MEASUREMENT_ID,
+  MAILJET_PUBLIC,
+  MAILJET_PRIVATE,
+  AFRICATALKING_API_KEY,
+  AFRICATALKING_API_USERNAME,
+  DB_USER,
+  DB_PASSWORD,
+  CLUSTER,
+  DB_NAME,
 } = process.env;
 
 export default {
@@ -27,7 +35,7 @@ export default {
   GEOCODING_APIKEY, // you can get this by from google cloud
   PAYSTACK_SECRET: '', // signup to paystack !!
   PORT: 8081,
-  DB_CONNECTION_STRING: 'mongodb://localhost/bulk-sms-api',
+  DB_CONNECTION_STRING: `mongodb+srv://${DB_USER}:${DB_PASSWORD}@${CLUSTER}.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
   JWT_ISSUER: 'https://example.com/example',
   JWT_AUDIENCE: '76rghjklkjh',
   JWT_ALGO: 'RS256',
@@ -36,6 +44,8 @@ export default {
   TWILIO_ACCOUNT_SID,
   TWILIO_MESSAGING_SID,
   TWILIO_PHONE_NUMBER,
+  MAILJET_PUBLIC,
+  MAILJET_PRIVATE,
 
   API_KEY,
   AUTH_DOMAIN,
@@ -45,4 +55,6 @@ export default {
   MESSENGER_ID,
   APP_ID,
   MEASUREMENT_ID,
+  AFRICATALKING_API_KEY,
+  AFRICATALKING_API_USERNAME,
 };

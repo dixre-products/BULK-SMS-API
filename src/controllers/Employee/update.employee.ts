@@ -7,6 +7,12 @@ import {
 import models from '../../models';
 import { EmployeeSignupProps } from '../../Types/interfaces';
 import constants from '../../constants';
+import {
+  ACCOUNT_TYPE,
+  Entities,
+  EntitiesAction,
+} from '../../constants/enums';
+import { getPhoneNumberInfo } from '../../utills/utills';
 
 export async function UpdateEmployee(req: Request, res: Response) {
   const { id, updates } = req.body as {
@@ -26,7 +32,33 @@ export async function UpdateEmployee(req: Request, res: Response) {
       res,
       constants.RequestResponse.EmployeeNotFound,
     );
-
+  if (updates.countryCode && updates.phoneNumber) {
+    const intlPhoneNumber = getPhoneNumberInfo(
+      updates.phoneNumber,
+      updates.countryCode,
+    );
+    doc.phoneNumberInternational = intlPhoneNumber;
+    await doc.save({ validateBeforeSave: false });
+  }
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.EMPLOYEES,
+    type: EntitiesAction.UPDATE,
+    description: 'Employee Account details updated !!!',
+    payload: {
+      name: doc?.name,
+      email: doc?.email,
+      address: doc?.address,
+      id: doc?._id, // eslint-disable-line
+      department: doc.groupId ? (doc as any).groupId.name : '',
+      role: doc.roleId ? (doc as any).roleId.name : '',
+    },
+    date: new Date(),
+  });
+  await Activity.save();
   return ProcessingSuccess(res, doc);
 }
 
@@ -64,7 +96,25 @@ export async function AssignEmployeeToDepartment(
     },
     { new: true },
   ).populate('groupId roleId');
-
+  const Activity = new models.Activities({
+    group: '',
+    userType: ACCOUNT_TYPE.ADMIN_ACCOUNT,
+    admin: res.locals.id, // eslint-disable-line
+    user: res.locals.id,
+    entity: Entities.EMPLOYEES,
+    type: EntitiesAction.UPDATE,
+    description: 'Employee department changed successfully!!!',
+    payload: {
+      name: doc?.name,
+      email: doc?.email,
+      address: doc?.address,
+      id: doc?._id, // eslint-disable-line
+      department: departmentExist.name,
+      role: (doc as any).roleId.name,
+    },
+    date: new Date(),
+  });
+  await Activity.save();
   return ProcessingSuccess(res, doc);
 }
 
@@ -104,7 +154,6 @@ export async function AssignEmployeeToRole(
     .select({
       hash: 0,
       salt: 0,
-      password: 0,
     });
 
   return ProcessingSuccess(res, doc);

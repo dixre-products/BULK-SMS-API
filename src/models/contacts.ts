@@ -8,7 +8,9 @@ const Contact: mongoose.Schema = new mongoose.Schema(
       type: mongoose.Schema.Types.String,
     },
 
-    phone: {
+    countryCode: { type: mongoose.Schema.Types.String },
+
+    number: {
       type: mongoose.Schema.Types.String,
     },
 
@@ -19,13 +21,14 @@ const Contact: mongoose.Schema = new mongoose.Schema(
 
     date: {
       type: mongoose.Schema.Types.Date,
+      default: Date.now(),
     },
   },
 
   { autoIndex: false },
 );
 
-Contact.index({ name: 'text', phone: 'text' });
+Contact.index({ name: 'text', number: 'text' });
 Contact.plugin(mongoosePaginate);
 
 export default mongoose.model<ContactProps>('contact', Contact);

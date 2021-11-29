@@ -1,19 +1,31 @@
 /**
- * @api {GET} /message/:id Get all messages belonging to agency
- * @apiName Get all message for an agency
+ * @api {GET} /message Get all messages belonging to agency
+ * @apiName Get all message for an agency by status
  * @apiGroup Message
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
- *  @apiParam {String} id department ID or agency ID .
+ * @apiParam {Number} pageNumber number of pages.
+ * @apiParam {Number} pageSize number of date to query.
+ * @apiParam {String} [searchText] search text.
+ * @apiParam {String} agency group id.
+ * @apiParam {String} [status] status can be APPROVED, PENDING, SENT.
+ * @apiParam {String} [uid] user ID.
+ * @apiParam {String} [role] Role Id.
+ * @apiParam {String} [startDate] date to start searching messages
+ * @apiParam {String} [endDate] date to stop searching messages
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
 * @apiSuccess {Object} payload  message credentials Array
  * @apiSuccess {String} payload._id message ID.
  * @apiSuccess {Number[]} payload.contacts list of contacts.
  * @apiSuccess {String} payload.message createed message to be sent.
- * @apiSuccess {String} payload.time time created.
  * @apiSuccess {String} payload.date date created.
  * @apiSuccess {String} payload.sender message sender
  * @apiSuccess {String} payload.status current status of the message.
