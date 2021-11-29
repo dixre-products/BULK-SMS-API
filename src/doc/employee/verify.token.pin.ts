@@ -18,7 +18,7 @@
  *       "message": "SUCCESSFULL",
  *        "payload": {
  *             "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MTExNDYyMjJ9.qJGAtvbWNm9xOJRmcV9Te27E5WdTdE9mn7EAd8bdqKA",
- *                }
+ *               }
  *     }
  *
  * @apiError InvalidInput Invalid input parameters.

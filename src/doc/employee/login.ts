@@ -41,7 +41,7 @@
  *                       "addContact": true,
  *                       "sendMessage": true,
  *                     }
- *                }
+ *               }
  *        }
  *     }
  *

@@ -5,6 +5,12 @@
  * @apiVersion  1.0.0
  * @apiSampleRequest off
  * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
+ * 
  * 
  *
  *
@@ -12,7 +18,7 @@
  * @apiParam {Object} updates object that contains updates to be applied.
  * @apiParam {String} [updates.name]  The new senderID name.
  *
- *  
+ *   
  * 
  * 
  * @apiSuccessExample Success-Response:

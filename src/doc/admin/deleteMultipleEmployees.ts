@@ -4,6 +4,12 @@
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
  * @apiParam {String} employeeIds Array of Employees ids to be deleted.
@@ -23,7 +29,7 @@
             "n": 1,
             "ok": 1,
              "deletedCount": 2,
-            
+        
  *       }
  *     }
  *

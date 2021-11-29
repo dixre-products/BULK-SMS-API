@@ -4,6 +4,12 @@
  * @apiGroup ContactGroup
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *
  * @apiParam {String} id id of the contact group to be updated
@@ -12,7 +18,6 @@
  * @apiParam {Array} [updates.contacts] Array of ids to be added to the contact group
  * 
  *  
- * 
  * 
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful

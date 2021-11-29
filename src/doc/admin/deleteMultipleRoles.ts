@@ -4,6 +4,12 @@
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
  * @apiParam {String} roleIds Array of roles ids to be deleted.
@@ -14,7 +20,7 @@
  * @apiSuccess {Number} payload.ok 
  * @apiSuccess {Number} payload.n 
  *
- *
+ * 
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {

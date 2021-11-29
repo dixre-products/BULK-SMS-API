@@ -4,6 +4,12 @@
  * @apiGroup ContactGroup
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
  *  @apiParam {String} id id of the Contact Group
@@ -17,6 +23,7 @@
  * @apiSuccess {String} payload.groupId department ID who owns the contact group.
  *
  *
+ * 
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 Successful
  *     {

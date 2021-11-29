@@ -1,17 +1,24 @@
 /**
- * @api {DELETE} /senderID/:id Delete a sender 
- * @apiName Delete a sender
- * @apiGroup Sender
+ * @api {DELETE} /admin/delete-groups Delete multiple Departments 
+ * @apiName Delete multiple Departments
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
- * @apiParam {String} id id of the sender.
+ * @apiParam {String} groupIds Array of Departments ids to be deleted.
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
- * @apiSuccess {Object} payload  sender credentials object
- * @apiSuccess {String} payload.name sender name.
- * @apiSuccess {String} payload.senderIds array of sender ids.
+ * @apiSuccess {Object} payload  Employee credentials object
+ * @apiSuccess {Number} payload.deletedCount number of items deleted.
+ * @apiSuccess {Number} payload.ok 
+ * @apiSuccess {Number} payload.n 
  *
  *
  * @apiSuccessExample Success-Response:
@@ -19,9 +26,9 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
- *          "_id": "61676654e1647695f9e14eca",
-            "name": "taker",
-            "senderIds": [],
+            "n": 1,
+            "ok": 1,
+             "deletedCount": 2,
             
  *       }
  *     }

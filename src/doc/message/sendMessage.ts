@@ -4,6 +4,12 @@
  * @apiGroup Message
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *
  * @apiParam {String} id id of the message to be sent 
@@ -33,7 +39,11 @@
             "message": "asasasas",
             "sender": "sassss",
             "status": "approved",
-            "groupId": "61664190dd57d724b1b49c23",,
+             "groupId":{
+      *          "_id": "6167ec5c549f4c75397eec44",
+                  "name": "dept",
+                  "credit": 313,
+      *       },
  *       }
  *     }
  *

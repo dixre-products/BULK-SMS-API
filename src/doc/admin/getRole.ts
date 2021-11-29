@@ -4,6 +4,12 @@
  * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  * 
  * 
@@ -25,13 +31,6 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"[
-   *        {
-   *           "_id": "61676654e1647695f9e14eca",
-              "name": "taker",
-              "sendMessage": false,
-              "readMessage": false,
-              "addContact": true,
-   *        },
             {
    *           "_id": "61676654e1647695f9e14eca",
               "name": "taker",

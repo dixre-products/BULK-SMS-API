@@ -4,6 +4,12 @@
  * @apiGroup ContactGroup
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
  * @apiParam {String} contactGroupIds Array of contacts ids to be deleted.
@@ -20,7 +26,7 @@
  *     {
  *       "message": "SUCCESSFULL",
  *       "payload"{
-            "n": 1,
+ *          "n": 1,
             "ok": 1,
              "deletedCount": 2,
             

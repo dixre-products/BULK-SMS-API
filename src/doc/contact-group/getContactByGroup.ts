@@ -4,6 +4,12 @@
  * @apiGroup ContactGroup
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *  
  * @apiParam {Number} pageNumber number of pages.
@@ -28,9 +34,18 @@
  *       "message": "SUCCESSFULL",
  *      "payload":[{
  *          "_id": "6167ec5c549f4c75397eec44",
- *           "name": "Admin",
- *           "date": "20-20-2020",
- *           "number": "13333313313",
+            "name": "Admin",
+            "date": "20-20-2020",
+             "contacts":{
+                name:"Customers",
+                contacts:[
+                    {
+                       name:"solex",
+                       number:"08084848",
+                       ....
+                    }
+                ]
+             },
  *            "groupId": "6167f6840780a4b379baa4f5",
  *       }]
  *     }

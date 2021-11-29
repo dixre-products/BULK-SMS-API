@@ -15,6 +15,12 @@
  * @apiSuccess {String} payload.date created date.
  * @apiSuccess {Array} payload.contacts contacts added to group.
  * @apiSuccess {String} payload.groupId department ID.
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
  *
  * @apiSuccessExample Success-Response:
@@ -31,6 +37,7 @@
  *       }
  *     }
  *
+ * 
  * @apiError Invalid Input
  * @apiErrorExample InvalidInput:
  *     HTTP/1.1 400 Forbidden

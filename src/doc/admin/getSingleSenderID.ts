@@ -1,19 +1,24 @@
 /**
- * @api {DELETE} /contact-group/:id
- * @apiName Delete a contact group
- * @apiGroup ContactGroup
+ * @api {GET} /admin/senderID/:id  Get a SenderID
+ * @apiName GetSingleSenderID
+ * @apiGroup Admin
  * @apiVersion  1.0.0
  * @apiSampleRequest off
+ * 
+ * @apiHeader {String} authorization Admin unique access token for authorization.
+ * @apiHeaderExample {json} Header-Example:
+ *     {
+ *       "authorization": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9hdgda;uifgeuifbkjefg"
+ *     } 
  *
- *  
- *  @apiParam {String} id id of the contact.
+ *  @apiParam {String} id id of the sender.
+
+ * 
  * 
  * @apiSuccess {String} message  describes the success of the action performed.
-* @apiSuccess {Object} payload  contact credentials object
- * @apiSuccess {String} payload._id contact ID.
- * @apiSuccess {String} payload.name contact name.
- * @apiSuccess {String} payload.date created date.
- * @apiSuccess {String} payload.groupId department ID.
+ * @apiSuccess {Object} payload  sender object from collection
+ * @apiSuccess {String} payload._id sender ID.
+ * @apiSuccess {String} payload.name sender name.
  *
  *
  * @apiSuccessExample Success-Response:
@@ -23,9 +28,6 @@
  *       "payload"{
  *          "_id": "6167ec5c549f4c75397eec44",
             "name": "Admin",
-            "date": "20-20-2020",
-            "number": "13333313313",
-             "groupId": "6167f6840780a4b379baa4f5",
  *       }
  *     }
  *
@@ -46,8 +48,7 @@
  *        "mesage": "describes reason for error"
  *     }
  *
- *
- *
+ * 
  * 
  *
  *
