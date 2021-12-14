@@ -1,19 +1,22 @@
 ## BULK-SMS-API
 
-Bulk sms allocation backend using checker and maker Access layer Control System. Application is synonymous to ebulk sms but with the exception that checker and maker integration.
+Bulk sms allocation backend using checker and maker Access layer Control System.
 
 # Environment SetUp
 
 - clone repository
-- Install local mongodb
-- Add mongo to System environment variables path and open a new terminal
-- Create Path C:/data/bulk-sms-api for windows machine
-- Create Path /var/lib/mongodb/bulk-sms-api for linux machine
+- Configure your database configuration in the `config` folder on the root directory
+
+`Important Notes`
+
+- Please checkout the [config](https://github.com/lorenwest/node-config) library and configure application for your use case according to developement, production and test environment according to the keys specified on each of the environment.
+- Checkout the API logger transports to remove either `firebase` or `mongodb` as the logger transport database or configure according to your preference but the app uses both now. you can check out [Winston](https://github.com/winstonjs/winston) for more information on how to do that.
+- The app uses mailjet for sending of emails, please create a project in `mailjet` and make sure your public and private keys are set up on your environment variables.To create an account follow this link [Mailjet](https://github.com/winstonjs/winston)
 
 **Installing Dependencies**
 
 ```bash
-cd /projectDirectory
+cd ./Bulk-SMS-API
 yarn install
 ```
 
@@ -40,17 +43,3 @@ yarn prettier-watch ## starts prettier in watch mode
 yarn doc:watch ## Runs api doc in watch mode
 
 ```
-
-### TODO
-
-- Implement usage of queryParams for all get Request, please refer to employees get controller for detail example on how to implement others.
-
-### UPCOMING UPDATES
-
-- Creating and assigning of senderId to a department (enable sending of message with senderid)
-- Track every activity on plaform
-- resseting of account information
-- inApp notification when messages is getting low for each department, Admin should be notified when department request for more sms,
-  admin should be notified when sms update is required
-- Adding of higher authority
-- Validating routes permission
